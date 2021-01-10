@@ -25,7 +25,7 @@ if (!defined('ABSPATH')) {
 
 
 // Define most essential constants.
-define('bit_wp_smtp_VERSION', '1.0.1');
+define('bit_wp_smtp_VERSION', '1.0.0');
 define('bit_wp_smtp_PLUGIN_MAIN_FILE', __FILE__);
 define('bit_wp_smtp_PLUGIN_BASENAME', plugin_basename(bit_wp_smtp_PLUGIN_MAIN_FILE));
 define('bit_wp_smtp_PLUGIN_DIR_PATH', plugin_dir_path(bit_wp_smtp_PLUGIN_MAIN_FILE));
