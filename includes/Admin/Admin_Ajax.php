@@ -28,20 +28,9 @@ class Admin_Ajax
       $mailDetails = json_encode($_REQUEST);
     
       $query = "UPDATE `{$this->wpdb->prefix}options` SET `option_value` = '$mailDetails' WHERE `{$this->wpdb->prefix}options`.`option_name`='bit_smtp_options'";
-      var_dump($query);
-      die;
+   
       $result = $this->wpdb->query($query);
-      if ($result) {
-        wp_send_json_success($result, 200);
-      } else {
-        wp_send_json_error(
-          __(
-            'db eror',
-            'bitsmtp'
-          ),
-          401
-        );
-      }
+      wp_send_json_success($result, 200);
     } else {
       wp_send_json_error(
         __(
