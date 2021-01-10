@@ -38,7 +38,7 @@ final class Plugin
 		//(new Activation())->activate();
 
 		$display_bit_form_meta = function () {
-			printf('<meta name="generator" content="Forms by BitCode %s" />', esc_attr(bit_wp_smtp_VERSION));
+			printf('<meta name="generator" content="Forms by BitCode %s" />', esc_attr(BIT_SMTP_VERSION));
 		};
 		add_action('wp_head', $display_bit_form_meta);
 		add_action('login_head', $display_bit_form_meta);
@@ -80,7 +80,7 @@ final class Plugin
 		add_action('init', array($this, 'wpdb_table_shortcuts'), 0);
 		add_action('phpmailer_init', [$this, 'mailConfig'], 10, 1);
 
-		add_filter('plugin_action_links_' . plugin_basename(bit_wp_smtp_PLUGIN_MAIN_FILE), array($this, 'plugin_action_links'));
+		add_filter('plugin_action_links_' . plugin_basename(BIT_SMTP_PLUGIN_MAIN_FILE), array($this, 'plugin_action_links'));
 	}
 
 	function mailConfig($phpmailer)
@@ -89,18 +89,22 @@ final class Plugin
 		$mailConfigData = get_option('bit_smtp_options');
 		if ($mailConfigData) {
 			$mailConfig = json_decode($mailConfigData);
-			$phpmailer->Mailer     = 'smtp';
-			$phpmailer->Host       = $mailConfig->smtp_host;
-			$phpmailer->SMTPAuth   = true;
-			$phpmailer->addReplyTo('no-reply@example.com', 'Information');
-			$phpmailer->Port       = $mailConfig->port;
-			$phpmailer->Username   = $mailConfig->smtp_user_name;
-			$phpmailer->Password   = $mailConfig->smtp_password;
-			$phpmailer->SMTPSecure = $mailConfig->encryption;
-			$phpmailer->SMTP_DEBUG =  1;
-			$phpmailer->From       = $mailConfig->form_email_address;
-			$phpmailer->FromName   = $mailConfig->form_name;
+			if($mailConfig->status==1){
+			
+				$phpmailer->Mailer     = 'smtp';
+				$phpmailer->Host       = $mailConfig->smtp_host;
+				$phpmailer->SMTPAuth   = true;
+				//$phpmailer->addReplyTo($mailConfig->re_email_address, 'Information');
+				$phpmailer->Port       = $mailConfig->port;
+				$phpmailer->Username   = $mailConfig->smtp_user_name;
+				$phpmailer->Password   = $mailConfig->smtp_password;
+				$phpmailer->SMTPSecure = $mailConfig->encryption;
+				$phpmailer->SMTP_DEBUG =  1;
+				$phpmailer->From       = $mailConfig->form_email_address;
+				$phpmailer->FromName   = $mailConfig->form_name;
+			}
 		}
+	
 	}
 	/**
 	 * Set WPDB table shortcut names
@@ -111,8 +115,8 @@ final class Plugin
 	{
 		global $wpdb;
 
-		$wpdb->bit_wp_smtp_schema   = $wpdb->prefix . 'bit_wp_smtp_schema';
-		$wpdb->bit_wp_smtp_schema_meta = $wpdb->prefix . 'bit_wp_smtp_schema_meta';
+		$wpdb->bit_wc_smtp_schema   = $wpdb->prefix . 'bit_wc_smtp_schema';
+		$wpdb->bit_wc_smtp_schema_meta = $wpdb->prefix . 'bit_wc_smtp_schema_meta';
 	}
 
 	/**
@@ -122,7 +126,7 @@ final class Plugin
 	 */
 	public function localization_setup()
 	{
-		load_plugin_textdomain('bit_smtp', false, bit_wp_smtp_PLUGIN_DIR_PATH . '/lang/');
+		load_plugin_textdomain('bit_smtp', false, BIT_SMTP_PLUGIN_DIR_PATH . '/lang/');
 	}
 
 	/**
@@ -189,7 +193,7 @@ final class Plugin
 	{
 		$this->init_hooks();
 
-		do_action('bit_wp_smtp_loaded');
+		do_action('bit_wc_smtp_loaded');
 	}
 	/********************************************************************************************** */
 

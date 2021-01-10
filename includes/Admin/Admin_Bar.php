@@ -28,7 +28,7 @@ class Admin_Bar
         if (current_user_can($capability)) {
 
             $submenu['bit_smtp'][] = array(__('General', 'bit_smtp'), $capability, 'admin.php?page=bit_smtp');
-            $submenu['bit_smtp'][] = array(__('About Us', 'bit_smtp'), $capability, 'admin.php?page=bit_smtp#/about-us');
+            // $submenu['bit_smtp'][] = array(__('About Us', 'bit_smtp'), $capability, 'admin.php?page=bit_smtp#/about-us');
         }
         // if(is_plugin_active('bit-form/bitforms.php')){
         //     echo 'Active';
@@ -48,7 +48,7 @@ class Admin_Bar
     public function load_assets()
     {
         /*  require_once dirname( __FILE__ ) . '/class-form-builder-assets.php';
-        new bit_wp_smtp_Form_Builder_Assets(); */
+        new bit_wc_smtp_Form_Builder_Assets(); */
     }
 
     /**
@@ -58,23 +58,18 @@ class Admin_Bar
      */
     public function table_home_page()
     {
-        require_once bit_wp_smtp_PLUGIN_DIR_PATH . '/views/view-root.php';
-
-        /* echo plugin_basename( bit_wp_smtp_PLUGIN_MAIN_FILE );
-      $query = new WP_Query();
-      $forms = $query->get_posts();
-      var_dump($forms); */
+        require_once BIT_SMTP_PLUGIN_DIR_PATH . '/views/view-root.php';
         $parsed_url = parse_url(get_admin_url());
         //   echo get_admin_url();
         $base_apth_admin =  str_replace($parsed_url['scheme'] . "://" . $parsed_url['host'], null, get_admin_url());
-        wp_enqueue_script('bit_wp_smtp-admin-script', bit_wp_smtp_ASSET_URI . '/js/index.js');
-        $bit_wp_smtp = apply_filters('bit_wp_smtp_localized_script', array(
+        wp_enqueue_script('bit_wp_smtp-admin-script', BIT_SMTP_ASSET_URI . '/js/index.js');
+        $bit_wp_smtp = apply_filters('bit_wc_smtp_localized_script', array(
             'nonce'           => wp_create_nonce('bit_wp_smtp'),
             'confirm'         => __('Are you sure?', 'bit_wp_smtp'),
             'isPro'           => false,
             'routeComponents' => array('default' => null),
             'mixins'          => array('default' => null),
-            'assetsURL'       => bit_wp_smtp_ASSET_URI . '/js/',
+            'assetsURL'       => BIT_SMTP_ASSET_URI . '/js/',
             'baseURL'         => $base_apth_admin . 'admin.php?page=bit_wp_smtp#/',
             'ajaxURL'         => admin_url('admin-ajax.php')
         ));
@@ -99,9 +94,9 @@ class Admin_Bar
     public function admin_footer_text($footer_text)
     {
         $current_screen = get_current_screen();
-        $is_bit_wp_smtps_screen = ($current_screen && false !== strpos($current_screen->id, 'bit_wp_smtp'));
+        $is_bit_smtps_screen = ($current_screen && false !== strpos($current_screen->id, 'bit_wp_smtp'));
 
-        if ($is_bit_wp_smtps_screen) {
+        if ($is_bit_smtps_screen) {
             $footer_text = sprintf(
                 __('If you like %1$s please leave us a %2$s rating. A huge thank you from %3$s in advance!', 'bit_wp_smtp'),
                 '<strong>' . __('bit_wp_smtp', 'bit_wp_smtp') . '</strong>',

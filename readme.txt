@@ -44,5 +44,5 @@ The general section consists of the following options
 == Changelog ==
 
 = 1.0.0 =
-* Initial release of bit_wp_smtp
+* Initial release of bit_smtp
 

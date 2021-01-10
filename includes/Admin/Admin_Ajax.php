@@ -26,14 +26,17 @@ class Admin_Ajax
     if (wp_verify_nonce(sanitize_text_field($_REQUEST['_ajax_nonce']), 'bit_wp_smtp')) {
       unset($_REQUEST['_ajax_nonce'], $_REQUEST['action']);
       $mailDetails = json_encode($_REQUEST);
+    
       $query = "UPDATE `{$this->wpdb->prefix}options` SET `option_value` = '$mailDetails' WHERE `{$this->wpdb->prefix}options`.`option_name`='bit_smtp_options'";
+      var_dump($query);
+      die;
       $result = $this->wpdb->query($query);
       if ($result) {
         wp_send_json_success($result, 200);
       } else {
         wp_send_json_error(
           __(
-            'Token expired',
+            'db eror',
             'bitsmtp'
           ),
           401
