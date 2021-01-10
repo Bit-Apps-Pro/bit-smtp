@@ -50,9 +50,9 @@ function bit_smtp_activate_plugin($network_wide)
 			esc_html__('Error Activating', 'bit_wc_smtp')
 		);
 	}
-	$bit_smtp_version = get_option('bit_smtp_version');
-	$installedDB = get_option('bit_smtp_installed');
-	$mailConfig = get_option('bit_smtp_options');
+	$bit_smtp_version = get_site_option('bit_smtp_version');
+	$installedDB = get_site_option('bit_smtp_installed');
+	$mailConfig = get_site_option('bit_smtp_options');
 	$data = "{}";
 	if (!$installedDB) {
 		update_option('bit_smtp_installed', time());
@@ -65,7 +65,7 @@ function bit_smtp_activate_plugin($network_wide)
 	}
 }
 
-register_activation_hook(__FILE__, 'bit_wc_smtp_activate_plugin');
+register_activation_hook(__FILE__, 'bit_smtp_activate_plugin');
 
 function bit_smtp_uninstall_plugin()
 {
