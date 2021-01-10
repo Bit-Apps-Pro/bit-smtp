@@ -6,8 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
-if (typeof bit_wc_smtp !== 'undefined' && bit_wc_smtp.baseURL && `${window.location.pathname + window.location.search}#` !== bit_wc_smtp.baseURL) {
-  bit_wc_smtp.baseURL = `${window.location.pathname + window.location.search}#`
+if (typeof bit_wp_smtp !== 'undefined' && bit_wp_smtp.baseURL && `${window.location.pathname + window.location.search}#` !== bit_wp_smtp.baseURL) {
+  bit_wp_smtp.baseURL = `${window.location.pathname + window.location.search}#`
 }
 if (window.location.hash === '') {
   window.location = `${window.location.href}#/`

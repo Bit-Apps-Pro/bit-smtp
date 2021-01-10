@@ -20,7 +20,7 @@ function App() {
   
     <div>
   <SnackMsg snack={snack} setSnackbar={setsnack} />
-  <Router basename={typeof bit_wc_smtp !== 'undefined' ? bit_wc_smtp.baseURL : '/'}>
+  <Router basename={typeof bit_wp_smtp !== 'undefined' ? bit_wp_smtp.baseURL : '/'}>
       <div id="btcd-app">
         <div className="top-header">
           <span>Developed by&nbsp;</span>

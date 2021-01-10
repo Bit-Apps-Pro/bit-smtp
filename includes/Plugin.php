@@ -38,7 +38,7 @@ final class Plugin
 		//(new Activation())->activate();
 
 		$display_bit_form_meta = function () {
-			printf('<meta name="generator" content="Forms by BitCode %s" />', esc_attr(BIT_WC_SMTP_VERSION));
+			printf('<meta name="generator" content="Forms by BitCode %s" />', esc_attr(bit_wp_smtp_VERSION));
 		};
 		add_action('wp_head', $display_bit_form_meta);
 		add_action('login_head', $display_bit_form_meta);
@@ -78,30 +78,30 @@ final class Plugin
 		// initialize the classes
 		add_action('init', array($this, 'init_classes'));
 		add_action('init', array($this, 'wpdb_table_shortcuts'), 0);
-		add_action('phpmailer_init', [$this,'mailConfig'], 10, 1);
+		add_action('phpmailer_init', [$this, 'mailConfig'], 10, 1);
 
-		add_filter('plugin_action_links_' . plugin_basename(BIT_WC_SMTP_PLUGIN_MAIN_FILE), array($this, 'plugin_action_links'));
+		add_filter('plugin_action_links_' . plugin_basename(bit_wp_smtp_PLUGIN_MAIN_FILE), array($this, 'plugin_action_links'));
 	}
 
 	function mailConfig($phpmailer)
-    {
-        //$integrationHandler = new IntegrationHandler(0);
-        $mailConfigData =get_option( 'bit_smtp_options');
-        if($mailConfigData){
-            $mailConfig = json_decode($mailConfigData);
-            $phpmailer->Mailer     = 'smtp';
-            $phpmailer->Host       = $mailConfig->smtp_host;
-            $phpmailer->SMTPAuth   = true;
-            $phpmailer->addReplyTo('no-reply@example.com', 'Information');
-            $phpmailer->Port       = $mailConfig->port;
-            $phpmailer->Username   = $mailConfig->smtp_user_name;
-            $phpmailer->Password   = $mailConfig->smtp_password;
-            $phpmailer->SMTPSecure = $mailConfig->encryption;
-            $phpmailer->SMTP_DEBUG =  1;
-            $phpmailer->From       = $mailConfig->form_email_address;
-            $phpmailer->FromName   = $mailConfig->form_name;
-        } 
-    }
+	{
+		//$integrationHandler = new IntegrationHandler(0);
+		$mailConfigData = get_option('bit_smtp_options');
+		if ($mailConfigData) {
+			$mailConfig = json_decode($mailConfigData);
+			$phpmailer->Mailer     = 'smtp';
+			$phpmailer->Host       = $mailConfig->smtp_host;
+			$phpmailer->SMTPAuth   = true;
+			$phpmailer->addReplyTo('no-reply@example.com', 'Information');
+			$phpmailer->Port       = $mailConfig->port;
+			$phpmailer->Username   = $mailConfig->smtp_user_name;
+			$phpmailer->Password   = $mailConfig->smtp_password;
+			$phpmailer->SMTPSecure = $mailConfig->encryption;
+			$phpmailer->SMTP_DEBUG =  1;
+			$phpmailer->From       = $mailConfig->form_email_address;
+			$phpmailer->FromName   = $mailConfig->form_name;
+		}
+	}
 	/**
 	 * Set WPDB table shortcut names
 	 *
@@ -111,8 +111,8 @@ final class Plugin
 	{
 		global $wpdb;
 
-		$wpdb->bit_wc_smtp_schema   = $wpdb->prefix . 'bit_wc_smtp_schema';
-		$wpdb->bit_wc_smtp_schema_meta = $wpdb->prefix . 'bit_wc_smtp_schema_meta';
+		$wpdb->bit_wp_smtp_schema   = $wpdb->prefix . 'bit_wp_smtp_schema';
+		$wpdb->bit_wp_smtp_schema_meta = $wpdb->prefix . 'bit_wp_smtp_schema_meta';
 	}
 
 	/**
@@ -122,7 +122,7 @@ final class Plugin
 	 */
 	public function localization_setup()
 	{
-		load_plugin_textdomain('bit_smtp', false, BIT_WC_SMTP_PLUGIN_DIR_PATH . '/lang/');
+		load_plugin_textdomain('bit_smtp', false, bit_wp_smtp_PLUGIN_DIR_PATH . '/lang/');
 	}
 
 	/**
@@ -149,7 +149,7 @@ final class Plugin
 	 */
 	function plugin_action_links($links)
 	{
-		$links[] = '<a href="https://www.bitpress.pro" target="_blank">' . __('Bitpress', 'bit_wc_smtp') . '</a>';
+		$links[] = '<a href="https://www.bitpress.pro" target="_blank">' . __('Bitpress', 'bit_wp_smtp') . '</a>';
 
 		return $links;
 	}
@@ -189,7 +189,7 @@ final class Plugin
 	{
 		$this->init_hooks();
 
-		do_action('bit_wc_smtp_loaded');
+		do_action('bit_wp_smtp_loaded');
 	}
 	/********************************************************************************************** */
 
@@ -198,7 +198,7 @@ final class Plugin
 	 *
 	 * @since 1.0.0-alpha
 	 *
-	 * @return bit_wc_smtp Plugin main instance.
+	 * @return bit_wp_smtp Plugin main instance.
 	 */
 	public static function instance()
 	{

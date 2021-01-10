@@ -4,7 +4,7 @@ Tags: wp mail smtp,easy wp smtp,wp smtp,gmail smtp,post smtp mailer,smtp mailer,
 Requires at least: 4.9.0
 Tested up to: 5.5.1
 Requires PHP: 5.6
-Stable tag: 1.0.2
+Stable tag: 1.0.0
 License: GPLv2 or later
 
 == Description ==
@@ -44,5 +44,5 @@ The general section consists of the following options
 == Changelog ==
 
 = 1.0.0 =
-* Initial release of bit_wc_smtp
+* Initial release of bit_wp_smtp
 
