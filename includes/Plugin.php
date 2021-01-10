@@ -94,7 +94,7 @@ final class Plugin
 				$phpmailer->Mailer     = 'smtp';
 				$phpmailer->Host       = $mailConfig->smtp_host;
 				$phpmailer->SMTPAuth   = true;
-				//$phpmailer->addReplyTo($mailConfig->re_email_address, 'Information');
+				$phpmailer->addReplyTo($mailConfig->re_email_address, 'Information');
 				$phpmailer->Port       = $mailConfig->port;
 				$phpmailer->Username   = $mailConfig->smtp_user_name;
 				$phpmailer->Password   = $mailConfig->smtp_password;
