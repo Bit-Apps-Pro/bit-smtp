@@ -5,8 +5,8 @@ use BitPress\BIT_SMTP\Plugin;
 /**
  * Plugin Name: BIT SMTP
  * Plugin URI:  bitpress.pro/bit_smtp
- * Description: BIT SMTP Send email via SMTP plugin by Bitpress
- * Version:     1.0.2
+ * Description: Send email via SMTP using BIT SMTP plugin by Bitpress
+ * Version:     1.0.0
  * Author:      BitPress
  * Author URI:  bitpress.pro
  * Text Domain: bit_smtp
@@ -25,7 +25,7 @@ if (!defined('ABSPATH')) {
 
 
 // Define most essential constants.
-define('BIT_SMTP_VERSION', '1.0.1');
+define('BIT_SMTP_VERSION', '1.0.0');
 define('BIT_SMTP_PLUGIN_MAIN_FILE', __FILE__);
 define('BIT_SMTP_PLUGIN_BASENAME', plugin_basename(BIT_SMTP_PLUGIN_MAIN_FILE));
 define('BIT_SMTP_PLUGIN_DIR_PATH', plugin_dir_path(BIT_SMTP_PLUGIN_MAIN_FILE));
@@ -106,20 +106,6 @@ function bit_smtp_deactivate_plugin($network_wide)
 
 register_deactivation_hook(__FILE__, 'bit_smtp_deactivate_plugin');
 
-/**
- * Handles plugin uninstall.
- *
- * @access private
- */
-// function bit_wc_smtp_uninstall_plugin()
-// {
-// 	if (version_compare(PHP_VERSION, '5.4.0', '<')) {
-// 		return;
-// 	}
-
-// 	do_action('bit_wc_smtp_uninstall');
-// }
-// register_uninstall_hook(__FILE__, 'bit_wc_smtp_uninstall_plugin');
 
 if (version_compare(PHP_VERSION, '5.4.0', '>=')) {
 	// Autoload vendor files.
