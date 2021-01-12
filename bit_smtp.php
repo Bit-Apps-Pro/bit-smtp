@@ -77,7 +77,7 @@ function bit_smtp_uninstall_plugin()
 	}
 
 	global $wpdb;
-	$columns = ["bit_smtp_installed", "bit_smtp_options"];
+	$columns = ["bit_smtp_installed", "bit_smtp_options","bit_smtp_version"];
 	foreach ($columns as $column) {
 		$wpdb->query("DELETE FROM `{$wpdb->prefix}options` WHERE option_name=$column");
 	}
