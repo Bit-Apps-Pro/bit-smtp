@@ -38,7 +38,7 @@ class Admin_Ajax
     if (wp_verify_nonce(sanitize_text_field($_REQUEST['_ajax_nonce']), 'bit_smtp')) {
       unset($_REQUEST['_ajax_nonce'], $_REQUEST['action']);
       $mail_post_data = $this->mailPostData($_REQUEST);
-      $result = update_option('bit_smtp_options',wp_json_encode($mail_post_data));
+      $result = update_option('bit_smtp_options',$mail_post_data);
       wp_send_json_success($result, 200);
     } else {
       wp_send_json_error(
