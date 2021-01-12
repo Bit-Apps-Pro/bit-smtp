@@ -90,7 +90,6 @@ final class Plugin
 		if ($mailConfigData) {
 			$mailConfig = json_decode($mailConfigData);
 			if($mailConfig->status==1){
-			
 				$phpmailer->Mailer     = 'smtp';
 				$phpmailer->Host       = $mailConfig->smtp_host;
 				$phpmailer->SMTPAuth   = true;
@@ -153,7 +152,7 @@ final class Plugin
 	 */
 	function plugin_action_links($links)
 	{
-		$links[] = '<a href="https://www.bitpress.pro" target="_blank">' . __('Bitpress', 'bit_wp_smtp') . '</a>';
+		$links[] = '<a href="https://www.bitpress.pro" target="_blank">' . __('Bitpress', 'bit_smtp') . '</a>';
 
 		return $links;
 	}
