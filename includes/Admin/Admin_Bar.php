@@ -63,9 +63,9 @@ class Admin_Bar
         //   echo get_admin_url();
         $base_apth_admin =  str_replace($parsed_url['scheme'] . "://" . $parsed_url['host'], null, get_admin_url());
         wp_enqueue_script('bit_wp_smtp-admin-script', BIT_SMTP_ASSET_URI . '/js/index.js');
-        $bit_wp_smtp = apply_filters('bit_wc_smtp_localized_script', array(
-            'nonce'           => wp_create_nonce('bit_wp_smtp'),
-            'confirm'         => __('Are you sure?', 'bit_wp_smtp'),
+        $bit_smtp = apply_filters('bit_wc_smtp_localized_script', array(
+            'nonce'           => wp_create_nonce('bit_smtp'),
+            'confirm'         => __('Are you sure?', 'bit_smtp'),
             'isPro'           => false,
             'routeComponents' => array('default' => null),
             'mixins'          => array('default' => null),
@@ -76,7 +76,7 @@ class Admin_Bar
         // $checkoutFields = (new WC_Checkout)->get_checkout_fields();
         // $checkoutFields = WC()->checkout()->get_checkout_fields();
         // $bit_wp_smtp['checkoutFields'] = (new WC_Checkout)->get_checkout_fields();
-        wp_localize_script('bit_wp_smtp-admin-script', 'bit_wp_smtp', $bit_wp_smtp);
+        wp_localize_script('bit_wp_smtp-admin-script', 'bit_wp_smtp', $bit_smtp);
     }
 
 
