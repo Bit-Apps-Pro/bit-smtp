@@ -3,6 +3,11 @@ import React, {  useState ,useRef,useEffect} from 'react';
  import bitsFetch from '../Childs/bitsFetch'
  import LoaderSm from '../Childs/LoaderSm'
 import CheckBox from '../ElmSettings/Childs/CheckBox'
+import aws from '../../resources/img/aws.png'
+import sendinblue from '../../resources/img/sendinblue.png'
+import gmail from '../../resources/img/google.png'
+import smtp from '../../resources/img/smtp.png'
+import sendgrid from '../../resources/img/sendgrid.png'
 
 export default function ConfigForm({ mail, setMail, setsnack, status, setsmtpStatus }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -70,8 +75,56 @@ export default function ConfigForm({ mail, setMail, setsnack, status, setsmtpSta
           <CheckBox className="btcd-label-cbx ml-2" radio name="status" onChange={e => handleStatus(e)} checked={status === 0} title={<small className="txt-dp">No</small>} value="0" />
           <br />
          <br />
+      
         {isShowing && (
-             <div>
+             <div className="mt-2">
+
+            <b className="wdt-250 d-in-b">Mailer :</b> 
+                      <div className="d-in-b">
+                      <div className="mailer">
+                          <div>
+                          <img className="mailer-img" src={sendinblue} alt="BitPress" />
+                          </div>
+                          <div className="mailer-option">
+                          <CheckBox   className="btcd-label-cbx ml-2" onChange={(e)=>handleInput(e.target.name, e.target.value)} checked={mail.mailer === 'sendinblue'}  radio name="mailer" title={<small className="txt-dp">Sendinblue</small>} value="sendinblue" />
+                          </div>
+                        </div>
+                        <div className="mailer">
+                          <div>
+                          <img className="mailer-img" src={gmail} alt="BitPress" />
+                          </div>
+                          <div className="mailer-option">
+                          <CheckBox  className="btcd-label-cbx ml-2" onChange={(e)=>handleInput(e.target.name, e.target.value)} checked={mail.mailer === 'gmail'}   radio name="mailer" title={<small className="txt-dp">Gmail</small>} value="gmail" />
+                          </div>
+                        </div>
+                        <div className="mailer">
+                          <div>
+                          <img className="mailer-img" src={aws} alt="BitPress" />
+                          </div>
+                          <div className="mailer-option">
+                          <CheckBox onChange={(e)=>handleInput(e.target.name, e.target.value)} checked={mail.mailer === 'aws'}   radio name="mailer" title={<small className="txt-dp">Amazon SES</small>} value="aws" />
+                          </div>
+                        </div>
+                        <div className="mailer">
+                          <div>
+                          <img className="mailer-img" src={sendgrid} alt="BitPress" />
+                          </div>
+                          <div className="mailer-option">
+                          <CheckBox  className="btcd-label-cbx ml-2" checked={mail.mailer === 'sendgrid'}  onChange={(e)=>handleInput(e.target.name, e.target.value)}  radio name="mailer" title={<small className="txt-dp">SendGrid</small>} value="sendgrid" />
+                          </div>
+                        </div>
+                        <div className="mailer">
+                          <div>
+                          <img  className="mailer-img" src={smtp} alt="BitPress" />
+                          </div>
+                          <div className="mailer-option">
+                          <CheckBox  className="btcd-label-cbx ml-2" checked={mail.mailer === 'smtp'}  onChange={(e)=>handleInput(e.target.name, e.target.value)}  radio name="mailer" title={<small className="txt-dp">Other SMTP</small>} value="smtp" />
+                          </div>
+                        </div>
+                      </div>
+                      <br />
+                      <br />
+
                 <b className="wdt-250 d-in-b">From Email Address :</b> 
                 <input id="form_email_address" onChange={(e) => handleInput(e.target.name, e.target.value)} name="form_email_address" className="btcd-paper-inp w-3 mr-4btcd-paper-inp w-3 mr-4" value={mail.form_email_address} placeholder="From Email Address" type="text" required />
             
@@ -121,7 +174,7 @@ export default function ConfigForm({ mail, setMail, setsnack, status, setsmtpSta
               )}
              </div>
             )}
-      <button type="submit" className="btn f-left btcd-btn-lg blue sh-sm flx">
+      <button type="submit" className="btn f-left btcd-btn-lg blue sh-sm flx" disabled={isLoading}>
         Save Changes
         {isLoading && <LoaderSm size="20" clr="#fff" className="ml-2" />}
       </button>

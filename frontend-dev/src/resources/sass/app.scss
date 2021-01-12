@@ -877,7 +877,19 @@ nav.top-nav {
   color: $dp-txt;
   margin-right:3px;
 }
-
+.mailer{
+  display: inline-block !important;
+  padding: 4px 6px;
+}
+.mailer-img{
+  width: 120px;
+  height : auto;
+  border:1px solid black;
+  border-radius:7px;
+}
+.mailer-option{
+  margin-top: 5px;
+}
 .d-blk {
   display: block !important;
 }

@@ -54,7 +54,7 @@ export default function MailSendTest({ setsnack }) {
         <textarea id="message" cols={5} rows={5} name="message" onChange={(e) => messageHandle(e)} className="btcd-paper-inp w-3 mr-4" placeholder="">{toMessage}</textarea>
         <br />
          <br />
-        <button onClick={(e) => testEmailHandle(e)} type="submit" className="btn f-left btcd-btn-lg blue sh-sm flx">
+        <button onClick={(e) => testEmailHandle(e)} type="submit" className="btn f-left btcd-btn-lg blue sh-sm flx" disabled={isTestLoading}>
           Send Test
           {isTestLoading && <LoaderSm size="20" clr="#fff" className="ml-2" />}
         </button>

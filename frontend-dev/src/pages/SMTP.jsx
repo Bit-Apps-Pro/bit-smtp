@@ -12,9 +12,8 @@ export default function SMTP({ setsnack }) {
     bitsFetch({ formID: 0 }, 'bitforms_get_mail_config').then((res) => {
       if (res !== undefined && res.success) {
         if (!res.data.errors) {
-          const jsonData = JSON.parse(res.data)
-          setMail(jsonData)
-          setsmtpStatus(Number(jsonData.status))
+          setMail(res.data)
+          setsmtpStatus(Number(res.data.status))
         }
       }
     })
@@ -22,7 +21,7 @@ export default function SMTP({ setsnack }) {
 
   return (
     <div className="btcd-s-wrp">
-      <h2>SMTP Configuration</h2>
+        <h2>Mail Configuration</h2>
       <br />
       <div className="pos-rel">
         <ConfigForm mail={mail} setMail={setMail}  status={status} setsmtpStatus={setsmtpStatus}  setsnack={setsnack} />
