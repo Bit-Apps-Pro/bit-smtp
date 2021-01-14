@@ -46,8 +46,8 @@ function bit_smtp_activate_plugin($network_wide)
 
 	if (version_compare(PHP_VERSION, '5.4.0', '<')) {
 		wp_die(
-			esc_html__('bit_smtp requires PHP version 5.4.', 'bit_wc_smtp'),
-			esc_html__('Error Activating', 'bit_wc_smtp')
+			esc_html__('bit_smtp requires PHP version 5.4.', 'bit_smtp'),
+			esc_html__('Error Activating', 'bit_smtp')
 		);
 	}
 	$bit_smtp_version = get_site_option('bit_smtp_version');
@@ -71,7 +71,7 @@ function bit_smtp_uninstall_plugin()
 {
 	if (version_compare(PHP_VERSION, '5.6.0', '<')) {
 		wp_die(
-			esc_html__('bit_smtp requires PHP version 5.4.', 'bit_wc_smtp'),
+			esc_html__('bit_smtp requires PHP version 5.4.', 'bit_smtp'),
 			esc_html__('Error Activating', 'bit_smtp')
 		);
 	}
