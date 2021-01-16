@@ -1,10 +1,10 @@
 === Bit SMTP ===
 Contributors: bitpressadmin
-Tags: wp mail smtp,easy wp smtp,wp smtp,gmail smtp,post smtp mailer,smtp mailer,wp mail bank
+Tags: smtp, wp mail smtp, wordpress smtp, gmail smtp, sendgrid smtp, mailgun smtp, mail, mailer, phpmailer, wp_mail, email, mailgun, sengrid,sendinblue, wp smtp,mandrill,outlook
 Requires at least: 4.9.0
 Tested up to: 5.5.1
 Requires PHP: 5.6
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 
 == Description ==
@@ -45,4 +45,6 @@ The general section consists of the following options
 
 = 1.0.0 =
 * Initial release of bit_smtp
+= 1.0.1 =
+* SMTP Frontend changed
 
