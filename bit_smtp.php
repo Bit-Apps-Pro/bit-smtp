@@ -25,7 +25,7 @@ if (!defined('ABSPATH')) {
 
 
 // Define most essential constants.
-define('BIT_SMTP_VERSION', '1.0.0');
+define('BIT_SMTP_VERSION', '1.0.1');
 define('BIT_SMTP_PLUGIN_MAIN_FILE', __FILE__);
 define('BIT_SMTP_PLUGIN_BASENAME', plugin_basename(BIT_SMTP_PLUGIN_MAIN_FILE));
 define('BIT_SMTP_PLUGIN_DIR_PATH', plugin_dir_path(BIT_SMTP_PLUGIN_MAIN_FILE));
@@ -79,7 +79,7 @@ function bit_smtp_uninstall_plugin()
 	global $wpdb;
 	$columns = ["bit_smtp_installed", "bit_smtp_options","bit_smtp_version"];
 	foreach ($columns as $column) {
-		$wpdb->query("DELETE FROM `{$wpdb->prefix}options` WHERE option_name=$column");
+		$wpdb->query("DELETE FROM `{$wpdb->prefix}options` WHERE option_name='$column'");
 	}
 }
 register_uninstall_hook(__FILE__, 'bit_smtp_uninstall_plugin');
