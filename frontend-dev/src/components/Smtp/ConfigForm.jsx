@@ -53,6 +53,7 @@ export default function ConfigForm({ mail, setMail, setsnack, status, setsmtpSta
       setIsAuthentic(false)
     }
     setMail(tmpMail)
+    console.log(tmpMail)
   }
 
   const handleStatus = (e) => {
@@ -76,7 +77,7 @@ export default function ConfigForm({ mail, setMail, setsnack, status, setsmtpSta
           && e.preventDefault()
       }}
     >
-          <b className="wdt-250 d-in-b">Enable SMTP :</b> 
+          <b className="wdt-250 d-in-b">Enable MAIL :</b> 
           <CheckBox className="btcd-label-cbx" radio name="status" onChange={e => handleStatus(e)} checked={status === 1} title={<small className="txt-dp">Yes</small>} value="1" />
           <CheckBox className="btcd-label-cbx ml-2" radio name="status" onChange={e => handleStatus(e)} checked={status === 0} title={<small className="txt-dp">No</small>} value="0" />
           <br />
@@ -84,6 +85,20 @@ export default function ConfigForm({ mail, setMail, setsnack, status, setsmtpSta
       
         {isShowing && (
              <div className="mt-2">
+                  <b className="wdt-250 d-in-b">From Email Address :</b> 
+                <input id="form_email_address" onChange={(e) => handleInput(e.target.name, e.target.value)} name="form_email_address" className="btcd-paper-inp w-3 mr-4btcd-paper-inp w-3 mr-4" value={mail.form_email_address} placeholder="From Email Address" type="text" required />
+            
+                <br />
+              <br />
+              <b className="wdt-250 d-in-b" >From Name</b>
+                <input id="form_name" onChange={(e) => handleInput(e.target.name, e.target.value)} value={mail.form_name} name="form_name" className="btcd-paper-inp w-3 mr-4btcd-paper-inp w-3 mr-4" placeholder="From Name" type="text" required />
+                <br />
+              <br />
+          
+              <b className="wdt-250 d-in-b" >Reply-To Email Address</b>
+                <input id="re_email_address" onChange={(e) => handleInput(e.target.name, e.target.value)} value={mail.re_email_address} name="re_email_address" className="btcd-paper-inp w-3 mr-4btcd-paper-inp w-3 mr-4" placeholder="Reply-To Email Address" type="text" required />
+                <br />
+              <br />
 
             <b className="wdt-250 d-in-b">Mailer :</b> 
                       <div className="d-in-b">
@@ -108,7 +123,7 @@ export default function ConfigForm({ mail, setMail, setsnack, status, setsmtpSta
                           <img className={`mailer-img ${mail.mailer === 'other' ? 'mailer-img-selected' : ''}`} src={other} alt="BitPress" />
                           </div>
                           <div className="mailer-option">
-                          <CheckBox   className="btcd-label-cbx ml-2" onChange={(e)=>handleInput(e.target.name, e.target.value)} checked={mail.mailer === 'other'}  radio name="mailer" title={<small className="txt-dp">Other SMTP</small>} value="other" />
+                          <CheckBox  className="btcd-label-cbx ml-2" onChange={(e)=>handleInput(e.target.name, e.target.value)} checked={mail.mailer === 'other'}  radio name="mailer" title={<small className="txt-dp">Other SMTP</small>} value="other" />
                           </div>
                         </div>
                         <div className="mailer">
@@ -176,53 +191,49 @@ export default function ConfigForm({ mail, setMail, setsnack, status, setsmtpSta
                       </div>
                       <br />
                       <br />
-                <b className="wdt-250 d-in-b">From Email Address :</b> 
-                <input id="form_email_address" onChange={(e) => handleInput(e.target.name, e.target.value)} name="form_email_address" className="btcd-paper-inp w-3 mr-4btcd-paper-inp w-3 mr-4" value={mail.form_email_address} placeholder="From Email Address" type="text" required />
-            
+
+                <b className="wdt-250 d-in-b" >Mail Option</b>
+                <CheckBox className="btcd-label-cbx" radio name="option" id="option" onChange={e => handleInput(e.target.name, e.target.value)} checked={mail.option === 'smtp'} title={<small className="txt-dp">SMTP</small>} value="smtp" />
+                <CheckBox className="btcd-label-cbx ml-2" radio name="option" id="option" onChange={e => handleInput(e.target.name, e.target.value)} checked={mail.option === 'api'} title={<small className="txt-dp">Api</small>} value="api" />
                 <br />
               <br />
-              <b className="wdt-250 d-in-b" >From Name</b>
-                <input id="form_name" onChange={(e) => handleInput(e.target.name, e.target.value)} value={mail.form_name} name="form_name" className="btcd-paper-inp w-3 mr-4btcd-paper-inp w-3 mr-4" placeholder="From Name" type="text" required />
+              {mail.option==='smtp' && (
+                <div>
+                <b className="wdt-250 d-in-b" >SMTP Host</b>
+                  <input id="smtp_host" value={mail.smtp_host} onChange={(e) => handleInput(e.target.name, e.target.value)} name="smtp_host" className="btcd-paper-inp w-3 mr-4btcd-paper-inp w-3 mr-4" placeholder="SMTP Host" type="text" required />
+                  <br />
                 <br />
-              <br />
-          
-              <b className="wdt-250 d-in-b" >Reply-To Email Address</b>
-                <input id="re_email_address" onChange={(e) => handleInput(e.target.name, e.target.value)} value={mail.re_email_address} name="re_email_address" className="btcd-paper-inp w-3 mr-4btcd-paper-inp w-3 mr-4" placeholder="Reply-To Email Address" type="text" required />
+                <b className="wdt-250 d-in-b" >Type of Encryption</b>
+                  <CheckBox className="btcd-label-cbx" radio name="encryption" id="encryption" onChange={e => handleInput(e.target.name, e.target.value)} checked={mail.encryption === 'tls'} title={<small className="txt-dp">TLS</small>} value="tls" />
+                  <CheckBox className="btcd-label-cbx ml-2" radio name="encryption" id="encryption" onChange={e => handleInput(e.target.name, e.target.value)} checked={mail.encryption === 'ssl'} title={<small className="txt-dp">SSL</small>} value="ssl" />
+                  <br />
                 <br />
-              <br />
-          
-              <b className="wdt-250 d-in-b" >SMTP Host</b>
-                <input id="smtp_host" value={mail.smtp_host} onChange={(e) => handleInput(e.target.name, e.target.value)} name="smtp_host" className="btcd-paper-inp w-3 mr-4btcd-paper-inp w-3 mr-4" placeholder="SMTP Host" type="text" required />
+                <b className="wdt-250 d-in-b" >SMTP Port</b>
+                  <CheckBox className="btcd-label-cbx" radio name="port" onChange={(e) => handleInput(e.target.name, e.target.value)} checked={mail.port === '587'} title={<small className="txt-dp">587</small>} value="587" />
+                  <CheckBox className="btcd-label-cbx ml-2" radio name="port" onChange={(e) => handleInput(e.target.name, e.target.value)} checked={mail.port === '465'} title={<small className="txt-dp">465</small>} value="465" />
+                  <br />
                 <br />
-              <br />
-              <b className="wdt-250 d-in-b" >Type of Encryption</b>
-                <CheckBox className="btcd-label-cbx" radio name="encryption" id="encryption" onChange={e => handleInput(e.target.name, e.target.value)} checked={mail.encryption === 'tls'} title={<small className="txt-dp">TLS</small>} value="tls" />
-                <CheckBox className="btcd-label-cbx ml-2" radio name="encryption" id="encryption" onChange={e => handleInput(e.target.name, e.target.value)} checked={mail.encryption === 'ssl'} title={<small className="txt-dp">SSL</small>} value="ssl" />
+              
+                <b className="wdt-250 d-in-b" >SMTP Authentication</b>
+                  <CheckBox radio name="smtp_auth" onChange={e => handleInput(e.target.name, e.target.value)} checked={mail.smtp_auth === '1'} title={<small className="txt-dp">Yes</small>} value="1" />
+                  <CheckBox className="btcd-label-cbx ml-2" radio name="smtp_auth" onChange={e => handleInput(e.target.name, e.target.value)} checked={mail.smtp_auth === '0'} title={<small className="txt-dp">No</small>} value="0" />
+                  <br />
                 <br />
-              <br />
-              <b className="wdt-250 d-in-b" >SMTP Port</b>
-                <CheckBox className="btcd-label-cbx" radio name="port" onChange={(e) => handleInput(e.target.name, e.target.value)} checked={mail.port === '587'} title={<small className="txt-dp">587</small>} value="587" />
-                <CheckBox className="btcd-label-cbx ml-2" radio name="port" onChange={(e) => handleInput(e.target.name, e.target.value)} checked={mail.port === '465'} title={<small className="txt-dp">465</small>} value="465" />
-                <br />
-              <br />
-            
-              <b className="wdt-250 d-in-b" >SMTP Authentication</b>
-                <CheckBox radio name="smtp_auth" onChange={e => handleInput(e.target.name, e.target.value)} checked={mail.smtp_auth === '1'} title={<small className="txt-dp">Yes</small>} value="1" />
-                <CheckBox className="btcd-label-cbx ml-2" radio name="smtp_auth" onChange={e => handleInput(e.target.name, e.target.value)} checked={mail.smtp_auth === '0'} title={<small className="txt-dp">No</small>} value="0" />
-                <br />
-              <br />
-              {isAuthentic && (
-              <div>
-                <b className="wdt-250 d-in-b" > SMTP Username</b>
-                 <input id="smtp_user_name" value={mail.smtp_user_name} onChange={(e) => handleInput(e.target.name, e.target.value)} name="smtp_user_name" className="btcd-paper-inp w-3 mr-4btcd-paper-inp w-3 mr-4" placeholder=" SMTP Username" type="text" required />
+                {isAuthentic && (
+                <div>
+                  <b className="wdt-250 d-in-b" > SMTP Username</b>
+                   <input id="smtp_user_name" value={mail.smtp_user_name} onChange={(e) => handleInput(e.target.name, e.target.value)} name="smtp_user_name" className="btcd-paper-inp w-3 mr-4btcd-paper-inp w-3 mr-4" placeholder=" SMTP Username" type="text" required />
+                   <br />
+                  <br />
+                 <b className="wdt-250 d-in-b" > SMTP Password</b>
+                   <input id="smtp_password" onChange={(e) => handleInput(e.target.name, e.target.value)} value={mail.smtp_password} name="smtp_password" className="btcd-paper-inp w-3 mr-4btcd-paper-inp w-3 mr-4" placeholder="SMTP Password" type="password" required />
+                   <br />
                  <br />
-                <br />
-               <b className="wdt-250 d-in-b" > SMTP Password</b>
-                 <input id="smtp_password" onChange={(e) => handleInput(e.target.name, e.target.value)} value={mail.smtp_password} name="smtp_password" className="btcd-paper-inp w-3 mr-4btcd-paper-inp w-3 mr-4" placeholder="SMTP Password" type="password" required />
-                 <br />
-               <br />
-              </div>
+                </div>
+                )}
+                </div>
               )}
+              
              </div>
             )}
       <button type="submit" className="btn f-left btcd-btn-lg blue sh-sm flx" disabled={isLoading}>

@@ -19,6 +19,7 @@ class Admin_Ajax
   private function mailPostData($request){
     $mail_post_data = [
       'mailer' => isset($request['mailer']) ? sanitize_text_field($request['mailer']) : '',
+      'option' => isset($request['option']) ? sanitize_text_field($request['option']) : '',
       'status' => isset($request['status']) ? sanitize_text_field($request['status']) : '',
       'form_email_address' => isset($request['form_email_address']) ? sanitize_email($request['form_email_address']) : '',
       'form_name' => isset($request['form_name']) ? sanitize_text_field($request['form_name']) : '',
