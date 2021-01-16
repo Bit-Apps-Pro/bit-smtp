@@ -78,7 +78,7 @@ final class Plugin
 		// initialize the classes
 		add_action('init', array($this, 'init_classes'));
 		add_action('init', array($this, 'wpdb_table_shortcuts'), 0);
-		add_action('phpmailer_init', [$this, 'mailConfig'], 10, 1);
+		add_action('phpmailer_init', [$this, 'mailConfig'], 1000);
 
 		add_filter('plugin_action_links_' . plugin_basename(BIT_SMTP_PLUGIN_MAIN_FILE), array($this, 'plugin_action_links'));
 	}
