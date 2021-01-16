@@ -8,6 +8,12 @@ import sendinblue from '../../resources/img/sendinblue.png'
 import gmail from '../../resources/img/google.png'
 import smtp from '../../resources/img/smtp.png'
 import sendgrid from '../../resources/img/sendgrid.png'
+import zoho from '../../resources/img/zoho.png'
+import mailgun from '../../resources/img/mailgun.png'
+import defaultMail from '../../resources/img/default.png'
+import other from '../../resources/img/other.png'
+import outlook from '../../resources/img/outlook.png'
+
 
 export default function ConfigForm({ mail, setMail, setsnack, status, setsmtpStatus }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -83,48 +89,93 @@ export default function ConfigForm({ mail, setMail, setsnack, status, setsmtpSta
                       <div className="d-in-b">
                       <div className="mailer">
                           <div>
-                          <img className="mailer-img" src={sendinblue} alt="BitPress" />
+                          <img className={`mailer-img ${mail.mailer === 'default' ? 'mailer-img-selected' : ''}`} src={defaultMail} alt="BitPress" />
                           </div>
                           <div className="mailer-option">
-                          <CheckBox   className="btcd-label-cbx ml-2" onChange={(e)=>handleInput(e.target.name, e.target.value)} checked={mail.mailer === 'sendinblue'}  radio name="mailer" title={<small className="txt-dp">Sendinblue</small>} value="sendinblue" />
+                          <CheckBox className="btcd-label-cbx ml-2" onChange={(e)=>handleInput(e.target.name, e.target.value)} checked={mail.mailer === 'default'}  radio name="mailer" title={<small className="txt-dp">Defalult</small>} value="default" />
                           </div>
                         </div>
                         <div className="mailer">
                           <div>
-                          <img className="mailer-img" src={gmail} alt="BitPress" />
+                          <img className={`mailer-img ${mail.mailer === 'smtp' ? 'mailer-img-selected' : ''}`} src={smtp} alt="BitPress" />
                           </div>
                           <div className="mailer-option">
-                          <CheckBox  className="btcd-label-cbx ml-2" onChange={(e)=>handleInput(e.target.name, e.target.value)} checked={mail.mailer === 'gmail'}   radio name="mailer" title={<small className="txt-dp">Gmail</small>} value="gmail" />
+                          <CheckBox   className="btcd-label-cbx ml-2" onChange={(e)=>handleInput(e.target.name, e.target.value)} checked={mail.mailer === 'smtp'}  radio name="mailer" title={<small className="txt-dp">SMTP</small>} value="smtp" />
                           </div>
                         </div>
                         <div className="mailer">
                           <div>
-                          <img className="mailer-img" src={aws} alt="BitPress" />
+                          <img className={`mailer-img ${mail.mailer === 'other' ? 'mailer-img-selected' : ''}`} src={other} alt="BitPress" />
+                          </div>
+                          <div className="mailer-option">
+                          <CheckBox   className="btcd-label-cbx ml-2" onChange={(e)=>handleInput(e.target.name, e.target.value)} checked={mail.mailer === 'other'}  radio name="mailer" title={<small className="txt-dp">Other SMTP</small>} value="other" />
+                          </div>
+                        </div>
+                        <div className="mailer">
+                          <div>
+                          <img className={`mailer-img ${mail.mailer === 'aws' ? 'mailer-img-selected' : ''}`} src={aws} alt="BitPress" />
                           </div>
                           <div className="mailer-option">
                           <CheckBox onChange={(e)=>handleInput(e.target.name, e.target.value)} checked={mail.mailer === 'aws'}   radio name="mailer" title={<small className="txt-dp">Amazon SES</small>} value="aws" />
                           </div>
                         </div>
-                        <div className="mailer">
+                      <div className="mailer">
                           <div>
-                          <img className="mailer-img" src={sendgrid} alt="BitPress" />
+                          <img className={`mailer-img ${mail.mailer === 'mailgun' ? 'mailer-img-selected' : ''}`} src={mailgun} alt="BitPress" />
                           </div>
                           <div className="mailer-option">
-                          <CheckBox  className="btcd-label-cbx ml-2" checked={mail.mailer === 'sendgrid'}  onChange={(e)=>handleInput(e.target.name, e.target.value)}  radio name="mailer" title={<small className="txt-dp">SendGrid</small>} value="sendgrid" />
-                          </div>
-                        </div>
-                        <div className="mailer">
-                          <div>
-                          <img  className="mailer-img" src={smtp} alt="BitPress" />
-                          </div>
-                          <div className="mailer-option">
-                          <CheckBox  className="btcd-label-cbx ml-2" checked={mail.mailer === 'smtp'}  onChange={(e)=>handleInput(e.target.name, e.target.value)}  radio name="mailer" title={<small className="txt-dp">Other SMTP</small>} value="smtp" />
+                          <CheckBox   className="btcd-label-cbx ml-2" onChange={(e)=>handleInput(e.target.name, e.target.value)} checked={mail.mailer === 'mailgun'}  radio name="mailer" title={<small className="txt-dp">Mailgun</small>} value="mailgun" />
                           </div>
                         </div>
                       </div>
                       <br />
+                      <b className="wdt-250 d-in-b"></b> 
+                      <div className="d-in-b">
+                      <div>
+                        <div className="mailer">
+                          <div>
+                          <img  className={`mailer-img ${mail.mailer === 'gmail' ? 'mailer-img-selected' : ''}`} src={gmail} alt="BitPress" />
+                          </div>
+                          <div className="mailer-option">
+                          <CheckBox  className="btcd-label-cbx ml-2" checked={mail.mailer === 'gmail'}  onChange={(e)=>handleInput(e.target.name, e.target.value)}  radio name="mailer" title={<small className="txt-dp">Gmail</small>} value="gmail" />
+                          </div>
+                        </div>
+                        <div className="mailer">
+                          <div>
+                          <img  className={`mailer-img ${mail.mailer === 'zoho' ? 'mailer-img-selected' : ''}`} src={zoho} alt="BitPress" />
+                          </div>
+                          <div className="mailer-option">
+                          <CheckBox  className="btcd-label-cbx ml-2" checked={mail.mailer === 'zoho'}  onChange={(e)=>handleInput(e.target.name, e.target.value)}  radio name="mailer" title={<small className="txt-dp">zoho</small>} value="zoho" />
+                          </div>
+                        </div>
+                        <div className="mailer">
+                          <div>
+                          <img  className={`mailer-img ${mail.mailer === 'outlook' ? 'mailer-img-selected' : ''}`} src={outlook} alt="BitPress" />
+                          </div>
+                          <div className="mailer-option">
+                          <CheckBox  className="btcd-label-cbx ml-2" checked={mail.mailer === 'outlook'}  onChange={(e)=>handleInput(e.target.name, e.target.value)}  radio name="mailer" title={<small className="txt-dp">Outlook</small>} value="outlook" />
+                          </div>
+                        </div>
+                        <div className="mailer">
+                          <div>
+                          <img  className={`mailer-img ${mail.mailer === 'sendgrid' ? 'mailer-img-selected' : ''}`} src={sendgrid} alt="BitPress" />
+                          </div>
+                          <div className="mailer-option">
+                          <CheckBox  className="btcd-label-cbx ml-2" checked={mail.mailer === 'sendgrid'}  onChange={(e)=>handleInput(e.target.name, e.target.value)}  radio name="mailer" title={<small className="txt-dp">Sendgrid</small>} value="sendgrid" />
+                          </div>
+                        </div>
+                        <div className="mailer">
+                          <div>
+                          <img  className={`mailer-img ${mail.mailer === 'sendinblue' ? 'mailer-img-selected' : ''}`} src={sendinblue} alt="BitPress" />
+                          </div>
+                          <div className="mailer-option">
+                          <CheckBox  className="btcd-label-cbx ml-2" checked={mail.mailer === 'sendinblue'}  onChange={(e)=>handleInput(e.target.name, e.target.value)}  radio name="mailer" title={<small className="txt-dp">Sendinblue</small>} value="sendinblue" />
+                          </div>
+                        </div>
+                      </div>
+                      </div>
                       <br />
-
+                      <br />
                 <b className="wdt-250 d-in-b">From Email Address :</b> 
                 <input id="form_email_address" onChange={(e) => handleInput(e.target.name, e.target.value)} name="form_email_address" className="btcd-paper-inp w-3 mr-4btcd-paper-inp w-3 mr-4" value={mail.form_email_address} placeholder="From Email Address" type="text" required />
             
