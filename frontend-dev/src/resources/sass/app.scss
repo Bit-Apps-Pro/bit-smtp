@@ -879,13 +879,18 @@ nav.top-nav {
 }
 .mailer{
   display: inline-block !important;
-  padding: 4px 6px;
+  padding: 5px 13px;
 }
 .mailer-img{
   width: 120px;
-  height : auto;
-  border:1px solid black;
-  border-radius:7px;
+  height: auto;
+  /* border: 1px solid black; */
+  background: white;
+  box-shadow: 0 0 6px -2px black;
+  border-radius: 10px;
+}
+.mailer-img-selected{
+  border: 3px solid #009aff !important;
 }
 .mailer-option{
   margin-top: 5px;
