@@ -86,21 +86,20 @@ final class Plugin
 	function mailConfig($phpmailer)
 	{
 		//$integrationHandler = new IntegrationHandler(0);
-		$mailConfigData = get_option('bit_smtp_options');
-		if ($mailConfigData) {
-			$mailConfig = json_decode($mailConfigData);
-			if($mailConfig->status==1){
+		$mailConfig = get_option('bit_smtp_options');
+		if ($mailConfig) {
+			if($mailConfig['status']==1){
 				$phpmailer->Mailer     = 'smtp';
-				$phpmailer->Host       = $mailConfig->smtp_host;
+				$phpmailer->Host       = $mailConfig['smtp_host'];
 				$phpmailer->SMTPAuth   = true;
-				$phpmailer->addReplyTo($mailConfig->re_email_address, 'Information');
-				$phpmailer->Port       = $mailConfig->port;
-				$phpmailer->Username   = $mailConfig->smtp_user_name;
-				$phpmailer->Password   = $mailConfig->smtp_password;
-				$phpmailer->SMTPSecure = $mailConfig->encryption;
+				$phpmailer->addReplyTo($mailConfig['re_email_address'], 'Information');
+				$phpmailer->Port       = $mailConfig['port'];
+				$phpmailer->Username   = $mailConfig['smtp_user_name'];
+				$phpmailer->Password   = $mailConfig['smtp_password'];
+				$phpmailer->SMTPSecure = $mailConfig['encryption'];
 				$phpmailer->SMTP_DEBUG =  1;
-				$phpmailer->From       = $mailConfig->form_email_address;
-				$phpmailer->FromName   = $mailConfig->form_name;
+				$phpmailer->From       = $mailConfig['form_email_address'];
+				$phpmailer->FromName   = $mailConfig['form_name'];
 			}
 		}
 	
