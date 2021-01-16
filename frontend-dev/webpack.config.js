@@ -72,7 +72,7 @@ module.exports = (env, argv) => {
           use: [{
             loader: 'url-loader',
             options: {
-              limit: 10000,
+              limit: 1000000,
               name: '[name].[ext]',
               outputPath: '../img'
             }
