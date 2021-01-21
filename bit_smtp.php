@@ -6,7 +6,7 @@ use BitPress\BIT_SMTP\Plugin;
  * Plugin Name: BIT SMTP
  * Plugin URI:  bitpress.pro/bit_smtp
  * Description: Send email via SMTP using BIT SMTP plugin by Bitpress
- * Version:     1.0.0
+ * Version:     1.0.2
  * Author:      BitPress
  * Author URI:  bitpress.pro
  * Text Domain: bit_smtp
@@ -17,7 +17,7 @@ use BitPress\BIT_SMTP\Plugin;
 /***
  *
  *If try to direct access  plugin folder it will Exit
- * 
+ *
  **/
 if (!defined('ABSPATH')) {
 	exit;
@@ -25,7 +25,7 @@ if (!defined('ABSPATH')) {
 
 
 // Define most essential constants.
-define('BIT_SMTP_VERSION', '1.0.1');
+define('BIT_SMTP_VERSION', '1.0.2');
 define('BIT_SMTP_PLUGIN_MAIN_FILE', __FILE__);
 define('BIT_SMTP_PLUGIN_BASENAME', plugin_basename(BIT_SMTP_PLUGIN_MAIN_FILE));
 define('BIT_SMTP_PLUGIN_DIR_PATH', plugin_dir_path(BIT_SMTP_PLUGIN_MAIN_FILE));
