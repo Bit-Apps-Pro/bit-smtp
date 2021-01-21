@@ -4,14 +4,12 @@ import bitsFetch from '../components/Childs/bitsFetch'
 import LoaderSm from '../components/Childs/LoaderSm'
 
 export default function MailSendTest({ setsnack }) {
-     const [isTestLoading, setisTestLoading] = useState(false)
-    const [toEmail, setToEmail] = useState('')
-    const [toSubject, setToSubject] = useState('')
-    const [toMessage, setToMessage] = useState('')
-    const testEmailHandle = (e) => {
+    const [isTestLoading, setisTestLoading] = useState(false)
+    const [mail, setMail] = useState({})
+    const handleSubmit = (e) => {
         e.preventDefault()
         setisTestLoading(true)
-        bitsFetch({ to: toEmail, subject: toSubject, message: toMessage },
+        bitsFetch(mail,
           'bit_send_test_email').then((res) => {
             if (res !== undefined && res.success) {
               setisTestLoading(false)
@@ -27,37 +25,48 @@ export default function MailSendTest({ setsnack }) {
           })
       }
 
-      const emailHandle = (e) => {
-        setToEmail(e.target.value)
-      }
-      const subjectHandle = (e) => {
-        setToSubject(e.target.value)
-      }
-      const messageHandle = (e) => {
-        setToMessage(e.target.value)
+      const handleInput = (typ, val, isNumber) => {
+        const setMailData = { ...mail }
+        if (isNumber) {
+          setMailData[typ] = Number(val)
+        } else {
+          setMailData[typ] = val
+        }
+        setMail(setMailData)
       }
     return (
       <div className="btcd-s-wrp">
+        <form
+      method="POST"
+      id="mailtest_form"
+      onSubmit={handleSubmit}
+      onKeyDown={e => {
+        e.key === 'Enter'
+          && e.target.tagName !== 'TEXTAREA'
+          && e.preventDefault()
+      }}
+    >
         <h2>
           Email Test
           {' '}
         </h2>
         <b className="wdt-150 d-in-b">To :</b>
-        <input id="to" name="to" value={toEmail} onChange={(e) => emailHandle(e)} className="btcd-paper-inp w-3 mr-4" placeholder="" type="text"/>
+        <input id="to" name="to" value={mail.to} onChange={(e) => handleInput(e.target.name, e.target.value)} className="btcd-paper-inp w-3 mr-4" placeholder="" type="email" required/>
         <br />
          <br />
         <b className="wdt-150 d-in-b">Subject :</b>
-        <input id="subject" name="subject" value={toSubject} onChange={(e) => subjectHandle(e)} className="btcd-paper-inp w-3 mr-4" placeholder="" type="text" />
+        <input id="subject" name="subject" value={mail.subject} onChange={(e) => handleInput(e.target.name, e.target.value)} className="btcd-paper-inp w-3 mr-4" placeholder="" type="text" required/>
         <br />
         <br />
         <b className="wdt-150 d-in-b mt-2">Message :</b>
-        <textarea id="message" cols={5} rows={5} name="message" onChange={(e) => messageHandle(e)} className="btcd-paper-inp w-3 mr-4" placeholder="">{toMessage}</textarea>
+        <textarea id="message" name="message" cols={5} rows={5}  onChange={(e) => handleInput(e.target.name, e.target.value)} className="btcd-paper-inp w-3 mr-4" placeholder="" required>{mail.message}</textarea>
         <br />
          <br />
-        <button onClick={(e) => testEmailHandle(e)} type="submit" className="btn f-left btcd-btn-lg blue sh-sm flx" disabled={isTestLoading}>
+        <button type="submit" className="btn f-left btcd-btn-lg blue sh-sm flx" disabled={isTestLoading}>
           Send Test
           {isTestLoading && <LoaderSm size="20" clr="#fff" className="ml-2" />}
         </button>
+        </form>
       </div>
     )
 }
