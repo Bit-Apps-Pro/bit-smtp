@@ -4,7 +4,7 @@ Tags: smtp, wp mail smtp, wordpress smtp, gmail smtp, sendgrid smtp, mailgun smt
 Requires at least: 4.9.0
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 
 == Description ==
@@ -116,3 +116,6 @@ This testing option will help you to verify that actually, your website can rela
 
 = 1.0.2 =
 Fix: some issues
+
+= 1.0.3 =
+Fix: required field issue

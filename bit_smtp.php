@@ -25,7 +25,7 @@ if (!defined('ABSPATH')) {
 
 
 // Define most essential constants.
-define('BIT_SMTP_VERSION', '1.0.2');
+define('BIT_SMTP_VERSION', '1.0.3');
 define('BIT_SMTP_PLUGIN_MAIN_FILE', __FILE__);
 define('BIT_SMTP_PLUGIN_BASENAME', plugin_basename(BIT_SMTP_PLUGIN_MAIN_FILE));
 define('BIT_SMTP_PLUGIN_DIR_PATH', plugin_dir_path(BIT_SMTP_PLUGIN_MAIN_FILE));
