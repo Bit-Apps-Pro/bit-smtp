@@ -9,7 +9,7 @@ export default function SMTP({ setsnack }) {
   const [status, setsmtpStatus] = useState('')
 
   useEffect(() => {
-    bitsFetch({ formID: 0 }, 'bitforms_get_mail_config').then((res) => {
+    bitsFetch({ formID: 0 }, 'bit_get_mail_config').then((res) => {
       if (res !== undefined && res.success) {
         if (!res.data.errors) {
           setMail(res.data)

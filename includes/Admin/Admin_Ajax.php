@@ -13,7 +13,7 @@ class Admin_Ajax
   {
     add_action('wp_ajax_bit_save_email_config', array($this, 'saveMailConfig'));
     add_action('wp_ajax_bit_send_test_email', array($this, 'sendTestEmail'));
-    add_action('wp_ajax_bitforms_get_mail_config', array($this, 'getMailConfig'));
+    add_action('wp_ajax_bit_get_mail_config', array($this, 'getMailConfig'));
   }
 
   private function mailPostData($request){
