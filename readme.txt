@@ -1,4 +1,4 @@
-=== Bit SMTP ===
+=== Bit SMTP - Best SMTP plugin for WordPress ===
 Contributors: bitpressadmin
 Tags: smtp, wp mail smtp, wordpress smtp, gmail smtp, sendgrid smtp, mailgun smtp, mail, mailer, phpmailer, wp_mail, email, mailgun, sengrid,sendinblue, wp smtp,mandrill,outlook
 Requires at least: 4.9.0
