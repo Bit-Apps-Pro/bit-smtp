@@ -6,7 +6,7 @@ use BitPress\BIT_SMTP\Plugin;
  * Plugin Name: BIT SMTP
  * Plugin URI:  https://www.bitapps.pro/bit-smtp
  * Description: Send email via SMTP using BIT SMTP plugin by Bitpress
- * Version:     1.0.2
+ * Version:     1.0.3
  * Author:      Bit Apps
  * Author URI:  https://www.bitapps.pro
  * Text Domain: bit_smtp
