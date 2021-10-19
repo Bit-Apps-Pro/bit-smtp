@@ -4,11 +4,11 @@ use BitPress\BIT_SMTP\Plugin;
 
 /**
  * Plugin Name: BIT SMTP
- * Plugin URI:  bitpress.pro/bit_smtp
+ * Plugin URI:  https://www.bitapps.pro/bit-smtp
  * Description: Send email via SMTP using BIT SMTP plugin by Bitpress
  * Version:     1.0.2
- * Author:      BitPress
- * Author URI:  bitpress.pro
+ * Author:      Bit Apps
+ * Author URI:  https://www.bitapps.pro
  * Text Domain: bit_smtp
  * Domain Path: /languages
  * License: GPLv2 or later
