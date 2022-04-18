@@ -87,7 +87,7 @@ final class Plugin
 	{
 		//$integrationHandler = new IntegrationHandler(0);
 		$mailConfig = get_option('bit_smtp_options');
-		if ($mailConfig) {
+		if (is_array($mailConfig)) {
 			if($mailConfig['status']==1){
 				$phpmailer->Mailer     = 'smtp';
 				$phpmailer->Host       = $mailConfig['smtp_host'];
