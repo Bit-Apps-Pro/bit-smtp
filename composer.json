@@ -1,6 +1,6 @@
 {
     "name": "bitpress/bit_smtp",
-    "description": "SMTP Configuration plugin by BitPress",
+    "description": "SMTP Configuration plugin by Bit Apps",
     "license": "gpl-2",
     "require": {},
     "autoload": {
