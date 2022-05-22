@@ -46,7 +46,7 @@ $select-arrow: "data:image/svg+xml;charset=utf8,%3Csvg width='20' height='20' xm
   outline         : none;
   box-shadow      : 1px 2px 3px #d7e0ed;
   background-color: aliceblue;
-  transition      : box-shadow 0.2s, transform 0.3s;
+  transition      : box-shadow 0.2s, transform 0.2s;
 
   &>.btcd-inte-atn {
     background: white;
@@ -718,11 +718,13 @@ select.btcd-paper-inp {
   }
 }
 .box{
-  flex-wrap: wrap-reverse
+  flex-wrap: wrap;
+  gap: 20px;
+  padding:20px;
   
 }
 .box > *{
-  flex:1 1 160px;
+  flex-basis:49%;
 }
 .text-overhide {
   white-space: nowrap;
@@ -730,12 +732,12 @@ select.btcd-paper-inp {
   overflow: hidden;
 
 
-  @supports (-webkit-line-clamp: 2) {
+  @supports (-webkit-line-clamp: 1) {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: initial;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
   }
 }
@@ -1123,8 +1125,9 @@ nav.top-nav {
   }
 }
 .f-5 {
-  font-weight: 500;
+  font-size: 12px;
 }
 .f15{
-  font-size:15px
+  font-size:14px;
+  font-weight: bold;
 }
