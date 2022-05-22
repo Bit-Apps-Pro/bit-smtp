@@ -35,6 +35,130 @@ $select-arrow: "data:image/svg+xml;charset=utf8,%3Csvg width='20' height='20' xm
   line-height: 1;
 }
 
+.btcd-inte-card {
+  position        : relative;
+  cursor          : pointer;
+  width           : 160px;
+  height          : 203px;
+  text-decoration : none;
+  overflow        : hidden;
+  border-radius   : 15px;
+  outline         : none;
+  box-shadow      : 1px 2px 3px #d7e0ed;
+  background-color: aliceblue;
+  transition      : box-shadow 0.2s, transform 0.3s;
+
+  &>.btcd-inte-atn {
+    background: white;
+    position  : absolute;
+    bottom    : 38px;
+    height    : 0px;
+    width     : 100%;
+    text-align: center;
+    overflow  : hidden;
+    transition: height 0.2s;
+
+    & .btn {
+      padding: 3px;
+    }
+
+    & span.btcd-icn {
+      font-size: 16px;
+    }
+  }
+
+  &>.body {
+    background: #fff;
+
+    &>div {
+      width        : 85%;
+      font-size    : 14px;
+      height       : 17px;
+      text-overflow: ellipsis;
+      overflow     : hidden;
+      margin       : auto;
+      white-space  : pre;
+    }
+
+    & small {
+      font-size: 12px;
+    }
+  }
+
+  & a {
+    color          : inherit;
+    text-decoration: none;
+  }
+
+  &.add-inte {
+    color    : #ccd6fe;
+    font-size: 100px;
+    cursor   : pointer;
+    outline  : none;
+
+    &:hover {
+      color: #b7c1ec;
+    }
+  }
+
+  &:hover:not(.btcd-inte-dis, .btcd-inte-pro, .pro-filter) {
+    transform : scale(1.02);
+    box-shadow: 2px 2px 7px #cdd4e7;
+
+    &>.btcd-inte-atn {
+      height  : 42px;
+      overflow: visible;
+    }
+  }
+
+  & img {
+    display    : block;
+    max-height : 160px;
+    max-width  : 160px;
+    transform  : scale(0.8);
+    padding-top: 20px;
+  }
+}
+
+.inte-sm {
+  background   : aliceblue;
+  position     : relative;
+  width        : 150px;
+  height       : 181px;
+  border-radius: 15px;
+  font-size    : 12px;
+  letter-spacing: 0.3px;
+
+  & img {
+    width     : 100px;
+    height    : 100px;
+    max-width : 100px;
+    max-height: 100px;
+    object-fit: contain;
+    margin    : 0 auto;
+    padding   : 12px;
+  }
+
+  &:before {
+    display        : flex;
+    background     : rgba(4, 37, 155, 0.18);
+    color          : #fff;
+    position       : absolute;
+    justify-content: center;
+    align-items    : center;
+    font-size      : 100px;
+    width          : 100%;
+    height         : 100%;
+    z-index        : 9;
+  }
+
+  // &:hover:not(.btcd-inte-dis, .btcd-inte-pro, .pro-filter, .inte-edit) {
+  //   &:before {
+  //     content: "+";
+  //   }
+  // }
+}
+
 .btcd-snack-cls {
   display: inline-block;
   background: #000;
@@ -105,6 +229,12 @@ $select-arrow: "data:image/svg+xml;charset=utf8,%3Csvg width='20' height='20' xm
 }
 .pl-6 {
   padding-left: 30px;
+}
+
+
+.px-2 {
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 .flx {
@@ -571,6 +701,44 @@ select.btcd-paper-inp {
 .btcd-mt-inp > textarea:disabled:placeholder-shown + span::after {
   border-top-color: transparent !important;
 }
+.btcd-btn-sm {
+  padding  : 5px;
+  font-size: 10px;
+}
+
+.btcd-btn-o-blue {
+  background: transparent;
+  color     : $blue !important;
+  border    : 1px solid $blue;
+  transition: background 0.2s !important;
+
+  &:hover {
+    background: $blue;
+    color     : white !important;
+  }
+}
+.box{
+  flex-wrap: wrap-reverse
+  
+}
+.box > *{
+  flex:1 1 160px;
+}
+.text-overhide {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+
+  @supports (-webkit-line-clamp: 2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: initial;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
 
 /* Faster transition in Safari for less noticable fractional font-size issue */
 @media not all and (min-resolution: 0.001dpcm) {
@@ -953,4 +1121,10 @@ nav.top-nav {
   & img {
     width: 110px;
   }
+}
+.f-5 {
+  font-weight: 500;
+}
+.f15{
+  font-size:15px
 }
