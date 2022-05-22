@@ -1,18 +1,16 @@
 /* eslint-disable no-undef */
 import React, { useState } from 'react';
-import 'react-multiple-select-dropdown-lite/dist/index.css';
+import 'react-multiple-select-dropdown-lite/dist/index.css'
 import {
   BrowserRouter as Router, Link, NavLink, Route, Switch
 } from 'react-router-dom';
 
 import SMTP from './pages/SMTP'
 import MailSendTest from './pages/MailSendTest'
-import LogTable from './pages/LogTable'
-import EmailControl from './pages/EmailControl'
-// import About from './pages/About'
 import SnackMsg from './components/Childs/SnackMsg'
-import bitLogo from './resources/img/logo.png'
-import './resources/sass/app.scss';
+import './resources/sass/app.scss'
+import Others from './pages/Others'
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const [snack, setsnack] = useState({ show: false })
@@ -20,14 +18,22 @@ function App() {
 
     <div>
       <SnackMsg snack={snack} setSnackbar={setsnack} />
+      <Toaster
+        position="bottom-right"
+        containerStyle={{ inset: '-25px 30px 20px -10px' }}
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: '#333',
+            color: '#fff',
+            bottom: 40,
+            padding: '15px 18px',
+            boxShadow: '0 0px 7px rgb(0 0 0 / 30%), 0 3px 30px rgb(0 0 0 / 20%)',
+          },
+        }}
+      />
       <Router basename={typeof bit_wp_smtp !== 'undefined' ? bit_wp_smtp.baseURL : '/'}>
         <div id="btcd-app">
-          <div className="top-header">
-            <span>Developed by&nbsp;</span>
-            <a href="https://www.bitpress.pro" target="_blank" rel="noreferrer">
-              <img src={bitLogo} alt="BitPress" />
-            </a>
-          </div>
           <div className="nav-wrp">
             <div className="flx">
               <div className="logo flx" title="Bit Form">
@@ -43,24 +49,11 @@ function App() {
                   Email Test
               </NavLink>
                 <NavLink
-                  to="/email-log"
+                  to="/others"
                   activeClassName="app-link-active"
                 >
-                  Email Log
+                  Others
               </NavLink>
-                <NavLink
-                  to="/email-control"
-                  activeClassName="app-link-active"
-                >
-                  Email Controls
-              </NavLink>
-                {/* <NavLink
-                  to="/about-us"
-                  activeClassName="app-link-active"
-
-                >
-                  About Us
-              </NavLink> */}
               </nav>
             </div>
           </div>
@@ -71,16 +64,9 @@ function App() {
             <Route path="/test-email">
               <MailSendTest setsnack={setsnack} />
             </Route>
-            <Route path="/email-log">
-              <LogTable />
+            <Route path="/others">
+              <Others />
             </Route>
-            <Route path="/email-control">
-              <EmailControl />
-            </Route>
-            {/* <Route path="/about-us">
-              <About />
-            </Route> */}
-
           </Switch>
         </div>
       </Router>
