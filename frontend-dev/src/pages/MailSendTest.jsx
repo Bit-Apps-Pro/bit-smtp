@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import bitsFetch from '../components/Childs/bitsFetch'
 import LoaderSm from '../components/Childs/LoaderSm'
 
@@ -10,18 +11,14 @@ export default function MailSendTest({ setsnack }) {
         e.preventDefault()
         setisTestLoading(true)
         bitsFetch(mail,
-          'bit_send_test_email').then((res) => {
-            if (res !== undefined && res.success) {
-              setisTestLoading(false)
-              if(res.data){
-                setsnack({ show: true, msg: 'mail send successfully' })
-              }else{
-                setsnack({ show: true, msg: 'wrong smtp configuration,please try again' })
-              }
-            } else {
-              setisTestLoading(false)
-              setsnack({ show: true, msg: 'mail test fail,please try again' })
-            }
+          'bit_send_test_email').then(res => {
+            const {data, success} = res
+            setisTestLoading(false)
+            if (data !== undefined && success) {
+              return toast.success('Email sent successfully.')
+
+            } 
+              return toast.error(data.data.error)
           })
       }
 
