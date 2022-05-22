@@ -2,9 +2,9 @@
 Contributors: bitpressadmin
 Tags: smtp, wp mail smtp, wordpress smtp, gmail smtp, sendgrid smtp, mailgun smtp, mail, mailer, phpmailer, wp_mail, email, mailgun, sengrid,sendinblue, wp smtp,mandrill,outlook
 Requires at least: 4.9.0
-Tested up to: 5.9
+Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 1.0.5
+Stable tag: 1.0.2
 License: GPLv2 or later
 
 Enable SMTP plugin to authenticate mail service of your site by configuring SMTP server of your desired mail service.
@@ -185,3 +185,6 @@ Fix: required field issue
 = 1.0.5 =
 * Fix:
     1. Illegal string offset (PHP Warning)
+
+= 1.0.2 =
+    1. Improves confirmation message
