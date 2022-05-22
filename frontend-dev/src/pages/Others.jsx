@@ -4,7 +4,7 @@ export default function Others() {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    const newVersion = '1.0' 
+    const newVersion = '1.1' 
 
     const oldVersion = localStorage.getItem('btcd_products_old_version')
     const isSetLocal = localStorage.getItem('btcd_products')
@@ -28,25 +28,21 @@ export default function Others() {
 
   return (
     <div className=" btcd-inte-wrp txt-center">
-      <br/>
-      <br/>
        <div className="flx flx-center box">
-         {products && products.map((product, i) => (
+         {products && products.map((product, i) => product.slug !== 'bit-smtp' && (
             <div
                 key={`inte-sm-${i + 2}`}
                 role="button"
                 tabIndex="0"
-                className={`btcd-inte-card inte-sm mr-4 mt-3 `}
+                className={`btcd-inte-card inte-sm`}
               >
 
               <img loading="lazy" src={product.icon_url} alt={product.slug} />
-              <div className="txt-center text-overhide px-2 f15">
+              <div className="txt-center px-2 f15">
                 {product.name}
               </div>
               <br/>
-              <div className="txt-center f-5">
-                <span className="btcd-inte-card-desc">{product.description}</span>
-              </div>
+                <span className="btcd-inte-card-desc txt-center  text-overhide f-5" title={product.description}>{product.description}</span>
               <div className="flx flx-center">
                 <a href={product.url} target="_blank" rel="noopener noreferrer" className="btn btcd-btn-o-blue btcd-btn-sm">
                   <i className="fas fa-external-link-alt"></i>
