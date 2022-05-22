@@ -47,7 +47,7 @@ class Admin_Ajax
             wp_send_json_error(
                 __(
                     'Token expired',
-                    'bit-smtp'
+                    'bit_smtp'
                 ),
                 401
             );
@@ -69,7 +69,7 @@ class Admin_Ajax
 
                     add_action('wp_mail_failed', function ($error) {
                         $errors = $error->errors['wp_mail_failed'];
-                        wp_send_json_error(['error' => __($errors[0], 'bit-smtp')], 400);
+                        wp_send_json_error(['error' => __($errors[0], 'bit_smtp')], 400);
                     });
 
                     wp_mail($to, $subject, $message);
@@ -77,17 +77,17 @@ class Admin_Ajax
                     wp_send_json_success(['error' => false], 200);
                 } catch (Exception $e) {
                     $error = $e->getMessage();
-                    wp_send_json_error(['error' => __($error, 'bit-smtp')], 400);
+                    wp_send_json_error(['error' => __($error, 'bit_smtp')], 400);
                 }
             } else {
-                $error = __('Some of the test fields are empty or an invalid email supplied', 'bit-smtp');
+                $error = __('Some of the test fields are empty or an invalid email supplied', 'bit_smtp');
                 wp_send_json_error(['error' => $error], 400);
             }
         } else {
             wp_send_json_error(
                 __(
                     'Token expired',
-                    'bit-smtp'
+                    'bit_smtp'
                 ),
                 401
             );
