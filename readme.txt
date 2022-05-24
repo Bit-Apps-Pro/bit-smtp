@@ -4,7 +4,7 @@ Tags: smtp, wp mail smtp, wordpress smtp, gmail smtp, sendgrid smtp, mailgun smt
 Requires at least: 4.9.0
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 1.0.2
+Stable tag: 1.0.6
 License: GPLv2 or later
 
 Enable SMTP plugin to authenticate mail service of your site by configuring SMTP server of your desired mail service.
@@ -186,5 +186,5 @@ Fix: required field issue
 * Fix:
     1. Illegal string offset (PHP Warning)
 
-= 1.0.2 =
+= 1.0.6 =
     1. Improves confirmation message
