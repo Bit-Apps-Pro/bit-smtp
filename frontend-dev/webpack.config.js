@@ -29,7 +29,7 @@ module.exports = (env, argv) => {
       new webpack.DefinePlugin({ "process.env.NODE_ENV": production ? JSON.stringify("production") : JSON.stringify("developmet") })
     ],
 
-    devtool: production ? '' : 'source-map',
+    devtool: !production && 'source-map',
 
     resolve: {
       extensions: [".js", ".jsx", ".json"],
