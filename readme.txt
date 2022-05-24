@@ -21,7 +21,7 @@ At first, you have to open an account on your desired hosting provider (e.g: Mai
 To access all the mail services you need professional mail addresses. The mail services you can use through this plug-in:
 
 1. MailGun SMTP [5,000 free email /per month for 3 months]
-2. Gmail SMTP [6,000 free email/per month]
+2. Gmail SMTP [10000 free email/per month]
 3. Hotmail
 4. Yahoo
 5. AWS SES
