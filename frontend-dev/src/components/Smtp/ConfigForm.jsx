@@ -13,6 +13,7 @@ import mailgun from '../../resources/img/mailgun.png'
 import defaultMail from '../../resources/img/default.png'
 import other from '../../resources/img/other.png'
 import outlook from '../../resources/img/outlook.png'
+import toast from 'react-hot-toast'
 
 
 export default function ConfigForm({ mail, setMail, setsnack, status, setsmtpStatus }) {
@@ -30,14 +31,18 @@ export default function ConfigForm({ mail, setMail, setsnack, status, setsmtpSta
     const formmail = new FormData(formRef.current)
     e.preventDefault()
     setIsLoading(true)
-    bitsFetch(formmail,
+   const configSaveProm = bitsFetch(formmail,
       'bit_save_email_config').then((res) => {
         if (res !== undefined && res.success) {
           setIsLoading(false)
-           setsnack({ show: true, msg: 'smtp config save successfully' })
-        }else{
-          console.log('success false')
+          return 'SMTP config saved successfully'
         }
+        return 'Error Occured'
+      })
+     toast.promise(configSaveProm, {
+        success: data => data,
+        failed: data => data,
+        loading: 'Saving...',
       })
   }
   const handleInput = (typ, val, isNumber) => {
