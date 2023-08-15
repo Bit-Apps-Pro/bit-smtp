@@ -88,11 +88,13 @@ final class Plugin
 		//$integrationHandler = new IntegrationHandler(0);
 		$mailConfig = get_option('bit_smtp_options');
 		if (is_array($mailConfig)) {
-			if($mailConfig['status']==1){
+			if ($mailConfig['status'] == 1) {
 				$phpmailer->Mailer     = 'smtp';
 				$phpmailer->Host       = $mailConfig['smtp_host'];
 				$phpmailer->SMTPAuth   = true;
-				$phpmailer->addReplyTo($mailConfig['re_email_address'], 'Information');
+				if (!empty($mailConfig['re_email_address'])) {
+					$phpmailer->addReplyTo($mailConfig['re_email_address'], 'Information');
+				}
 				$phpmailer->Port       = $mailConfig['port'];
 				$phpmailer->Username   = $mailConfig['smtp_user_name'];
 				$phpmailer->Password   = $mailConfig['smtp_password'];
@@ -102,7 +104,6 @@ final class Plugin
 				$phpmailer->FromName   = $mailConfig['form_name'];
 			}
 		}
-	
 	}
 	/**
 	 * Set WPDB table shortcut names
