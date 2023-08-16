@@ -2,9 +2,9 @@
 Contributors: bitpressadmin
 Tags: smtp, wp mail smtp, wordpress smtp, gmail smtp, sendgrid smtp, mailgun smtp, mail, mailer, phpmailer, wp_mail, email, mailgun, sengrid,sendinblue, wp smtp,mandrill,outlook
 Requires at least: 4.9.0
-Tested up to: 6.0
+Tested up to: 6.3
 Requires PHP: 5.6
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2 or later
 
 Enable SMTP plugin to authenticate mail service of your site by configuring SMTP server of your desired mail service.
@@ -203,6 +203,10 @@ Yes, possible to send WordPress emails using Hotmail.
 
 
 == Changelog ==
+
+= 1.0.7 =
+* Tested with 6.3
+* Reply To nullable
 
 = 1.0.6 =
 * Improves confirmation message
