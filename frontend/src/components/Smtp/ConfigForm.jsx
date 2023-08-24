@@ -101,7 +101,7 @@ export default function ConfigForm({ mail, setMail, setsnack, status, setsmtpSta
               <br />
           
               <b className="wdt-250 d-in-b" >Reply-To Email Address</b>
-                <input id="re_email_address" onChange={(e) => handleInput(e.target.name, e.target.value)} value={mail.re_email_address} name="re_email_address" className="btcd-paper-inp w-3 mr-4btcd-paper-inp w-3 mr-4" placeholder="Reply-To Email Address" type="text" required />
+                <input id="re_email_address" onChange={(e) => handleInput(e.target.name, e.target.value)} value={mail.re_email_address} name="re_email_address" className="btcd-paper-inp w-3 mr-4btcd-paper-inp w-3 mr-4" placeholder="Reply-To Email Address" type="text"/>
                 <br />
               <br />
 
