@@ -1,11 +1,13 @@
 {
-  "name": "frontend-dev",
-  "version": "0.1.0",
+  "name": "bit-smtp",
+  "version": "1.0.8",
   "private": true,
   "dependencies": {
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^14.1.1",
+    "@vitejs/plugin-react": "^4.0.4",
     "axios": "^0.26.1",
     "core-js": "^3.8.1",
     "css-loader": "^6.7.1",
@@ -19,6 +21,7 @@
     "regenerator-runtime": "^0.13.7",
     "sass-loader": "^12.6.0",
     "url-loader": "^4.1.1",
+    "vite": "^4.4.9",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -27,7 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "wpb": "webpack --progress --color --watch --mode=development",
-    "wp": "webpack --progress --color --config webpack.config.js --mode=production"
+    "production": "webpack --progress --color --config webpack.config.js --mode=production"
   },
   "eslintConfig": {
     "extends": [

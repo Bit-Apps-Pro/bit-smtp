@@ -3,7 +3,7 @@
 import React, { useEffect,useState } from 'react';
 import toast from 'react-hot-toast';
 import bitsFetch from '../components/Childs/bitsFetch'
-import ConfigForm from './../components/Smtp/ConfigForm'
+import ConfigForm from '../components/Smtp/ConfigForm'
 
 export default function SMTP({ setsnack }) {
   const [mail, setMail] = useState({})

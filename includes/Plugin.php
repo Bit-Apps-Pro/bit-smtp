@@ -1,9 +1,9 @@
 <?php
 
-namespace BitPress\BIT_SMTP;
+namespace BitApps\SMTP;
 
-use BitPress\BIT_SMTP\Admin\Admin_Bar;
-use BitPress\BIT_SMTP\Admin\Admin_Ajax;
+use BitApps\SMTP\Admin\Admin_Bar;
+use BitApps\SMTP\Admin\Admin_Ajax;
 
 /**
  * Main class for the plugin.
@@ -125,7 +125,7 @@ final class Plugin
 	 */
 	public function localization_setup()
 	{
-		load_plugin_textdomain('bit_smtp', false, BIT_SMTP_PLUGIN_DIR_PATH . '/lang/');
+		load_plugin_textdomain('bit-smtp', false, BIT_SMTP_PLUGIN_DIR_PATH . '/lang/');
 	}
 
 	/**
@@ -152,7 +152,7 @@ final class Plugin
 	 */
 	function plugin_action_links($links)
 	{
-		$links[] = '<a href="https://www.bitpress.pro" target="_blank">' . __('Bitpress', 'bit_smtp') . '</a>';
+		$links[] = '<a href="https://www.bitapps.pro" target="_blank">' . __('BitApps', 'bit-smtp') . '</a>';
 
 		return $links;
 	}
@@ -201,7 +201,7 @@ final class Plugin
 	 *
 	 * @since 1.0.0-alpha
 	 *
-	 * @return bit_wp_smtp Plugin main instance.
+	 * @return Plugin Plugin main instance.
 	 */
 	public static function instance()
 	{
@@ -213,16 +213,15 @@ final class Plugin
 	 *
 	 * @since 1.0.0-alpha
 	 *
-	 * @param string $main_file Absolute path to the plugin main file.
 	 * @return bool True if the plugin main instance could be loaded, false otherwise.
 	 */
-	public static function load($main_file)
+	public static function load()
 	{
 		if (null !== static::$instance) {
 			return false;
 		}
 
-		static::$instance = new static($main_file);
+		static::$instance = new static();
 		static::$instance->register();
 
 		return true;

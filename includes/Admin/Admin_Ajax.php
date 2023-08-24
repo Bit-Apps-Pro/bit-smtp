@@ -1,9 +1,16 @@
 <?php
 
-namespace BitPress\BIT_SMTP\Admin;
+namespace BitApps\SMTP\Admin;
 
 class Admin_Ajax
 {
+    /**
+     * WordPress database abstraction object
+     *
+     * @var wpdb
+     */
+    public $wpdb;
+
     public function __construct()
     {
         global $wpdb;
@@ -38,7 +45,7 @@ class Admin_Ajax
     public function saveMailConfig()
     {
         \ignore_user_abort();
-        if (wp_verify_nonce(sanitize_text_field($_REQUEST['_ajax_nonce']), 'bit_smtp')) {
+        if (wp_verify_nonce(sanitize_text_field($_REQUEST['_ajax_nonce']), 'bit-smtp')) {
             unset($_REQUEST['_ajax_nonce'], $_REQUEST['action']);
             $mail_post_data = $this->mailPostData($_REQUEST);
             $result = update_option('bit_smtp_options', $mail_post_data);
@@ -47,7 +54,7 @@ class Admin_Ajax
             wp_send_json_error(
                 __(
                     'Token expired',
-                    'bit_smtp'
+                    'bit-smtp'
                 ),
                 401
             );
@@ -57,7 +64,7 @@ class Admin_Ajax
     public function sendTestEmail()
     {
         \ignore_user_abort();
-        if (wp_verify_nonce(sanitize_text_field($_REQUEST['_ajax_nonce']), 'bit_smtp')) {
+        if (wp_verify_nonce(sanitize_text_field($_REQUEST['_ajax_nonce']), 'bit-smtp')) {
             $inputJSON = file_get_contents('php://input');
             $queryParams = json_decode($inputJSON);
             $to = isset($queryParams->to) ? sanitize_email($queryParams->to) : '';
@@ -69,7 +76,7 @@ class Admin_Ajax
 
                     add_action('wp_mail_failed', function ($error) {
                         $errors = $error->errors['wp_mail_failed'];
-                        wp_send_json_error(['error' => __($errors[0], 'bit_smtp')], 400);
+                        wp_send_json_error(['error' => __($errors[0], 'bit-smtp')], 400);
                     });
 
                     wp_mail($to, $subject, $message);
@@ -77,17 +84,17 @@ class Admin_Ajax
                     wp_send_json_success(['error' => false], 200);
                 } catch (Exception $e) {
                     $error = $e->getMessage();
-                    wp_send_json_error(['error' => __($error, 'bit_smtp')], 400);
+                    wp_send_json_error(['error' => __($error, 'bit-smtp')], 400);
                 }
             } else {
-                $error = __('Some of the test fields are empty or an invalid email supplied', 'bit_smtp');
+                $error = __('Some of the test fields are empty or an invalid email supplied', 'bit-smtp');
                 wp_send_json_error(['error' => $error], 400);
             }
         } else {
             wp_send_json_error(
                 __(
                     'Token expired',
-                    'bit_smtp'
+                    'bit-smtp'
                 ),
                 401
             );

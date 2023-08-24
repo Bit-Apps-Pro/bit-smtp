@@ -32,7 +32,7 @@ function App() {
           },
         }}
       />
-      <Router basename={typeof bit_wp_smtp !== 'undefined' ? bit_wp_smtp.baseURL : '/'}>
+      <Router basename={typeof bitsmtp !== 'undefined' ? bitsmtp.baseURL : '/'}>
         <div id="btcd-app">
           <div className="nav-wrp">
             <div className="flx">
