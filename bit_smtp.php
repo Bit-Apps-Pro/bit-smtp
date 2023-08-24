@@ -6,7 +6,7 @@ use BitApps\SMTP\Plugin;
  * Plugin Name: BIT SMTP
  * Plugin URI:  https://www.bitapps.pro/bit-smtp
  * Description: Send email via SMTP using BIT SMTP plugin by Bit Apps
- * Version:     1.0.7
+ * Version:     1.0.8
  * Author:      SMTP plugin by Bit Apps
  * Author URI:  https://www.bitapps.pro
  * Text Domain: bit-smtp
@@ -25,7 +25,7 @@ if (!defined('ABSPATH')) {
 
 
 // Define most essential constants.
-define('BIT_SMTP_VERSION', '1.0.7');
+define('BIT_SMTP_VERSION', '1.0.8');
 define('BIT_SMTP_PLUGIN_MAIN_FILE', __FILE__);
 define('BIT_SMTP_PLUGIN_BASENAME', plugin_basename(BIT_SMTP_PLUGIN_MAIN_FILE));
 define('BIT_SMTP_PLUGIN_DIR_PATH', plugin_dir_path(BIT_SMTP_PLUGIN_MAIN_FILE));
