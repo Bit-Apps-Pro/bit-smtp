@@ -20,8 +20,8 @@ A lot of site owners face the spam mail problem for using the WordPress default 
 
 Bit SMTP plugin allows you to authenticate the mail service of your site by configuring the SMTP server of your desired mail service. SMTP is a protocol that helps your WordPress site to make its email deliverability more easygoing & reliable. By enabling this feature you can send mail from your site to your recipients via your preferred mail server.
 
-### How does SMTP works :
-At first, you have to open an account on your desired hosting provider (e.g: MailGun, Gmail, Yahoo, Hotmail, Zoho mail). By opening an account you are authenticating your WordPress site. They will provide you the necessary credentials (e.g.: Encryption type, SMTP port ). You have to put this information when configuring SMTP on your site. Once your site is authenticated you can send mail through your preferred SMTP server. All the email validation work will be done on your specified SMTP server.
+### How does SMTP work:
+At first, you have to open an account on your desired hosting provider (e.g: MailGun, Gmail, Yahoo, Hotmail, Zoho mail). By opening an account you are authenticating your WordPress site. They will provide you with the necessary credentials (e.g.: Encryption type, SMTP port ). You have to put this information when configuring SMTP on your site. Once your site is authenticated you can send mail through your preferred SMTP server. All the email validation work will be done on your specified SMTP server.
 
 To access all the mail services you need professional mail addresses. The mail services you can use through this plug-in:
 
@@ -46,28 +46,28 @@ SMTP Port: 587
 = Gmail SMTP: =
 Bloggers and small business owners frequently prefer not to utilize third-party SMTP services. However, they have the option to utilize their Gmail or G Suite accounts for SMTP emails.
 
-SMTP Host : smtp.gmail.com
-Type of Encryption : TLS
+SMTP Host: smtp.gmail.com
+Type of Encryption: TLS
 SMTP Port: 587
 
 = Hotmail SMTP: =
 
-SMTP Host : smtp.live.com
-Type of Encryption : TLS
+SMTP Host: smtp.live.com
+Type of Encryption: TLS
 SMTP Port: 587
 
 = Yahoo: =
 
-SMTP Host : smtp.mail.yahoo.com
-Type of Encryption : SSL
+SMTP Host: smtp.mail.yahoo.com
+Type of Encryption: SSL
 SMTP Port: 465
 
 = Zoho Mail SMTP: =
 
 Experience the convenience of sending emails securely using your personal or business Zoho Mail account, while ensuring the utmost protection for your login credentials. Stay safe and confident with Zoho Mail's reliable email delivery.
 
-SMTP Host : smtp.zoho.com
-Type of Encryption : TSL
+SMTP Host: smtp.zoho.com
+Type of Encryption: TSL
 SMTP Port: 587
 
 = Amazon SES SMTP: =
@@ -75,36 +75,36 @@ Amazon SES is an ideal mailer for advanced users seeking to leverage the power o
 It caters to technical users and offers a robust platform for efficient email delivery.
 With Amazon SES, users can maximize the benefits of AWS SES service and effectively handle large email volumes.
 
-SMTP Host :http://email-smtp.us-west-2.amazonaws.com/
-Type of Encryption : TLS
+SMTP Host:http://email-smtp.us-west-2.amazonaws.com/
+Type of Encryption: TLS
 SMTP Port: 587
 
 = Sendgrid SMTP: =
 With SendGrid's free SMTP plan, you can send up to 100 emails per day. Easily integrate SendGrid SMTP with your WordPress site for reliable email delivery.
 
-host : smtp.sendgrid.net  
-port : 587  
-encrypted : TLS
+host: smtp.sendgrid.net  
+port: 587  
+encrypted: TLS
  
 = Sendinblue SMTP: =
 Unlock the benefits of Sendinblue, a highly recommended transactional email service utilized by over 80,000 growing companies worldwide. With a daily email volume of over 30 million, their dedicated experts continuously enhance the reliability and speed of their SMTP infrastructure. Enjoy the advantage of 300 free emails per day provided by Sendinblue to empower your communication needs.
 
-host : smtp-relay.sendinblue.com  
+host: smtp-relay.sendinblue.com  
 port: 587  
-encrypted : TLS
+encrypted: TLS
 
 = outlook SMTP: =
 Supercharge your email deliverability with our Microsoft 365 / Outlook mailer integration. Seamlessly send emails from WordPress using your current Outlook.com or Microsoft 365 account, maximizing convenience and efficiency. Elevate your business communication by harnessing the power of our integrated solution.
 
-host : smtp-mail.outlook.com  
-Type of Encryption : TLS  
+host: smtp-mail.outlook.com  
+Type of Encryption: TLS  
 port: 587
 
 ###   ⭐Features
 
-1.  Send email using a SMTP sever
+1.  Send email using an SMTP server
     
-2.  You can use Gmail, Yahoo, Hot mail's, Mail gun, Amazon SES ,Sendgrid, Sendinblue, Outlook &  Zoho Mail SMTP server if you have an account with them
+2.  You can use Gmail, Yahoo, Hot mail's, Mail gun, Amazon SES , Sendgrid, Sendinblue, Outlook &  Zoho Mail SMTP servers if you have an account with them
     
 3.  Securely deliver emails to your recipients.
     
@@ -118,7 +118,7 @@ port: 587
 Once you have installed the plugin, Click the BIT SMTP menu
 The general section consists of the following options:
 
-* **Enable SMTP:** Yes/No if option Yes plugin is enabled or option is No plugin is disabled (This option should always be checked “Yes”).
+* **Enable SMTP:** Yes/No if option Yes plugin is enabled or option No plugin is disabled (This option should always be checked “Yes”).
 
 * **From Email Address:** The email address that will be used to send emails to your recipients.
 
@@ -154,20 +154,51 @@ This testing option will help you to verify that actually, your website can rela
 
 https://youtu.be/1dnw6v2E2y8
 
+
+### Bit SMTP COMPATIBLE WITH ALL POPULAR FORM BUILDER:
+
+[**Bit Form:**](https://wordpress.org/plugins/bit-form/)
+[**Gravity Form**](https://www.gravityforms.com/)
+[**Contact Form 7**](https://wordpress.org/plugins/contact-form-7/)
+[**WPForms Pro**](https://wpforms.com/)
+[**Ninja Forms-Contact Form**](https://wordpress.org/plugins/ninja-forms/)
+[**Forminator Forms**](https://wordpress.org/plugins/forminator/)
+[**Fluent Forms**](https://wordpress.org/plugins/fluentform/)
+[**Formidable Forms**](https://wordpress.org/plugins/formidable/)
+[**Everest Forms**](https://wordpress.org/plugins/everest-forms/)
+[**WS Forms**](https://wordpress.org/plugins/ws-form/)
+[**Happy Forms - Contact Form**](https://wordpress.org/plugins/happyforms/)
+[**weForms - Contact Form**](https://wordpress.org/plugins/weforms/)
+[**Kali Forms**](https://wordpress.org/plugins/kali-forms/)
+[**WPForm Lite**](https://wordpress.org/plugins/wpforms-lite/)
+[**PlanSo Forms**](https://www.planso.net/planso-form-builder/)
+[**Form Maker by 10Web**](https://wordpress.org/plugins/form-maker/)
+[**Elementor Form**](https://elementor.com/)
+[**FormCraft**](https://wordpress.org/plugins/formcraft-form-builder/)
+[**Quform WordPress Form Builder**](https://www.quform.com/)
+[**Caldera Contact Forms**](https://calderaforms.com/)
+
+### SECURITY:
+
+The Bit SMTP team places a high priority on security. Not only does the plugin adhere to all security best practices, but we offer various options to ensure the safety and protection of your website.
+
+For recommended direct SMTP mailers integrations like SMTP.com, Brevo (formerly Sendinblue), Mailgun, SendGrid, Postmark, and SparkPost, we utilize official provider APIs. This means that you never have to input your username or password in the plugin settings, and these credentials are not stored in the database. Instead, we use tokens or API keys, which provide a much higher level of security.
+
+
 🎉 Overview of other products we are offering :
 
-📝[**Bit Form:**](https://wordpress.org/plugins/bit-form/) One of our best selling product. Bit Form is an amazing drag & drop form builder that allows you to create custom forms to interact with your visitors. It gives you the freedom to create any form you want, no coding required.
+[**Bit Form:**](https://wordpress.org/plugins/bit-form/) One of our best selling product. Bit Form is an amazing drag-and-drop form builder that allows you to create custom forms to interact with your visitors. It gives you the freedom to create any form you want, with no coding required.
 
-🛒[**Integration of WooCommerce with Zoho CRM:**](https://wordpress.org/plugins/crm-for-wc-in-zoho/) An advanced integration with Zoho CRM to sync all the WooCommerce information (Customers, Products, Sales Order) following few steps
+[**Bit Integrations:**](https://wordpress.org/plugins/bit-integrations/) Automate 200+ platforms and Contact form 7, Elementor Form, WooCommerce, Google Sheet, WPForms, Forminator, BuddyBoss, LearnDash, Hubspot, Mail poet, MailChimp, Webhook, ACF, Zapier, Fluent, Forms, CRM, LMS, Membership & many more.
 
-🛒 [**Integration of WooCommerce with Zoho Inventory:**](https://wordpress.org/plugins/wc-zoho-inventory/) The WooCommerce integration with Zoho inventory  is a new plugin by which user can import all the information's related to customer & sales order.
+[**Bit Assist:**](https://wordpress.org/plugins/bit-assist/) Connect your all support assistant with a single button. Floating Chat Widget, Contact Chat Icons, Telegram Chat, Line Messenger, WeChat, WhatsApp, Email, SMS, Call Button & more.
 
-♻ [**Integration Of Zoho CRM & Fluent Form:**](https://wordpress.org/plugins/integration-of-zoho-crm-and-fluent-form/)  A powerful integration tool to keep track your Fluent form data in a mannered way.
+[**Bit File Manager:**](https://wordpress.org/plugins/file-manager/) Best File manager and Code editor plugin for WordPress. You can edit, upload, delete, copy, move, rename, archive and extract files with the file manager plugin. You don’t need to worry about FTP anymore. It is really simple and easy to use.
 
-♻ [**Integration Of Zoho CRM & Contact Form7**](https://wordpress.org/plugins/integration-of-zoho-crm-and-contact-form-7/): An module that allows you to integrate into the Zoho CRM system to create and manage your sales leads, contacts, and appointments with Contact Form7.
-♻ [**Integration Of Zoho CRM & Gravity Form:**](https://wordpress.org/plugins/integration-of-zoho-crm-and-gravity-forms/)  A powerful integration tool to automatically sync your gravity form data with Zoho CRM.
+[**Webhook.is:**](https://webhook.is/) Test your incoming webhook response & send outgoing webhook request for free.
 
-♻  [**Integration Of Zoho CRM & WP Form:**](https://wordpress.org/plugins/integration-of-zoho-crm-and-wpforms/)  A powerful integration tool to automatically sync your WP form data with Zoho CRM.
+[Bit Flow] – Zapier, Integromat (Make.com), Integrately & Pabbly alternative in WordPress. [Coming Soon]
+
 
 🔔 For more updates about our products we cordially request you to join our [**Fb Community**](https://www.facebook.com/groups/bitcommunityusers).
 
@@ -175,7 +206,7 @@ https://youtu.be/1dnw6v2E2y8
 ## FAQ
 
 = 1. Is it possible to utilize this plugin to send emails via SMTP from my WordPress site? =
-Yes, you can use this plugin to send emails via SMTP from your WordPress site. You can use Gmail, Yahoo, Hot mail's, Mail gun, Amazon SES ,Sendgrid, Sendinblue, Outlook &  Zoho Mail SMTP server if you have an account with them.
+Yes, you can use this plugin to send emails via SMTP from your WordPress site. You can use Gmail, Yahoo, Hot mail's, Mail Gun, Amazon SES, Sendgrid, Sendinblue, Outlook &  Zoho Mail SMTP servers if you have an account with them.
 
 = 2. Is it possible to integrate the Amazon SES API with Bit SMTP? =
 Yes, you can integrate the Amazon SES API with Bit SMTP.
