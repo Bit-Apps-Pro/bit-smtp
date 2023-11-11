@@ -5,9 +5,9 @@ use BitApps\SMTP\Plugin;
 /**
  * Plugin Name: BIT SMTP
  * Plugin URI:  https://www.bitapps.pro/bit-smtp
- * Description: Send email via SMTP using BIT SMTP plugin by Bit Apps
+ * Description: Send email via SMTP using BIT SMTP Plugin by Bit Apps
  * Version:     1.0.8
- * Author:      SMTP plugin by Bit Apps
+ * Author:      SMTP Plugin by Bit Apps
  * Author URI:  https://www.bitapps.pro
  * Text Domain: bit-smtp
  * Domain Path: /languages
@@ -22,7 +22,6 @@ use BitApps\SMTP\Plugin;
 if (!defined('ABSPATH')) {
     exit;
 }
-
 
 // Define most essential constants.
 define('BIT_SMTP_VERSION', '1.0.8');
@@ -105,7 +104,6 @@ function bit_smtp_deactivate_plugin($network_wide)
 }
 
 register_deactivation_hook(__FILE__, 'bit_smtp_deactivate_plugin');
-
 
 if (version_compare(PHP_VERSION, '7.4', '>=')) {
     // Autoload vendor files.
