@@ -21,7 +21,7 @@
     "regenerator-runtime": "^0.13.7",
     "sass-loader": "^12.6.0",
     "url-loader": "^4.1.1",
-    "vite": "^4.4.9",
+    "vite": "^4.4.12",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
