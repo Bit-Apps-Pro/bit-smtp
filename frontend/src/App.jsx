@@ -11,6 +11,7 @@ import SnackMsg from './components/Childs/SnackMsg'
 import './resources/sass/app.scss'
 import Others from './pages/Others'
 import { Toaster } from 'react-hot-toast';
+import { __ } from './Utils/i18nwrap';
 
 function App() {
   const [snack, setsnack] = useState({ show: false })
@@ -38,7 +39,7 @@ function App() {
             <div className="flx">
               <div className="logo flx" title="Bit Form">
                 <Link to="/" className="flx" activeClassName="app-link-active">
-                  <span className="ml-2">General</span>
+                  <span className="ml-2">{__('General')}</span>
                 </Link>
               </div>
               <nav className="top-nav ml-2">
@@ -46,13 +47,13 @@ function App() {
                   to="/test-email"
                   activeClassName="app-link-active"
                 >
-                  Email Test
+                  {__('Email Test')}
               </NavLink>
                 <NavLink
                   to="/others"
                   activeClassName="app-link-active"
                 >
-                  Others
+                  {__('Others')}
               </NavLink>
               </nav>
             </div>

@@ -4,6 +4,7 @@ import React, { useEffect,useState } from 'react';
 import toast from 'react-hot-toast';
 import bitsFetch from '../components/Childs/bitsFetch'
 import ConfigForm from '../components/Smtp/ConfigForm'
+import { __ } from '../Utils/i18nwrap';
 
 export default function SMTP({ setsnack }) {
   const [mail, setMail] = useState({})
@@ -29,7 +30,7 @@ export default function SMTP({ setsnack }) {
 
   return (
     <div className="btcd-s-wrp">
-        <h2>Mail Configuration</h2>
+        <h2>{__('Mail Configuration')}</h2>
       <br />
       <div className="pos-rel">
         <ConfigForm mail={mail} setMail={setMail}  status={status} setsmtpStatus={setsmtpStatus}  setsnack={setsnack} />
