@@ -4,19 +4,19 @@ import 'react-multiple-select-dropdown-lite/dist/index.css'
 import {
   BrowserRouter as Router, Link, NavLink, Route, Switch
 } from 'react-router-dom';
+import './resources/sass/app.scss'
 
 import SMTP from './pages/SMTP'
 import MailSendTest from './pages/MailSendTest'
 import SnackMsg from './components/Childs/SnackMsg'
-import './resources/sass/app.scss'
 import Others from './pages/Others'
 import { Toaster } from 'react-hot-toast';
 import { __ } from './Utils/i18nwrap';
 
 function App() {
   const [snack, setsnack] = useState({ show: false })
+  
   return (
-
     <div>
       <SnackMsg snack={snack} setSnackbar={setsnack} />
       <Toaster
@@ -38,7 +38,7 @@ function App() {
           <div className="nav-wrp">
             <div className="flx">
               <div className="logo flx" title="Bit Form">
-                <Link to="/" className="flx" activeClassName="app-link-active">
+                <Link to="/" className="flx" activeclassname="app-link-active">
                   <span className="ml-2">{__('General')}</span>
                 </Link>
               </div>

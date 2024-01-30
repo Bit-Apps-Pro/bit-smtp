@@ -80,7 +80,6 @@ class Admin_Ajax
                     });
 
                     wp_mail($to, $subject, $message);
-
                     wp_send_json_success(['error' => false], 200);
                 } catch (Exception $e) {
                     $error = $e->getMessage();
