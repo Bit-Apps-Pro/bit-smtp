@@ -1,0 +1,20 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/components/Error404.jsx:23
+msgid "404"
+msgstr ""
+
+#: src/components/Error404.jsx:24
+msgid "Lost In Space"
+msgstr ""
+
+#: src/components/Error404.jsx:26
+msgid "Redirecting Home in"
+msgstr ""
+
+#: src/components/Error404.jsx:31
+msgid "Go Home"
+msgstr ""

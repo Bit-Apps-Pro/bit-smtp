@@ -1,0 +1,41 @@
+.main {
+  height: 100vh;
+  margin: 30px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.label {
+  cursor: default;
+}
+.textarea {
+  height: 100px;
+  width: fit-content;
+}
+.label {
+  cursor: default;
+}
+.textareaLabel {
+  margin-top: 10px;
+  margin-bottom: 2px;
+  font-size: 20px;
+  cursor: default;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.input {
+  box-sizing: border-box;
+  border: 1px solid #d9d9d9 !important;
+  outline: none;
+}

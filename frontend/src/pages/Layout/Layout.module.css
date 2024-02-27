@@ -1,0 +1,67 @@
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+
+  & h1 {
+    margin-bottom: 0;
+  }
+}
+
+.reviewLink span {
+  font-size: 15px;
+}
+
+.reviewLink a {
+  color: #cea60a;
+  margin-left: 2px;
+  font-size: 16px;
+}
+
+.navBar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #2c2940;
+  padding: 20px 40px;
+
+}
+
+.navItems {
+  display: flex;
+  gap: 10px;
+}
+
+
+.navItems a {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: var(--font-family);
+  box-shadow: none;
+}
+
+.menu {
+  padding: 8px 15px;
+}
+
+.menuActive {
+  background-color: #0085FF;
+  border-radius: 8px;
+}
+
+input[type='text'],
+[type='password'] {
+  padding: 5px 8px !important;
+  width: 400px;
+  border-radius: 8px;
+  border: 1px solid #d9d9d9;
+}
+
+
+input[type='text']:focus {
+  border-color: #4096ff;
+  box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+  border-inline-end-width: 1px;
+  outline: 0;
+}

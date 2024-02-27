@@ -1,0 +1,35 @@
+.others {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 40px;
+
+  & h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+
+}
+
+.productLogo {
+  flex: 20%;
+}
+
+.productDetails {
+  display: flex;
+  flex-direction: column;
+  flex: 80%;
+  gap: 15px;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.installed {
+  & span {
+    color: #676767;
+  }
+}

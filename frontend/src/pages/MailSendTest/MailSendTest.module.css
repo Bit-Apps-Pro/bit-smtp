@@ -1,0 +1,45 @@
+.mailTest {
+  padding: 0 40px 40px;
+
+  & h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 0;
+    padding: 20px 0;
+  }
+
+}
+
+.form {
+  background-color: white;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  border-radius: 12px;
+}
+
+::placeholder {
+  padding-left: 8px;
+}
+
+.inputSection {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  cursor: default;
+  flex: 25%;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0A1525;
+}
+
+.inputField {
+  flex: 75%;
+
+  & textarea {
+    width: 400px;
+  }
+}

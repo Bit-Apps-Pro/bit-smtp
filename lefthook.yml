@@ -1,0 +1,32 @@
+pre-commit:
+  # piped: true
+  parallel: true
+  commands:
+    style-lint:
+      glob: '*.{css,scss}'
+      run: pnpm lint:css {staged_files}
+    php-lint:
+      glob: '*.{php}'
+      run: pnpm lint:php {staged_files}
+    php-test:
+      glob: '*{php}'
+      run: pnpm test:php {staged_files}
+    php-compatibility:
+      glob: 'backend/**/*.php'
+      run: pnpm compat {staged_files}
+    ts-lint:
+      glob: '*.{js,ts,jsx,tsx}'
+      run: pnpm lint
+    pretty:
+      run: pnpm pretty:quick
+    ts-check:
+      glob: '*.{ts,tsx}'
+      run: pnpm ts-check
+    test:
+      glob: '*.test.{js,ts,jsx,tsx}'
+      run: pnpm test
+
+commit-msg:
+  commands:
+    commit-lint:
+      run: pnpm commitlint --edit {1}
