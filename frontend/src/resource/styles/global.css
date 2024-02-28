@@ -172,3 +172,7 @@ svg {
   display: flex !important;
   padding: 20px !important;
 }
+
+textarea {
+  width: 400px!important;
+}

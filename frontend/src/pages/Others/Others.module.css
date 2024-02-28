@@ -3,13 +3,12 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 40px;
+}
 
-  & h2 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 0;
-  }
-
+h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 0;
 }
 
 .productLogo {
@@ -28,8 +27,7 @@ h3 {
   font-weight: 600;
 }
 
-.installed {
-  & span {
-    color: #676767;
-  }
+
+span {
+  color: #676767;
 }

@@ -33,7 +33,7 @@ class Config
 
     const APP_BASE = '../../index.php';
 
-    const DEV_URL = 'http://localhost:3000';
+    const DEV_URL = 'http://localhost:3000/wp-content/plugins/bit-smtp/frontend/src';
 
     /**
      * Provides configuration for plugin.

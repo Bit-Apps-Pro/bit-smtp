@@ -1,5 +1,10 @@
 import { Button, Card } from 'antd'
 import cls from './Others.module.css'
+import bitFormLogo from '@resource/img/bitForm.svg';
+import bitIntegrationsLogo from '@resource/img/bitIntegrations.svg';
+import bitAssistLogo from '@resource/img/bitAssist.svg';
+import bitSocialLogo from '@resource/img/bitSocial.svg';
+import bitFileManagerLogo from '@resource/img/bitFileManager.svg';
 
 export default function Others() {
 
@@ -8,7 +13,7 @@ export default function Others() {
     <div className={cls.others}>
       <Card size="small">
         <div className={cls.productLogo}>
-          <h2>Bit Form</h2>
+          <img src={bitFormLogo} alt="Bit Form logo" />
         </div>
         <div className={cls.productDetails}>
           <div className={cls.title}>
@@ -25,7 +30,7 @@ export default function Others() {
 
       <Card size="small">
         <div className={cls.productLogo}>
-          <h2>Bit Integrations</h2>
+        <img src={bitIntegrationsLogo} alt="Bit Integrations logo" />
         </div>
         <div className={cls.productDetails}>
           <div className={cls.title}>
@@ -42,7 +47,7 @@ export default function Others() {
 
       <Card size="small">
         <div className={cls.productLogo}>
-          <h2>Bit Assist</h2>
+        <img src={bitAssistLogo} alt="Bit Assist logo" />
         </div>
         <div className={cls.productDetails}>
           <div className={cls.title}>
@@ -59,7 +64,7 @@ export default function Others() {
 
       <Card size="small">
         <div className={cls.productLogo}>
-          <h2>Bit Social</h2>
+        <img src={bitSocialLogo} alt="Bit Social logo" />
         </div>
         <div className={cls.productDetails}>
           <div className={cls.title}>
@@ -76,7 +81,8 @@ export default function Others() {
 
       <Card size="small">
         <div className={cls.productLogo}>
-          <h2>Bit File Manager</h2>
+        <img src={bitFileManagerLogo} alt="Bit File Manager logo" />
+
         </div>
         <div className={cls.productDetails}>
           <div className={cls.title}>
