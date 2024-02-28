@@ -1,8 +1,8 @@
 <?php
 
-namespace BitApps\BMI\Model;
+namespace BitApps\SMTP\Model;
 
-use BitApps\BMI\Core\Database\Model;
+use BitApps\WPKit\Database\Model;
 
 class Platform extends Model
 {

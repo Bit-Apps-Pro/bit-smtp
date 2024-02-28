@@ -2,19 +2,19 @@
 
 // phpcs:disable Squiz.NamingConventions.ValidVariableName.NotCamelCaps
 
-namespace BitApps\BMI\Views;
+namespace BitApps\SMTP\Views;
 
-use BitApps\BMI\Config;
-use BitApps\BMI\Core\Helpers\DateTimeHelper;
-use BitApps\BMI\Core\Hooks\Hooks;
-use BitApps\BMI\Core\Utils\Capabilities;
+use BitApps\SMTP\Config;
+use BitApps\WPKit\Helpers\DateTimeHelper;
+use BitApps\WPKit\Hooks\Hooks;
+use BitApps\WPKit\Utils\Capabilities;
 
 /**
  * The admin Layout and page handler class.
  */
 class Layout
 {
-    const FONT_URL = 'https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap';
+    public const FONT_URL = 'https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap';
 
     public function __construct()
     {
@@ -107,7 +107,7 @@ class Layout
   <div
     style="display: flex;flex-direction: column;justify-content: center;
     align-items: center;height: 90vh;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-    <img alt="app-logo" class="bit-logo" width="70" src="{$assetURI}/img/logo.svg">
+    <!-- <img alt="app-logo" class="bit-logo" width="70" src="{$assetURI}/img/logo.svg"> -->
     <h1>Welcome to Bit SMTP.</h1>
     <p></p>
   </div>

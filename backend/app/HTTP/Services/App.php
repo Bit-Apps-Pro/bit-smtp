@@ -1,6 +1,6 @@
 <?php
 
-namespace BitApps\BMI\HTTP\Services;
+namespace BitApps\SMTP\HTTP\Services;
 
 class App
 {

@@ -1,8 +1,8 @@
 <?php
 
-use BitApps\BMI\Core\Database\Blueprint;
-use BitApps\BMI\Core\Database\Migration;
-use BitApps\BMI\Core\Database\Schema;
+use BitApps\WPKit\Database\Blueprint;
+use BitApps\WPKit\Database\Migration;
+use BitApps\WPKit\Database\Schema;
 
 if (!\defined('ABSPATH')) {
     exit;

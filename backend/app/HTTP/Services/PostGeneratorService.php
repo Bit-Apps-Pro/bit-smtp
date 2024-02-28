@@ -1,8 +1,8 @@
 <?php
 
-namespace BitApps\BMI\HTTP\Services;
+namespace BitApps\SMTP\HTTP\Services;
 
-use BitApps\BMI\Model\Platform;
+use BitApps\SMTP\Model\Platform;
 
 class PostGeneratorService
 {

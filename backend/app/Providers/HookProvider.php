@@ -1,12 +1,12 @@
 <?php
 
-namespace BitApps\BMI\Providers;
+namespace BitApps\SMTP\Providers;
 
-use BitApps\BMI\Config;
-use BitApps\BMI\Core\Hooks\Hooks;
-use BitApps\BMI\Core\Http\RequestType;
-use BitApps\BMI\Core\Http\Router\Router;
-use BitApps\BMI\Plugin;
+use BitApps\SMTP\Config;
+use BitApps\WPKit\Hooks\Hooks;
+use BitApps\WPKit\Http\RequestType;
+use BitApps\WPKit\Http\Router\Router;
+use BitApps\SMTP\Plugin;
 use FilesystemIterator;
 
 class HookProvider

@@ -1,10 +1,10 @@
 <?php
 
-namespace BitApps\BMI\Providers;
+namespace BitApps\SMTP\Providers;
 
-use BitApps\BMI\Config;
-use BitApps\BMI\Core\Hooks\Hooks;
-use BitApps\BMI\Core\Installer;
+use BitApps\SMTP\Config;
+use BitApps\WPKit\Hooks\Hooks;
+use BitApps\WPKit\Installer;
 
 class InstallerProvider
 {

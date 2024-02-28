@@ -2,9 +2,9 @@
 
 // phpcs:disable Squiz.NamingConventions.ValidVariableName
 
-namespace BitApps\BMI;
+namespace BitApps\SMTP;
 
-use BitApps\BMI\Views\Layout;
+use BitApps\SMTP\Views\Layout;
 
 if (!\defined('ABSPATH')) {
     exit;

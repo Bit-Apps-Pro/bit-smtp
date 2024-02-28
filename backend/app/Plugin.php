@@ -1,6 +1,6 @@
 <?php
 
-namespace BitApps\BMI;
+namespace BitApps\SMTP;
 
 /*
  * Main class for the plugin.
@@ -8,14 +8,14 @@ namespace BitApps\BMI;
  * @since 1.0.0-alpha
  */
 
-use BitApps\BMI\Core\Database\Operator as DBOperator;
-use BitApps\BMI\Core\Hooks\Hooks;
-use BitApps\BMI\Core\Http\RequestType;
-use BitApps\BMI\Core\Utils\Capabilities;
-use BitApps\BMI\HTTP\Middleware\NonceCheckerMiddleware;
-use BitApps\BMI\Providers\HookProvider;
-use BitApps\BMI\Providers\InstallerProvider;
-use BitApps\BMI\Views\Layout;
+use BitApps\WPKit\Database\Operator as DBOperator;
+use BitApps\WPKit\Hooks\Hooks;
+use BitApps\WPKit\Http\RequestType;
+use BitApps\WPKit\Utils\Capabilities;
+use BitApps\SMTP\HTTP\Middleware\NonceCheckerMiddleware;
+use BitApps\SMTP\Providers\HookProvider;
+use BitApps\SMTP\Providers\InstallerProvider;
+use BitApps\SMTP\Views\Layout;
 
 final class Plugin
 {

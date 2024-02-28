@@ -53,6 +53,7 @@ export default function SMTP() {
 
     request('save_mail_config', data)
       .then(res => {
+        console.log(res)
         if (res?.status !== 'error') {
           toast.success(res.data)
         } else {
@@ -64,7 +65,7 @@ export default function SMTP() {
         }
       })
       .catch(() => {
-        toast.error('SMTP config saved failed')
+        toast.error('SMTP config saving failed')
       })
   }
 
@@ -75,7 +76,7 @@ export default function SMTP() {
         setIsLoading(false)
         if (res?.status === 'success') {
           setValues(res?.data?.mailConfig)
-          return 'SMTP config fetch successfully!'
+          return 'SMTP config fetched successfully!'
         }
         return 'Error Occured'
       })
@@ -141,7 +142,6 @@ export default function SMTP() {
                   value={values.re_email_address}
                   placeholder="Reply-To Email Address"
                   onChange={handleChange}
-                  required
                 />
               </div>
             </div>

@@ -1,9 +1,9 @@
 <?php
 
-namespace BitApps\BMI\HTTP\Middleware;
+namespace BitApps\SMTP\HTTP\Middleware;
 
-use BitApps\BMI\Core\Http\Request\Request;
-use BitApps\BMI\Core\Http\Response;
+use BitApps\WPKit\Http\Request\Request;
+use BitApps\WPKit\Http\Response;
 
 final class NonceCheckerMiddleware
 {

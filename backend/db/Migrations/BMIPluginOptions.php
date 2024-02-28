@@ -1,8 +1,8 @@
 <?php
 
-use BitApps\BMI\Config;
-use BitApps\BMI\Core\Database\Connection as DB;
-use BitApps\BMI\Core\Database\Migration;
+use BitApps\SMTP\Config;
+use BitApps\WPKit\Database\Connection as DB;
+use BitApps\WPKit\Database\Migration;
 
 if (!\defined('ABSPATH')) {
     exit;
