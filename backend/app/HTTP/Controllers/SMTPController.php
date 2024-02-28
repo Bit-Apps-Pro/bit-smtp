@@ -19,10 +19,10 @@ class SMTPController
             return Response::error($request->errors());
         }
         $result = update_option('bit_smtp_options', $request->validated());
+        return Response::success('SMTP config saved successfully');
 
-        if ($result) {
-            return Response::success('SMTP config saved successfully');
-        }
-        return Response::error('SMTP config saved failed');
+        // if ($result) {
+        // }
+        // return Response::error('SMTP config saved failed');
     }
 }
