@@ -5,7 +5,8 @@ import Button from '@components/Button/Index'
 import Toaster from '@components/Toaster/Toaster'
 import cls from './MailSendTest.module.css'
 import TextArea from 'antd/es/input/TextArea'
-import { Input } from 'antd'
+import { Input, Spin } from 'antd'
+import { LoadingOutlined } from '@ant-design/icons'
 
 export default function MailSendTest() {
   interface values {
@@ -15,6 +16,7 @@ export default function MailSendTest() {
     message: string
   }
 
+  const [isLoading, setIsLoading] = useState(false)
   const [values, setValues] = useState<values>({
     to: '',
     subject: '',
@@ -29,6 +31,7 @@ export default function MailSendTest() {
   }
 
   const handleSubmit = (e: any) => {
+    setIsLoading(true);
     e.preventDefault()
     const data = new FormData()
     for (let key in values) {
@@ -37,6 +40,7 @@ export default function MailSendTest() {
 
     request('send_test_mail', data)
       .then(res => {
+        setIsLoading(false)
         if (res?.status !== 'error') {
           toast.success(res.data)
         } else {
@@ -96,7 +100,7 @@ export default function MailSendTest() {
           </div>
         </div>
 
-        <Button type="submit">Send Test</Button>
+        <Button type="submit">Send Test {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 20, color:'white' }} spin />}/>}</Button>
         <Toaster />
       </form>
     </div>

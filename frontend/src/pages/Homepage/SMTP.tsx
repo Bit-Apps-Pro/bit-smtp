@@ -22,6 +22,7 @@ export default function SMTP() {
     smtp_password: string
   }
 
+  const [isLoading, setIsLoading] = useState(false)
   const [values, setValues] = useState<values>({
     status: '1',
     form_email_address: '',
@@ -34,8 +35,6 @@ export default function SMTP() {
     smtp_user_name: '',
     smtp_password: ''
   })
-  const [isLoading, setIsLoading] = useState(false)
-
 
   const handleChange = (e: any) => {
     const { name, value } = e.target
@@ -53,7 +52,6 @@ export default function SMTP() {
 
     request('save_mail_config', data)
       .then(res => {
-        console.log(res)
         if (res?.status !== 'error') {
           toast.success(res.data)
         } else {
