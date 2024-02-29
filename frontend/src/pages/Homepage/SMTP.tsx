@@ -83,7 +83,7 @@ export default function SMTP() {
 
     toast.promise(fetchConfig, {
       success: data => data,
-      failed: (data: string) => data,
+      error: (err) => err.toString(),
       loading: 'Loading...',
     })
   }, [])

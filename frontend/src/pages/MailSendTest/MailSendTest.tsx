@@ -22,7 +22,7 @@ export default function MailSendTest() {
   })
 
   const handleChange = (e: any) => {
-    const { name, value, checked } = e.target
+    const { name, value } = e.target
     const tmpValues = { ...values }
     tmpValues[name] = value
     setValues(tmpValues)
@@ -34,6 +34,22 @@ export default function MailSendTest() {
     for (let key in values) {
       data.append(key, values[key])
     }
+
+    request('send_test_mail', data)
+      .then(res => {
+        if (res?.status !== 'error') {
+          toast.success(res.data)
+        } else {
+          Object.entries(res.data).forEach((item: any) => {
+            item[1].forEach((rule: string) => {
+              toast.error(rule)
+            })
+          })
+        }
+      })
+      .catch(() => {
+        toast.error('Mail send testing failed')
+      })
   }
 
   return (

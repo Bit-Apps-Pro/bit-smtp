@@ -37,12 +37,14 @@ final class Plugin
     {
         $this->registerInstaller();
         Hooks::addAction('plugins_loaded', [$this, 'loaded']);
-        Hooks::addAction('phpmailer_init', [$this, 'mailConfig']);
+        Hooks::addAction('phpmailer_init', [$this, 'mailConfig'], 1000);
     }
 
     public function mailConfig($phpmailer)
     {
+
         $mailConfig = get_option('bit_smtp_options');
+
         if (\is_array($mailConfig)) {
             if ($mailConfig['status'] == 1) {
                 $phpmailer->Mailer     = 'smtp';
@@ -163,6 +165,7 @@ final class Plugin
      */
     public static function load()
     {
+
         if (static::$_instance !== null) {
             return false;
         }
