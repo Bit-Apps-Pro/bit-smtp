@@ -14,7 +14,7 @@ use BitApps\WPKit\Utils\Capabilities;
  */
 class Layout
 {
-    public const FONT_URL = 'https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap';
+    const FONT_URL = 'https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap';
 
     public function __construct()
     {
@@ -76,7 +76,7 @@ class Layout
         }
 
         $version = Config::VERSION;
-        $slug    = Config::SLUG;
+        $slug = Config::SLUG;
 
         // loading google fonts
         wp_enqueue_style('googleapis-PRECONNECT', 'https://fonts.googleapis.com');
@@ -181,17 +181,17 @@ HTML;
         $frontendVars = apply_filters(
             Config::withPrefix('localized_script'),
             [
-                'nonce'          => wp_create_nonce(Config::withPrefix('nonce')),
-                'rootURL'        => Config::get('ROOT_URI'),
-                'assetsURL'      => Config::get('ASSET_URI'),
-                'baseURL'        => Config::get('ADMIN_URL') . 'admin.php?page=' . Config::SLUG . '#',
-                'ajaxURL'        => admin_url('admin-ajax.php'),
-                'apiURL'         => Config::get('API_URL'),
-                'routePrefix'    => Config::VAR_PREFIX,
-                'settings'       => Config::getOption('settings'),
-                'dateFormat'     => Config::getOption('date_format', true),
-                'timeFormat'     => Config::getOption('time_format', true),
-                'timeZone'       => DateTimeHelper::wp_timezone_string(),
+                'nonce' => wp_create_nonce(Config::withPrefix('nonce')),
+                'rootURL' => Config::get('ROOT_URI'),
+                'assetsURL' => Config::get('ASSET_URI'),
+                'baseURL' => Config::get('ADMIN_URL') . 'admin.php?page=' . Config::SLUG . '#',
+                'ajaxURL' => admin_url('admin-ajax.php'),
+                'apiURL' => Config::get('API_URL'),
+                'routePrefix' => Config::VAR_PREFIX,
+                'settings' => Config::getOption('settings'),
+                'dateFormat' => Config::getOption('date_format', true),
+                'timeFormat' => Config::getOption('time_format', true),
+                'timeZone' => DateTimeHelper::wp_timezone_string(),
 
             ]
         );
