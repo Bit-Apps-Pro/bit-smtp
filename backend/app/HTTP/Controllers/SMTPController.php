@@ -20,12 +20,9 @@ class SMTPController
         if (!$request->validated()) {
             return Response::error($request->errors());
         }
-        $result = update_option('bit_smtp_options', $request->validated());
+        update_option('bit_smtp_options', $request->validated());
         return Response::success('SMTP config saved successfully');
 
-        // if ($result) {
-        // }
-        // return Response::error('SMTP config saved failed');
     }
 
     public function sendTestEmail(MailTestRequest $request)
