@@ -8,7 +8,7 @@ if (!\defined('ABSPATH')) {
     exit;
 }
 
-final class BMIPluginOptions extends Migration
+final class BSPluginOptions extends Migration
 {
     public function up()
     {

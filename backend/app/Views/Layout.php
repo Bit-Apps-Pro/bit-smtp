@@ -18,7 +18,6 @@ class Layout
 
     public function __construct()
     {
-        // Hooks::addAction('wp_print_scripts', [$this,'pm_remove_all_scripts'], 100);
         Hooks::addAction('in_admin_header', [$this, 'RemoveAdminNotices']);
         Hooks::addAction('admin_menu', [$this, 'sideBarMenuItem']);
         Hooks::addAction('admin_enqueue_scripts', [$this, 'head'], 0);
@@ -50,18 +49,6 @@ class Layout
                 }
             }
         }
-    }
-
-    public function pm_remove_all_scripts()
-    {
-        global $wp_scripts;
-        // echo "<pre>";
-        // $a[0] = $wp_scripts->queue[6];
-        // $wp_scripts->queue = $a;
-        unset($wp_scripts->queue[0], $wp_scripts->queue[1], $wp_scripts->queue[2], $wp_scripts->queue[3], $wp_scripts->queue[4], $wp_scripts->queue[5], $wp_scripts->queue[7], $wp_scripts->queue[8], $wp_scripts->queue[9], $wp_scripts->queue[10], $wp_scripts->queue[11], $wp_scripts->queue[12], $wp_scripts->queue[13]);
-
-        print_r($wp_scripts->queue);
-        // print_r($wp_scripts->queue[6]);
     }
 
     /**

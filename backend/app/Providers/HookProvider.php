@@ -3,11 +3,10 @@
 namespace BitApps\SMTP\Providers;
 
 use BitApps\SMTP\Config;
+use BitApps\SMTP\Plugin;
 use BitApps\WPKit\Hooks\Hooks;
 use BitApps\WPKit\Http\RequestType;
 use BitApps\WPKit\Http\Router\Router;
-use BitApps\SMTP\Plugin;
-use FilesystemIterator;
 
 class HookProvider
 {
@@ -16,20 +15,10 @@ class HookProvider
     public function __construct()
     {
         $this->_pluginBackend = Config::get('BASEDIR') . DIRECTORY_SEPARATOR;
-        $this->loadTriggersAjax();
         $this->loadAppHooks();
-        $this->loadActionsHooks();
+        Hooks::addAction('phpmailer_init', [$this, 'mailConfig'], 1000);
         Hooks::addAction('rest_api_init', [$this, 'loadApi']);
     }
-
-    /**
-     * Helps to register integration ajax.
-     */
-    public function loadActionsHooks()
-    {
-        // $this->includeTaskHooks('Actions');
-    }
-
     /**
      * Loads API routes.
      */
@@ -66,35 +55,27 @@ class HookProvider
         }
     }
 
-    /**
-     * Helps to register Triggers ajax.
-     */
-    protected function loadTriggersAjax()
+    public function mailConfig($phpmailer)
     {
-        // $this->includeTaskHooks('Triggers');
-    }
+        $mailConfig = get_option(Config::VAR_PREFIX . 'options');
 
-    /**
-     * Backend Routes and Hooks.
-     *
-     * @param string $taskName Triggers|Actions
-     */
-    private function includeTaskHooks($taskName)
-    {
-        $taskDir  = $this->_pluginBackend . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . $taskName;
-        $dirs     = new FilesystemIterator($taskDir);
-        foreach ($dirs as $dirInfo) {
-            if ($dirInfo->isDir()) {
-                $taskName  = basename($dirInfo);
-                $taskPath  = $taskDir . DIRECTORY_SEPARATOR . $taskName . DIRECTORY_SEPARATOR;
-                if (is_readable($taskPath . 'Routes.php') && RequestType::is('ajax') && RequestType::is('admin')) {
-                    include $taskPath . 'Routes.php';
+        if (\is_array($mailConfig)) {
+            if ($mailConfig['status'] == 1) {
+                $phpmailer->Mailer = 'smtp';
+                $phpmailer->Host = $mailConfig['smtp_host'];
+                $phpmailer->SMTPAuth = true;
+                if (!empty($mailConfig['re_email_address'])) {
+                    $phpmailer->addReplyTo($mailConfig['re_email_address'], 'Information');
                 }
-
-                if (is_readable($taskPath . 'Hooks.php')) {
-                    include $taskPath . 'Hooks.php';
-                }
+                $phpmailer->Port = $mailConfig['port'];
+                $phpmailer->Username = $mailConfig['smtp_user_name'];
+                $phpmailer->Password = $mailConfig['smtp_password'];
+                $phpmailer->SMTPSecure = $mailConfig['encryption'];
+                $phpmailer->SMTPDebug = 1;
+                $phpmailer->From = $mailConfig['form_email_address'];
+                $phpmailer->FromName = $mailConfig['form_name'];
             }
         }
     }
+
 }

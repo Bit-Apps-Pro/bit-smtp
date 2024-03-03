@@ -8,14 +8,14 @@ namespace BitApps\SMTP;
  * @since 1.0.0-alpha
  */
 
-use BitApps\WPKit\Database\Operator as DBOperator;
-use BitApps\WPKit\Hooks\Hooks;
-use BitApps\WPKit\Http\RequestType;
-use BitApps\WPKit\Utils\Capabilities;
 use BitApps\SMTP\HTTP\Middleware\NonceCheckerMiddleware;
 use BitApps\SMTP\Providers\HookProvider;
 use BitApps\SMTP\Providers\InstallerProvider;
 use BitApps\SMTP\Views\Layout;
+use BitApps\WPKit\Database\Operator as DBOperator;
+use BitApps\WPKit\Hooks\Hooks;
+use BitApps\WPKit\Http\RequestType;
+use BitApps\WPKit\Utils\Capabilities;
 
 final class Plugin
 {
@@ -37,31 +37,6 @@ final class Plugin
     {
         $this->registerInstaller();
         Hooks::addAction('plugins_loaded', [$this, 'loaded']);
-        Hooks::addAction('phpmailer_init', [$this, 'mailConfig'], 1000);
-    }
-
-    public function mailConfig($phpmailer)
-    {
-
-        $mailConfig = get_option('bit_smtp_options');
-
-        if (\is_array($mailConfig)) {
-            if ($mailConfig['status'] == 1) {
-                $phpmailer->Mailer     = 'smtp';
-                $phpmailer->Host       = $mailConfig['smtp_host'];
-                $phpmailer->SMTPAuth   = true;
-                if (!empty($mailConfig['re_email_address'])) {
-                    $phpmailer->addReplyTo($mailConfig['re_email_address'], 'Information');
-                }
-                $phpmailer->Port       = $mailConfig['port'];
-                $phpmailer->Username   = $mailConfig['smtp_user_name'];
-                $phpmailer->Password   = $mailConfig['smtp_password'];
-                $phpmailer->SMTPSecure = $mailConfig['encryption'];
-                $phpmailer->SMTPDebug  =  1;
-                $phpmailer->From       = $mailConfig['form_email_address'];
-                $phpmailer->FromName   = $mailConfig['form_name'];
-            }
-        }
     }
 
     public function registerInstaller()

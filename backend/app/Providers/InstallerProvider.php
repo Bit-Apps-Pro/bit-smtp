@@ -18,9 +18,9 @@ class InstallerProvider
     {
         register_activation_hook(Config::get('MAIN_FILE'), [$this, 'registerActivator']);
         register_deactivation_hook(Config::get('MAIN_FILE'), [$this, 'registerDeactivator']);
-        $this->_activateHook   = Config::withPrefix('activate');
+        $this->_activateHook = Config::withPrefix('activate');
         $this->_deactivateHook = Config::withPrefix('deactivate');
-        self::$_uninstallHook  = Config::withPrefix('uninstall');
+        self::$_uninstallHook = Config::withPrefix('uninstall');
 
         Hooks::addAction($this->_deactivateHook, [$this, 'deactivate']);
 
@@ -32,21 +32,21 @@ class InstallerProvider
     {
         $installer = new Installer(
             [
-                'php'        => Config::REQUIRED_PHP_VERSION,
-                'wp'         => Config::REQUIRED_WP_VERSION,
-                'version'    => Config::VERSION,
+                'php' => Config::REQUIRED_PHP_VERSION,
+                'wp' => Config::REQUIRED_WP_VERSION,
+                'version' => Config::VERSION,
                 'oldVersion' => Config::getOption('version', '0.0'),
-                'multisite'  => true,
-                'basename'   => Config::get('BASENAME'),
+                'multisite' => true,
+                'basename' => Config::get('BASENAME'),
             ],
             [
-                'activate'  => $this->_activateHook,
+                'activate' => $this->_activateHook,
                 'uninstall' => self::$_uninstallHook,
             ],
             [
 
                 'migration' => $this->migration(),
-                'drop'      => $this->drop(),
+                'drop' => $this->drop(),
             ]
         );
         $installer->register();
@@ -75,19 +75,16 @@ class InstallerProvider
     public static function migration()
     {
         $migrations = [
-            'BMIIntegrationCategoriesMigration',
-            'BMIIntegrationDetailsMigration',
-            'BMIPlatformsMigration',
-            'BMIPluginOptions',
+            'BSPluginOptions',
         ];
 
         return [
-            'path'       => Config::get('BASEDIR')
-                . DIRECTORY_SEPARATOR
-                . 'db'
-                . DIRECTORY_SEPARATOR
-                . 'Migrations'
-                . DIRECTORY_SEPARATOR,
+            'path' => Config::get('BASEDIR')
+            . DIRECTORY_SEPARATOR
+            . 'db'
+            . DIRECTORY_SEPARATOR
+            . 'Migrations'
+            . DIRECTORY_SEPARATOR,
             'migrations' => $migrations,
         ];
     }
@@ -95,18 +92,16 @@ class InstallerProvider
     public static function drop()
     {
         $migrations = [
-            // 'BMIIntegrationCategoriesMigration',
-            // 'BMIIntegrationDetailsMigration',
-            // 'BMIPluginOptions',
+            'BSPluginOptions',
         ];
 
         return [
-            'path'       => Config::get('BASEDIR')
-                . DIRECTORY_SEPARATOR
-                . 'db'
-                . DIRECTORY_SEPARATOR
-                . 'Migrations'
-                . DIRECTORY_SEPARATOR,
+            'path' => Config::get('BASEDIR')
+            . DIRECTORY_SEPARATOR
+            . 'db'
+            . DIRECTORY_SEPARATOR
+            . 'Migrations'
+            . DIRECTORY_SEPARATOR,
             'migrations' => $migrations,
         ];
     }
