@@ -7,7 +7,6 @@
     "clean": "rimraf node_modules yarn.lock package-lock.json pnpm-lock.yaml",
     "clear-lint-cache": "eslint . --cache --cache-file eslint-cache/eslintcache",
     "dev": "vite",
-    "dev:wp": "vite --config vite.config.wp.ts",
     "i18n:json": "npx po2json ./language/locale.pot ../languages/bitform-btcfi-admin-script.json -f jed1.x",
     "i18n:php": "node ./language/pot-to-php.js ./language/locale.pot ../languages/generatedString.php btcfi",
     "lint": "eslint --ext .jsx --ext .js --ext .ts --ext .tsx ./frontend/src/ --fix",
