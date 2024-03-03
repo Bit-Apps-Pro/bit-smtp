@@ -1,8 +1,8 @@
 <?php
 
 use BitApps\SMTP\Config;
-use BitApps\WPKit\Database\Connection as DB;
-use BitApps\WPKit\Database\Migration;
+use BitApps\WPDatabase\Connection as DB;
+use BitApps\WPKit\Migration\Migration;
 
 if (!\defined('ABSPATH')) {
     exit;
@@ -32,15 +32,15 @@ final class BMIPluginOptions extends Migration
         DB::query(
             DB::prepare(
                 'DELETE FROM `' . DB::wpPrefix() . 'options` WHERE option_name in ('
-                    . implode(
-                        ',',
-                        array_map(
-                            function () {
-                                return '%s';
-                            },
-                            $pluginOptions
-                        )
-                    ) . ')',
+                . implode(
+                    ',',
+                    array_map(
+                        function () {
+                            return '%s';
+                        },
+                        $pluginOptions
+                    )
+                ) . ')',
                 $pluginOptions
             )
         );
