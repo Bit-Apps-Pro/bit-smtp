@@ -10,31 +10,31 @@ class MailConfigStoreRequest extends Request
     {
         return
             [
-                'status'                    => ['required'],
-                'form_email_address'        => ['required'],
-                'form_name'                 => ['required'],
-                're_email_address'          => ['nullable'],
-                'smtp_host'                 => ['required'],
-                'encryption'                => ['required'],
-                'port'                      => ['required'],
-                'smtp_auth'                 => ['required'],
-                'smtp_user_name'            => ['required'],
-                'smtp_password'             => ['required'],
-            ];
+            'status' => ['required', 'boolean'],
+            'form_email_address' => ['required', 'email', 'sanitize:email'],
+            'form_name' => ['required', 'string', 'sanitize:text'],
+            're_email_address' => ['nullable', 'email', 'sanitize:email'],
+            'smtp_host' => ['required', 'string', 'sanitize:text'],
+            'encryption' => ['required', 'string', 'sanitize:text'],
+            'port' => ['required', 'integer'],
+            'smtp_auth' => ['required', 'boolean'],
+            'smtp_user_name' => ['required', 'string', 'sanitize:text'],
+            'smtp_password' => ['required', 'string', 'sanitize:text'],
+        ];
     }
 
     public function messages()
     {
         return [
-            'status'                        => 'Status is required',
-            'form_email_address'            => 'Form email address is required',
-            'form_name'                     => 'Form name is required',
-            'smtp_host'                     => 'SMTP host is required',
-            'encryption'                    => 'Encryption is required',
-            'port'                          => 'Port is required',
-            'smtp_auth'                     => 'SMTP auth is required',
-            'smtp_user_name'                => 'SMTP user name is required',
-            'smtp_password'                 => 'SMTP password is required',
+            'status.required' => 'Status is required',
+            'form_email_address.required' => 'Form email address is required',
+            'form_name.required' => 'Form name is required',
+            'smtp_host.required' => 'SMTP host is required',
+            'encryption.required' => 'Encryption is required',
+            'port.required' => 'Port is required',
+            'smtp_auth.required' => 'SMTP auth is required',
+            'smtp_user_name.required' => 'SMTP user name is required',
+            'smtp_password.required' => 'SMTP password is required',
         ];
     }
 }

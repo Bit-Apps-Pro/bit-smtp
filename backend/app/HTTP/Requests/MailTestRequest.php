@@ -8,13 +8,11 @@ class MailTestRequest extends Request
 {
     public function rules()
     {
-        error_log(get_class($this));
-        error_log('Rules ');
         return
             [
-            'to' => ['required'],
-            'subject' => ['required'],
-            'message' => ['required'],
+            'to' => ['required', 'email', 'sanitize:text'],
+            'subject' => ['required', 'sanitize:text'],
+            'message' => ['required', 'sanitize:text'],
         ];
     }
 
