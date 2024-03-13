@@ -7,7 +7,7 @@
  * Author:      Bit Apps
  * Author URI:  https://bitapps.pro
  * Text Domain: bit-smtp
- * Requires PHP: 5.6
+ * Requires PHP: 7.4
  * Requires WP: 5.0
  * Domain Path: /languages
  * License: gpl2+
