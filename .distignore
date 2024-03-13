@@ -20,4 +20,5 @@ tests.config.sample.php
 tsconfig.json
 tsconfig.node.json
 vite.config.mts
+bin 
 
