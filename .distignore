@@ -1,4 +1,6 @@
 frontend
+bin 
+node_modules
 .eslintignore
 .eslintrc.js
 .gitattributes
@@ -20,5 +22,4 @@ tests.config.sample.php
 tsconfig.json
 tsconfig.node.json
 vite.config.mts
-bin 
 
