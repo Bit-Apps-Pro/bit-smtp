@@ -235,6 +235,9 @@ Yes, possible to send WordPress emails using Hotmail.
 
 == Changelog ==
 
+= 1.0.8 =
+* Design modified
+
 = 1.0.7 =
 * Tested with 6.3
 * Reply To nullable
