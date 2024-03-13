@@ -16,3 +16,4 @@ eslint-cache/
 composer.lock
 pnpm-lock.yaml
 .husky/
+locale.pot

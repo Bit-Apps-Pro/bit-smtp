@@ -7,8 +7,9 @@
     "clean": "rimraf node_modules yarn.lock package-lock.json pnpm-lock.yaml",
     "clear-lint-cache": "eslint . --cache --cache-file eslint-cache/eslintcache",
     "dev": "vite",
-    "i18n:json": "npx po2json ./language/locale.pot ../languages/bitform-btcfi-admin-script.json -f jed1.x",
-    "i18n:php": "node ./language/pot-to-php.js ./language/locale.pot ../languages/generatedString.php btcfi",
+    "i18n:parse-js": "npx react-gettext-parser --output ./locale.pot --config ./gettext-parser.config.js  './frontend/src/**/{*.ts,*.tsx}'",
+    "i18n:json": "[ ! -d \"languages/\" ] && mkdir languages/;npx po2json locale.pot languages/bit-smtp-index-MODULE.json -f jed1.x",
+    "i18n:php": "[ ! -d \"languages/\" ] && mkdir languages/;node ./bin/pot-to-php.js locale.pot languages/generatedString.php bit-smtp;wp i18n make-pot . --include='*.php' --skip-js --slug=bit-form --headers='{\"Last-Translator\":\"developer@bitcode.pro\",\"Language-Team\":\"support@bitapps.pro\",\"PO-Revision-Date\":\"\"}'",
     "lint": "eslint --ext .jsx --ext .js --ext .ts --ext .tsx ./frontend/src/ --fix",
     "lint:css": "stylelint frontend/**/*.{css,scss} --aei --color --fix",
     "lint:php": "composer lint",
@@ -25,7 +26,8 @@
     "ts-check": "tsc",
     "pre-commit": "lefthook run pre-commit",
     "sb": "storybook dev -p 6006",
-    "all:test": "pnpm ts && pnpm lint"
+    "all:test": "pnpm ts && pnpm lint",
+    "production": "composer i --no-dev && pnpm install && pnpm build && pnpm i18n:parse-js && pnpm i18n:php"
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.9.1",

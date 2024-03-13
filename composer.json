@@ -25,8 +25,8 @@
     }
   },
   "require": {
-    "bitapps/wp-validator": "1.x-dev",
-    "bitapps/wp-kit": "dev-main",
-    "bitapps/wp-database": "dev-main"
+    "bitapps/wp-validator": "^1.0",
+    "bitapps/wp-kit": "^1.0",
+    "bitapps/wp-database": "^1.0"
   }
 }

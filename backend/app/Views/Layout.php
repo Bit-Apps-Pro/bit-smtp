@@ -63,7 +63,7 @@ class Layout
         }
 
         $version = Config::VERSION;
-        $slug = Config::SLUG;
+        $slug    = Config::SLUG;
 
         // loading google fonts
         wp_enqueue_style('googleapis-PRECONNECT', 'https://fonts.googleapis.com');
@@ -156,7 +156,7 @@ HTML;
     public function scriptTagFilter($html, $handle, $href)
     {
         $newTag = $html;
-        if (str_contains($handle, 'MODULE')) {
+        if (str_contains($handle, Config::SLUG . '-index-MODULE')) {
             $newTag = preg_replace('/<script /', '<script type="module" ', $newTag);
         }
 
@@ -168,23 +168,23 @@ HTML;
         $frontendVars = apply_filters(
             Config::withPrefix('localized_script'),
             [
-                'nonce' => wp_create_nonce(Config::withPrefix('nonce')),
-                'rootURL' => Config::get('ROOT_URI'),
-                'assetsURL' => Config::get('ASSET_URI'),
-                'baseURL' => Config::get('ADMIN_URL') . 'admin.php?page=' . Config::SLUG . '#',
-                'ajaxURL' => admin_url('admin-ajax.php'),
-                'apiURL' => Config::get('API_URL'),
+                'nonce'       => wp_create_nonce(Config::withPrefix('nonce')),
+                'rootURL'     => Config::get('ROOT_URI'),
+                'assetsURL'   => Config::get('ASSET_URI'),
+                'baseURL'     => Config::get('ADMIN_URL') . 'admin.php?page=' . Config::SLUG . '#',
+                'ajaxURL'     => admin_url('admin-ajax.php'),
+                'apiURL'      => Config::get('API_URL'),
                 'routePrefix' => Config::VAR_PREFIX,
-                'settings' => Config::getOption('settings'),
-                'dateFormat' => Config::getOption('date_format', true),
-                'timeFormat' => Config::getOption('time_format', true),
-                'timeZone' => DateTimeHelper::wp_timezone_string(),
+                'settings'    => Config::getOption('settings'),
+                'dateFormat'  => Config::getOption('date_format', true),
+                'timeFormat'  => Config::getOption('time_format', true),
+                'timeZone'    => DateTimeHelper::wp_timezone_string(),
 
             ]
         );
         if (get_locale() !== 'en_US' && file_exists(Config::get('BASEDIR') . '/languages/generatedString.php')) {
             include_once Config::get('BASEDIR') . '/languages/generatedString.php';
-            $frontendVars['translations'] = Config::withPrefix('i18n_strings');
+            $frontendVars['translations'] = $i18n_strings;
         }
 
         return $frontendVars;
