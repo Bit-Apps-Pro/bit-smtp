@@ -1,8 +1,8 @@
 === SMTP - 100% Free & Open Source SMTP plugin for WordPress - Bit SMTP   ===
 Contributors: bitpressadmin
 Tags: smtp, wp mail smtp, wordpress smtp, gmail smtp, sendgrid smtp, mailgun smtp, mail, mailer, phpmailer, wp_mail, email, mailgun, sengrid,sendinblue, wp smtp,mandrill,outlook
-Requires at least: 5.0
-Tested up to: 6.3
+Requires at least: 7.4
+Tested up to: 6.4.3
 Requires PHP: 7.4
 Stable tag: 1.0.8
 License: GPLv2 or later

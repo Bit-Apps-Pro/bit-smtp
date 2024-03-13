@@ -15,25 +15,25 @@ if (!\defined('ABSPATH')) {
  */
 class Config
 {
-    const SLUG = 'bit-smtp';
+    public const SLUG = 'bit-smtp';
 
-    const TITLE = 'Bit SMTP';
+    public const TITLE = 'Bit SMTP';
 
-    const VAR_PREFIX = 'bit_smtp_';
+    public const VAR_PREFIX = 'bit_smtp_';
 
-    const VERSION = '1.0';
+    public const VERSION = '1.0';
 
-    const DB_VERSION = '1.0';
+    public const DB_VERSION = '1.0';
 
-    const REQUIRED_PHP_VERSION = '5.6.4';
+    public const REQUIRED_PHP_VERSION = '7.4';
 
-    const REQUIRED_WP_VERSION = '5.0';
+    public const REQUIRED_WP_VERSION = '5.0';
 
-    const API_VERSION = '1.0';
+    public const API_VERSION = '1.0';
 
-    const APP_BASE = '../../index.php';
+    public const APP_BASE = '../../bit_smtp.php';
 
-    const DEV_URL = 'http://localhost:3000/wp-content/plugins/bit-smtp/frontend/src';
+    public const DEV_URL = 'http://localhost:3000/wp-content/plugins/bit-smtp/frontend/src';
 
     /**
      * Provides configuration for plugin.

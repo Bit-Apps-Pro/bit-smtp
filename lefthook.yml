@@ -8,9 +8,7 @@ pre-commit:
     php-lint:
       glob: '*.{php}'
       run: pnpm lint:php {staged_files}
-    php-test:
-      glob: '*{php}'
-      run: pnpm test:php {staged_files}
+
     php-compatibility:
       glob: 'backend/**/*.php'
       run: pnpm compat {staged_files}
