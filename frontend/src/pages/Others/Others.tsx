@@ -1,14 +1,12 @@
+import bitAssistLogo from '@resource/img/bitAssist.svg'
+import bitFileManagerLogo from '@resource/img/bitFileManager.svg'
+import bitFormLogo from '@resource/img/bitForm.svg'
+import bitIntegrationsLogo from '@resource/img/bitIntegrations.svg'
+import bitSocialLogo from '@resource/img/bitSocial.svg'
 import { Button, Card } from 'antd'
 import cls from './Others.module.css'
-import bitFormLogo from '@resource/img/bitForm.svg';
-import bitIntegrationsLogo from '@resource/img/bitIntegrations.svg';
-import bitAssistLogo from '@resource/img/bitAssist.svg';
-import bitSocialLogo from '@resource/img/bitSocial.svg';
-import bitFileManagerLogo from '@resource/img/bitFileManager.svg';
 
 export default function Others() {
-
-
   return (
     <div className={cls.others}>
       <Card size="small">
@@ -18,19 +16,26 @@ export default function Others() {
         <div className={cls.productDetails}>
           <div className={cls.title}>
             <h3>
-              Contact Form Builder Plugin: Multi Step Contact Form, Payment Form, Custom Contact Form Plugin by Bit Form
+              Contact Form Builder Plugin: Multi Step Contact Form, Payment Form, Custom Contact Form
+              Plugin by Bit Form
             </h3>
           </div>
           <div className={cls.installed}>
             <span>Active Installs : 5000+</span>
           </div>
-          <Button type='link' href='https://wordpress.org/plugins/bit-form/' style={{ border: "1px solid " }} >Go to Plugin</Button>
+          <Button
+            type="link"
+            href="https://wordpress.org/plugins/bit-form/"
+            style={{ border: '1px solid ' }}
+          >
+            Go to Plugin
+          </Button>
         </div>
-      </Card >
+      </Card>
 
       <Card size="small">
         <div className={cls.productLogo}>
-        <img src={bitIntegrationsLogo} alt="Bit Integrations logo" />
+          <img src={bitIntegrationsLogo} alt="Bit Integrations logo" />
         </div>
         <div className={cls.productDetails}>
           <div className={cls.title}>
@@ -41,48 +46,64 @@ export default function Others() {
           <div className={cls.installed}>
             <span>Active Installs : 6,000+</span>
           </div>
-          <Button type='link' href='https://wordpress.org/plugins/bit-integrations/' style={{ border: "1px solid " }} >Go to Plugin</Button>
+          <Button
+            type="link"
+            href="https://wordpress.org/plugins/bit-integrations/"
+            style={{ border: '1px solid ' }}
+          >
+            Go to Plugin
+          </Button>
         </div>
       </Card>
 
       <Card size="small">
         <div className={cls.productLogo}>
-        <img src={bitAssistLogo} alt="Bit Assist logo" />
+          <img src={bitAssistLogo} alt="Bit Assist logo" />
         </div>
         <div className={cls.productDetails}>
           <div className={cls.title}>
             <h3>
-              Chat Widget: Customer Support Button with floating Chat, SMS, Call Button, Live Chat Support Chat Button - Bit Assist
+              Chat Widget: Customer Support Button with floating Chat, SMS, Call Button, Live Chat
+              Support Chat Button - Bit Assist
             </h3>
           </div>
           <div className={cls.installed}>
             <span>Active Installs : 3000+</span>
           </div>
-          <Button type='link' href='https://wordpress.org/plugins/bit-assist/' style={{ border: "1px solid " }} >Go to Plugin</Button>
+          <Button
+            type="link"
+            href="https://wordpress.org/plugins/bit-assist/"
+            style={{ border: '1px solid ' }}
+          >
+            Go to Plugin
+          </Button>
         </div>
       </Card>
 
       <Card size="small">
         <div className={cls.productLogo}>
-        <img src={bitSocialLogo} alt="Bit Social logo" />
+          <img src={bitSocialLogo} alt="Bit Social logo" />
         </div>
         <div className={cls.productDetails}>
           <div className={cls.title}>
-            <h3>
-              Auto Post Scheduler & Poster for Blog to Social Media Share - Bit Social (Beta)
-            </h3>
+            <h3>Auto Post Scheduler & Poster for Blog to Social Media Share - Bit Social (Beta)</h3>
           </div>
           <div className={cls.installed}>
             <span>Active Installs : 10+</span>
           </div>
-          <Button type='link' href='https://wordpress.org/plugins/bit-social/' style={{ border: "1px solid " }} >Go to Plugin</Button>
+          <Button
+            type="link"
+            href="https://wordpress.org/plugins/bit-social/"
+            style={{ border: '1px solid ' }}
+          >
+            Go to Plugin
+          </Button>
         </div>
       </Card>
 
       <Card size="small">
         <div className={cls.productLogo}>
-        <img src={bitFileManagerLogo} alt="Bit File Manager logo" />
-
+          <img src={bitFileManagerLogo} alt="Bit File Manager logo" />
         </div>
         <div className={cls.productDetails}>
           <div className={cls.title}>
@@ -93,10 +114,15 @@ export default function Others() {
           <div className={cls.installed}>
             <span>Active Installs : 20,000+</span>
           </div>
-          <Button type='link' href='https://wordpress.org/plugins/file-manager/' style={{ border: "1px solid " }} >Go to Plugin</Button>
+          <Button
+            type="link"
+            href="https://wordpress.org/plugins/file-manager/"
+            style={{ border: '1px solid ' }}
+          >
+            Go to Plugin
+          </Button>
         </div>
       </Card>
-
-    </div >
+    </div>
   )
 }

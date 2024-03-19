@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 /* eslint-disable no-underscore-dangle */
+
 /* eslint-disable no-undef */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { __ as i18n_, sprintf as i18nsprintf } from '@wordpress/i18n'

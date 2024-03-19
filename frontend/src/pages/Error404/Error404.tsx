@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-
 import { __ } from '@common/helpers/i18nwrap'
 import space from '@resource/img/space.svg'
 

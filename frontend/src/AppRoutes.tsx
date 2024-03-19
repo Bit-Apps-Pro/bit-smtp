@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
-import Layout from '@pages/Layout'
 import SMTP from '@pages/Homepage'
+import Layout from '@pages/Layout'
 import MailSendTest from '@pages/MailSendTest/MailSendTest'
 import Others from '@pages/Others/Others'
 

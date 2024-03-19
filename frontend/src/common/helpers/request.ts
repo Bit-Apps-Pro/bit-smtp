@@ -14,14 +14,15 @@ interface OptionsType {
 interface QueryParam {
   [key: string]: string | number
 }
-export interface DefaultResponse {
+export interface DefaultResponse<T> {
   status: 'success' | 'error'
-  data: any
+  data: T
   code: 'SUCCESS' | 'ERROR'
 }
 
-export default async function request<T extends Partial<DefaultResponse>>(
+export default async function request<T extends Partial<DefaultResponse<T>>>(
   action: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data?: Record<string, unknown> | FormData | null | undefined | any,
   queryParam?: QueryParam | null | undefined,
   method: MethodType = 'POST'
@@ -51,7 +52,7 @@ export default async function request<T extends Partial<DefaultResponse>>(
   return (await fetch(uri, options).then((res: Response) => res.json())) as T
 }
 
-type ProxyRequestFunction = <T extends Partial<DefaultResponse>>(
+type ProxyRequestFunction = <T extends Partial<DefaultResponse<T>>>(
   data: Record<string, unknown> | FormData | null | undefined,
   queryParam?: QueryParam | null
 ) => Promise<T>

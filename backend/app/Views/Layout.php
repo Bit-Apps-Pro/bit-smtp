@@ -14,7 +14,7 @@ use BitApps\WPKit\Utils\Capabilities;
  */
 class Layout
 {
-    const FONT_URL = 'https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap';
+    public const FONT_URL = 'https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap';
 
     public function __construct()
     {
@@ -78,7 +78,6 @@ class Layout
             wp_enqueue_script($slug . '-index-MODULE', Config::get('ASSET_URI') . '/main.js', [], $version);
             wp_enqueue_style($slug . '-styles', Config::get('ASSET_URI') . '/main.css', null, $version, 'screen');
         }
-        wp_enqueue_script('tinymce_js', includes_url('js/tinymce/') . 'wp-tinymce.php', null, false, true);
 
         wp_localize_script(Config::SLUG . '-index-MODULE', Config::VAR_PREFIX, self::createConfigVariable());
     }
@@ -156,7 +155,7 @@ HTML;
     public function scriptTagFilter($html, $handle, $href)
     {
         $newTag = $html;
-        if (str_contains($handle, Config::SLUG . '-index-MODULE')) {
+        if (str_contains($handle, 'MODULE')) {
             $newTag = preg_replace('/<script /', '<script type="module" ', $newTag);
         }
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { type Interpolation, type Theme } from '@emotion/react'
 import { type GlobalToken } from 'antd'
 

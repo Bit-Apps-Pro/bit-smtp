@@ -162,7 +162,7 @@ svg {
   font-size: 20px;
 }
 
-.ant-table-tbody>tr>td {
+.ant-table-tbody > tr > td {
   height: 70px;
 }
 
@@ -174,5 +174,5 @@ svg {
 }
 
 textarea {
-  width: 400px!important;
+  width: 400px !important;
 }

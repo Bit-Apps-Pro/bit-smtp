@@ -1,20 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NavLink, Outlet } from 'react-router-dom'
+import Logo from '@resource/img/bitSmtpLogo.svg'
 import { Layout as AntLayout } from 'antd'
 import cls from './Layout.module.css'
-import Logo from "../../resource/img/bitSmtpLogo.svg"
 
-const Header = () => {
+function Header() {
   const navItems = [
     { label: 'Mail Configuration', path: '/' },
     { label: 'Test Mail', path: '/test-mail' },
-    { label: 'Others', path: '/others' },
+    { label: 'Others', path: '/others' }
   ]
 
-  const navItemStyle = ({ isActive }: any) => {
-    return {
-      color: isActive ? '#fff' : ''
-    }
-  }
+  const navItemStyle = ({ isActive }: any) => ({
+    color: isActive ? '#fff' : ''
+  })
 
   return (
     <div className={cls.layout}>
@@ -22,9 +21,8 @@ const Header = () => {
         <img src={Logo} alt="Bit SMTP logo" />
         <div className={cls.reviewLink}>
           <span>Share Your Product Experience!</span>
-          <a href="">Review us</a>
+          <a href="https://wordpress.org/support/plugin/bit-smtp/reviews/">Review us</a>
         </div>
-
       </div>
       <div className={cls.navBar}>
         <div className={cls.navItems}>
@@ -41,11 +39,10 @@ const Header = () => {
         </div>
       </div>
     </div>
-
   )
 }
 
-const Layout = () => {
+function Layout() {
   return (
     <AntLayout>
       <Header />

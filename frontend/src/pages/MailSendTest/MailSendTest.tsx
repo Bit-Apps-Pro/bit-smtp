@@ -1,15 +1,17 @@
-import { useState } from 'react'
+/* eslint-disable jsx-a11y/label-has-associated-control */
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useId, useState } from 'react'
 import toast from 'react-hot-toast'
 import request from '@common/helpers/request'
-import Button from '@components/Button/Index'
+import AntBtn from '@components/Button/Button'
 import Toaster from '@components/Toaster/Toaster'
-import cls from './MailSendTest.module.css'
+import { Input } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
-import { Input, Spin } from 'antd'
-import { LoadingOutlined } from '@ant-design/icons'
+import cls from './MailSendTest.module.css'
 
 export default function MailSendTest() {
-  interface values {
+  interface Values {
     [key: string]: any
     to: string
     subject: string
@@ -17,12 +19,13 @@ export default function MailSendTest() {
   }
 
   const [isLoading, setIsLoading] = useState(false)
-  const [values, setValues] = useState<values>({
+  const [values, setValues] = useState<Values>({
     to: '',
     subject: '',
-    message: '',
+    message: ''
   })
 
+  const id = useId()
   const handleChange = (e: any) => {
     const { name, value } = e.target
     const tmpValues = { ...values }
@@ -31,10 +34,11 @@ export default function MailSendTest() {
   }
 
   const handleSubmit = (e: any) => {
-    setIsLoading(true);
+    setIsLoading(true)
     e.preventDefault()
     const data = new FormData()
-    for (let key in values) {
+    // eslint-disable-next-line no-restricted-syntax, guard-for-in
+    for (const key in values) {
       data.append(key, values[key])
     }
 
@@ -42,9 +46,9 @@ export default function MailSendTest() {
       .then(res => {
         setIsLoading(false)
         if (res?.status !== 'error') {
-          toast.success(res.data)
+          toast.success(res.data as string)
         } else {
-          Object.entries(res.data).forEach((item: any) => {
+          Object.entries(res.data as Array<string>).forEach((item: any) => {
             item[1].forEach((rule: string) => {
               toast.error(rule)
             })
@@ -61,30 +65,37 @@ export default function MailSendTest() {
       <h2>Test Your Mail:</h2>
       <form className={cls.form} onSubmit={handleSubmit}>
         <div className={cls.inputSection}>
-          <label className={cls.label}>To:</label>
+          <label htmlFor={id} className={cls.label}>
+            To:
+          </label>
           <div className={cls.inputField}>
             <Input
               name="to"
               placeholder="Enter Email Address"
               onChange={handleChange}
+              id={id}
               required
             />
           </div>
         </div>
         <div className={cls.inputSection}>
-          <label className={cls.label}>Subject:</label>
+          <label htmlFor={id} className={cls.label}>
+            Subject:
+          </label>
           <div className={cls.inputField}>
-
             <Input
               name="subject"
               placeholder="From Subject Here"
               onChange={handleChange}
+              id={id}
               required
             />
           </div>
         </div>
         <div className={cls.inputSection}>
-          <label className={cls.label}>Message:</label>
+          <label htmlFor={id} className={cls.label}>
+            Message:
+          </label>
           <div className={cls.inputField}>
             <TextArea
               name="message"
@@ -94,13 +105,15 @@ export default function MailSendTest() {
               required
               style={{
                 height: 150,
-                resize: 'none',
+                resize: 'none'
               }}
             />
           </div>
         </div>
 
-        <Button type="submit">Send Test {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 20, color:'white' }} spin />}/>}</Button>
+        <AntBtn type="submit" isLoading={isLoading}>
+          Send Test
+        </AntBtn>
         <Toaster />
       </form>
     </div>

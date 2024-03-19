@@ -1,3 +1,3 @@
-import Button from './Button'
+import AntBtn from './Button'
 
-export default Button
+export default AntBtn
