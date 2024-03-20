@@ -17,3 +17,4 @@ composer.lock
 pnpm-lock.yaml
 .husky/
 locale.pot
+.vscode/settings.json

@@ -140,7 +140,6 @@ final class Plugin
      */
     public static function load()
     {
-
         if (static::$_instance !== null) {
             return false;
         }

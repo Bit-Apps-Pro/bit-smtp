@@ -13,6 +13,7 @@ class SMTPController
     public function index()
     {
         $mailConfig = get_option(Config::VAR_PREFIX . 'options');
+
         return Response::success(['mailConfig' => $mailConfig]);
     }
 
@@ -21,17 +22,16 @@ class SMTPController
         update_option(Config::VAR_PREFIX . 'options', $request->validated());
 
         return Response::success('SMTP config saved successfully');
-
     }
 
     public function sendTestEmail(MailTestRequest $request)
     {
-
         $queryParams = $request->validated();
 
         try {
             add_action('wp_mail_failed', function ($error) {
                 $errors = $error->errors['wp_mail_failed'];
+
                 return Response::error($errors[0]);
             });
 
@@ -39,12 +39,12 @@ class SMTPController
             if ($result) {
                 return Response::success('Mail sent successfully');
             }
-            return Response::error('Mail send testing failed');
 
+            return Response::error('Mail send testing failed');
         } catch (Exception $e) {
             $error = $e->getMessage();
+
             return Response::error($error);
         }
-
     }
 }

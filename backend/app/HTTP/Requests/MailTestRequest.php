@@ -10,16 +10,16 @@ class MailTestRequest extends Request
     {
         return
             [
-            'to' => ['required', 'email', 'sanitize:text'],
-            'subject' => ['required', 'sanitize:text'],
-            'message' => ['required', 'sanitize:text'],
-        ];
+                'to'      => ['required', 'email', 'sanitize:text'],
+                'subject' => ['required', 'sanitize:text'],
+                'message' => ['required', 'sanitize:text'],
+            ];
     }
 
     public function messages()
     {
         return [
-            'to.required' => 'To Email Address is required',
+            'to.required'      => 'To Email Address is required',
             'subject.required' => 'Subject is required',
             'message.required' => 'Message is required',
         ];

@@ -19,6 +19,7 @@ class HookProvider
         Hooks::addAction('phpmailer_init', [$this, 'mailConfig'], 1000);
         Hooks::addAction('rest_api_init', [$this, 'loadApi']);
     }
+
     /**
      * Loads API routes.
      */
@@ -32,6 +33,29 @@ class HookProvider
 
             include $this->_pluginBackend . 'hooks' . DIRECTORY_SEPARATOR . 'api.php';
             $router->register();
+        }
+    }
+
+    public function mailConfig($phpmailer)
+    {
+        $mailConfig = get_option(Config::VAR_PREFIX . 'options');
+
+        if (\is_array($mailConfig)) {
+            if ($mailConfig['status'] == 1) {
+                $phpmailer->Mailer   = 'smtp';
+                $phpmailer->Host     = $mailConfig['smtp_host'];
+                $phpmailer->SMTPAuth = true;
+                if (!empty($mailConfig['re_email_address'])) {
+                    $phpmailer->addReplyTo($mailConfig['re_email_address'], 'Information');
+                }
+                $phpmailer->Port       = $mailConfig['port'];
+                $phpmailer->Username   = $mailConfig['smtp_user_name'];
+                $phpmailer->Password   = $mailConfig['smtp_password'];
+                $phpmailer->SMTPSecure = $mailConfig['encryption'];
+                $phpmailer->SMTPDebug  = 1;
+                $phpmailer->From       = $mailConfig['form_email_address'];
+                $phpmailer->FromName   = $mailConfig['form_name'];
+            }
         }
     }
 
@@ -54,28 +78,4 @@ class HookProvider
             include $this->_pluginBackend . 'hooks.php';
         }
     }
-
-    public function mailConfig($phpmailer)
-    {
-        $mailConfig = get_option(Config::VAR_PREFIX . 'options');
-
-        if (\is_array($mailConfig)) {
-            if ($mailConfig['status'] == 1) {
-                $phpmailer->Mailer = 'smtp';
-                $phpmailer->Host = $mailConfig['smtp_host'];
-                $phpmailer->SMTPAuth = true;
-                if (!empty($mailConfig['re_email_address'])) {
-                    $phpmailer->addReplyTo($mailConfig['re_email_address'], 'Information');
-                }
-                $phpmailer->Port = $mailConfig['port'];
-                $phpmailer->Username = $mailConfig['smtp_user_name'];
-                $phpmailer->Password = $mailConfig['smtp_password'];
-                $phpmailer->SMTPSecure = $mailConfig['encryption'];
-                $phpmailer->SMTPDebug = 1;
-                $phpmailer->From = $mailConfig['form_email_address'];
-                $phpmailer->FromName = $mailConfig['form_name'];
-            }
-        }
-    }
-
 }
