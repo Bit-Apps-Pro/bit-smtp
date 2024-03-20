@@ -75,8 +75,8 @@ class Layout
             wp_enqueue_script($slug . '-vite-client-MODULE', Config::DEV_URL . '/@vite/client', [], null);
             wp_enqueue_script($slug . '-index-MODULE', Config::DEV_URL . '/main.tsx', [], null);
         } else {
-            wp_enqueue_script($slug . '-index-MODULE', Config::get('ASSET_URI') . '/main.js', [], $version);
-            wp_enqueue_style($slug . '-styles', Config::get('ASSET_URI') . '/main.css', null, $version, 'screen');
+            wp_enqueue_script($slug . '-index-MODULE', Config::get('ASSET_URI') . '/main-.js', [], $version);
+            wp_enqueue_style($slug . '-styles', Config::get('ASSET_URI') . '/main-.css', null, $version, 'screen');
         }
 
         wp_localize_script(Config::SLUG . '-index-MODULE', Config::VAR_PREFIX, self::createConfigVariable());
