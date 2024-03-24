@@ -12,9 +12,9 @@ use BitApps\SMTP\HTTP\Middleware\NonceCheckerMiddleware;
 use BitApps\SMTP\Providers\HookProvider;
 use BitApps\SMTP\Providers\InstallerProvider;
 use BitApps\SMTP\Views\Layout;
-use BitApps\WPKit\Migration\MigrationHelper;
 use BitApps\WPKit\Hooks\Hooks;
 use BitApps\WPKit\Http\RequestType;
+use BitApps\WPKit\Migration\MigrationHelper;
 use BitApps\WPKit\Utils\Capabilities;
 
 final class Plugin
