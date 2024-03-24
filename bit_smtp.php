@@ -3,7 +3,7 @@
  * Plugin Name: BIT SMTP
  * Plugin URI:  https://www.bitapps.pro/bit-smtp
  * Description: Integrates with other platform
- * Version:     1.0.8
+ * Version:     1.0.9
  * Author:      Bit Apps
  * Author URI:  https://bitapps.pro
  * Text Domain: bit-smtp
