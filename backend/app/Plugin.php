@@ -12,7 +12,7 @@ use BitApps\SMTP\HTTP\Middleware\NonceCheckerMiddleware;
 use BitApps\SMTP\Providers\HookProvider;
 use BitApps\SMTP\Providers\InstallerProvider;
 use BitApps\SMTP\Views\Layout;
-use BitApps\WPKit\Database\Operator as DBOperator;
+use BitApps\WPKit\Migration\MigrationHelper;
 use BitApps\WPKit\Hooks\Hooks;
 use BitApps\WPKit\Http\RequestType;
 use BitApps\WPKit\Utils\Capabilities;
@@ -115,7 +115,7 @@ final class Plugin
         }
 
         if (version_compare(Config::getOption('db_version'), Config::DB_VERSION, '<')) {
-            DBOperator::migrate(InstallerProvider::migration());
+            MigrationHelper::migrate(InstallerProvider::migration());
         }
     }
 
