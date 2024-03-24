@@ -1,4 +1,5 @@
 /* All utilities classes are defined here */
+
 /* use this ext to convert px to rem https://marketplace.visualstudio.com/items?itemName=sainoba.px-to-rem */
 .p-0 {
   padding: 0;
@@ -193,7 +194,7 @@
 }
 
 .mt-0 {
-  margin-top: 0rem;
+  margin-top: 0;
 }
 
 .mt-1 {
@@ -335,28 +336,23 @@
 }
 
 .col-gap-1 {
-  -moz-column-gap: 0.3125rem;
-       column-gap: 0.3125rem;
+  column-gap: 0.3125rem;
 }
 
 .col-gap-2 {
-  -moz-column-gap: 0.625rem;
-       column-gap: 0.625rem;
+  column-gap: 0.625rem;
 }
 
 .col-gap-3 {
-  -moz-column-gap: 0.9375rem;
-       column-gap: 0.9375rem;
+  column-gap: 0.9375rem;
 }
 
 .col-gap-4 {
-  -moz-column-gap: 1.25rem;
-       column-gap: 1.25rem;
+  column-gap: 1.25rem;
 }
 
 .col-gap-5 {
-  -moz-column-gap: 1.5625rem;
-       column-gap: 1.5625rem;
+  column-gap: 1.5625rem;
 }
 
 .row-gap-1 {
@@ -471,7 +467,7 @@
 
 .svgIcn {
   fill: none;
-  stroke: currentColor;
+  stroke: currentcolor;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -506,4 +502,4 @@
 
 .o-hidden {
   overflow: hidden;
-}/*# sourceMappingURL=utilities.css.map */
+}
