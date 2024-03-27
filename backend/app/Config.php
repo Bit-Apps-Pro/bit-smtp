@@ -173,14 +173,10 @@ class Config
     private static function pluginPageLinks()
     {
         return [
-            'settings' => [
-                'title' => __('Settings', 'bit-smtp'),
-                'url'   => self::get('ADMIN_URL') . 'admin.php?page=' . self::SLUG . '#settings',
-            ],
-            'help'     => [
-                'title' => __('Help', 'bit-smtp'),
-                'url'   => self::get('ADMIN_URL') . 'admin.php?page=' . self::SLUG . '#help',
-            ],
+            'Home' => [
+                'title' => __('Home', 'bit-smtp'),
+                'url'   => self::get('ADMIN_URL') . 'admin.php?page=' . self::SLUG,
+            ]
         ];
     }
 
