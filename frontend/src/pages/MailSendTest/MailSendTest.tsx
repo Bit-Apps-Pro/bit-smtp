@@ -70,6 +70,7 @@ export default function MailSendTest() {
           </label>
           <div className={cls.inputField}>
             <Input
+              type="email"
               name="to"
               placeholder="Enter Email Address"
               onChange={handleChange}

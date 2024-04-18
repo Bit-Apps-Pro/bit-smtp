@@ -116,6 +116,7 @@ export default function SMTP() {
               <label className={cls.label}>From Email Address:</label>
               <div className={cls.inputField}>
                 <Input
+                  type="email"
                   name="form_email_address"
                   value={values.form_email_address}
                   placeholder="From Email Address"
@@ -141,6 +142,7 @@ export default function SMTP() {
               <label className={cls.label}>Reply-To Email Address:</label>
               <div className={cls.inputField}>
                 <Input
+                  type="email"
                   name="re_email_address"
                   value={values.re_email_address}
                   placeholder="Reply-To Email Address"

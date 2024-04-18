@@ -49,14 +49,17 @@ h1 {
 }
 
 input[type='text'],
-[type='password'] {
+input[type='email'],
+input[type='password'] {
   padding: 5px 8px !important;
   width: 400px;
   border-radius: 8px;
   border: 1px solid #d9d9d9;
 }
 
-input[type='text']:focus {
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='password']:focus {
   border-color: #4096ff;
   box-shadow: 0 0 0 2px rgba(5, 145, 255, 10%);
   border-inline-end-width: 1px;
