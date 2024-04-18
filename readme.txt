@@ -197,7 +197,9 @@ For recommended direct SMTP mailers integrations like SMTP.com, Brevo (formerly 
 
 [**Webhook.is:**](https://webhook.is/) Test your incoming webhook response & send outgoing webhook request for free.
 
-[Bit Flow] – Zapier, Integromat (Make.com), Integrately & Pabbly alternative in WordPress. [Coming Soon]
+[**Bit Social**](https://wordpress.org/plugins/bit-social/) Bit Social is a versatile WordPress plugin enabling effortless post creation, scheduling, and sharing across multiple social platforms, enhancing your social media management with simplicity and efficiency.
+
+[**Bit PI**] – Zapier, Integromat (Make.com), Integrately & Pabbly alternative in WordPress. [Coming Soon]
 
 
 🔔 For more updates about our products we cordially request you to join our [**Fb Community**](https://www.facebook.com/groups/bitcommunityusers).
