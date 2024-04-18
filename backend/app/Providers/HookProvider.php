@@ -52,7 +52,7 @@ class HookProvider
                 $phpmailer->Username   = $mailConfig['smtp_user_name'];
                 $phpmailer->Password   = $mailConfig['smtp_password'];
                 $phpmailer->SMTPSecure = $mailConfig['encryption'];
-                $phpmailer->SMTPDebug  = 1;
+                $phpmailer->SMTPDebug  = $mailConfig['smtp_debug'];
                 $phpmailer->From       = $mailConfig['form_email_address'];
                 $phpmailer->FromName   = $mailConfig['form_name'];
             }

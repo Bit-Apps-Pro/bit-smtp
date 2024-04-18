@@ -22,6 +22,7 @@ export default function SMTP() {
     encryption: string
     port: string
     smtp_auth: string
+    smtp_debug: string
     smtp_user_name: string
     smtp_password: string
   }
@@ -36,6 +37,7 @@ export default function SMTP() {
     encryption: 'ssl',
     port: '465',
     smtp_auth: '0',
+    smtp_debug: '0',
     smtp_user_name: '',
     smtp_password: ''
   })
@@ -78,6 +80,7 @@ export default function SMTP() {
     const fetchConfig = request('get_mail_config', null, null, 'GET').then((res: any) => {
       setIsLoading(false)
       if (res?.status === 'success') {
+        console.log(res.data.mailConfig)
         setValues(res?.data?.mailConfig)
         return 'SMTP config fetched successfully!'
       }
@@ -183,6 +186,17 @@ export default function SMTP() {
               <label className={cls.label}>SMTP Authentication:</label>
               <div className={cls.inputField}>
                 <Radio.Group onChange={handleChange} value={values.smtp_auth} name="smtp_auth">
+                  <>
+                    <Radio value="1">Yes</Radio>
+                    <Radio value="0">No</Radio>
+                  </>
+                </Radio.Group>
+              </div>
+            </div>
+            <div className={cls.inputSection}>
+              <label className={cls.label}>SMTP Debug:</label>
+              <div className={cls.inputField}>
+                <Radio.Group onChange={handleChange} value={values.smtp_debug} name="smtp_debug">
                   <>
                     <Radio value="1">Yes</Radio>
                     <Radio value="0">No</Radio>

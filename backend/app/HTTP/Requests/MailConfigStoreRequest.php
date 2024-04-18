@@ -18,6 +18,7 @@ class MailConfigStoreRequest extends Request
                 'encryption'         => ['required', 'string', 'sanitize:text'],
                 'port'               => ['required', 'integer'],
                 'smtp_auth'          => ['required', 'boolean'],
+                'smtp_debug'          => ['required', 'boolean'],
                 'smtp_user_name'     => ['required', 'string', 'sanitize:text'],
                 'smtp_password'      => ['required', 'string', 'sanitize:text'],
             ];
@@ -33,6 +34,7 @@ class MailConfigStoreRequest extends Request
             'encryption.required'         => 'Encryption is required',
             'port.required'               => 'Port is required',
             'smtp_auth.required'          => 'SMTP auth is required',
+            'smtp_debug.required'          => 'SMTP debug is required',
             'smtp_user_name.required'     => 'SMTP user name is required',
             'smtp_password.required'      => 'SMTP password is required',
         ];
