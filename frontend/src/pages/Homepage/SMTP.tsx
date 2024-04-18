@@ -29,14 +29,14 @@ export default function SMTP() {
 
   const [isLoading, setIsLoading] = useState(false)
   const [values, setValues] = useState<ValuesTypes>({
-    status: '1',
+    status: '0',
     form_email_address: '',
     form_name: '',
     re_email_address: '',
     smtp_host: '',
     encryption: 'ssl',
     port: '465',
-    smtp_auth: '0',
+    smtp_auth: '1',
     smtp_debug: '0',
     smtp_user_name: '',
     smtp_password: ''
@@ -80,8 +80,9 @@ export default function SMTP() {
     const fetchConfig = request('get_mail_config', null, null, 'GET').then((res: any) => {
       setIsLoading(false)
       if (res?.status === 'success') {
-        console.log(res.data.mailConfig)
-        setValues(res?.data?.mailConfig)
+        if (res.data.mailConfig !== '') {
+          setValues(res?.data?.mailConfig)
+        }
         return 'SMTP config fetched successfully!'
       }
       return 'Error Occured'
