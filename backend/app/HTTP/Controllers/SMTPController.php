@@ -3,9 +3,9 @@
 namespace BitApps\SMTP\HTTP\Controllers;
 
 use BitApps\SMTP\Config;
+use BitApps\SMTP\Deps\BitApps\WPKit\Http\Response;
 use BitApps\SMTP\HTTP\Requests\MailConfigStoreRequest;
 use BitApps\SMTP\HTTP\Requests\MailTestRequest;
-use BitApps\WPKit\Http\Response;
 use Exception;
 
 class SMTPController

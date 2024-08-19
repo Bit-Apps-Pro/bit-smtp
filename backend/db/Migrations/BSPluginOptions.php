@@ -1,8 +1,8 @@
 <?php
 
 use BitApps\SMTP\Config;
+use BitApps\SMTP\Deps\BitApps\WPKit\Migration\Migration;
 use BitApps\WPDatabase\Connection as DB;
-use BitApps\WPKit\Migration\Migration;
 
 if (!\defined('ABSPATH')) {
     exit;

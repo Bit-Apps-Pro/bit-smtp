@@ -8,14 +8,14 @@ namespace BitApps\SMTP;
  * @since 1.0.0-alpha
  */
 
+use BitApps\SMTP\Deps\BitApps\WPKit\Hooks\Hooks;
+use BitApps\SMTP\Deps\BitApps\WPKit\Http\RequestType;
+use BitApps\SMTP\Deps\BitApps\WPKit\Migration\MigrationHelper;
+use BitApps\SMTP\Deps\BitApps\WPKit\Utils\Capabilities;
 use BitApps\SMTP\HTTP\Middleware\NonceCheckerMiddleware;
 use BitApps\SMTP\Providers\HookProvider;
 use BitApps\SMTP\Providers\InstallerProvider;
 use BitApps\SMTP\Views\Layout;
-use BitApps\WPKit\Hooks\Hooks;
-use BitApps\WPKit\Http\RequestType;
-use BitApps\WPKit\Migration\MigrationHelper;
-use BitApps\WPKit\Utils\Capabilities;
 
 final class Plugin
 {

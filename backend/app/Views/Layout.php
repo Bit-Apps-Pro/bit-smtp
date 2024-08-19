@@ -5,9 +5,9 @@
 namespace BitApps\SMTP\Views;
 
 use BitApps\SMTP\Config;
-use BitApps\WPKit\Helpers\DateTimeHelper;
-use BitApps\WPKit\Hooks\Hooks;
-use BitApps\WPKit\Utils\Capabilities;
+use BitApps\SMTP\Deps\BitApps\WPKit\Helpers\DateTimeHelper;
+use BitApps\SMTP\Deps\BitApps\WPKit\Hooks\Hooks;
+use BitApps\SMTP\Deps\BitApps\WPKit\Utils\Capabilities;
 
 /**
  * The admin Layout and page handler class.

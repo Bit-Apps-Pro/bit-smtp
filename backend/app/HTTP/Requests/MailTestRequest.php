@@ -2,7 +2,7 @@
 
 namespace BitApps\SMTP\HTTP\Requests;
 
-use BitApps\WPKit\Http\Request\Request;
+use BitApps\SMTP\Deps\BitApps\WPKit\Http\Request\Request;
 
 class MailTestRequest extends Request
 {

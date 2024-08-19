@@ -1,7 +1,7 @@
 <?php
 
+use BitApps\SMTP\Deps\BitApps\WPKit\Http\Router\Route;
 use BitApps\SMTP\HTTP\Controllers\SMTPController;
-use BitApps\WPKit\Http\Router\Route;
 
 if (!\defined('ABSPATH')) {
     exit;

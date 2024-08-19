@@ -3,8 +3,8 @@
 namespace BitApps\SMTP\HTTP\Middleware;
 
 use BitApps\SMTP\Config;
-use BitApps\WPKit\Http\Request\Request;
-use BitApps\WPKit\Http\Response;
+use BitApps\SMTP\Deps\BitApps\WPKit\Http\Request\Request;
+use BitApps\SMTP\Deps\BitApps\WPKit\Http\Response;
 
 final class NonceCheckerMiddleware
 {

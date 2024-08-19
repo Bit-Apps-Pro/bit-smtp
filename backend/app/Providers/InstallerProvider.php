@@ -3,8 +3,8 @@
 namespace BitApps\SMTP\Providers;
 
 use BitApps\SMTP\Config;
-use BitApps\WPKit\Hooks\Hooks;
-use BitApps\WPKit\Installer;
+use BitApps\SMTP\Deps\BitApps\WPKit\Hooks\Hooks;
+use BitApps\SMTP\Deps\BitApps\WPKit\Installer;
 
 class InstallerProvider
 {
