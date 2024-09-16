@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import request from '@common/helpers/request'
 import Button from '@components/Button/Index'
+import Modal from '@components/Modal/Modal'
 import Toaster from '@components/Toaster/Toaster'
 import { Radio, type RadioChangeEvent } from 'antd'
 import Input from 'antd/es/input/Input'
@@ -26,8 +27,8 @@ export default function SMTP() {
     smtp_user_name: string
     smtp_password: string
   }
-
   const [isLoading, setIsLoading] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [values, setValues] = useState<ValuesTypes>({
     status: '0',
     form_email_address: '',
@@ -95,150 +96,179 @@ export default function SMTP() {
     })
   }, [])
 
+  useEffect(() => {
+    request('telemetry_popup_disable_check', null, null, 'GET').then((res: any) => {
+      setIsModalOpen(!res.data)
+    })
+  }, [])
+
+  const handleTelemetryAccess = () => {
+    request('telemetry_permission_handle', { isChecked: true })
+    setIsModalOpen(false)
+  }
+
+  const handleCancelTelemetriModal = () => {
+    request('telemetry_permission_handle', { isChecked: false })
+    setIsModalOpen(false)
+  }
+
   return (
-    <div className={cls.smtp}>
-      <h2>Configuration Your Mail:</h2>
-      <form className={cls.form} onSubmit={handleSubmit}>
-        <div className={cls.inputSection}>
-          <label className={cls.label}>Enable Mail:</label>
-          <div className={cls.inputField}>
-            <Radio.Group onChange={handleChange} value={values.status} name="status">
-              <>
-                <Radio value="1">Yes</Radio>
-                <Radio value="0">No</Radio>
-              </>
-            </Radio.Group>
+    <>
+      <div className={cls.smtp}>
+        <h2>Configuration Your Mail:</h2>
+        <form className={cls.form} onSubmit={handleSubmit}>
+          <div className={cls.inputSection}>
+            <label className={cls.label}>Enable Mail:</label>
+            <div className={cls.inputField}>
+              <Radio.Group onChange={handleChange} value={values.status} name="status">
+                <>
+                  <Radio value="1">Yes</Radio>
+                  <Radio value="0">No</Radio>
+                </>
+              </Radio.Group>
+            </div>
           </div>
-        </div>
-        {!isLoading && values?.status === '1' && (
-          <>
-            <div className={cls.inputSection}>
-              <label className={cls.label}>From Email Address:</label>
-              <div className={cls.inputField}>
-                <Input
-                  type="email"
-                  name="form_email_address"
-                  value={values.form_email_address}
-                  placeholder="From Email Address"
-                  onChange={handleChange}
-                  required
-                />
+          {!isLoading && values?.status === '1' && (
+            <>
+              <div className={cls.inputSection}>
+                <label className={cls.label}>From Email Address:</label>
+                <div className={cls.inputField}>
+                  <Input
+                    type="email"
+                    name="form_email_address"
+                    value={values.form_email_address}
+                    placeholder="From Email Address"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
               </div>
-            </div>
-            <div className={cls.inputSection}>
-              <label className={cls.label}>From Name:</label>
+              <div className={cls.inputSection}>
+                <label className={cls.label}>From Name:</label>
 
-              <div className={cls.inputField}>
-                <Input
-                  name="form_name"
-                  value={values.form_name}
-                  placeholder="From Name"
-                  onChange={handleChange}
-                  required
-                />
+                <div className={cls.inputField}>
+                  <Input
+                    name="form_name"
+                    value={values.form_name}
+                    placeholder="From Name"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
               </div>
-            </div>
-            <div className={cls.inputSection}>
-              <label className={cls.label}>Reply-To Email Address:</label>
-              <div className={cls.inputField}>
-                <Input
-                  type="email"
-                  name="re_email_address"
-                  value={values.re_email_address}
-                  placeholder="Reply-To Email Address"
-                  onChange={handleChange}
-                />
+              <div className={cls.inputSection}>
+                <label className={cls.label}>Reply-To Email Address:</label>
+                <div className={cls.inputField}>
+                  <Input
+                    type="email"
+                    name="re_email_address"
+                    value={values.re_email_address}
+                    placeholder="Reply-To Email Address"
+                    onChange={handleChange}
+                  />
+                </div>
               </div>
-            </div>
-            <div className={cls.inputSection}>
-              <label className={cls.label}>SMTP Host:</label>
-              <div className={cls.inputField}>
-                <Input
-                  name="smtp_host"
-                  value={values.smtp_host}
-                  placeholder="SMTP Host"
-                  onChange={handleChange}
-                  required
-                />
+              <div className={cls.inputSection}>
+                <label className={cls.label}>SMTP Host:</label>
+                <div className={cls.inputField}>
+                  <Input
+                    name="smtp_host"
+                    value={values.smtp_host}
+                    placeholder="SMTP Host"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className={cls.inputSection}>
-              <label className={cls.label}>Type of Encryption:</label>
-              <div className={cls.inputField}>
-                <Radio.Group onChange={handleChange} value={values.encryption} name="encryption">
-                  <>
-                    <Radio value="tls">TLS</Radio>
-                    <Radio value="ssl">SSL</Radio>
-                  </>
-                </Radio.Group>
+              <div className={cls.inputSection}>
+                <label className={cls.label}>Type of Encryption:</label>
+                <div className={cls.inputField}>
+                  <Radio.Group onChange={handleChange} value={values.encryption} name="encryption">
+                    <>
+                      <Radio value="tls">TLS</Radio>
+                      <Radio value="ssl">SSL</Radio>
+                    </>
+                  </Radio.Group>
+                </div>
               </div>
-            </div>
-            <div className={cls.inputSection}>
-              <label className={cls.label}>SMTP Port:</label>
-              <div className={cls.inputField}>
-                <Radio.Group onChange={handleChange} value={values.port} name="port">
-                  <>
-                    <Radio value="587">587</Radio>
-                    <Radio value="465">465</Radio>
-                  </>
-                </Radio.Group>
+              <div className={cls.inputSection}>
+                <label className={cls.label}>SMTP Port:</label>
+                <div className={cls.inputField}>
+                  <Radio.Group onChange={handleChange} value={values.port} name="port">
+                    <>
+                      <Radio value="587">587</Radio>
+                      <Radio value="465">465</Radio>
+                    </>
+                  </Radio.Group>
+                </div>
               </div>
-            </div>
-            <div className={cls.inputSection}>
-              <label className={cls.label}>SMTP Authentication:</label>
-              <div className={cls.inputField}>
-                <Radio.Group onChange={handleChange} value={values.smtp_auth} name="smtp_auth">
-                  <>
-                    <Radio value="1">Yes</Radio>
-                    <Radio value="0">No</Radio>
-                  </>
-                </Radio.Group>
+              <div className={cls.inputSection}>
+                <label className={cls.label}>SMTP Authentication:</label>
+                <div className={cls.inputField}>
+                  <Radio.Group onChange={handleChange} value={values.smtp_auth} name="smtp_auth">
+                    <>
+                      <Radio value="1">Yes</Radio>
+                      <Radio value="0">No</Radio>
+                    </>
+                  </Radio.Group>
+                </div>
               </div>
-            </div>
-            <div className={cls.inputSection}>
-              <label className={cls.label}>SMTP Debug:</label>
-              <div className={cls.inputField}>
-                <Radio.Group onChange={handleChange} value={values.smtp_debug} name="smtp_debug">
-                  <>
-                    <Radio value="1">Yes</Radio>
-                    <Radio value="0">No</Radio>
-                  </>
-                </Radio.Group>
+              <div className={cls.inputSection}>
+                <label className={cls.label}>SMTP Debug:</label>
+                <div className={cls.inputField}>
+                  <Radio.Group onChange={handleChange} value={values.smtp_debug} name="smtp_debug">
+                    <>
+                      <Radio value="1">Yes</Radio>
+                      <Radio value="0">No</Radio>
+                    </>
+                  </Radio.Group>
+                </div>
               </div>
-            </div>
-            <div className={cls.inputSection}>
-              <label className={cls.label}>SMTP Username:</label>
-              <div className={cls.inputField}>
-                <Input
-                  name="smtp_user_name"
-                  value={values.smtp_user_name}
-                  placeholder="SMTP Username"
-                  onChange={handleChange}
-                  required
-                />
+              <div className={cls.inputSection}>
+                <label className={cls.label}>SMTP Username:</label>
+                <div className={cls.inputField}>
+                  <Input
+                    name="smtp_user_name"
+                    value={values.smtp_user_name}
+                    placeholder="SMTP Username"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className={cls.inputSection}>
-              <label className={cls.label}>SMTP Password:</label>
-              <div className={cls.inputField}>
-                <Input
-                  type="password"
-                  name="smtp_password"
-                  value={values.smtp_password}
-                  placeholder="SMTP Password"
-                  onChange={handleChange}
-                  required
-                />
+              <div className={cls.inputSection}>
+                <label className={cls.label}>SMTP Password:</label>
+                <div className={cls.inputField}>
+                  <Input
+                    type="password"
+                    name="smtp_password"
+                    value={values.smtp_password}
+                    placeholder="SMTP Password"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
               </div>
-            </div>
 
-            <Button type="submit">Save Changes</Button>
-          </>
-        )}
-        <Toaster />
-      </form>
-    </div>
+              <Button type="submit" className={cls.btn}>
+                Save Changes
+              </Button>
+            </>
+          )}
+          <Toaster />
+        </form>
+      </div>
+      {isModalOpen ? (
+        <Modal
+          isModalOpen={isModalOpen}
+          handleSubmit={handleTelemetryAccess}
+          handleCancel={handleCancelTelemetriModal}
+        />
+      ) : (
+        ''
+      )}
+    </>
   )
 }

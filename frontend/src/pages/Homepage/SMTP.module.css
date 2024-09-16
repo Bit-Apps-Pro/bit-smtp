@@ -32,9 +32,17 @@ h2 {
   flex: 25%;
   font-size: 16px;
   font-weight: 600;
-  color: #0A1525;
+  color: #0a1525;
 }
 
 .inputField {
   flex: 75%;
+}
+
+.btn span {
+  color: white !important;
+}
+
+.smtp button:hover {
+  background-color: #232133 !important;
 }

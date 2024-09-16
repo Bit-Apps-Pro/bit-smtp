@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name: BIT SMTP
  * Plugin URI:  https://www.bitapps.pro/bit-smtp

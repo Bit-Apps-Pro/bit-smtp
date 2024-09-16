@@ -6,6 +6,7 @@ use BitApps\SMTP\Config;
 use BitApps\SMTP\Deps\BitApps\WPKit\Hooks\Hooks;
 use BitApps\SMTP\Deps\BitApps\WPKit\Http\RequestType;
 use BitApps\SMTP\Deps\BitApps\WPKit\Http\Router\Router;
+use BitApps\SMTP\HTTP\Controllers\SMTPAnalyticsController;
 use BitApps\SMTP\Plugin;
 
 class HookProvider
@@ -18,6 +19,7 @@ class HookProvider
         $this->loadAppHooks();
         Hooks::addAction('phpmailer_init', [$this, 'mailConfig'], 1000);
         Hooks::addAction('rest_api_init', [$this, 'loadApi']);
+        Hooks::addFilter(Config::VAR_PREFIX . 'telemetry_additional_data', [new SMTPAnalyticsController(), 'filterTrackingData']);
     }
 
     /**

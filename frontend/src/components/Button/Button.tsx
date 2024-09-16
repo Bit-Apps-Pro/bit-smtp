@@ -5,10 +5,11 @@ import { Button, Spin } from 'antd'
 type ButtonProps = {
   type?: 'button' | 'submit' | 'reset'
   isLoading?: boolean
+  className?: string
   children: ReactNode
 }
 
-function AntBtn({ type = 'button', isLoading = false, children }: ButtonProps) {
+function AntBtn({ type = 'button', isLoading = false, className, children }: ButtonProps) {
   const btnCustomStyle = {
     borderRadius: '8px',
     width: '120px',
@@ -32,6 +33,7 @@ function AntBtn({ type = 'button', isLoading = false, children }: ButtonProps) {
           <Spin indicator={<LoadingOutlined style={{ fontSize: 20, color: 'white' }} spin />} />
         )
       }
+      className={className}
     >
       {children}
     </Button>

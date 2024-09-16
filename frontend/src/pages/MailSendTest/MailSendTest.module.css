@@ -39,10 +39,10 @@ h2 {
   flex: 75%;
 }
 
-button span {
+.btn span {
   color: white !important;
 }
 
-button:hover {
+.mailTest button:hover {
   background-color: #232133 !important;
 }

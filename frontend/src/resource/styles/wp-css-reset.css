@@ -1,5 +1,4 @@
-/* stylelint-disable */
-.media-toolbar .button-primary {
+stylelint-disable .media-toolbar .button-primary {
   background: var(--accent-color) !important;
   color: white !important;
   border-radius: 20px !important;

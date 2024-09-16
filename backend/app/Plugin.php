@@ -12,6 +12,9 @@ use BitApps\SMTP\Deps\BitApps\WPKit\Hooks\Hooks;
 use BitApps\SMTP\Deps\BitApps\WPKit\Http\RequestType;
 use BitApps\SMTP\Deps\BitApps\WPKit\Migration\MigrationHelper;
 use BitApps\SMTP\Deps\BitApps\WPKit\Utils\Capabilities;
+use BitApps\SMTP\Deps\BitApps\WPTelemetry\Telemetry\Telemetry;
+use BitApps\SMTP\Deps\BitApps\WPTelemetry\Telemetry\TelemetryConfig;
+use BitApps\SMTP\HTTP\Controllers\SMTPAnalyticsController;
 use BitApps\SMTP\HTTP\Middleware\NonceCheckerMiddleware;
 use BitApps\SMTP\Providers\HookProvider;
 use BitApps\SMTP\Providers\InstallerProvider;
@@ -37,6 +40,8 @@ final class Plugin
     {
         $this->registerInstaller();
         Hooks::addAction('plugins_loaded', [$this, 'loaded']);
+
+        $this->initWPTelemetry();
     }
 
     public function registerInstaller()
@@ -147,5 +152,20 @@ final class Plugin
         static::$_instance = new static();
 
         return true;
+    }
+
+    public function initWPTelemetry()
+    {
+        TelemetryConfig::setSlug(Config::SLUG);
+        TelemetryConfig::setTitle(Config::TITLE);
+        TelemetryConfig::setVersion(Config::VERSION);
+        TelemetryConfig::setPrefix(Config::VAR_PREFIX);
+
+        TelemetryConfig::setServerBaseUrl('https://wp-api.bitapps.pro/public/');
+        TelemetryConfig::setTermsUrl('https://bitapps.pro/terms-of-service/');
+        TelemetryConfig::setPolicyUrl('https://bitapps.pro/privacy-policy/');
+
+        Telemetry::report()->addPluginData()->init();
+        Telemetry::feedback()->init();
     }
 }

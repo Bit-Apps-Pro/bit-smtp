@@ -112,7 +112,7 @@ export default function MailSendTest() {
           </div>
         </div>
 
-        <AntBtn type="submit" isLoading={isLoading}>
+        <AntBtn type="submit" isLoading={isLoading} className={cls.btn}>
           Send Test
         </AntBtn>
         <Toaster />
