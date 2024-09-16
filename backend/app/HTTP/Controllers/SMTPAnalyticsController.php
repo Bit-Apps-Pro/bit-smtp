@@ -10,8 +10,9 @@ final class SMTPAnalyticsController
 {
     public function filterTrackingData($additional_data)
     {
-        $totalTestMailFormSubmitted = get_option(Config::VAR_PREFIX . 'test_mail_form_submitted');
+        $totalTestMailFormSubmitted                  = get_option(Config::VAR_PREFIX . 'test_mail_form_submitted');
         $additional_data['test_mail_form_submitted'] = $totalTestMailFormSubmitted;
+
         return $additional_data;
     }
 
@@ -37,10 +38,7 @@ final class SMTPAnalyticsController
         }
 
         $allowed = Telemetry::report()->isTrackingAllowed();
-        if ($allowed == true) {
-            return true;
-        }
 
-        return false;
+        return (bool) ($allowed == true);
     }
 }

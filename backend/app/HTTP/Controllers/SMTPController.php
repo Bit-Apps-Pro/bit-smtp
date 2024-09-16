@@ -37,7 +37,6 @@ class SMTPController
 
             $result = wp_mail($queryParams['to'], $queryParams['subject'], $queryParams['message']);
             if ($result) {
-
                 $previousData = get_option(Config::VAR_PREFIX . 'test_mail_form_submitted');
                 if (!$previousData) {
                     $previousData = 1;
@@ -45,12 +44,14 @@ class SMTPController
                     $previousData = (int) $previousData + 1;
                 }
                 update_option(Config::VAR_PREFIX . 'test_mail_form_submitted', $previousData);
+
                 return Response::success('Mail sent successfully');
             }
 
             return Response::error('Mail send testing failed');
         } catch (Exception $e) {
             $error = $e->getMessage();
+
             return Response::error($error);
         }
     }

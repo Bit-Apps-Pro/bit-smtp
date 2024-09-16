@@ -14,7 +14,6 @@ use BitApps\SMTP\Deps\BitApps\WPKit\Migration\MigrationHelper;
 use BitApps\SMTP\Deps\BitApps\WPKit\Utils\Capabilities;
 use BitApps\SMTP\Deps\BitApps\WPTelemetry\Telemetry\Telemetry;
 use BitApps\SMTP\Deps\BitApps\WPTelemetry\Telemetry\TelemetryConfig;
-use BitApps\SMTP\HTTP\Controllers\SMTPAnalyticsController;
 use BitApps\SMTP\HTTP\Middleware\NonceCheckerMiddleware;
 use BitApps\SMTP\Providers\HookProvider;
 use BitApps\SMTP\Providers\InstallerProvider;
