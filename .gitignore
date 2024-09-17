@@ -13,9 +13,7 @@ frontend/locale.pot
 tests.config.php
 .phpunit.result.cache
 eslint-cache/
-composer.lock
 .husky/
 locale.pot
 .vscode/settings.json
-pnpm-lock.yaml
 package-lock.json
