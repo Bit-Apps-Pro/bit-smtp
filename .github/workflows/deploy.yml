@@ -84,7 +84,6 @@ jobs:
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          BUILD_DIR: '${{ github.workspace }}/build/${{ env.PLUGIN_SLUG }}'
           SLUG: ${{ env.PLUGIN_SLUG }}
 
       - name: Upload release asset
