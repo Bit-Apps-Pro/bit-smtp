@@ -20,25 +20,29 @@ final class SMTPAnalyticsController
     {
         if ($request->isChecked == true) {
             Telemetry::report()->trackingOptIn();
-
+            update_option(Config::VAR_PREFIX . 'old_version', Config::VERSION);
             return true;
         }
 
         Telemetry::report()->trackingOptOut();
-
+        update_option(Config::VAR_PREFIX . 'old_version', Config::VERSION);
         return false;
     }
 
     public function telemetryPopupDisableCheck()
     {
-        $skipped = get_option(Config::VAR_PREFIX . 'tracking_skipped');
-
-        if ($skipped == true) {
+        $allowed = Telemetry::report()->isTrackingAllowed();
+        if ($allowed == true) {
             return true;
         }
 
-        $allowed = Telemetry::report()->isTrackingAllowed();
+        $skipped = get_option(Config::VAR_PREFIX . 'tracking_skipped');
+        $getOldPluginVersion = get_option(Config::VAR_PREFIX . 'old_version');
 
-        return (bool) ($allowed == true);
+        if ($skipped == true && $getOldPluginVersion === Config::VERSION) {
+            return true;
+        }
+
+        return false;
     }
 }
