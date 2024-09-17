@@ -21,11 +21,13 @@ final class SMTPAnalyticsController
         if ($request->isChecked == true) {
             Telemetry::report()->trackingOptIn();
             update_option(Config::VAR_PREFIX . 'old_version', Config::VERSION);
+
             return true;
         }
 
         Telemetry::report()->trackingOptOut();
         update_option(Config::VAR_PREFIX . 'old_version', Config::VERSION);
+
         return false;
     }
 
@@ -36,13 +38,9 @@ final class SMTPAnalyticsController
             return true;
         }
 
-        $skipped = get_option(Config::VAR_PREFIX . 'tracking_skipped');
+        $skipped             = get_option(Config::VAR_PREFIX . 'tracking_skipped');
         $getOldPluginVersion = get_option(Config::VAR_PREFIX . 'old_version');
 
-        if ($skipped == true && $getOldPluginVersion === Config::VERSION) {
-            return true;
-        }
-
-        return false;
+        return (bool) ($skipped == true && $getOldPluginVersion === Config::VERSION);
     }
 }
