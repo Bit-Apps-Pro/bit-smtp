@@ -21,7 +21,7 @@ export default function Others() {
             </h3>
           </div>
           <div className={cls.installed}>
-            <span>Active Installs : 5000+</span>
+            <span>Active Installs : 7000+</span>
           </div>
           <Button
             type="link"
@@ -44,7 +44,7 @@ export default function Others() {
             </h3>
           </div>
           <div className={cls.installed}>
-            <span>Active Installs : 6,000+</span>
+            <span>Active Installs : 10,000+</span>
           </div>
           <Button
             type="link"
@@ -68,7 +68,7 @@ export default function Others() {
             </h3>
           </div>
           <div className={cls.installed}>
-            <span>Active Installs : 3000+</span>
+            <span>Active Installs : 7000+</span>
           </div>
           <Button
             type="link"
@@ -89,7 +89,7 @@ export default function Others() {
             <h3>Auto Post Scheduler & Poster for Blog to Social Media Share - Bit Social (Beta)</h3>
           </div>
           <div className={cls.installed}>
-            <span>Active Installs : 10+</span>
+            <span>Active Installs : 60+</span>
           </div>
           <Button
             type="link"
