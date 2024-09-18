@@ -1,8 +1,5 @@
 name: Deploy to WordPress.org Repository
 on:
-  #push:
-  #branches:
-  # - main
   release:
     types: [released]
 jobs:
@@ -11,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PLUGIN_SLUG: bit-smtp
-      DRY_RUN: true
+      DRY_RUN: false
 
     steps:
       - name: Checkout code
