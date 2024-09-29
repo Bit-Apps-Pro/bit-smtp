@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import request from '@common/helpers/request'
 import Button from '@components/Button/Index'
-import Modal from '@components/Modal/Modal'
+import TelemetryPopup from '@components/TelemetryPopup/TelemetryPopup'
 import Toaster from '@components/Toaster/Toaster'
 import { Radio, type RadioChangeEvent } from 'antd'
 import Input from 'antd/es/input/Input'
@@ -28,7 +28,7 @@ export default function SMTP() {
     smtp_password: string
   }
   const [isLoading, setIsLoading] = useState(false)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isTelemetryModalOpen, setIsTelemetryModalOpen] = useState(false)
   const [values, setValues] = useState<ValuesTypes>({
     status: '0',
     form_email_address: '',
@@ -98,19 +98,9 @@ export default function SMTP() {
 
   useEffect(() => {
     request('telemetry_popup_disable_check', null, null, 'GET').then((res: any) => {
-      setIsModalOpen(!res.data)
+      setIsTelemetryModalOpen(!res.data)
     })
   }, [])
-
-  const handleTelemetryAccess = () => {
-    request('telemetry_permission_handle', { isChecked: true })
-    setIsModalOpen(false)
-  }
-
-  const handleCancelTelemetriModal = () => {
-    request('telemetry_permission_handle', { isChecked: false })
-    setIsModalOpen(false)
-  }
 
   return (
     <>
@@ -260,11 +250,11 @@ export default function SMTP() {
           <Toaster />
         </form>
       </div>
-      {isModalOpen ? (
-        <Modal
-          isModalOpen={isModalOpen}
-          handleSubmit={handleTelemetryAccess}
-          handleCancel={handleCancelTelemetriModal}
+
+      {isTelemetryModalOpen ? (
+        <TelemetryPopup
+          isTelemetryModalOpen={isTelemetryModalOpen}
+          setIsTelemetryModalOpen={setIsTelemetryModalOpen}
         />
       ) : (
         ''

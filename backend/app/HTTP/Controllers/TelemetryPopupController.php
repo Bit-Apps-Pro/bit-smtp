@@ -3,10 +3,10 @@
 namespace BitApps\SMTP\HTTP\Controllers;
 
 use BitApps\SMTP\Config;
+use BitApps\SMTP\Deps\BitApps\WPKit\Http\Request\Request;
 use BitApps\SMTP\Deps\BitApps\WPTelemetry\Telemetry\Telemetry;
-use BitApps\SMTP\HTTP\Requests\TelemetryAccessRequest;
 
-final class SMTPAnalyticsController
+class TelemetryPopupController
 {
     public function filterTrackingData($additional_data)
     {
@@ -16,7 +16,7 @@ final class SMTPAnalyticsController
         return $additional_data;
     }
 
-    public function telemetryPermissionHandle(TelemetryAccessRequest $request)
+    public function handleTelemetryPermission(Request $request)
     {
         if ($request->isChecked == true) {
             Telemetry::report()->trackingOptIn();
@@ -31,16 +31,16 @@ final class SMTPAnalyticsController
         return false;
     }
 
-    public function telemetryPopupDisableCheck()
+    public function isPopupDisabled()
     {
         $allowed = Telemetry::report()->isTrackingAllowed();
         if ($allowed == true) {
             return true;
         }
 
-        $skipped             = get_option(Config::VAR_PREFIX . 'tracking_skipped');
-        $getOldPluginVersion = get_option(Config::VAR_PREFIX . 'old_version');
+        $popupSkipped             = get_option(Config::VAR_PREFIX . 'tracking_skipped');
+        $getOldPluginVersion      = get_option(Config::VAR_PREFIX . 'old_version');
 
-        return (bool) ($skipped == true && $getOldPluginVersion === Config::VERSION);
+        return (bool) (($popupSkipped == true) && $getOldPluginVersion === Config::VERSION);
     }
 }

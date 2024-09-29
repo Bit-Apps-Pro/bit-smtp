@@ -4,7 +4,7 @@ Tags: smtp, wp mail smtp, wordpress smtp, gmail smtp, sendgrid smtp, mailgun smt
 Requires at least: 7.4
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 
 Enable SMTP plugin to authenticate mail service of your site by configuring SMTP server of your desired mail service.
@@ -236,6 +236,9 @@ Yes, possible to send WordPress emails using Hotmail.
 
 
 == Changelog ==
+
+= 1.1.2 (29 Sep, 2024) =
+* Telemetry Modal replaced with Multi Step Modal
 
 = 1.1.1 =
 * Namespace conflict issue fixed

@@ -33,6 +33,7 @@ function Header() {
               style={navItemStyle}
               key={Math.random()}
             >
+              {link.path === '/others' && <div className={cls.otherUpdates}>New</div>}
               {link.label}
             </NavLink>
           ))}
