@@ -56,6 +56,7 @@ export default function Others() {
                 type="link"
                 href="https://bit-social.com/?utm_source=bit-smtp&utm_medium=inside-plugin&utm_campaign=early-bird-offer"
                 style={{ border: '1px solid', color: '#5700fa', marginTop: '20px' }}
+                target="_blank"
               >
                 {`Grab It Before It's Gone!`}
               </Button>
