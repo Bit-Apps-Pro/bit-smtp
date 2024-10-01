@@ -1,8 +1,8 @@
-import bitSocialBanner from '@resource/img/bit-social-release.png'
 import bitAssistLogo from '@resource/img/bitAssist.svg'
 import bitFileManagerLogo from '@resource/img/bitFileManager.svg'
 import bitFormLogo from '@resource/img/bitForm.svg'
 import bitIntegrationsLogo from '@resource/img/bitIntegrations.svg'
+import earlyBirdOffer from '@resource/img/earlyBirdOffer.webp'
 import { Button, Card } from 'antd'
 import cls from './Others.module.css'
 
@@ -12,8 +12,11 @@ export default function Others() {
       <div className={`${cls.bitSocialRelease} bit-social-release`}>
         <Card size="small" style={{ backgroundColor: '#EDE4FD' }}>
           <div className={cls.productBanner}>
-            <a href="https://bit-social.com/" target="_blanlk">
-              <img src={bitSocialBanner} alt="Bit Social logo" />
+            <a
+              href="https://bit-social.com/?utm_source=bit-smtp&utm_medium=inside-plugin&utm_campaign=early-bird-offer"
+              target="_blanlk"
+            >
+              <img src={earlyBirdOffer} alt="Bit Social early bird offer banner" />
             </a>
           </div>
           <div className={cls.productDesc}>
@@ -37,18 +40,24 @@ export default function Others() {
             <span style={{ fontSize: '25px', fontWeight: 'bold' }}>
               Bit Social Early Bird Deal – Just $99!
             </span>
+
             <br />
             <span>
               This exclusive Early Bird offer is available from <b>October 1st to October 31st</b> (Yes,
               for one month only).{' '}
             </span>
+            <br />
+
+            <span>
+              Don’t miss out—after the offer ends, the price of Bit Social <b>will increase 50%</b>!
+            </span>
             <div className={cls.demoBtn}>
               <Button
                 type="link"
-                href="https://towp.io/"
+                href="https://bit-social.com/?utm_source=bit-smtp&utm_medium=inside-plugin&utm_campaign=early-bird-offer"
                 style={{ border: '1px solid', color: '#5700fa', marginTop: '20px' }}
               >
-                Try Demo
+                {`Grab It Before It's Gone!`}
               </Button>
             </div>
           </div>

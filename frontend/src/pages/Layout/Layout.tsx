@@ -1,10 +1,38 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import Logo from '@resource/img/bitSmtpLogo.svg'
-import { Layout as AntLayout } from 'antd'
+import earlyBirdOffer from '@resource/img/earlyBirdOffer.webp'
+import { Layout as AntLayout, Modal } from 'antd'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import confetti from 'canvas-confetti'
 import cls from './Layout.module.css'
 
 function Header() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleConfetti = () => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+      zIndex: 1000
+    })
+  }
+
+  const showModal = () => {
+    setIsModalOpen(true)
+    handleConfetti()
+  }
+
+  const handleOk = () => {
+    setIsModalOpen(false)
+  }
+
+  const handleCancel = () => {
+    setIsModalOpen(false)
+  }
+
   const navItems = [
     { label: 'Mail Configuration', path: '/' },
     { label: 'Test Mail', path: '/test-mail' },
@@ -38,7 +66,42 @@ function Header() {
             </NavLink>
           ))}
         </div>
+        <div className={cls.bitSocialMenu}>
+          <button type="button" onClick={() => showModal()} className={cls.btn}>
+            New Product Launch
+            <span className={cls.star} />
+            <span className={cls.star} />
+            <span className={cls.star} />
+            <span className={cls.star} />
+          </button>
+        </div>
       </div>
+
+      <Modal
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={null}
+        centered
+        className="bit-social-release-modal"
+      >
+        <a
+          href="https://bit-social.com/?utm_source=bit-smtp&utm_medium=inside-plugin&utm_campaign=early-bird-offer"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img src={earlyBirdOffer} alt="Bit Social Release Promotional Banner" width="100%" />
+        </a>
+        <div className={cls.footerBtn}>
+          <a
+            href="https://bit-social.com/?utm_source=bit-smtp&utm_medium=inside-plugin&utm_campaign=early-bird-offer"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {`Grab It Before It's Gone!`}
+          </a>
+        </div>
+      </Modal>
     </div>
   )
 }

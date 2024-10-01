@@ -34,6 +34,7 @@
 
 .demoBtn a {
   background-color: #5700fa !important;
+  padding: 20px;
 }
 
 .demoBtn a:hover {
@@ -49,15 +50,20 @@
 }
 
 .bitSocialRelease .productDesc {
-  width: 600px;
+  width: 700px;
 }
 
 .productDesc span {
   color: #303030;
+  font-size: 16px;
+}
+
+.productDesc h2 {
+  font-size: 24px;
 }
 
 .bitSocialRelease img {
-  height: 400px;
+  height: 600px;
   margin-right: 30px;
   border-radius: 6px;
 }

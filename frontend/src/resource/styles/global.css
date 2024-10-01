@@ -215,6 +215,11 @@ textarea {
   color: #534e4e !important;
 }
 
-.bit-social-release .ant-card-body {
-  justify-content: center !important;
+.bit-social-release-modal img {
+  border-radius: 10px;
+}
+
+.bit-social-release-modal .ant-modal-content {
+  padding: 0 !important;
+  text-align: center;
 }

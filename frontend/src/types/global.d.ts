@@ -14,6 +14,7 @@ declare module '*.module.scss'
 declare module '*.module.sass'
 declare module '*.svg'
 declare module '*.png'
+declare module '*.webp'
 declare module '*.json'
 declare let bitapp
 declare let wp
