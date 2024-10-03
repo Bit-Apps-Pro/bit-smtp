@@ -4,7 +4,7 @@ Tags: smtp, wp mail smtp, gmail smtp, sendgrid smtp, phpmailer
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 
 Enable SMTP plugin to authenticate mail service of your site by configuring SMTP server of your desired mail service.
@@ -195,15 +195,22 @@ For recommended direct SMTP mailers integrations like SMTP.com, Brevo (formerly 
 
 [**Bit File Manager:**](https://wordpress.org/plugins/file-manager/) Best File manager and Code editor plugin for WordPress. You can edit, upload, delete, copy, move, rename, archive and extract files with the file manager plugin. You don’t need to worry about FTP anymore. It is really simple and easy to use.
 
-[**Webhook.is:**](https://webhook.is/) Test your incoming webhook response & send outgoing webhook request for free.
 
 [**Bit Social**](https://wordpress.org/plugins/bit-social/) Bit Social is a versatile WordPress plugin enabling effortless post creation, scheduling, and sharing across multiple social platforms, enhancing your social media management with simplicity and efficiency.
 
 [**Bit PI**] – Zapier, Integromat (Make.com), Integrately & Pabbly alternative in WordPress. [Coming Soon]
 
+[**ToWP:**](https://https://towp.io//) ToWP is a powerful platform that lets you create temporary WordPress sites in less than 10 seconds using just your email! No passwords, no login URLs to remember — just a smooth experience.
+It is a completely free platform.
+
+[**Webhook.is:**](https://webhook.is/) Test your incoming webhook response & send outgoing webhook request for free.
 
 🔔 For more updates about our products we cordially request you to join our [**Fb Community**](https://www.facebook.com/groups/bitcommunityusers).
 
+### Credits:
+
+You can access the full source code on GitHub, and your contributions to enhancing this awesome Plugin are more than welcome.
+[**View on GitHub**](https://github.com/Bit-Apps-Pro/bit-smtp)
 
 ## FAQ
 
@@ -236,6 +243,9 @@ Yes, possible to send WordPress emails using Hotmail.
 
 
 == Changelog ==
+
+= 1.1.3 (03 Oct, 2024) =
+* Others page updated
 
 = 1.1.2 (29 Sep, 2024) =
 * Telemetry Modal replaced with Multi Step Modal
