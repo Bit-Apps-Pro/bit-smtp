@@ -4,7 +4,7 @@ Tags: smtp, wp mail smtp, gmail smtp, sendgrid smtp, phpmailer
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPLv2 or later
 
 Enable SMTP plugin to authenticate mail service of your site by configuring SMTP server of your desired mail service.
@@ -200,14 +200,11 @@ For recommended direct SMTP mailers integrations like SMTP.com, Brevo (formerly 
 
 [**Bit PI**] – Zapier, Integromat (Make.com), Integrately & Pabbly alternative in WordPress. [Coming Soon]
 
-[**ToWP:**](https://https://towp.io//) ToWP is a powerful platform that lets you create temporary WordPress sites in less than 10 seconds using just your email! No passwords, no login URLs to remember — just a smooth experience.
-It is a completely free platform.
+[**ToWP:**](https://towp.io//) ToWP is a powerful platform that lets you create temporary WordPress sites in less than 10 seconds using just your email! No passwords, no login URLs to remember — just a smooth experience.It is a completely free platform.
 
 [**Webhook.is:**](https://webhook.is/) Test your incoming webhook response & send outgoing webhook request for free.
 
 🔔 For more updates about our products we cordially request you to join our [**Fb Community**](https://www.facebook.com/groups/bitcommunityusers).
-
-### Credits:
 
 You can access the full source code on GitHub, and your contributions to enhancing this awesome Plugin are more than welcome.
 [**View on GitHub**](https://github.com/Bit-Apps-Pro/bit-smtp)
@@ -243,6 +240,9 @@ Yes, possible to send WordPress emails using Hotmail.
 
 
 == Changelog ==
+
+= 1.1.4 (28 Oct, 2024) =
+* Telemetry package version updated
 
 = 1.1.3 (03 Oct, 2024) =
 * Others page updated

@@ -7,7 +7,7 @@
     "bitapps/wp-kit": "^1.0",
     "bitapps/wp-database": "^1.0",
     "typisttech/imposter-plugin": "^0.6.2",
-    "bitapps/wp-telemetry": "^0.0.8"
+    "bitapps/wp-telemetry": "^0.0.9"
   },
   "autoload": {
     "psr-4": {
