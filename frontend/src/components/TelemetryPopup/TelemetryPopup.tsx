@@ -4,7 +4,7 @@
 import type React from 'react'
 import { useState } from 'react'
 import request from '@common/helpers/request'
-import earlyBirdOffer from '@resource/img/earlyBirdOffer.webp'
+import exclusiveEarlyBirdOffer from '@resource/img/exclusiveEarlyBirdOffer.jpg'
 import { Modal as AntModal, Button, Popconfirm, Steps } from 'antd'
 import changeLogs from '../../changeLogs'
 import cls from './TelemetryPopup.module.css'
@@ -18,9 +18,6 @@ function TelemetryPopup({ isTelemetryModalOpen, setIsTelemetryModalOpen }: Telem
   const [current, setCurrent] = useState(0)
   const [isDataNoticeShow, setIsDataNoticeShow] = useState(false)
   const [isPopConfirmOpen, setIsPopConfirmOpen] = useState(false)
-  // const handleStepToggle = () => {
-  //   setIsBitFormInstallChecked(prev => !prev)
-  // }
 
   const handleTelemetryAccess = () => {
     request('telemetry_permission_handle', { isChecked: true })
@@ -51,7 +48,11 @@ function TelemetryPopup({ isTelemetryModalOpen, setIsTelemetryModalOpen }: Telem
             target="_blank"
             rel="noreferrer"
           >
-            <img src={earlyBirdOffer} alt="Bit Social Release Promotional Banner" width="100%" />
+            <img
+              src={exclusiveEarlyBirdOffer}
+              alt="Bit Social Release Promotional Banner"
+              width="100%"
+            />
           </a>
           <div className={cls.footerBtn}>
             <a

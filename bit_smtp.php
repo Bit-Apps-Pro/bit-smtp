@@ -4,7 +4,7 @@
  * Plugin Name: BIT SMTP
  * Plugin URI:  https://www.bitapps.pro/bit-smtp
  * Description: Send email via SMTP using BIT SMTP plugin by Bit Apps
- * Version:     1.1.4
+ * Version:     1.1.5
  * Author:      Bit Apps
  * Author URI:  https://bitapps.pro
  * Text Domain: bit-smtp

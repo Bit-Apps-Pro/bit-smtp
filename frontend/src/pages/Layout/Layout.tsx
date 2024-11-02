@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import Logo from '@resource/img/bitSmtpLogo.svg'
-import earlyBirdOffer from '@resource/img/earlyBirdOffer.webp'
+import exclusiveEarlyBirdOffer from '@resource/img/exclusiveEarlyBirdOffer.jpg'
 import { Layout as AntLayout, Modal } from 'antd'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import confetti from 'canvas-confetti'
@@ -90,7 +90,7 @@ function Header() {
           target="_blank"
           rel="noreferrer"
         >
-          <img src={earlyBirdOffer} alt="Bit Social Release Promotional Banner" width="100%" />
+          <img src={exclusiveEarlyBirdOffer} alt="Bit Social Release Promotional Banner" width="100%" />
         </a>
         <div className={cls.footerBtn}>
           <a

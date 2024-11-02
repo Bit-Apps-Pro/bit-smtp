@@ -2,7 +2,7 @@ import bitAssistLogo from '@resource/img/bitAssist.svg'
 import bitFileManagerLogo from '@resource/img/bitFileManager.svg'
 import bitFormLogo from '@resource/img/bitForm.svg'
 import bitIntegrationsLogo from '@resource/img/bitIntegrations.svg'
-import earlyBirdOffer from '@resource/img/earlyBirdOffer.webp'
+import exclusiveEarlyBirdOffer from '@resource/img/exclusiveEarlyBirdOffer.jpg'
 import { Button, Card } from 'antd'
 import cls from './Others.module.css'
 
@@ -16,7 +16,7 @@ export default function Others() {
               href="https://bit-social.com/?utm_source=bit-smtp&utm_medium=inside-plugin&utm_campaign=early-bird-offer"
               target="_blanlk"
             >
-              <img src={earlyBirdOffer} alt="Bit Social early bird offer banner" />
+              <img src={exclusiveEarlyBirdOffer} alt="Bit Social early bird offer banner" />
             </a>
           </div>
           <div className={cls.productDesc}>
@@ -38,19 +38,19 @@ export default function Others() {
 
             <h3 style={{ marginTop: '20px', fontSize: '16px' }}>Pricing</h3>
             <span style={{ fontSize: '25px', fontWeight: 'bold' }}>
-              Bit Social Early Bird Deal – Just $99!
+              Bit Social Exclusive Early Bird Deal – Just $149!
             </span>
 
             <br />
             <span>
-              This exclusive Early Bird offer is available from <b>October 1st to October 31st</b> (Yes,
-              for one month only).{' '}
+              This exclusive Early Bird offer is available from <b>November 1st to November 30st</b>{' '}
+              (Yes, for one month only).{' '}
             </span>
             <br />
 
-            <span>
+            {/* <span>
               Don’t miss out—after the offer ends, the price of Bit Social <b>will increase 50%</b>!
-            </span>
+            </span> */}
             <div className={cls.demoBtn}>
               <Button
                 type="link"
