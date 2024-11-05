@@ -75,16 +75,16 @@ class InstallerProvider
     public static function migration()
     {
         $migrations = [
-            'BSPluginOptions',
+            'BitSmtpPluginOptions',
         ];
 
         return [
             'path' => Config::get('BASEDIR')
-            . DIRECTORY_SEPARATOR
-            . 'db'
-            . DIRECTORY_SEPARATOR
-            . 'Migrations'
-            . DIRECTORY_SEPARATOR,
+                . DIRECTORY_SEPARATOR
+                . 'db'
+                . DIRECTORY_SEPARATOR
+                . 'Migrations'
+                . DIRECTORY_SEPARATOR,
             'migrations' => $migrations,
         ];
     }
@@ -92,16 +92,16 @@ class InstallerProvider
     public static function drop()
     {
         $migrations = [
-            'BSPluginOptions',
+            'BitSmtpPluginOptions',
         ];
 
         return [
             'path' => Config::get('BASEDIR')
-            . DIRECTORY_SEPARATOR
-            . 'db'
-            . DIRECTORY_SEPARATOR
-            . 'Migrations'
-            . DIRECTORY_SEPARATOR,
+                . DIRECTORY_SEPARATOR
+                . 'db'
+                . DIRECTORY_SEPARATOR
+                . 'Migrations'
+                . DIRECTORY_SEPARATOR,
             'migrations' => $migrations,
         ];
     }
