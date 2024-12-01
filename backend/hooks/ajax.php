@@ -14,4 +14,6 @@ Route::noAuth()->group(function () {
     Route::post('send_test_mail', [SMTPController::class, 'sendTestEmail']);
     Route::post('telemetry_permission_handle', [TelemetryPopupController::class, 'handleTelemetryPermission']);
     Route::get('telemetry_popup_disable_check', [TelemetryPopupController::class, 'isPopupDisabled']);
+    Route::get('new_product_nav_btn_visible_check', [SMTPController::class, 'newProductNavBtnVisibleCheck']);
+    Route::post('hide_new_product_nav_btn', [SMTPController::class, 'newProductNavBtnHide']);
 })->middleware('nonce:admin');

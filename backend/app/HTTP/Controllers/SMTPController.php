@@ -55,4 +55,16 @@ class SMTPController
             return Response::error($error);
         }
     }
+
+    public function newProductNavBtnVisibleCheck()
+    {
+        $data = get_option(Config::VAR_PREFIX . 'new_product_nav_btn_hide');
+
+        return (bool) ($data);
+    }
+
+    public function newProductNavBtnHide()
+    {
+        update_option(Config::VAR_PREFIX . 'new_product_nav_btn_hide', true);
+    }
 }

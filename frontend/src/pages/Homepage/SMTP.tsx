@@ -241,14 +241,13 @@ export default function SMTP() {
                   />
                 </div>
               </div>
-
-              <Button type="submit" className={cls.btn}>
-                Save Changes
-              </Button>
             </>
           )}
-          <Toaster />
+          <Button type="submit" className={cls.btn}>
+            Save Changes
+          </Button>
         </form>
+        <Toaster />
       </div>
 
       {isTelemetryModalOpen ? (

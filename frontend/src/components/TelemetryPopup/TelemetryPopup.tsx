@@ -4,7 +4,7 @@
 import type React from 'react'
 import { useState } from 'react'
 import request from '@common/helpers/request'
-import exclusiveEarlyBirdOffer from '@resource/img/exclusiveEarlyBirdOffer.jpg'
+import exclusiveEarlyBirdOffer from '@resource/img/exclusiveEarlyBirdOffer.png'
 import { Modal as AntModal, Button, Popconfirm, Steps } from 'antd'
 import changeLogs from '../../changeLogs'
 import cls from './TelemetryPopup.module.css'

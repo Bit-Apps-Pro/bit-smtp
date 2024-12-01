@@ -2,7 +2,7 @@ import bitAssistLogo from '@resource/img/bitAssist.svg'
 import bitFileManagerLogo from '@resource/img/bitFileManager.svg'
 import bitFormLogo from '@resource/img/bitForm.svg'
 import bitIntegrationsLogo from '@resource/img/bitIntegrations.svg'
-import exclusiveEarlyBirdOffer from '@resource/img/exclusiveEarlyBirdOffer.jpg'
+import exclusiveEarlyBirdOffer from '@resource/img/exclusiveEarlyBirdOffer.png'
 import { Button, Card } from 'antd'
 import cls from './Others.module.css'
 

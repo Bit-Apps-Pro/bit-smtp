@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
+import request from '@common/helpers/request'
 import Logo from '@resource/img/bitSmtpLogo.svg'
-import exclusiveEarlyBirdOffer from '@resource/img/exclusiveEarlyBirdOffer.jpg'
+import exclusiveEarlyBirdOffer from '@resource/img/exclusiveEarlyBirdOffer.png'
 import { Layout as AntLayout, Modal } from 'antd'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import confetti from 'canvas-confetti'
@@ -10,6 +11,7 @@ import cls from './Layout.module.css'
 
 function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [hideNewProductBtn, setHideNewProductBtn] = useState(false)
 
   const handleConfetti = () => {
     confetti({
@@ -43,6 +45,20 @@ function Header() {
     color: isActive ? '#fff' : ''
   })
 
+  useEffect(() => {
+    request('new_product_nav_btn_visible_check', null, null, 'GET').then((res: any) => {
+      if (res.data) {
+        setHideNewProductBtn(true)
+      }
+    })
+  }, [])
+
+  const handleNewProductNavBtn = () => {
+    request('hide_new_product_nav_btn')
+    setHideNewProductBtn(true)
+    setIsModalOpen(false)
+  }
+
   return (
     <div className={cls.layout}>
       <div className={cls.topbar}>
@@ -66,15 +82,19 @@ function Header() {
             </NavLink>
           ))}
         </div>
-        <div className={cls.bitSocialMenu}>
-          <button type="button" onClick={() => showModal()} className={cls.btn}>
-            New Product Launch
-            <span className={cls.star} />
-            <span className={cls.star} />
-            <span className={cls.star} />
-            <span className={cls.star} />
-          </button>
-        </div>
+        {!hideNewProductBtn ? (
+          <div className={cls.bitSocialMenu}>
+            <button type="button" onClick={() => showModal()} className={cls.btn}>
+              New Product Launch
+              <span className={cls.star} />
+              <span className={cls.star} />
+              <span className={cls.star} />
+              <span className={cls.star} />
+            </button>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
 
       <Modal
@@ -100,6 +120,13 @@ function Header() {
           >
             {`Grab It Before It's Gone!`}
           </a>
+          <button
+            type="button"
+            className={cls.skipNewProductBtn}
+            onClick={() => handleNewProductNavBtn()}
+          >
+            Don&apos;t show it again
+          </button>
         </div>
       </Modal>
     </div>

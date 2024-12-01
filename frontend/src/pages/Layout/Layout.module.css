@@ -203,3 +203,9 @@ input[type='password']:focus {
 .footerBtn a:focus {
   box-shadow: none;
 }
+
+.footerBtn .skipNewProductBtn {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
