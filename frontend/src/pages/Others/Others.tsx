@@ -2,14 +2,13 @@ import bitAssistLogo from '@resource/img/bitAssist.svg'
 import bitFileManagerLogo from '@resource/img/bitFileManager.svg'
 import bitFormLogo from '@resource/img/bitForm.svg'
 import bitIntegrationsLogo from '@resource/img/bitIntegrations.svg'
-import exclusiveEarlyBirdOffer from '@resource/img/exclusiveEarlyBirdOffer.png'
 import { Button, Card } from 'antd'
 import cls from './Others.module.css'
 
 export default function Others() {
   return (
     <div className={cls.others}>
-      <div className={`${cls.bitSocialRelease} bit-social-release`}>
+      {/* <div className={`${cls.bitSocialRelease} bit-social-release`}>
         <Card size="small" style={{ backgroundColor: '#EDE4FD' }}>
           <div className={cls.productBanner}>
             <a
@@ -48,9 +47,6 @@ export default function Others() {
             </span>
             <br />
 
-            {/* <span>
-              Don’t miss out—after the offer ends, the price of Bit Social <b>will increase 50%</b>!
-            </span> */}
             <div className={cls.demoBtn}>
               <Button
                 type="link"
@@ -63,7 +59,7 @@ export default function Others() {
             </div>
           </div>
         </Card>
-      </div>
+      </div> */}
 
       <div className={cls.othersPlugin}>
         <Card size="small">

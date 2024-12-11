@@ -4,8 +4,7 @@
 import type React from 'react'
 import { useState } from 'react'
 import request from '@common/helpers/request'
-import exclusiveEarlyBirdOffer from '@resource/img/exclusiveEarlyBirdOffer.png'
-import { Modal as AntModal, Button, Popconfirm, Steps } from 'antd'
+import { Modal as AntModal, Button, Steps } from 'antd'
 import changeLogs from '../../changeLogs'
 import cls from './TelemetryPopup.module.css'
 
@@ -17,7 +16,6 @@ type TelemetryPopupProps = {
 function TelemetryPopup({ isTelemetryModalOpen, setIsTelemetryModalOpen }: TelemetryPopupProps) {
   const [current, setCurrent] = useState(0)
   const [isDataNoticeShow, setIsDataNoticeShow] = useState(false)
-  const [isPopConfirmOpen, setIsPopConfirmOpen] = useState(false)
 
   const handleTelemetryAccess = () => {
     request('telemetry_permission_handle', { isChecked: true })
@@ -25,47 +23,11 @@ function TelemetryPopup({ isTelemetryModalOpen, setIsTelemetryModalOpen }: Telem
   }
 
   const handleTelemetryModalSkip = () => {
-    setIsPopConfirmOpen(true)
-    const modalContent = document.getElementsByClassName('ant-modal-content')
-    if (modalContent.length) {
-      const content = modalContent[0] as HTMLElement
-      content.style.filter = 'blur(2px)'
-    }
-  }
-
-  const handleTelemetryPopConfirmSkip = () => {
     setIsTelemetryModalOpen(false)
     request('telemetry_permission_handle', { isChecked: false })
   }
 
   const steps = [
-    {
-      title: '',
-      content: (
-        <div className={cls.bitSocialReleaseBanner}>
-          <a
-            href="https://bit-social.com/?utm_source=bit-smtp&utm_medium=inside-plugin&utm_campaign=early-bird-offer"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img
-              src={exclusiveEarlyBirdOffer}
-              alt="Bit Social Release Promotional Banner"
-              width="100%"
-            />
-          </a>
-          <div className={cls.footerBtn}>
-            <a
-              href="https://bit-social.com/?utm_source=bit-smtp&utm_medium=inside-plugin&utm_campaign=early-bird-offer"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {`Grab It Before It's Gone!`}
-            </a>
-          </div>
-        </div>
-      )
-    },
     {
       title: '',
       content: (
@@ -123,7 +85,7 @@ function TelemetryPopup({ isTelemetryModalOpen, setIsTelemetryModalOpen }: Telem
   const footerBtnStyle: React.CSSProperties = {
     display: 'flex',
     justifyContent: 'space-between',
-    flexFlow: current !== 1 ? 'row-reverse' : 'initial',
+    // flexFlow: current !== 1 ? 'row-reverse' : 'initial',
     marginTop: '30px'
   }
 
@@ -131,7 +93,7 @@ function TelemetryPopup({ isTelemetryModalOpen, setIsTelemetryModalOpen }: Telem
     <AntModal
       title={
         <div style={{ textAlign: 'center', fontSize: '20px', marginBottom: '20px' }}>
-          {current === 0 ? 'Bit Social Release' : current === 1 ? 'Bit SMTP 2024 Updates' : ''}
+          Bit SMTP 2024 Updates
         </div>
       }
       open={isTelemetryModalOpen}
@@ -150,30 +112,9 @@ function TelemetryPopup({ isTelemetryModalOpen, setIsTelemetryModalOpen }: Telem
               Next
             </Button>
           )}
-          {current === 1 && (
-            <Popconfirm
-              title="Help Us Improve Your Experience"
-              description={
-                <>
-                  It has helped us make informed decisions to improve our most popular features, resolve
-                  issues more quickly, and enhance the overall user experience.
-                  <br /> We guarantee no personal data is stored, and there’s absolutely no spam - WE
-                  PROMISE!
-                </>
-              }
-              open={isPopConfirmOpen}
-              onConfirm={() => handleTelemetryAccess()}
-              onCancel={() => handleTelemetryPopConfirmSkip()}
-              okText="Don't Skip"
-              cancelText="I won't accept"
-              placement="topLeft"
-              overlayClassName="telemetry-popconfirm"
-            >
-              <Button className={cls.skipBtn} onClick={handleTelemetryModalSkip}>
-                Skip
-              </Button>
-            </Popconfirm>
-          )}
+          <Button className={cls.skipBtn} onClick={handleTelemetryModalSkip}>
+            Skip
+          </Button>
           {current === steps.length - 1 && (
             <Button type="primary" onClick={() => handleTelemetryAccess()}>
               Accept & Complete
