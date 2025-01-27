@@ -241,9 +241,6 @@ Yes, possible to send WordPress emails using Hotmail.
 
 == Changelog ==
 
-= 1.1.7 (11 Dec, 2024) =
-* Bit Social promotional banner removed
-
 = 1.1.6 (01 Dec, 2024) =
 * Bit Social promotional banner updated 
 

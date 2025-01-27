@@ -1,31 +1,31 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import request from '@common/helpers/request'
 import Logo from '@resource/img/bitSmtpLogo.svg'
 import exclusiveEarlyBirdOffer from '@resource/img/exclusiveEarlyBirdOffer.png'
 import { Layout as AntLayout, Modal } from 'antd'
 // eslint-disable-next-line import/no-extraneous-dependencies
-// import confetti from 'canvas-confetti'
+import confetti from 'canvas-confetti'
 import cls from './Layout.module.css'
 
 function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  // const [hideNewProductBtn, setHideNewProductBtn] = useState(true)
+  const [hideNewProductBtn, setHideNewProductBtn] = useState(true)
 
-  // const handleConfetti = () => {
-  //   confetti({
-  //     particleCount: 100,
-  //     spread: 70,
-  //     origin: { y: 0.6 },
-  //     zIndex: 1000
-  //   })
-  // }
+  const handleConfetti = () => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+      zIndex: 1000
+    })
+  }
 
-  // const showModal = () => {
-  //   setIsModalOpen(true)
-  //   handleConfetti()
-  // }
+  const showModal = () => {
+    setIsModalOpen(true)
+    handleConfetti()
+  }
 
   const handleOk = () => {
     setIsModalOpen(false)
@@ -45,17 +45,17 @@ function Header() {
     color: isActive ? '#fff' : ''
   })
 
-  // useEffect(() => {
-  //   request('new_product_nav_btn_visible_check', null, null, 'GET').then((res: any) => {
-  //     if (!res.data) {
-  //       setHideNewProductBtn(false)
-  //     }
-  //   })
-  // }, [])
+  useEffect(() => {
+    request('new_product_nav_btn_visible_check', null, null, 'GET').then((res: any) => {
+      if (!res.data) {
+        setHideNewProductBtn(false)
+      }
+    })
+  }, [])
 
   const handleNewProductNavBtn = () => {
     request('hide_new_product_nav_btn')
-    // setHideNewProductBtn(true)
+    setHideNewProductBtn(true)
     setIsModalOpen(false)
   }
 
@@ -82,7 +82,7 @@ function Header() {
             </NavLink>
           ))}
         </div>
-        {/* {!hideNewProductBtn ? (
+        {!hideNewProductBtn ? (
           <div className={cls.bitSocialMenu}>
             <button type="button" onClick={() => showModal()} className={cls.btn}>
               New Product Launch
@@ -94,7 +94,7 @@ function Header() {
           </div>
         ) : (
           ''
-        )} */}
+        )}
       </div>
 
       <Modal
@@ -105,21 +105,17 @@ function Header() {
         centered
         className="bit-social-release-modal"
       >
-        <a
-          href="https://bit-social.com/?utm_source=bit-smtp&utm_medium=inside-plugin&utm_campaign=early-bird-offer"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a href="https://bit-flows.com/" target="_blank" rel="noreferrer">
           <img src={exclusiveEarlyBirdOffer} alt="Bit Social Release Promotional Banner" width="100%" />
         </a>
         <div className={cls.footerBtn}>
-          <a
+          {/* <a
             href="https://bit-social.com/?utm_source=bit-smtp&utm_medium=inside-plugin&utm_campaign=early-bird-offer"
             target="_blank"
             rel="noreferrer"
           >
             {`Grab It Before It's Gone!`}
-          </a>
+          </a> */}
           <button
             type="button"
             className={cls.skipNewProductBtn}
