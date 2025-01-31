@@ -105,7 +105,11 @@ function Header() {
         centered
         className="bit-social-release-modal"
       >
-        <a href="https://bit-flows.com/" target="_blank" rel="noreferrer">
+        <a
+          href="https://bit-flows.com/?utm_source=bit-smtp&utm_medium=inside-plugin&utm_campaign=bit_flows_early_bird"
+          target="_blank"
+          rel="noreferrer"
+        >
           <img src={exclusiveEarlyBirdOffer} alt="Bit Social Release Promotional Banner" width="100%" />
         </a>
         <div className={cls.footerBtn}>
