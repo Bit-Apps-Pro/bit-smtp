@@ -4,7 +4,7 @@ Tags: smtp, wp mail smtp, gmail smtp, sendgrid smtp, phpmailer
 Requires at least: 5.0
 Tested up to: 6.7.1
 Requires PHP: 7.4
-Stable tag: 1.1.7
+Stable tag: 1.1.8
 License: GPLv2 or later
 
 Enable SMTP plugin to authenticate mail service of your site by configuring SMTP server of your desired mail service.
@@ -198,7 +198,7 @@ For recommended direct SMTP mailers integrations like SMTP.com, Brevo (formerly 
 
 [**Bit Social**](https://wordpress.org/plugins/bit-social/) Bit Social is a versatile WordPress plugin enabling effortless post creation, scheduling, and sharing across multiple social platforms, enhancing your social media management with simplicity and efficiency.
 
-[**Bit PI**] – Zapier, Integromat (Make.com), Integrately & Pabbly alternative in WordPress. [Coming Soon]
+[**Bit Flows**](https://bit-flows.com/) – Advanced workflow automation alternative to Zapier in WordPress.
 
 [**ToWP:**](https://towp.io//) ToWP is a powerful platform that lets you create temporary WordPress sites in less than 10 seconds using just your email! No passwords, no login URLs to remember — just a smooth experience.It is a completely free platform.
 
@@ -240,6 +240,12 @@ Yes, possible to send WordPress emails using Hotmail.
 
 
 == Changelog ==
+
+= 1.1.8 (31 Jan, 2025) =
+* Bit Flows promotional banner added 
+
+= 1.1.7 (11 Dec, 2024) =
+* Bit Social promotional banner removed 
 
 = 1.1.6 (01 Dec, 2024) =
 * Bit Social promotional banner updated 
