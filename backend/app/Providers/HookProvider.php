@@ -15,9 +15,8 @@ class HookProvider
 
     public function __construct()
     {
-        $this->_pluginBackend = Config::get('BASEDIR') . DIRECTORY_SEPARATOR;
+        $this->_pluginBackend = Config::get('BACKEND_PATH') . DIRECTORY_SEPARATOR;
         $this->loadAppHooks();
-        Hooks::addAction('phpmailer_init', [$this, 'mailConfig'], 1000);
         Hooks::addAction('rest_api_init', [$this, 'loadApi']);
         Hooks::addFilter(Config::VAR_PREFIX . 'telemetry_additional_data', [new TelemetryPopupController(), 'filterTrackingData']);
     }
@@ -31,33 +30,10 @@ class HookProvider
             is_readable($this->_pluginBackend . 'hooks' . DIRECTORY_SEPARATOR . 'api.php')
             && RequestType::is(RequestType::API)
         ) {
-            $router = new Router(RequestType::API, Config::SLUG, 'v1');
+            $router = new Router(RequestType::API, Config::SLUG, 'v' . Config::API_VERSION);
 
             include $this->_pluginBackend . 'hooks' . DIRECTORY_SEPARATOR . 'api.php';
             $router->register();
-        }
-    }
-
-    public function mailConfig($phpmailer)
-    {
-        $mailConfig = get_option(Config::VAR_PREFIX . 'options');
-
-        if (\is_array($mailConfig)) {
-            if ($mailConfig['status'] == 1) {
-                $phpmailer->Mailer   = 'smtp';
-                $phpmailer->Host     = $mailConfig['smtp_host'];
-                $phpmailer->SMTPAuth = true;
-                if (!empty($mailConfig['re_email_address'])) {
-                    $phpmailer->addReplyTo($mailConfig['re_email_address'], 'Information');
-                }
-                $phpmailer->Port       = $mailConfig['port'];
-                $phpmailer->Username   = $mailConfig['smtp_user_name'];
-                $phpmailer->Password   = $mailConfig['smtp_password'];
-                $phpmailer->SMTPSecure = $mailConfig['encryption'];
-                $phpmailer->SMTPDebug  = isset($mailConfig['smtp_debug']) ? $mailConfig['smtp_debug'] : 0;
-                $phpmailer->From       = $mailConfig['form_email_address'];
-                $phpmailer->FromName   = $mailConfig['form_name'];
-            }
         }
     }
 

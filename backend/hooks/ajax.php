@@ -1,6 +1,7 @@
 <?php
 
 use BitApps\SMTP\Deps\BitApps\WPKit\Http\Router\Route;
+use BitApps\SMTP\HTTP\Controllers\LogController;
 use BitApps\SMTP\HTTP\Controllers\SMTPController;
 use BitApps\SMTP\HTTP\Controllers\TelemetryPopupController;
 
@@ -16,4 +17,7 @@ Route::noAuth()->group(function () {
     Route::get('telemetry_popup_disable_check', [TelemetryPopupController::class, 'isPopupDisabled']);
     Route::get('new_product_nav_btn_visible_check', [SMTPController::class, 'newProductNavBtnVisibleCheck']);
     Route::post('hide_new_product_nav_btn', [SMTPController::class, 'newProductNavBtnHide']);
+
+    Route::post('logs/all', [LogController::class, 'all']);
+    Route::post('logs/delete', [LogController::class, 'delete']);
 })->middleware('nonce:admin');

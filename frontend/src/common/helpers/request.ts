@@ -9,24 +9,34 @@ interface OptionsType {
   method: MethodType
   headers: Record<string, string>
   body?: string | FormData
+  signal?: AbortSignal
 }
-
 interface QueryParam {
   [key: string]: string | number
 }
+
+interface RequestOptionsType {
+  action: string
+  data?: Record<string, unknown> | FormData | null | any // eslint-disable-line @typescript-eslint/no-explicit-any
+  queryParam?: QueryParam | null
+  method?: MethodType
+  signal?: AbortSignal
+}
+
 export interface DefaultResponse<T> {
   status: 'success' | 'error'
   data: T
+  message: string
   code: 'SUCCESS' | 'ERROR'
 }
 
-export default async function request<T extends Partial<DefaultResponse<T>>>(
-  action: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data?: Record<string, unknown> | FormData | null | undefined | any,
-  queryParam?: QueryParam | null | undefined,
-  method: MethodType = 'POST'
-): Promise<T> {
+export default async function request<T>({
+  action,
+  data,
+  queryParam,
+  method = 'POST',
+  signal
+}: RequestOptionsType): Promise<DefaultResponse<T>> {
   const { AJAX_URL, NONCE, ROUTE_PREFIX } = config
   const uri = new URL(AJAX_URL)
   uri.searchParams.append('action', `${ROUTE_PREFIX}${action}`)
@@ -46,16 +56,10 @@ export default async function request<T extends Partial<DefaultResponse<T>>>(
     headers: {}
   }
 
+  options.signal = signal
+
   if (method.toLowerCase() === 'post') {
     options.body = data instanceof FormData ? data : JSON.stringify(data)
   }
-  return (await fetch(uri, options).then((res: Response) => res.json())) as T
+  return (await fetch(uri, options).then((res: Response) => res.json())) as DefaultResponse<T>
 }
-
-type ProxyRequestFunction = <T extends Partial<DefaultResponse<T>>>(
-  data: Record<string, unknown> | FormData | null | undefined,
-  queryParam?: QueryParam | null
-) => Promise<T>
-
-export const proxyRequest: ProxyRequestFunction = (data, queryParam = null) =>
-  request('proxy/route', data, queryParam)

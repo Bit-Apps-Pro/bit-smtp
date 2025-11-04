@@ -15,8 +15,6 @@ final class BitSmtpPluginOptions extends Migration
         Config::updateOption('db_version', Config::DB_VERSION, true);
         Config::updateOption('installed', time(), true);
         Config::updateOption('version', Config::VERSION, true);
-        Config::updateOption('global_post_content', '', true);
-        Config::updateOption('post_generate_status', false, true);
     }
 
     public function down()
@@ -25,13 +23,17 @@ final class BitSmtpPluginOptions extends Migration
             Config::withPrefix('db_version'),
             Config::withPrefix('installed'),
             Config::withPrefix('version'),
-            Config::updateOption('global_post_content', '', true),
-            Config::updateOption('post_generate_status', false, true),
+            Config::withPrefix('settings'),
+            Config::withPrefix('old_version'),
+            Config::withPrefix('log_retention'),
+            Config::withPrefix('log_deleted_at'),
+            Config::withPrefix('tracking_skipped'),
+            Config::withPrefix('test_mail_form_submitted'),
         ];
 
         DB::query(
             DB::prepare(
-                'DELETE FROM `' . DB::wpPrefix() . 'options` WHERE option_name in ('
+                'DELETE FROM `%1s` WHERE option_name in ('
                     . implode(
                         ',',
                         array_map(
@@ -41,7 +43,7 @@ final class BitSmtpPluginOptions extends Migration
                             $pluginOptions
                         )
                     ) . ')',
-                $pluginOptions
+                [DB::wpPrefix() . 'options', ...$pluginOptions]
             )
         );
     }

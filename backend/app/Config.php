@@ -29,11 +29,9 @@ class Config
 
     public const REQUIRED_WP_VERSION = '5.0';
 
-    public const API_VERSION = '1.0';
+    public const API_VERSION = '1';
 
     public const APP_BASE = '../../bit_smtp.php';
-
-    public const DEV_URL = 'http://localhost:3000/wp-content/plugins/bit-smtp/frontend/src';
 
     /**
      * Provides configuration for plugin.
@@ -52,8 +50,11 @@ class Config
             case 'BASENAME':
                 return plugin_basename(trim(self::get('MAIN_FILE')));
 
-            case 'BASEDIR':
+            case 'BACKEND_PATH':
                 return plugin_dir_path(self::get('MAIN_FILE')) . 'backend';
+
+            case 'BASEDIR':
+                return plugin_dir_path(self::get('MAIN_FILE'));
 
             case 'SITE_URL':
                 $parsedUrl = parse_url(get_admin_url());
@@ -66,12 +67,8 @@ class Config
                 return str_replace(self::get('SITE_URL'), '', get_admin_url());
 
             case 'API_URL':
-                global $wp_rewrite;
 
-                return [
-                    'base'      => get_rest_url() . self::SLUG . '/v1',
-                    'separator' => $wp_rewrite->permalink_structure ? '?' : '&',
-                ];
+                return rest_url('/' . self::SLUG . '/v' . self::API_VERSION . '/');
 
             case 'ROOT_URI':
                 return set_url_scheme(plugins_url('', self::get('MAIN_FILE')), parse_url(home_url())['scheme']);
@@ -161,7 +158,14 @@ class Config
 
     public static function isDev()
     {
-        return \defined('BITAPPS_DEV') && BITAPPS_DEV;
+        return is_readable(Config::get('BASEDIR') . '/port');
+    }
+
+    public static function devUrl()
+    {
+        $port   = file_get_contents(Config::get('BASEDIR') . '/port');
+
+        return self::isDev() ? 'http://localhost:' . $port : Config::get('ASSET_URI');
     }
 
     /**

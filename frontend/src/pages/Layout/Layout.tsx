@@ -38,6 +38,7 @@ function Header() {
   const navItems = [
     { label: 'Mail Configuration', path: '/' },
     { label: 'Test Mail', path: '/test-mail' },
+    { label: 'Logs', path: '/logs' },
     { label: 'Others', path: '/others' }
   ]
 
@@ -46,7 +47,7 @@ function Header() {
   })
 
   useEffect(() => {
-    request('new_product_nav_btn_visible_check', null, null, 'GET').then((res: any) => {
+    request({ action: 'new_product_nav_btn_visible_check', method: 'GET' }).then((res: any) => {
       if (!res.data) {
         setHideNewProductBtn(false)
       }
@@ -54,7 +55,7 @@ function Header() {
   }, [])
 
   const handleNewProductNavBtn = () => {
-    request('hide_new_product_nav_btn')
+    request({ action: 'hide_new_product_nav_btn' })
     setHideNewProductBtn(true)
     setIsModalOpen(false)
   }

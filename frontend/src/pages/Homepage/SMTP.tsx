@@ -27,7 +27,7 @@ export default function SMTP() {
     smtp_user_name: string
     smtp_password: string
   }
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [isTelemetryModalOpen, setIsTelemetryModalOpen] = useState(false)
   const [values, setValues] = useState<ValuesTypes>({
     status: '0',
@@ -59,7 +59,7 @@ export default function SMTP() {
       data.append(key, values[key])
     }
 
-    request('save_mail_config', data)
+    request({ action: 'save_mail_config', data })
       .then(res => {
         if (res?.status !== 'error') {
           toast.success(res.data as string)
@@ -77,8 +77,7 @@ export default function SMTP() {
   }
 
   useEffect(() => {
-    setIsLoading(true)
-    const fetchConfig = request('get_mail_config', null, null, 'GET').then((res: any) => {
+    const fetchConfig = request({ action: 'get_mail_config', method: 'GET' }).then((res: any) => {
       setIsLoading(false)
       if (res?.status === 'success') {
         if (res.data.mailConfig !== '') {
@@ -86,7 +85,7 @@ export default function SMTP() {
         }
         return 'SMTP config fetched successfully!'
       }
-      return 'Error Occured'
+      return 'Error Occurred'
     })
 
     toast.promise(fetchConfig, {
@@ -97,10 +96,12 @@ export default function SMTP() {
   }, [])
 
   useEffect(() => {
-    request('telemetry_popup_disable_check', null, null, 'GET').then((res: any) => {
+    request({ action: 'telemetry_popup_disable_check', method: 'GET' }).then((res: any) => {
       setIsTelemetryModalOpen(!res.data)
     })
   }, [])
+
+  console.debug({ isLoading })
 
   return (
     <>

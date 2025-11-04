@@ -42,7 +42,7 @@ export default function MailSendTest() {
       data.append(key, values[key])
     }
 
-    request('send_test_mail', data)
+    request({ action: 'send_test_mail', data })
       .then(res => {
         setIsLoading(false)
         if (res?.status !== 'error') {
