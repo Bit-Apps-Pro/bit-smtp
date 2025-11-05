@@ -2,10 +2,10 @@
 
 namespace BitApps\SMTP\HTTP\Controllers;
 
-use BitApps\SMTP\Plugin;
-use BitApps\SMTP\Deps\BitApps\WPKit\Http\Response;
 use BitApps\SMTP\Deps\BitApps\WPKit\Http\Request\Request;
+use BitApps\SMTP\Deps\BitApps\WPKit\Http\Response;
 use BitApps\SMTP\HTTP\Requests\DeleteLogRequest;
+use BitApps\SMTP\Plugin;
 
 final class LogController
 {

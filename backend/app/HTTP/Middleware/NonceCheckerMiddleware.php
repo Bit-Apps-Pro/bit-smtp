@@ -15,7 +15,6 @@ final class NonceCheckerMiddleware
             return Response::error('Invalid token')->httpStatus(411);
         }
 
-
         if (!Capabilities::check('manage_options')) {
             return Response::error([])->message('unauthorized access');
         }

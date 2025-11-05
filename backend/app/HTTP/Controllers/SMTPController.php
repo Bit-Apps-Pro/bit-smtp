@@ -72,7 +72,7 @@ class SMTPController
     public function resend(Request $request)
     {
         $logId = \intval($request->id);
-        $logId = intval($logId);
+        $logId = \intval($logId);
         if ($logId <= 0) {
             return Response::error('Invalid log ID');
         }
@@ -85,8 +85,8 @@ class SMTPController
             return Response::error('Log not found');
         }
 
-        $message = Arr::get($log->details, 'message', '');
-        $headers = Arr::get($log->details, 'headers', '');
+        $message     = Arr::get($log->details, 'message', '');
+        $headers     = Arr::get($log->details, 'headers', '');
         $attachments = Arr::get($log->details, 'attachments', []);
 
         error_log(print_r([$log->to, $log->subject, $message, $headers, $attachments], true));

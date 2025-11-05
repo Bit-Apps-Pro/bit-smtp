@@ -21,6 +21,7 @@ use BitApps\SMTP\Providers\HookProvider;
 use BitApps\SMTP\Providers\InstallerProvider;
 use BitApps\SMTP\Providers\MailConfigProvider;
 use BitApps\SMTP\Views\Layout;
+use Exception;
 
 final class Plugin
 {
@@ -104,7 +105,7 @@ final class Plugin
 
     /**
      * Get Mail Config Provider instance.
-     * 
+     *
      * @return MailConfigProvider
      */
     public function mailConfigProvider()
@@ -120,6 +121,7 @@ final class Plugin
 
         return $this->_container['logService'];
     }
+
     /**
      * Plugin action links.
      *
@@ -146,7 +148,7 @@ final class Plugin
         if (version_compare(Config::getOption('db_version'), Config::DB_VERSION, '<')) {
             try {
                 MigrationHelper::migrate(InstallerProvider::migration());
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 error_log('BIT SMTP Migration Error: ' . $e->getMessage());
             }
         }

@@ -25,6 +25,7 @@ class LogService
             }
         }
     }
+
     public function all($skip = 0, $take = 20)
     {
         $logs  = [];
@@ -70,11 +71,11 @@ class LogService
 
         $log->status      = $status;
         if (isset($message)) {
-            $log->debug_info    = is_scalar($message) ? [$message] : $message;
+            $log->debug_info    = \is_scalar($message) ? [$message] : $message;
         }
 
-        $log->subject     = Arr::get($details, 'subject', '');
-        $log->to_addr    = Arr::get($details, 'to', '');
+        $log->subject      = Arr::get($details, 'subject', '');
+        $log->to_addr      = Arr::get($details, 'to', '');
         $log->from_addr    = Arr::get($details, 'from', '');
 
         unset($details['subject'], $details['to'], $details['from'], $details['phpmailer_exception_code']);
@@ -94,12 +95,12 @@ class LogService
         $log->status      = $status;
 
         if (isset($message)) {
-            $log->debug_info    = is_scalar($message) ? [$message] : $message;
+            $log->debug_info    = \is_scalar($message) ? [$message] : $message;
         } else {
             $log->debug_info    = null;
         }
 
-        /* 
+        /*
         // Don't need to update these fields again....
             $log->subject     = Arr::get($details, 'subject', '');
             $log->to_addr    = Arr::get($details, 'to', '');
@@ -109,7 +110,7 @@ class LogService
             $log->details    = $details;
         */
         $log->save();
-        return;
+
     }
 
     public function delete($id)
@@ -145,10 +146,7 @@ class LogService
         }
 
         $status = Config::updateOption('log_retention', $days);
-        if ($status) {
-            return true;
-        }
 
-        return false;
+        return (bool) ($status);
     }
 }

@@ -14,7 +14,7 @@ final class BitSmtpLogsTableMigration extends Migration
 {
     public function up()
     {
-        error_log(print_r([__FILE__,], true));
+        error_log(print_r([__FILE__], true));
         Schema::withPrefix(Connection::wpPrefix() . Config::VAR_PREFIX)->create(
             'logs',
             function (Blueprint $table) {
@@ -26,7 +26,7 @@ final class BitSmtpLogsTableMigration extends Migration
                 $table->longtext('details')->nullable();
                 $table->text('debug_info')->nullable();
                 $table->tinyint('retry_count')->defaultValue(0);
-                
+
                 $table->timestamps();
             }
         );

@@ -13,9 +13,13 @@ use WP_Error;
 class MailConfigProvider
 {
     private array $debugOutput = [];
+
     private bool $debug = false;
+
     private bool $isFailed = false;
+
     private bool $isRetrying = false;
+
     private int $retryLogId = 0;
 
     public function __construct()
@@ -38,6 +42,7 @@ class MailConfigProvider
     public function retry()
     {
         $this->isRetrying = true;
+
         return $this;
     }
 
@@ -49,6 +54,7 @@ class MailConfigProvider
     public function setRetryLogId(int $logId)
     {
         $this->retryLogId = $logId;
+
         return $this;
     }
 
@@ -68,7 +74,6 @@ class MailConfigProvider
             $mailer->Username    = $mailConfig['smtp_user_name'];
             $mailer->Password    = $mailConfig['smtp_password'];
             $mailer->SMTPSecure  = $mailConfig['encryption'];
-
 
             if (\array_key_exists('form_email_address', $mailConfig) && !empty($mailConfig['form_email_address'])) {
                 $mailer->setFrom(
@@ -92,15 +97,14 @@ class MailConfigProvider
             Plugin::instance()->logger()->success($mailData);
         }
 
-
-        $this->isFailed = false;
+        $this->isFailed   = false;
         $this->isRetrying = false;
     }
 
     public function logMailFailed(WP_Error $error)
     {
         if ($this->debug && $error->get_error_data()['phpmailer_exception_code'] == PHPMailer::STOP_CRITICAL) {
-            $message = __("SMTP configuration is not correct. PHPMailer could not connect to the SMTP server", 'bit-smtp');
+            $message = __('SMTP configuration is not correct. PHPMailer could not connect to the SMTP server', 'bit-smtp');
             $error->add('wp_mail_failed', $message, $error->get_error_data());
             $this->setDebugOutput($message, 0);
         }
@@ -111,7 +115,7 @@ class MailConfigProvider
             Plugin::instance()->logger()->error($error);
         }
 
-        $this->isFailed = true;
+        $this->isFailed   = true;
         $this->isRetrying = false;
     }
 
