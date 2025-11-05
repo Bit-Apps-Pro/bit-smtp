@@ -8,6 +8,7 @@ namespace BitApps\SMTP;
  * @since 1.0.0-alpha
  */
 
+use BitApps\SMTP\Deps\BitApps\WPDatabase\Connection as DB;
 use BitApps\SMTP\Deps\BitApps\WPKit\Hooks\Hooks;
 use BitApps\SMTP\Deps\BitApps\WPKit\Http\RequestType;
 use BitApps\SMTP\Deps\BitApps\WPKit\Migration\MigrationHelper;
@@ -15,8 +16,10 @@ use BitApps\SMTP\Deps\BitApps\WPKit\Utils\Capabilities;
 use BitApps\SMTP\Deps\BitApps\WPTelemetry\Telemetry\Telemetry;
 use BitApps\SMTP\Deps\BitApps\WPTelemetry\Telemetry\TelemetryConfig;
 use BitApps\SMTP\HTTP\Middleware\NonceCheckerMiddleware;
+use BitApps\SMTP\HTTP\Services\LogService;
 use BitApps\SMTP\Providers\HookProvider;
 use BitApps\SMTP\Providers\InstallerProvider;
+use BitApps\SMTP\Providers\MailConfigProvider;
 use BitApps\SMTP\Views\Layout;
 
 final class Plugin
@@ -31,6 +34,8 @@ final class Plugin
     private static $_instance;
 
     private $_registeredMiddleware = [];
+
+    private array $_container = [];
 
     /**
      * Initialize the Plugin with hooks.
@@ -93,8 +98,28 @@ final class Plugin
         }
 
         new HookProvider();
+
+        $this->_container['mailConfigProvider'] = new MailConfigProvider();
     }
 
+    /**
+     * Get Mail Config Provider instance.
+     * 
+     * @return MailConfigProvider
+     */
+    public function mailConfigProvider()
+    {
+        return $this->_container['mailConfigProvider'];
+    }
+
+    public function logger(): LogService
+    {
+        if (!isset($this->_container['logService'])) {
+            $this->_container['logService'] = new LogService();
+        }
+
+        return $this->_container['logService'];
+    }
     /**
      * Plugin action links.
      *
@@ -119,7 +144,11 @@ final class Plugin
         }
 
         if (version_compare(Config::getOption('db_version'), Config::DB_VERSION, '<')) {
-            MigrationHelper::migrate(InstallerProvider::migration());
+            try {
+                MigrationHelper::migrate(InstallerProvider::migration());
+            } catch (\Exception $e) {
+                error_log('BIT SMTP Migration Error: ' . $e->getMessage());
+            }
         }
     }
 
@@ -149,6 +178,8 @@ final class Plugin
         }
 
         static::$_instance = new static();
+
+        DB::setPluginPrefix(Config::VAR_PREFIX);
 
         return true;
     }

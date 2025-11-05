@@ -2,12 +2,10 @@
 
 namespace BitApps\SMTP\HTTP\Controllers;
 
-use BitApps\SMTP\Config;
-use BitApps\SMTP\Deps\BitApps\WPKit\Http\Request\Request;
+use BitApps\SMTP\Plugin;
 use BitApps\SMTP\Deps\BitApps\WPKit\Http\Response;
-use BitApps\SMTP\Deps\BitApps\WPKit\Utils\Capabilities;
-use BitApps\SMTP\HTTP\Requests\Log\DeleteLogRequest;
-use BitApps\SMTP\HTTP\Services\LogService;
+use BitApps\SMTP\Deps\BitApps\WPKit\Http\Request\Request;
+use BitApps\SMTP\HTTP\Requests\DeleteLogRequest;
 
 final class LogController
 {
@@ -15,24 +13,22 @@ final class LogController
 
     public function __construct()
     {
-        $this->logger = new LogService();
-        $currentTime  = time();
-        $logDeletedAt = Config::getOption('log_deleted_at', ($currentTime - (DAY_IN_SECONDS * 30)));
-        if ((abs($logDeletedAt - $currentTime) / DAY_IN_SECONDS) > 30) {
-            $this->logger->deleteOlder();
-        }
+        $this->logger = Plugin::instance()->logger();
     }
 
     public function all(Request $request)
     {
-        if (Capabilities::check('manage_options')) {
-            return Response::error([])->message('unauthorized access');
-        }
-
         $pageNo = \intval($request->pageNo) ?? 1;
         $limit  = \intval($request->limit)  ?? 14;
 
         return Response::success($this->logger->all((($pageNo - 1) * $limit), $limit));
+    }
+
+    public function details(Request $request)
+    {
+        $logId = \intval($request->id);
+
+        return Response::success($this->logger->get($logId));
     }
 
     public function delete(DeleteLogRequest $request)
@@ -42,9 +38,20 @@ final class LogController
         }, $request->ids);
         $status = $this->logger->delete($validatedIds);
         if ($status) {
-            return Response::success([])->message('log deleted successfully');
+            return Response::success([])->message(__('Log deleted', 'bit-smtp'));
         }
 
-        return Response::error([])->message('failed to delete log');
+        return Response::error([])->message(__('Failed to delete log', 'bit-smtp'));
+    }
+
+    public function updateRetention(Request $request)
+    {
+        $days   = \intval($request->period);
+        $status = $this->logger->updateRetention($days);
+        if ($status) {
+            return Response::success([])->message(__('Log retention period updated successfully', 'bit-smtp'));
+        }
+
+        return Response::error([])->message(__('Failed to update log retention period', 'bit-smtp'));
     }
 }

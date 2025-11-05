@@ -14,14 +14,20 @@ final class BitSmtpLogsTableMigration extends Migration
 {
     public function up()
     {
+        error_log(print_r([__FILE__,], true));
         Schema::withPrefix(Connection::wpPrefix() . Config::VAR_PREFIX)->create(
             'logs',
             function (Blueprint $table) {
                 $table->id();
-                $table->integer('status');
-                $table->string('message');
-                $table->longtext('details');
-                $table->integer('retry_count')->default(0);
+                $table->tinyint('status');
+                $table->longtext('subject');
+                $table->varchar('to_addr', 320);
+                $table->varchar('from_addr', 320)->nullable();
+                $table->longtext('details')->nullable();
+                $table->text('debug_info')->nullable();
+                $table->tinyint('retry_count')->defaultValue(0);
+                
+                $table->timestamps();
             }
         );
     }

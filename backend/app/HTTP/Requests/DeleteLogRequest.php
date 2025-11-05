@@ -1,6 +1,6 @@
 <?php
 
-namespace BitApps\SMTP\HTTP\Requests\Log;
+namespace BitApps\SMTP\HTTP\Requests;
 
 use BitApps\SMTP\Deps\BitApps\WPKit\Http\Request\Request;
 use BitApps\SMTP\Deps\BitApps\WPKit\Utils\Capabilities;

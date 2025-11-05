@@ -5,14 +5,26 @@ namespace BitApps\SMTP\HTTP\Services;
 use BitApps\SMTP\Config;
 use BitApps\SMTP\Deps\BitApps\WPDatabase\Connection;
 use BitApps\SMTP\Deps\BitApps\WPDatabase\QueryBuilder;
+use BitApps\SMTP\Deps\BitApps\WPKit\Helpers\Arr;
 use BitApps\SMTP\Model\Log;
 use DateTime;
 use Throwable;
+use WP_Error;
 
 \defined('ABSPATH') || exit();
 
 class LogService
 {
+    public function __construct()
+    {
+        if (\defined('DOING_CRON') && DOING_CRON) {
+            $currentTime  = time();
+            $logDeletedAt = Config::getOption('log_deleted_at', ($currentTime - (DAY_IN_SECONDS * 30)));
+            if ((abs($logDeletedAt - $currentTime) / DAY_IN_SECONDS) > 30) {
+                $this->deleteOlder();
+            }
+        }
+    }
     public function all($skip = 0, $take = 20)
     {
         $logs  = [];
@@ -37,25 +49,67 @@ class LogService
         return compact('count', 'logs', 'pages', 'current');
     }
 
-    public function success($message, $data)
+    public function success(array $mailData)
     {
-        $this->save(Log::SUCCESS, $message, $data);
+        $this->save(Log::SUCCESS, $mailData);
     }
 
-    public function error($message, $data)
+    public function error(WP_Error $error)
     {
-        $this->save(Log::ERROR, $message, $data);
+        $this->save(Log::ERROR, $error->get_error_data(), $error->get_error_messages());
     }
 
-    public function save($status, $message, $details)
+    public function get(int $id): ?Log
+    {
+        return Log::where('id', $id)->first();
+    }
+
+    public function save($status, $details, $message = null)
     {
         $log             = new Log();
 
-        $log->status     = $status;
-        $log->message    = $message;
+        $log->status      = $status;
+        if (isset($message)) {
+            $log->debug_info    = is_scalar($message) ? [$message] : $message;
+        }
+
+        $log->subject     = Arr::get($details, 'subject', '');
+        $log->to_addr    = Arr::get($details, 'to', '');
+        $log->from_addr    = Arr::get($details, 'from', '');
+
+        unset($details['subject'], $details['to'], $details['from'], $details['phpmailer_exception_code']);
         $log->details    = $details;
 
         return $log->save();
+    }
+
+    public function update($id, $status, $details, $message = null)
+    {
+        $log = $this->get($id);
+        if (!$log) {
+            return false;
+        }
+
+        $log->retry_count = $log->retry_count + 1;
+        $log->status      = $status;
+
+        if (isset($message)) {
+            $log->debug_info    = is_scalar($message) ? [$message] : $message;
+        } else {
+            $log->debug_info    = null;
+        }
+
+        /* 
+        // Don't need to update these fields again....
+            $log->subject     = Arr::get($details, 'subject', '');
+            $log->to_addr    = Arr::get($details, 'to', '');
+            $log->from_addr    = Arr::get($details, 'from', '');
+
+            unset($details['subject'], $details['to'], $details['from'], $details['phpmailer_exception_code']);
+            $log->details    = $details;
+        */
+        $log->save();
+        return;
     }
 
     public function delete($id)
@@ -80,5 +134,21 @@ class LogService
         Config::updateOption('log_deleted_at', time());
 
         return Log::where('created_at', '<', $dateToDelete)->delete();
+    }
+
+    public function updateRetention($days)
+    {
+        if ($days < 1) {
+            $days = 1;
+        } elseif ($days > 200) {
+            $days = 200;
+        }
+
+        $status = Config::updateOption('log_retention', $days);
+        if ($status) {
+            return true;
+        }
+
+        return false;
     }
 }
