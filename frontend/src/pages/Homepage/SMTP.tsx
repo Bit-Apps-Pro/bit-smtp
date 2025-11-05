@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { __ } from '@common/helpers/i18nwrap'
 import request from '@common/helpers/request'
 import TelemetryPopup from '@components/TelemetryPopup/TelemetryPopup'
-import { Button, Form, Input, Radio, Space, Switch, message } from 'antd'
+import { Button, Card, Form, Input, Space, Switch, message } from 'antd'
 
 export default function SMTP() {
   interface ValuesTypes {
@@ -42,7 +42,14 @@ export default function SMTP() {
   const [form] = Form.useForm()
 
   const onValuesChange = (_changedValues: any, allValues: any) => {
-    setValues(allValues)
+    // Convert switch values to expected format
+    const formattedValues = {
+      ...allValues,
+      encryption: allValues.encryption ? 'tls' : 'ssl',
+      smtp_auth: allValues.smtp_auth ? '1' : '0',
+      smtp_debug: allValues.smtp_debug ? '1' : '0'
+    }
+    setValues(formattedValues)
   }
 
   const onFinish = (formValues: any) => {
@@ -78,7 +85,7 @@ export default function SMTP() {
       .then((res: any) => {
         setIsLoading(false)
         if (res?.status === 'success') {
-          if (res.data.mailConfig !== '') {
+          if (res.data.mailConfig) {
             setValues(res?.data?.mailConfig)
             form.setFieldsValue(res?.data?.mailConfig)
           }
@@ -100,7 +107,27 @@ export default function SMTP() {
   }, [])
 
   return (
-    <>
+    <Card
+      title={__('SMTP Configuration')}
+      style={{
+        margin: '20px',
+        position: 'relative'
+      }}
+      styles={{
+        header: {
+          position: 'sticky',
+          top: 0,
+          zIndex: 1,
+          borderBottom: '1px solid #f0f0f0',
+          padding: '16px 24px'
+        }
+      }}
+      extra={
+        <Button type="primary" onClick={() => form.submit()} loading={isSubmitting}>
+          Save Changes
+        </Button>
+      }
+    >
       <Form
         form={form}
         initialValues={values}
@@ -110,22 +137,30 @@ export default function SMTP() {
       >
         <Space direction="vertical" size="middle" style={{ padding: '15px', width: 'fit-content' }}>
           <Form.Item name="status" label={__('Enable Mail')}>
-            <Switch />
+            <Switch defaultChecked={values?.status === '1'} />
           </Form.Item>
 
           {!isLoading && values?.status && (
             <>
-              <Form.Item
-                name="form_email_address"
-                rules={[{ required: true, type: 'email' }]}
-                label={__('From Email Address')}
-              >
-                <Input placeholder="From Email Address" />
-              </Form.Item>
+              <Space size="middle" style={{ width: '100%' }}>
+                <Form.Item
+                  name="form_email_address"
+                  rules={[{ required: true, type: 'email' }]}
+                  label={__('From Email Address')}
+                  style={{ flex: 1, marginBottom: 0 }}
+                >
+                  <Input placeholder="From Email Address" />
+                </Form.Item>
 
-              <Form.Item name="form_name" rules={[{ required: true }]} label={__('From Name')}>
-                <Input placeholder="From Name" />
-              </Form.Item>
+                <Form.Item
+                  name="form_name"
+                  rules={[{ required: true }]}
+                  label={__('From Name')}
+                  style={{ flex: 1, marginBottom: 0 }}
+                >
+                  <Input placeholder="From Name" />
+                </Form.Item>
+              </Space>
 
               <Form.Item
                 name="re_email_address"
@@ -135,51 +170,83 @@ export default function SMTP() {
                 <Input placeholder="Reply-To Email Address" />
               </Form.Item>
 
-              <Form.Item name="smtp_host" rules={[{ required: true }]} label={__('SMTP Host')}>
-                <Input placeholder="SMTP Host" />
-              </Form.Item>
+              <Space size="middle" style={{ width: '100%' }}>
+                <Form.Item
+                  name="smtp_host"
+                  rules={[{ required: true }]}
+                  label={__('SMTP Host')}
+                  style={{ flex: 2, marginBottom: 0 }}
+                >
+                  <Input placeholder="SMTP Host" />
+                </Form.Item>
 
-              <Form.Item name="encryption" label={__('Type of Encryption')}>
-                <Radio.Group>
-                  <Radio value="tls">TLS</Radio>
-                  <Radio value="ssl">SSL</Radio>
-                </Radio.Group>
-              </Form.Item>
+                <Form.Item name="port" label={__('SMTP Port')} style={{ flex: 1, marginBottom: 0 }}>
+                  <Input placeholder="Port" />
+                </Form.Item>
+              </Space>
 
-              <Form.Item name="port" label={__('SMTP Port')}>
-                <Radio.Group>
-                  <Radio value="587">587</Radio>
-                  <Radio value="465">465</Radio>
-                </Radio.Group>
-              </Form.Item>
+              <Space size="middle" style={{ width: '100%' }}>
+                <Form.Item
+                  name="encryption"
+                  label={__('Use TLS Encryption')}
+                  valuePropName="checked"
+                  style={{ flex: 1, marginBottom: 0 }}
+                >
+                  <Switch
+                    checkedChildren="TLS"
+                    unCheckedChildren="SSL"
+                    defaultChecked={values.encryption === 'tls'}
+                  />
+                </Form.Item>
 
-              <Form.Item name="smtp_auth" label={__('SMTP Authentication')}>
-                <Radio.Group>
-                  <Radio value="1">Yes</Radio>
-                  <Radio value="0">No</Radio>
-                </Radio.Group>
-              </Form.Item>
+                <Form.Item
+                  name="smtp_auth"
+                  label={__('SMTP Authentication')}
+                  valuePropName="checked"
+                  style={{ flex: 1, marginBottom: 0 }}
+                >
+                  <Switch defaultChecked={values.smtp_auth === '1'} />
+                </Form.Item>
 
-              <Form.Item name="smtp_debug" label={__('SMTP Debug')}>
-                <Radio.Group>
-                  <Radio value="1">Yes</Radio>
-                  <Radio value="0">No</Radio>
-                </Radio.Group>
-              </Form.Item>
+                <Form.Item
+                  name="smtp_debug"
+                  label={__('SMTP Debug')}
+                  valuePropName="checked"
+                  style={{ flex: 1, marginBottom: 0 }}
+                >
+                  <Switch defaultChecked={values.smtp_debug === '1'} />
+                </Form.Item>
+              </Space>
 
-              <Form.Item name="smtp_user_name" rules={[{ required: true }]} label={__('SMTP Username')}>
+              <Form.Item
+                name="smtp_user_name"
+                rules={[
+                  {
+                    required: values.smtp_auth === '1',
+                    message: 'Username is required when authentication is enabled'
+                  }
+                ]}
+                label={__('SMTP Username')}
+                hidden={values.smtp_auth !== '1'}
+              >
                 <Input placeholder="SMTP Username" />
               </Form.Item>
 
-              <Form.Item name="smtp_password" rules={[{ required: true }]} label={__('SMTP Password')}>
+              <Form.Item
+                name="smtp_password"
+                rules={[
+                  {
+                    required: values.smtp_auth === '1',
+                    message: 'Password is required when authentication is enabled'
+                  }
+                ]}
+                label={__('SMTP Password')}
+                hidden={values.smtp_auth !== '1'}
+              >
                 <Input.Password placeholder="SMTP Password" />
               </Form.Item>
             </>
           )}
-
-          <Button type="primary" htmlType="submit" loading={isSubmitting}>
-            Save Changes
-          </Button>
         </Space>
       </Form>
 
@@ -191,6 +258,6 @@ export default function SMTP() {
       ) : (
         ''
       )}
-    </>
+    </Card>
   )
 }

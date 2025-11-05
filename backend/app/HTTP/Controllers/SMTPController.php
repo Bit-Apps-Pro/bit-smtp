@@ -15,7 +15,7 @@ class SMTPController
 {
     public function index()
     {
-        $mailConfig = Config::getOption('options');
+        $mailConfig = Config::getOption('options', []);
 
         return Response::success(['mailConfig' => $mailConfig]);
     }
