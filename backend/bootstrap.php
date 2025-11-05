@@ -5,7 +5,6 @@ if (! \defined('ABSPATH')) {
 }
 
 if (is_readable(__DIR__ . '/../vendor/autoload.php')) {
-    
     require_once __DIR__ . '/../vendor/autoload.php';
     BitApps\SMTP\Plugin::load();
 } else {
@@ -16,4 +15,3 @@ if (is_readable(__DIR__ . '/../vendor/autoload.php')) {
         );
     });
 }
-
