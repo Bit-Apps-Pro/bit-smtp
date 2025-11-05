@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
+import { MoonOutlined, SunOutlined } from '@ant-design/icons'
 import request from '@common/helpers/request'
+import { useTheme } from '@config/themes/theme.provider'
 import Logo from '@resource/img/bitSmtpLogo.svg'
 import exclusiveEarlyBirdOffer from '@resource/img/exclusiveEarlyBirdOffer.png'
-import { Layout as AntLayout, Modal } from 'antd'
+import { Layout as AntLayout, Button, Modal, theme } from 'antd'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import confetti from 'canvas-confetti'
 import cls from './Layout.module.css'
@@ -12,6 +14,7 @@ import cls from './Layout.module.css'
 function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [hideNewProductBtn, setHideNewProductBtn] = useState(true)
+  const { isDark, toggleTheme } = useTheme()
 
   const handleConfetti = () => {
     confetti({
@@ -65,6 +68,12 @@ function Header() {
       <div className={cls.topbar}>
         <img src={Logo} alt="Bit SMTP logo" />
         <div className={cls.reviewLink}>
+          <Button
+            type="text"
+            icon={isDark ? <SunOutlined /> : <MoonOutlined />}
+            onClick={toggleTheme}
+            className={cls.themeToggle}
+          />
           <span>Share Your Product Experience!</span>
           <a href="https://wordpress.org/support/plugin/bit-smtp/reviews/">Review us</a>
         </div>
@@ -135,8 +144,18 @@ function Header() {
 }
 
 function Layout() {
+  const { isDark } = useTheme()
+  const { useToken } = theme
+  const antConfig = useToken()
   return (
-    <AntLayout>
+    <AntLayout
+      color-scheme={isDark ? 'dark' : 'light'}
+      style={{
+        backgroundColor: antConfig.token.colorBgContainer,
+        borderRadius: antConfig.token.borderRadius,
+        border: `1px solid ${antConfig.token.controlOutline}`
+      }}
+    >
       <Header />
       <Outlet />
     </AntLayout>

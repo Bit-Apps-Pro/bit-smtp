@@ -10,7 +10,7 @@ h2 {
 }
 
 .form {
-  background-color: white;
+  background-color: var(--bg);
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -32,7 +32,7 @@ h2 {
   flex: 25%;
   font-size: 16px;
   font-weight: 600;
-  color: #0a1525;
+  color: var(--txt);
 }
 
 .inputField {
@@ -44,5 +44,5 @@ h2 {
 }
 
 .mailTest button:hover {
-  background-color: #232133 !important;
+  background-color: var(--accent-color);
 }

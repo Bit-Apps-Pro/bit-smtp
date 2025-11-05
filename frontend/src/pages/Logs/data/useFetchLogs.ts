@@ -7,12 +7,22 @@ export interface LogQueryType {
   limit: number
 }
 
+export type LogDetail = {
+  message: string
+  headers: Record<string, string>
+  attachments: Array<string>
+}
 export type LogType = {
   id: number
   status: string
-  message: string
+  subject: number
+  to_addr: Array<string>
+  from_addr: string
+  details: LogDetail
+  debug_info: Array<string>
+  retry_count: number
   created_at: string
-  details: string
+  updated_at: string
 }
 
 type FetchLogsType = {
