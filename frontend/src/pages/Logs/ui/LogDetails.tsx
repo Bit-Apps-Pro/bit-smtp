@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { DeleteOutlined, DownloadOutlined, LeftOutlined, SendOutlined } from '@ant-design/icons'
 import { __ } from '@common/helpers/i18nwrap'
+import DebugOutput from '@components/DebugOutput/DebugOutput'
 import useDeleteLog from '@pages/Logs/data/useDeleteLog'
 import useFetchLog from '@pages/Logs/data/useFetchLog'
 import useResendLog from '@pages/Logs/data/useResendLog'
@@ -104,23 +105,28 @@ export default function LogDetails() {
               <Text>{localSentAt}</Text>
               <br />
               <Text strong>From: </Text>
-              <Text>{(log as any).from_addr}</Text>
+              <Text>{log.from_addr}</Text>
               <br />
               <Text strong>To: </Text>
-              <Text>{(log as any).to_addr}</Text>
+              <Text>
+                {Array.isArray(log?.to_addr) && log.to_addr.length ? log.to_addr.toString() : ''}
+              </Text>
               <br />
               <Text strong>Subject: </Text>
-              <Text>{(log as any).subject}</Text>
+              <Text>{log.subject}</Text>
             </div>
           )}
         </Tabs.TabPane>
         <Tabs.TabPane tab="Mail Body" key="2">
+          {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{ __html: mailBodyHtml }} />
         </Tabs.TabPane>
         <Tabs.TabPane tab="Debug Output" key="3">
-          <pre style={{ whiteSpace: 'pre-wrap' }}>
-            {JSON.stringify((log as any)?.details?.debug_output, null, 2)}
-          </pre>
+          {Array.isArray(log?.debug_info) && log.debug_info.length ? (
+            <DebugOutput log={log.debug_info} />
+          ) : (
+            ''
+          )}
         </Tabs.TabPane>
       </Tabs>
     </Card>

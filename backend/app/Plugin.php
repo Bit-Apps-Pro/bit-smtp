@@ -17,9 +17,10 @@ use BitApps\SMTP\Deps\BitApps\WPTelemetry\Telemetry\Telemetry;
 use BitApps\SMTP\Deps\BitApps\WPTelemetry\Telemetry\TelemetryConfig;
 use BitApps\SMTP\HTTP\Middleware\NonceCheckerMiddleware;
 use BitApps\SMTP\HTTP\Services\LogService;
+use BitApps\SMTP\HTTP\Services\MailConfigService;
 use BitApps\SMTP\Providers\HookProvider;
 use BitApps\SMTP\Providers\InstallerProvider;
-use BitApps\SMTP\Providers\MailConfigProvider;
+use BitApps\SMTP\Providers\SmtpProvider;
 use BitApps\SMTP\Views\Layout;
 use Exception;
 
@@ -100,17 +101,17 @@ final class Plugin
 
         new HookProvider();
 
-        $this->_container['mailConfigProvider'] = new MailConfigProvider();
+        $this->_container['smtpProvider'] = new SmtpProvider();
     }
 
     /**
      * Get Mail Config Provider instance.
      *
-     * @return MailConfigProvider
+     * @return SmtpProvider
      */
-    public function mailConfigProvider()
+    public function smtpProvider()
     {
-        return $this->_container['mailConfigProvider'];
+        return $this->_container['smtpProvider'];
     }
 
     public function logger(): LogService
@@ -120,6 +121,15 @@ final class Plugin
         }
 
         return $this->_container['logService'];
+    }
+
+    public function mailConfigService(): MailConfigService
+    {
+        if (!isset($this->_container['mailConfigService'])) {
+            $this->_container['mailConfigService'] = new MailConfigService();
+        }
+
+        return $this->_container['mailConfigService'];
     }
 
     /**

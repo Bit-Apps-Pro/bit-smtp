@@ -44,9 +44,14 @@ body {
   min-height: auto;
 }
 
-.link {
+#bit-apps-root .link {
   text-decoration: none;
   cursor: pointer;
+}
+
+#bit-apps-root .link:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 svg {

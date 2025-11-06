@@ -1,113 +1,55 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useEffect, useState } from 'react'
 import { __ } from '@common/helpers/i18nwrap'
 import request from '@common/helpers/request'
 import TelemetryPopup from '@components/TelemetryPopup/TelemetryPopup'
-import { Button, Card, Form, Input, Space, Switch, message, theme } from 'antd'
+import { AutoComplete, Button, Card, Form, Input, Radio, Space, Switch, theme } from 'antd'
+import { type SmtpConfig, useSmtpConfig, useUpdateSmtpConfig } from './data/useSmtpConfig'
 
 export default function SMTP() {
-  interface ValuesTypes {
-    [key: string]: any
-    status: string
-    form_email_address: string
-    form_name: string
-    re_email_address?: string
-    smtp_host: string
-    encryption: string
-    port: string
-    smtp_auth: string
-    smtp_debug: string
-    smtp_user_name: string
-    smtp_password: string
-  }
-  const [isLoading, setIsLoading] = useState(true)
   const [isTelemetryModalOpen, setIsTelemetryModalOpen] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [values, setValues] = useState<ValuesTypes>({
-    status: '0',
-    form_email_address: '',
-    form_name: '',
-    re_email_address: '',
-    smtp_host: '',
-    encryption: 'ssl',
-    port: '465',
-    smtp_auth: '1',
-    smtp_debug: '0',
-    smtp_user_name: '',
-    smtp_password: ''
-  })
+  const { data: values, isLoading } = useSmtpConfig()
+  const updateConfig = useUpdateSmtpConfig()
+
+  // Check telemetry popup state
+  useEffect(() => {
+    request({ action: 'telemetry_popup_disable_check', method: 'GET' })
+      .then(res => {
+        setIsTelemetryModalOpen(!res.data)
+      })
+      .catch(() => {
+        // Ignore errors
+      })
+  }, [])
 
   const { useToken } = theme
   const { token } = useToken()
   const [form] = Form.useForm()
+  const smtpAuth = Form.useWatch('smtp_auth', form)
+  const [status, setStatus] = useState<boolean>(values?.status === true)
 
-  const onValuesChange = (_changedValues: any, allValues: any) => {
-    // Convert switch values to expected format
-    const formattedValues = {
-      ...allValues,
-      encryption: allValues.encryption ? 'tls' : 'ssl',
-      smtp_auth: allValues.smtp_auth ? '1' : '0',
-      smtp_debug: allValues.smtp_debug ? '1' : '0'
-    }
-    setValues(formattedValues)
-  }
-
-  const onFinish = (formValues: any) => {
-    setIsSubmitting(true)
-    const data = new FormData()
-    // eslint-disable-next-line guard-for-in, no-restricted-syntax
-    for (const key in formValues) {
-      // Ensure null/undefined become empty strings
-      data.append(key, formValues[key] ?? '')
+  const onFinish = (formValues: SmtpConfig) => {
+    // Convert boolean/switch values to expected string format
+    const config = {
+      ...formValues,
+      smtp_auth: formValues.smtp_auth,
+      smtp_debug: formValues.smtp_debug,
+      status
     }
 
-    request({ action: 'save_mail_config', data })
-      .then(res => {
-        if (res?.status !== 'error') {
-          message.success(res.data as string)
-        } else {
-          Object.entries(res?.data as Array<string>).forEach((item: any) => {
-            item[1].forEach((rule: string) => {
-              message.error(rule)
-            })
-          })
-        }
-      })
-      .catch(() => {
-        message.error('SMTP config saving failed')
-      })
-      .finally(() => setIsSubmitting(false))
+    updateConfig.mutate(config)
   }
 
   useEffect(() => {
-    const hide = message.loading('Loading...', 0)
-    request({ action: 'get_mail_config', method: 'GET' })
-      .then((res: any) => {
-        setIsLoading(false)
-        if (res?.status === 'success') {
-          if (res.data.mailConfig) {
-            setValues(res?.data?.mailConfig)
-            form.setFieldsValue(res?.data?.mailConfig)
-          }
-          message.success('SMTP config fetched successfully!')
-          return
-        }
-        message.error('Error Occurred')
+    if (values) {
+      form.setFieldsValue({
+        ...values,
+        smtp_auth: values.smtp_auth,
+        smtp_debug: values.smtp_debug
       })
-      .catch(err => {
-        message.error(String(err))
-      })
-      .finally(() => hide())
-  }, [form])
-
-  useEffect(() => {
-    request({ action: 'telemetry_popup_disable_check', method: 'GET' }).then((res: any) => {
-      setIsTelemetryModalOpen(!res.data)
-    })
-  }, [])
-
+      setStatus(values?.status === true)
+    }
+  }, [form, values])
   return (
     <Card
       title={__('SMTP Configuration')}
@@ -125,130 +67,128 @@ export default function SMTP() {
         }
       }}
       extra={
-        <Button type="primary" onClick={() => form.submit()} loading={isSubmitting}>
+        <Button type="primary" onClick={() => form.submit()} loading={updateConfig.isPending}>
           Save Changes
         </Button>
       }
     >
+      <Form.Item name="status" label={__('Enable Mail')}>
+        <Switch
+          checkedChildren="On"
+          unCheckedChildren="Off"
+          onChange={() => setStatus(!status)}
+          checked={status}
+          defaultChecked={status}
+        />
+      </Form.Item>
       <Form
         form={form}
         initialValues={values}
-        onValuesChange={onValuesChange}
         onFinish={onFinish}
         layout="vertical"
+        disabled={!status || isLoading || updateConfig.isPending}
       >
         <Space direction="vertical" size="middle" style={{ padding: '15px', width: 'fit-content' }}>
-          <Form.Item name="status" label={__('Enable Mail')}>
-            <Switch defaultChecked={values?.status === '1'} />
+          <Space size="middle" style={{ width: '100%' }}>
+            <Form.Item
+              name="from_email_address"
+              rules={[{ required: true, type: 'email' }]}
+              label={__('From Email Address')}
+              style={{ flex: 1, marginBottom: 0 }}
+            >
+              <Input placeholder="From Email Address" />
+            </Form.Item>
+
+            <Form.Item
+              name="from_name"
+              rules={[{ required: true }]}
+              label={__('From Name')}
+              style={{ flex: 1, marginBottom: 0 }}
+            >
+              <Input placeholder="From Name" />
+            </Form.Item>
+          </Space>
+
+          <Form.Item
+            name="re_email_address"
+            rules={[{ type: 'email' }]}
+            label={__('Reply-To Email Address')}
+          >
+            <Input placeholder="Reply-To Email Address" />
           </Form.Item>
 
-          {!isLoading && values?.status && (
-            <>
-              <Space size="middle" style={{ width: '100%' }}>
-                <Form.Item
-                  name="form_email_address"
-                  rules={[{ required: true, type: 'email' }]}
-                  label={__('From Email Address')}
-                  style={{ flex: 1, marginBottom: 0 }}
-                >
-                  <Input placeholder="From Email Address" />
-                </Form.Item>
+          <Space size="middle" style={{ width: '100%' }}>
+            <Form.Item
+              name="smtp_host"
+              rules={[{ required: true }]}
+              label={__('SMTP Host')}
+              style={{ flex: 2, marginBottom: 0 }}
+            >
+              <Input placeholder="SMTP Host" />
+            </Form.Item>
 
-                <Form.Item
-                  name="form_name"
-                  rules={[{ required: true }]}
-                  label={__('From Name')}
-                  style={{ flex: 1, marginBottom: 0 }}
-                >
-                  <Input placeholder="From Name" />
-                </Form.Item>
-              </Space>
+            <Form.Item name="port" label={__('SMTP Port')} style={{ flex: 1, marginBottom: 0 }}>
+              <AutoComplete options={[{ value: 25 }, { value: 465 }, { value: 587 }]}>
+                <Input placeholder="Port" type="number" />
+              </AutoComplete>
+            </Form.Item>
+          </Space>
 
-              <Form.Item
-                name="re_email_address"
-                rules={[{ type: 'email' }]}
-                label={__('Reply-To Email Address')}
-              >
-                <Input placeholder="Reply-To Email Address" />
-              </Form.Item>
+          <Space size="middle" style={{ width: '100%', display: 'flex' }}>
+            <Form.Item name="encryption" label={__('Encryption')} style={{ flex: 1, marginBottom: 0 }}>
+              <Radio.Group>
+                <Radio.Button value="tls">TLS</Radio.Button>
+                <Radio.Button value="ssl">SSL</Radio.Button>
+                <Radio.Button value="none">None</Radio.Button>
+              </Radio.Group>
+            </Form.Item>
 
-              <Space size="middle" style={{ width: '100%' }}>
-                <Form.Item
-                  name="smtp_host"
-                  rules={[{ required: true }]}
-                  label={__('SMTP Host')}
-                  style={{ flex: 2, marginBottom: 0 }}
-                >
-                  <Input placeholder="SMTP Host" />
-                </Form.Item>
+            <Form.Item
+              name="smtp_auth"
+              label={__('SMTP Authentication')}
+              valuePropName="checked"
+              style={{ flex: 1, marginBottom: 0 }}
+            >
+              <Switch checkedChildren="Yes" unCheckedChildren="No" defaultChecked={values?.smtp_auth} />
+            </Form.Item>
 
-                <Form.Item name="port" label={__('SMTP Port')} style={{ flex: 1, marginBottom: 0 }}>
-                  <Input placeholder="Port" />
-                </Form.Item>
-              </Space>
+            <Form.Item
+              name="smtp_debug"
+              label={__('SMTP Debug')}
+              valuePropName="checked"
+              style={{ flex: 1, marginBottom: 0 }}
+            >
+              <Switch checkedChildren="Yes" unCheckedChildren="No" defaultChecked={values?.smtp_debug} />
+            </Form.Item>
+          </Space>
 
-              <Space size="middle" style={{ width: '100%' }}>
-                <Form.Item
-                  name="encryption"
-                  label={__('Use TLS Encryption')}
-                  valuePropName="checked"
-                  style={{ flex: 1, marginBottom: 0 }}
-                >
-                  <Switch
-                    checkedChildren="TLS"
-                    unCheckedChildren="SSL"
-                    defaultChecked={values.encryption === 'tls'}
-                  />
-                </Form.Item>
+          <Form.Item
+            name="smtp_user_name"
+            rules={[
+              {
+                required: smtpAuth,
+                message: 'Username is required when authentication is enabled'
+              }
+            ]}
+            label={__('SMTP Username')}
+            hidden={!smtpAuth}
+          >
+            <Input placeholder="SMTP Username" />
+          </Form.Item>
 
-                <Form.Item
-                  name="smtp_auth"
-                  label={__('SMTP Authentication')}
-                  valuePropName="checked"
-                  style={{ flex: 1, marginBottom: 0 }}
-                >
-                  <Switch defaultChecked={values.smtp_auth === '1'} />
-                </Form.Item>
-
-                <Form.Item
-                  name="smtp_debug"
-                  label={__('SMTP Debug')}
-                  valuePropName="checked"
-                  style={{ flex: 1, marginBottom: 0 }}
-                >
-                  <Switch defaultChecked={values.smtp_debug === '1'} />
-                </Form.Item>
-              </Space>
-
-              <Form.Item
-                name="smtp_user_name"
-                rules={[
-                  {
-                    required: values.smtp_auth === '1',
-                    message: 'Username is required when authentication is enabled'
-                  }
-                ]}
-                label={__('SMTP Username')}
-                hidden={values.smtp_auth !== '1'}
-              >
-                <Input placeholder="SMTP Username" />
-              </Form.Item>
-
-              <Form.Item
-                name="smtp_password"
-                rules={[
-                  {
-                    required: values.smtp_auth === '1',
-                    message: 'Password is required when authentication is enabled'
-                  }
-                ]}
-                label={__('SMTP Password')}
-                hidden={values.smtp_auth !== '1'}
-              >
-                <Input.Password placeholder="SMTP Password" />
-              </Form.Item>
-            </>
-          )}
+          <Form.Item
+            name="smtp_password"
+            rules={[
+              {
+                required: smtpAuth,
+                message: 'Password is required when authentication is enabled'
+              }
+            ]}
+            label={__('SMTP Password')}
+            hidden={!smtpAuth}
+          >
+            <Input.Password placeholder="SMTP Password" />
+          </Form.Item>
         </Space>
       </Form>
 

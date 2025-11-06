@@ -2,12 +2,14 @@
 import { useState } from 'react'
 import { __ } from '@common/helpers/i18nwrap'
 import request from '@common/helpers/request'
+import DebugOutput from '@components/DebugOutput/DebugOutput'
 import { Button, Card, Form, Input, message } from 'antd'
 
 const { TextArea } = Input
 
 export default function MailSendTest() {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [testConnectionLog, setTestConnectionLog] = useState([])
   const [form] = Form.useForm()
 
   const onFinish = (values: any) => {
@@ -23,11 +25,7 @@ export default function MailSendTest() {
           message.success(res.data as string)
           form.resetFields()
         } else {
-          Object.entries(res?.data as Array<string>).forEach((item: any) => {
-            item[1].forEach((rule: string) => {
-              message.error(rule)
-            })
-          })
+          setTestConnectionLog(res.data as [])
         }
       })
       .catch(() => {
@@ -63,7 +61,7 @@ export default function MailSendTest() {
             }
           ]}
         >
-          <Input placeholder="Enter Email Address" />
+          <Input placeholder="Enter Email Address" type="email" />
         </Form.Item>
 
         <Form.Item
@@ -81,14 +79,14 @@ export default function MailSendTest() {
         >
           <TextArea
             placeholder="Write your message"
-            maxLength={50}
             style={{
               height: 150,
-              resize: 'none'
+              resize: 'block'
             }}
           />
         </Form.Item>
       </Form>
+      {testConnectionLog.length ? <DebugOutput log={testConnectionLog} /> : ''}
     </Card>
   )
 }

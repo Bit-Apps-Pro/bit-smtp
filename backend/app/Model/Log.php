@@ -24,14 +24,15 @@ class Log extends Model
     public const ERROR   = 0;
 
     public $casts = [
-        'details'     => 'array',
-        'status'      => 'int',
-        'retry_count' => 'int',
-        'int'         => 'status',
-        'array'       => 'to_addr',
-        'array'       => 'details',
-        'array'       => 'debug_info',
-        'int'         => 'retry_count',
+        'status'          => 'int',
+        'subject'         => 'string',
+        'to_addr'         => 'array',
+        'from_addr'       => 'string',
+        'details'         => 'array',
+        'debug_info'      => 'array',
+        'retry_count'     => 'int',
+        'created_at'      => 'string',
+        'updated_at'      => 'string',
     ];
 
     protected $fillable = [

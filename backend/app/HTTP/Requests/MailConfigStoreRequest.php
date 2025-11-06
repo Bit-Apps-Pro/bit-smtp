@@ -11,16 +11,16 @@ class MailConfigStoreRequest extends Request
         return
             [
                 'status'              => ['required', 'boolean'],
-                'form_email_address'  => ['required', 'email', 'sanitize:email'],
-                'form_name'           => ['required', 'string', 'sanitize:text'],
-                're_email_address'    => ['nullable', 'email', 'sanitize:email'],
-                'smtp_host'           => ['required', 'string', 'sanitize:text'],
-                'encryption'          => ['required', 'string', 'sanitize:text'],
-                'port'                => ['required', 'integer'],
-                'smtp_auth'           => ['required', 'boolean'],
-                'smtp_debug'          => ['required', 'boolean'],
-                'smtp_user_name'      => ['required', 'string', 'sanitize:text'],
-                'smtp_password'       => ['required', 'string', 'sanitize:text'],
+                'from_email_address'  => ['email', 'sanitize:email'],
+                'from_name'           => ['string', 'sanitize:text'],
+                're_email_address'    => ['email', 'sanitize:email'],
+                'smtp_host'           => ['string', 'sanitize:text'],
+                'encryption'          => ['string', 'sanitize:text'],
+                'port'                => ['integer'],
+                'smtp_auth'           => ['boolean'],
+                'smtp_debug'          => ['boolean'],
+                'smtp_user_name'      => ['string', 'sanitize:text'],
+                'smtp_password'       => ['string', 'sanitize:text'],
             ];
     }
 
@@ -28,8 +28,8 @@ class MailConfigStoreRequest extends Request
     {
         return [
             'status.required'              => 'Status is required',
-            'form_email_address.required'  => 'Form email address is required',
-            'form_name.required'           => 'Form name is required',
+            'from_email_address.required'  => 'Form email address is required',
+            'from_name.required'           => 'Form name is required',
             'smtp_host.required'           => 'SMTP host is required',
             'encryption.required'          => 'Encryption is required',
             'port.required'                => 'Port is required',

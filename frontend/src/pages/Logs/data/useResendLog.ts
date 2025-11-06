@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 
 export default function useResendLog() {
   const { mutateAsync, isPending } = useMutation(async (id: number) =>
-    request({ action: 'mail/resend', data: { id } })
+    request({ action: 'mail/resend', data: { ids: [id] } })
   )
 
   return {

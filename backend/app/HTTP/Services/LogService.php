@@ -65,6 +65,11 @@ class LogService
         return Log::where('id', $id)->first();
     }
 
+    public function getBulk(array $ids)
+    {
+        return Log::where('id', $ids)->get();
+    }
+
     public function save($status, $details, $message = null)
     {
         $log             = new Log();
@@ -96,10 +101,7 @@ class LogService
 
         if (isset($message)) {
             $log->debug_info    = \is_scalar($message) ? [$message] : $message;
-        } else {
-            $log->debug_info    = null;
         }
-
         /*
         // Don't need to update these fields again....
             $log->subject     = Arr::get($details, 'subject', '');
@@ -110,12 +112,11 @@ class LogService
             $log->details    = $details;
         */
         $log->save();
-
     }
 
-    public function delete($id)
+    public function delete(array $ids)
     {
-        Log::where('id', $id)->delete();
+        Log::where('id', $ids)->delete();
 
         return Connection::prop('last_error') ? false : true;
     }
@@ -148,5 +149,62 @@ class LogService
         $status = Config::updateOption('log_retention', $days);
 
         return (bool) ($status);
+    }
+
+    /**
+     * Bulk insert multiple mail logs
+     *
+     * @param array<int,array{status: string, data: array|WP_Error}> $logs Array of log entries
+     *
+     * @return bool True on success, false on failure
+     */
+    public function bulkInsert(array $logs)
+    {
+        if (empty($logs)) {
+            return false;
+        }
+
+        $records = [];
+        foreach ($logs as $log) {
+            if (!isset($log['status']) || !isset($log['data'])) {
+                continue;
+            }
+
+            $record = [
+                'status'      => $log['status'],
+                'retry_count' => 0,
+            ];
+
+            if ($log['status'] === Log::ERROR && $log['data'] instanceof WP_Error) {
+                $record['debug_info'] = wp_json_encode($log['data']->get_error_messages());
+                $details              = $log['data']->get_error_data();
+            } else {
+                $details = $log['data'];
+            }
+
+            $record['subject']   = Arr::get($details, 'subject', '');
+            $record['to_addr']   = wp_json_encode(Arr::get($details, 'to', []));
+            $record['from_addr'] = Arr::get($details, 'from', '');
+
+            unset(
+                $details['subject'],
+                $details['to'],
+                $details['from'],
+                $details['phpmailer_exception_code']
+            );
+
+            $record['details'] = wp_json_encode($details);
+            $records[]         = $record;
+        }
+
+        if (empty($records)) {
+            return false;
+        }
+
+        try {
+            return (bool) Log::insert($records);
+        } catch (Throwable $e) {
+            return false;
+        }
     }
 }
