@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { __ } from '@common/helpers/i18nwrap'
 import request from '@common/helpers/request'
 import TelemetryPopup from '@components/TelemetryPopup/TelemetryPopup'
-import { Button, Card, Form, Input, Space, Switch, message } from 'antd'
+import { Button, Card, Form, Input, Space, Switch, message, theme } from 'antd'
 
 export default function SMTP() {
   interface ValuesTypes {
@@ -39,6 +39,8 @@ export default function SMTP() {
     smtp_password: ''
   })
 
+  const { useToken } = theme
+  const { token } = useToken()
   const [form] = Form.useForm()
 
   const onValuesChange = (_changedValues: any, allValues: any) => {
@@ -118,7 +120,7 @@ export default function SMTP() {
           position: 'sticky',
           top: 0,
           zIndex: 1,
-          borderBottom: '1px solid #f0f0f0',
+          backgroundColor: token.colorBgContainer,
           padding: '16px 24px'
         }
       }}

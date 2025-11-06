@@ -1,4 +1,12 @@
 /* stylelint-disable comment-whitespace-inside */
+.ant-notification,
+.ant-notification-wrapper,
+.ant-message,
+.ant-message-notice,
+.ant-message-notice-content {
+  z-index: 999999 !important;
+}
+
 ::-webkit-datetime-edit {
   line-height: 1;
 }
