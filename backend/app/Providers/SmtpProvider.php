@@ -32,8 +32,14 @@ class SmtpProvider
     public function __construct()
     {
         Hooks::addAction('phpmailer_init', [$this, 'configureMailer'], 1000);
-        Hooks::addAction('wp_mail_succeeded', [$this, 'logMailSuccess']);
-        Hooks::addAction('wp_mail_failed', [$this, 'logMailFailed']);
+
+        if (Plugin::instance()->logger()->isEnabled()) {
+            /**
+             * We only log mails when logging is enabled, to avoid unnecessary overhead
+             */
+            Hooks::addAction('wp_mail_succeeded', [$this, 'logMailSuccess']);
+            Hooks::addAction('wp_mail_failed', [$this, 'logMailFailed']);
+        }
     }
 
     /**
@@ -103,6 +109,9 @@ class SmtpProvider
         }
 
         if ($this->debug || $mailConfig->isSmtpDebug()) {
+            /**
+             * We set SMTP debug level to CONNECTION to capture all debug info to provide better insights on test mail failures
+             */
             $mailer->SMTPDebug   = SMTP::DEBUG_CONNECTION;
             $mailer->Debugoutput = [$this, 'setDebugOutput'];
         }

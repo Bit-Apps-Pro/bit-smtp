@@ -1,5 +1,7 @@
+import { __ } from '@common/helpers/i18nwrap'
 import request from '@common/helpers/request'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import notify from '@components/Toaster/Toaster'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { message } from 'antd'
 
 export interface SmtpConfig {
@@ -48,10 +50,8 @@ export const useSmtpConfig = () =>
     }
   })
 
-export const useUpdateSmtpConfig = () => {
-  const queryClient = useQueryClient()
-
-  return useMutation({
+export const useUpdateSmtpConfig = () =>
+  useMutation({
     mutationFn: async (config: SmtpConfig) => {
       const data = new FormData()
       Object.entries(config).forEach(([key, value]) => {
@@ -65,15 +65,12 @@ export const useUpdateSmtpConfig = () => {
           rules.forEach(rule => message.error(rule))
         })
         throw new Error('Failed to update SMTP configuration')
+      } else {
+        notify.success(__('SMTP config saved successfully'))
       }
       return response.data
     },
-    onSuccess: data => {
-      message.success(data as string)
-      queryClient.invalidateQueries({ queryKey: ['smtp-config'] })
-    },
     onError: () => {
-      message.error('SMTP config saving failed')
+      notify.error(__('SMTP config saving failed'))
     }
   })
-}

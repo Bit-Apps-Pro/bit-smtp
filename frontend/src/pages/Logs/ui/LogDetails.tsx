@@ -1,16 +1,15 @@
-import { useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { DeleteOutlined, DownloadOutlined, LeftOutlined, SendOutlined } from '@ant-design/icons'
 import { __ } from '@common/helpers/i18nwrap'
-import DebugOutput from '@components/DebugOutput/DebugOutput'
 import useDeleteLog from '@pages/Logs/data/useDeleteLog'
 import useFetchLog from '@pages/Logs/data/useFetchLog'
 import useResendLog from '@pages/Logs/data/useResendLog'
 import { Button, Card, Space, Tabs, Typography, notification } from 'antd'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import dompurify from 'dompurify'
+import DebugOutputTab from './tabs/DebugOutputTab'
+import EmailDetailsTab from './tabs/EmailDetailsTab'
+import MailBodyTab from './tabs/MailBodyTab'
 
-const { Title, Text } = Typography
+const { Title } = Typography
 
 export default function LogDetails() {
   const { id } = useParams()
@@ -63,20 +62,9 @@ export default function LogDetails() {
     URL.revokeObjectURL(url)
   }
 
-  const mailBodyHtml = useMemo(() => dompurify.sanitize((log as any)?.details?.message || ''), [log])
-
-  const localSentAt = useMemo(() => {
-    if (!log?.created_at) return ''
-    try {
-      const d = new Date(log.created_at)
-      return d.toLocaleString()
-    } catch (e) {
-      return log.created_at
-    }
-  }, [log])
-
   return (
     <Card
+      loading={isLoading}
       title={
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Button type="link" icon={<LeftOutlined />} onClick={() => navigate('/logs')}>
@@ -95,40 +83,28 @@ export default function LogDetails() {
         </Space>
       }
     >
-      <Tabs defaultActiveKey="1">
-        <Tabs.TabPane tab="Email Details" key="1">
-          {isLoading || !log ? (
-            <Text>Loading...</Text>
-          ) : (
-            <div>
-              <Text strong>Sent At: </Text>
-              <Text>{localSentAt}</Text>
-              <br />
-              <Text strong>From: </Text>
-              <Text>{log.from_addr}</Text>
-              <br />
-              <Text strong>To: </Text>
-              <Text>
-                {Array.isArray(log?.to_addr) && log.to_addr.length ? log.to_addr.toString() : ''}
-              </Text>
-              <br />
-              <Text strong>Subject: </Text>
-              <Text>{log.subject}</Text>
-            </div>
-          )}
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="Mail Body" key="2">
-          {/* eslint-disable-next-line react/no-danger */}
-          <div dangerouslySetInnerHTML={{ __html: mailBodyHtml }} />
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="Debug Output" key="3">
-          {Array.isArray(log?.debug_info) && log.debug_info.length ? (
-            <DebugOutput log={log.debug_info} />
-          ) : (
-            ''
-          )}
-        </Tabs.TabPane>
-      </Tabs>
+      {isLoading || !log ? null : (
+        <Tabs
+          defaultActiveKey="1"
+          items={[
+            {
+              key: '1',
+              label: 'Email Details',
+              children: <EmailDetailsTab isLoading={isLoading} log={log} />
+            },
+            {
+              key: '2',
+              label: 'Mail Body',
+              children: <MailBodyTab log={log} />
+            },
+            {
+              key: '3',
+              label: 'Debug Output',
+              children: <DebugOutputTab log={log} />
+            }
+          ]}
+        />
+      )}
     </Card>
   )
 }

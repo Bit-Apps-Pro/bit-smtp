@@ -15,7 +15,7 @@ class SmtpConfig
      */
     private array $options = [];
 
-    public function __construct($options)
+    public function __construct(array $options)
     {
         $this->options = $this->parseConfig($options);
     }
@@ -27,7 +27,7 @@ class SmtpConfig
      *
      * @return array<string,mixed>
      */
-    public function parseConfig($opts): array
+    public function parseConfig(array $opts): array
     {
         if (\array_key_exists('form_name', $opts)) {
             $opts['from_name'] = $opts['form_name'];
@@ -61,7 +61,7 @@ class SmtpConfig
 
     public function get(string $key, $default = null)
     {
-        return $this->options[$key] ?? $default;
+        return empty($this->options[$key]) ? $default : $this->options[$key];
     }
 
     public function set(string $key, $value): self
@@ -92,7 +92,7 @@ class SmtpConfig
 
     public function hasFromAddress(): ?string
     {
-        return $this->get('from_email_address', null) !== null;
+        return !empty($this->get('from_email_address', null));
     }
 
     public function getFromEmailAddress(): ?string
@@ -121,7 +121,7 @@ class SmtpConfig
 
     public function hasReplyAddress(): ?string
     {
-        return $this->get('re_email_address', null) !== null;
+        return !empty($this->get('re_email_address', null));
     }
 
     public function getReEmailAddress(): ?string
@@ -232,6 +232,6 @@ class SmtpConfig
      */
     private function toBool($val): bool
     {
-        return \boolval($val);
+        return filter_var($val, FILTER_VALIDATE_BOOLEAN);
     }
 }

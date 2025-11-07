@@ -21,7 +21,12 @@ final class LogController
         $pageNo = \intval($request->pageNo) ?? 1;
         $limit  = \intval($request->limit)  ?? 14;
 
-        return Response::success($this->logger->all((($pageNo - 1) * $limit), $limit));
+        $filters = [];
+        if (isset($request->to_addr) && !empty($request->to_addr)) {
+            $filters['to_addr'] = sanitize_text_field($request->to_addr);
+        }
+
+        return Response::success($this->logger->all((($pageNo - 1) * $limit), $limit, $filters));
     }
 
     public function details(Request $request)
@@ -53,5 +58,23 @@ final class LogController
         }
 
         return Response::error([])->message(__('Failed to update log retention period', 'bit-smtp'));
+    }
+
+    public function isEnabled(Request $request)
+    {
+        $enabled = $this->logger->isEnabled();
+
+        return Response::success(['enabled' => $enabled]);
+    }
+
+    public function toggle(Request $request)
+    {
+        $enabled = isset($request->enabled) ? (bool) $request->enabled : (bool) ($request->state ?? false);
+        $status  = $this->logger->setEnabled($enabled);
+        if ($status) {
+            return Response::success(['enabled' => $enabled])->message(__('Logging updated', 'bit-smtp'));
+        }
+
+        return Response::error([])->message(__('Failed to update logging setting', 'bit-smtp'));
     }
 }

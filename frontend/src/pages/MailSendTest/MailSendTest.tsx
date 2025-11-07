@@ -1,37 +1,22 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from 'react'
 import { __ } from '@common/helpers/i18nwrap'
-import request from '@common/helpers/request'
 import DebugOutput from '@components/DebugOutput/DebugOutput'
-import { Button, Card, Form, Input, message } from 'antd'
+import { Button, Card, Form, Input } from 'antd'
+import useTestMailSend from './data/useTestMailSend'
 
 const { TextArea } = Input
 
 export default function MailSendTest() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [testConnectionLog, setTestConnectionLog] = useState([])
   const [form] = Form.useForm()
+  const { mutate: sendTestMail, isPending, data: { data: debugInfo } = {} } = useTestMailSend()
 
-  const onFinish = (values: any) => {
-    setIsSubmitting(true)
-    const data = new FormData()
-    Object.keys(values).forEach(key => {
-      data.append(key, values[key])
-    })
-
-    request({ action: 'send_test_mail', data })
-      .then(res => {
-        if (res?.status !== 'error') {
-          message.success(res.data as string)
+  const onFinish = (values: Record<string, string>) => {
+    sendTestMail(values, {
+      onSuccess: res => {
+        if (res.code === 'SUCCESS') {
           form.resetFields()
-        } else {
-          setTestConnectionLog(res.data as [])
         }
-      })
-      .catch(() => {
-        message.error('Mail send testing failed')
-      })
-      .finally(() => setIsSubmitting(false))
+      }
+    })
   }
 
   return (
@@ -39,7 +24,7 @@ export default function MailSendTest() {
       title={__('Test Your Mail')}
       style={{ margin: '20px' }}
       extra={
-        <Button type="primary" onClick={() => form.submit()} loading={isSubmitting}>
+        <Button type="primary" onClick={() => form.submit()} loading={isPending}>
           {__('Send Test Email')}
         </Button>
       }
@@ -80,13 +65,15 @@ export default function MailSendTest() {
           <TextArea
             placeholder="Write your message"
             style={{
-              height: 150,
-              resize: 'block'
+              resize: 'both',
+              minHeight: '100px',
+              minWidth: '100%',
+              maxWidth: '100%'
             }}
           />
         </Form.Item>
       </Form>
-      {testConnectionLog.length ? <DebugOutput log={testConnectionLog} /> : ''}
+      {debugInfo?.length ? <DebugOutput log={debugInfo} /> : ''}
     </Card>
   )
 }

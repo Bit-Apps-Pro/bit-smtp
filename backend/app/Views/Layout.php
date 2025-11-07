@@ -73,11 +73,9 @@ class Layout
         if (Config::isDev()) {
             wp_enqueue_script($slug . '-MODULE-vite-client-helper', Config::devUrl() . '/config/devHotModule.js', [], null);
             wp_enqueue_script($slug . '-MODULE-index', Config::devUrl() . '/main.tsx', [], null);
-            error_log(print_r(['IN DEV'], true));
         } else {
             wp_enqueue_script($slug . '-MODULE-index', Config::get('ASSET_URI') . '/main.' . Config::VERSION . '.js', [], $version);
             wp_enqueue_style($slug . '-styles', Config::get('ASSET_URI') . '/main.' . Config::VERSION . '.css', null, $version, 'screen');
-            error_log(print_r(['NOT IN DEV'], true));
         }
 
         wp_localize_script(Config::SLUG . '-MODULE-index', Config::VAR_PREFIX, self::createConfigVariable());

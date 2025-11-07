@@ -12,7 +12,7 @@ class MailTestRequest extends Request
             [
                 'to'      => ['required', 'email', 'sanitize:text'],
                 'subject' => ['required', 'sanitize:text'],
-                'message' => ['required', 'sanitize:text'],
+                'message' => ['required', 'sanitize:wp_kses_post'],
             ];
     }
 

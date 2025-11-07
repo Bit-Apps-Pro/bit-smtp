@@ -31,7 +31,7 @@ class MailConfigService
     public function load()
     {
         if (!isset($this->config)) {
-            $this->config = new SmtpConfig(Config::getOption('options'));
+            $this->config = new SmtpConfig(Config::getOption('options', []));
         }
 
         return $this->config;

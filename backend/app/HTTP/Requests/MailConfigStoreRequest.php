@@ -11,16 +11,16 @@ class MailConfigStoreRequest extends Request
         return
             [
                 'status'              => ['required', 'boolean'],
-                'from_email_address'  => ['email', 'sanitize:email'],
-                'from_name'           => ['string', 'sanitize:text'],
-                're_email_address'    => ['email', 'sanitize:email'],
-                'smtp_host'           => ['string', 'sanitize:text'],
-                'encryption'          => ['string', 'sanitize:text'],
-                'port'                => ['integer'],
-                'smtp_auth'           => ['boolean'],
-                'smtp_debug'          => ['boolean'],
-                'smtp_user_name'      => ['string', 'sanitize:text'],
-                'smtp_password'       => ['string', 'sanitize:text'],
+                'from_email_address'  => ['nullable','email', 'sanitize:email'],
+                'from_name'           => ['nullable','string', 'sanitize:text'],
+                're_email_address'    => ['nullable','email', 'sanitize:email'],
+                'smtp_host'           => ['nullable','string', 'sanitize:text'],
+                'encryption'          => ['nullable','string', 'sanitize:text'],
+                'port'                => ['nullable','integer'],
+                'smtp_auth'           => ['nullable','boolean'],
+                'smtp_debug'          => ['nullable','boolean'],
+                'smtp_user_name'      => ['nullable','string', 'sanitize:text'],
+                'smtp_password'       => ['nullable','string', 'sanitize:text'],
             ];
     }
 

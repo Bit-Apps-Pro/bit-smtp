@@ -92,7 +92,7 @@ export default function SMTP() {
           <Space size="middle" style={{ width: '100%' }}>
             <Form.Item
               name="from_email_address"
-              rules={[{ required: true, type: 'email' }]}
+              rules={[{ required: status, type: 'email' }]}
               label={__('From Email Address')}
               style={{ flex: 1, marginBottom: 0 }}
             >
@@ -101,7 +101,7 @@ export default function SMTP() {
 
             <Form.Item
               name="from_name"
-              rules={[{ required: true }]}
+              rules={[{ required: status }]}
               label={__('From Name')}
               style={{ flex: 1, marginBottom: 0 }}
             >
@@ -120,7 +120,7 @@ export default function SMTP() {
           <Space size="middle" style={{ width: '100%' }}>
             <Form.Item
               name="smtp_host"
-              rules={[{ required: true }]}
+              rules={[{ required: status }]}
               label={__('SMTP Host')}
               style={{ flex: 2, marginBottom: 0 }}
             >
@@ -166,7 +166,7 @@ export default function SMTP() {
             name="smtp_user_name"
             rules={[
               {
-                required: smtpAuth,
+                required: status && smtpAuth,
                 message: 'Username is required when authentication is enabled'
               }
             ]}
@@ -180,7 +180,7 @@ export default function SMTP() {
             name="smtp_password"
             rules={[
               {
-                required: smtpAuth,
+                required: status && smtpAuth,
                 message: 'Password is required when authentication is enabled'
               }
             ]}

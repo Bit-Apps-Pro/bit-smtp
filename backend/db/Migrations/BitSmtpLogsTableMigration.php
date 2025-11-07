@@ -14,7 +14,6 @@ final class BitSmtpLogsTableMigration extends Migration
 {
     public function up()
     {
-        error_log(print_r([__FILE__], true));
         Schema::withPrefix(Connection::wpPrefix() . Config::VAR_PREFIX)->create(
             'logs',
             function (Blueprint $table) {

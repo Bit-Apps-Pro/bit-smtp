@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "typeRoots": [
-      "./node_modules/@types",
-      "./frontend/src/types"
-    ],
+    "typeRoots": ["./node_modules/@types", "./frontend/src/types"],
     "target": "ESNext",
     "useDefineForClassFields": true,
     "importHelpers": true,
@@ -21,50 +18,24 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext"
-    ],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"
       }
     ],
     "paths": {
-      "@common/*": [
-        "./frontend/src/common/*"
-      ],
-      "@features/*": [
-        "./frontend/src/components/features/*"
-      ],
-      "@utilities/*": [
-        "./frontend/src/components/utilities/*"
-      ],
-      "@config/*": [
-        "./frontend/src/config/*"
-      ],
-      "@components/*": [
-        "./frontend/src/components/*"
-      ],
-      "@icons/*": [
-        "./frontend/src/icons/*"
-      ],
-      "@queries/*": [
-        "./frontend/src/api/queries/*"
-      ],
-      "@mutations/*": [
-        "./frontend/src/api/mutations/*"
-      ],
-      "@resource/*": [
-        "./frontend/src/resource/*"
-      ],
-      "@pages/*": [
-        "./frontend/src/pages/*"
-      ],
-      "@static/*": [
-        "./frontend/src/static/*"
-      ]
+      "@common/*": ["./frontend/src/common/*"],
+      "@features/*": ["./frontend/src/components/features/*"],
+      "@utilities/*": ["./frontend/src/components/utilities/*"],
+      "@config/*": ["./frontend/src/config/*"],
+      "@components/*": ["./frontend/src/components/*"],
+      "@icons/*": ["./frontend/src/icons/*"],
+      "@queries/*": ["./frontend/src/api/queries/*"],
+      "@mutations/*": ["./frontend/src/api/mutations/*"],
+      "@resource/*": ["./frontend/src/resource/*"],
+      "@pages/*": ["./frontend/src/pages/*"],
+      "@static/*": ["./frontend/src/static/*"]
     }
   },
   "include": [
@@ -74,13 +45,6 @@
     "vite.config.ts",
     "vite.config.wp.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ],
-  "types": [
-    "cypress",
-    "node",
-    "@4tw/cypress-drag-drop",
-    "vite/client"
-  ]
+  "exclude": ["/node_modules/**/*"],
+  "types": ["cypress", "node", "@4tw/cypress-drag-drop", "vite/client"]
 }

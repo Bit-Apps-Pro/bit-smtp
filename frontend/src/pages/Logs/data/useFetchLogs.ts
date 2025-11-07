@@ -34,11 +34,11 @@ type FetchLogsType = {
 
 export default function useFetchLogs(searchData: LogQueryType) {
   const queryId = `logs-${searchData.pageNo}`
-
   const { data, isLoading, isFetching, refetch } = useQuery({
     refetchOnWindowFocus: false,
-    queryKey: ['all_logs', queryId],
-    queryFn: async () => request<FetchLogsType>({ action: 'logs/all', data: searchData })
+    queryKey: ['all_logs', queryId, searchData],
+    queryFn: async ({ signal }) =>
+      request<FetchLogsType>({ action: 'logs/all', data: searchData, signal })
   })
   return {
     isLoading,

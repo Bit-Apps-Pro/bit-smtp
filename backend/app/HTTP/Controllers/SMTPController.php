@@ -4,6 +4,7 @@ namespace BitApps\SMTP\HTTP\Controllers;
 
 use BitApps\SMTP\Config;
 use BitApps\SMTP\Deps\BitApps\WPKit\Helpers\Arr;
+use BitApps\SMTP\Deps\BitApps\WPKit\Hooks\Hooks;
 use BitApps\SMTP\Deps\BitApps\WPKit\Http\Request\Request;
 use BitApps\SMTP\Deps\BitApps\WPKit\Http\Response;
 use BitApps\SMTP\Deps\BitApps\WPKit\Utils\Capabilities;
@@ -27,21 +28,21 @@ class SMTPController
 
         $mailConfig = Plugin::instance()->mailConfigService()->load();
 
-        $mailConfig->setStatus(Arr::get($validated, 'status'));
+        $mailConfig->setStatus(Arr::get($validated, 'status', false));
         $mailConfig->setFromEmailAddress(Arr::get($validated, 'from_email_address'));
         $mailConfig->setFromName(Arr::get($validated, 'from_name'));
         $mailConfig->setReEmailAddress(Arr::get($validated, 're_email_address'));
         $mailConfig->setSmtpHost(Arr::get($validated, 'smtp_host'));
-        $mailConfig->setEncryption(Arr::get($validated, 'encryption'));
+        $mailConfig->setEncryption(Arr::get($validated, 'encryption', 'none'));
         $mailConfig->setPort(Arr::get($validated, 'port'));
-        $mailConfig->setSmtpAuth(Arr::get($validated, 'smtp_auth'));
-        $mailConfig->setSmtpDebug(Arr::get($validated, 'smtp_debug'));
+        $mailConfig->setSmtpAuth(Arr::get($validated, 'smtp_auth', false));
+        $mailConfig->setSmtpDebug(Arr::get($validated, 'smtp_debug', false));
         $mailConfig->setSmtpUserName(Arr::get($validated, 'smtp_user_name'));
         $mailConfig->setSmtpPassword(Arr::get($validated, 'smtp_password'));
 
         Plugin::instance()->mailConfigService()->store();
 
-        return Response::success('SMTP config saved successfully');
+        return Response::success(__('SMTP config saved successfully', 'bit-smtp'));
     }
 
     public function sendTestEmail(MailTestRequest $request)
@@ -51,9 +52,9 @@ class SMTPController
         try {
             $smtpProvider = Plugin::instance()->smtpProvider();
             $smtpProvider->setDebug(true);
-
+            Hooks::addFilter('wp_mail_content_type', [$this, 'setContentType']);
             wp_mail($queryParams['to'], $queryParams['subject'], $queryParams['message']);
-
+            remove_filter('wp_mail_content_type', [$this, 'setContentType']);
             if ($smtpProvider->isFailed() === false) {
                 $previousData = Config::getOption('test_mail_form_submitted');
                 if (!$previousData) {
@@ -63,14 +64,14 @@ class SMTPController
                 }
                 Config::updateOption('test_mail_form_submitted', $previousData);
 
-                return Response::success('Mail sent successfully');
+                return Response::success(__('Mail sent successfully', 'bit-smtp'));
             }
 
-            return Response::message('Mail send testing failed')->error($smtpProvider->getDebugOutput());
+            return Response::message(__('Mail send testing failed', 'bit-smtp'))->error($smtpProvider->getDebugOutput());
         } catch (Exception $e) {
             $error = $e->getMessage();
 
-            return Response::error($error);
+            return Response::message(__('Mail send testing failed', 'bit-smtp'))->error([$error]);
         }
     }
 
@@ -89,7 +90,7 @@ class SMTPController
     public function resend(Request $request)
     {
         if (!Capabilities::check('manage_options')) {
-            // double check to prevent misuse
+            // double checking to prevent misuse
             return Response::error([])->message('unauthorized access');
         }
 
@@ -106,19 +107,27 @@ class SMTPController
         if (empty($logs)) {
             return Response::error(__('Log not found', 'bit-smtp'));
         }
+        Hooks::addFilter('wp_mail_content_type', [$this, 'setContentType']);
         foreach ($logs as $log) {
             $smtpProvider->retry()->setRetryLogId($log->id)->setDebug(true);
             $message     = Arr::get($log->details, 'message', '');
             $headers     = Arr::get($log->details, 'headers', '');
             $attachments = Arr::get($log->details, 'attachments', []);
 
-            wp_mail($log->to_addr, $log->subject, $message, $headers, $attachments);
+            wp_mail($log->to_addr, $log->subject, trim($message), $headers, $attachments);
         }
+
+        remove_filter('wp_mail_content_type', [$this, 'setContentType']);
 
         if ($smtpProvider->isFailed() === false) {
             return Response::success(__('Mail resent', 'bit-smtp'));
         }
 
         return Response::message(__('Failed to resend mail', 'bit-smtp'))->error($smtpProvider->getDebugOutput());
+    }
+
+    public function setContentType()
+    {
+        return 'text/html';
     }
 }

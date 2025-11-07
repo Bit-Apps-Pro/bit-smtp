@@ -21,6 +21,8 @@ Route::group(function () {
     Route::post('logs/all', [LogController::class, 'all']);
     Route::post('logs/details/{id}', [LogController::class, 'details']);
     Route::post('logs/delete', [LogController::class, 'delete']);
+    Route::get('logs/is_enabled', [LogController::class, 'isEnabled']);
+    Route::post('logs/toggle', [LogController::class, 'toggle']);
 
     Route::post('mail/resend', [SMTPController::class, 'resend']);
 

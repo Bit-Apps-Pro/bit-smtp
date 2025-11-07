@@ -26,7 +26,7 @@ class LogService
         }
     }
 
-    public function all($skip = 0, $take = 20)
+    public function all($skip = 0, $take = 20, $filters = [])
     {
         $logs  = [];
         $count = 0;
@@ -35,10 +35,13 @@ class LogService
         }
 
         try {
-            $logs  = Log::skip($skip)
+            $logsQuery  = Log::skip($skip)
                 ->take($take)
-                ->desc()
-                ->get();
+                ->desc();
+            if (isset($filters['to_addr']) && !empty($filters['to_addr'])) {
+                $logsQuery->where('to_addr', 'LIKE', '%' . Connection::esc_like($filters['to_addr']) . '%');
+            }
+            $logs  = $logsQuery->get();
             $count = Log::count();
         } catch (Throwable $th) {
             // throw $th;
@@ -149,6 +152,28 @@ class LogService
         $status = Config::updateOption('log_retention', $days);
 
         return (bool) ($status);
+    }
+
+    /**
+     * Check if logging is enabled
+     *
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        return (bool) Config::getOption('logging_enabled', false);
+    }
+
+    /**
+     * Enable or disable logging
+     *
+     * @param bool $enable
+     *
+     * @return bool
+     */
+    public function setEnabled(bool $enable)
+    {
+        return (bool) Config::updateOption('logging_enabled', $enable, true);
     }
 
     /**

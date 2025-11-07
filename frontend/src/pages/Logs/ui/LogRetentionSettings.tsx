@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { SettingOutlined } from '@ant-design/icons'
 import { __ } from '@common/helpers/i18nwrap'
 import useLogRetention from '@pages/Logs/data/useLogRetention'
-import { Button, Flex, Input, Popover, notification } from 'antd'
+import { Button, Flex, Form, Input, Popover, notification } from 'antd'
 
 interface LogRetentionSettingsProps {
   onSuccess?: () => void
@@ -35,14 +35,20 @@ export default function LogRetentionSettings({ onSuccess }: LogRetentionSettings
 
   const retentionContent = (
     <Flex vertical gap="small">
-      <Input
-        type="number"
-        min={1}
-        value={retentionDays}
-        onChange={e => setRetentionDays(parseInt(e.target.value, 10))}
-        placeholder="Enter days"
-        style={{ width: 200 }}
-      />
+      <Form.Item
+        label={__('Days')}
+        tooltip={__('Number of days to retain logs before automatic deletion.')}
+      >
+        <Input
+          type="number"
+          min={1}
+          value={retentionDays}
+          onChange={e => setRetentionDays(parseInt(e.target.value, 10))}
+          placeholder="Enter days"
+          style={{ width: 200 }}
+        />
+      </Form.Item>
+
       <Button type="primary" onClick={handleRetentionSave} loading={isUpdatingRetention}>
         Save
       </Button>
@@ -52,7 +58,7 @@ export default function LogRetentionSettings({ onSuccess }: LogRetentionSettings
   return (
     <Popover
       content={retentionContent}
-      title="Log Retention Settings"
+      title={__('Log Retention Settings')}
       trigger="click"
       placement="bottomRight"
     >
