@@ -28,3 +28,20 @@ commit-msg:
   commands:
     commit-lint:
       run: pnpm commitlint --edit {1}
+github-actions:
+  parallel: true
+  commands:
+    lint:
+      run: pnpm eslint frontend
+    lint-css:
+      run: pnpm lint:css
+    lint-php:
+      run: composer lint
+    php-compatibility-check:
+      run: composer compat
+    prettier:
+      run: pnpm pretty:fix
+    test-js:
+      run: pnpm test
+    ts-check:
+      run: pnpm ts-check
