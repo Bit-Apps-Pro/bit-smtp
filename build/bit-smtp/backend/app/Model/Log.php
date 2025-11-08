@@ -1,0 +1,44 @@
+<?php
+
+namespace BitApps\SMTP\Model;
+
+use BitApps\SMTP\Deps\BitApps\WPDatabase\Model;
+
+/**
+ * Model for log
+ *
+ * @property int    $status
+ * @property string $subject
+ * @property array  $to_addr
+ * @property string $from_addr
+ * @property array  $details
+ * @property array  $debug_info
+ * @property int    $retry_count
+ * @property string $created_at
+ * @property string $updated_at
+ */
+class Log extends Model
+{
+    public const SUCCESS = 1;
+
+    public const ERROR   = 0;
+
+    public $casts = [
+        'status'          => 'int',
+        'subject'         => 'string',
+        'to_addr'         => 'array',
+        'from_addr'       => 'string',
+        'details'         => 'array',
+        'debug_info'      => 'array',
+        'retry_count'     => 'int',
+        'created_at'      => 'string',
+        'updated_at'      => 'string',
+    ];
+
+    protected $fillable = [
+        'status',
+        'message',
+        'details',
+        'retry_count',
+    ];
+}

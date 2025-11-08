@@ -1,6 +1,13 @@
 const changeLogs = {
-  improvements: ['SMTP debug enable/disable option added.', 'UI modified.'],
-  fixed: ['Namespace conflict issue fixed.', 'Some minor issue fixed.']
+  improvements: [
+    'Redesigned interface',
+    'Email activity history',
+    'View sent emails',
+    'Resend email',
+    'Delete email record',
+    'Resend multiple emails'
+  ],
+  fixed: ['Some minor issue fixed.']
 }
 
 export default changeLogs

@@ -221,14 +221,6 @@ Wp-Telemetry DOES NOT IMMEDIATELY start gathering data; rather, it will gather b
 
 == Changelog ==
 
-= 1.2 (08 Nov, 2025) =
-* Feat: Redesigned interface
-* Feat: Email activity history
-* Feat: View sent emails
-* Feat: Resend email
-* Feat: Delete email record
-* Feat: Resend multiple emails
-
 = 1.1.8 (31 Jan, 2025) =
 * Bit Flows promotional banner added 
 
