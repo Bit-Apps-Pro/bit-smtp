@@ -192,7 +192,6 @@ class Config
             return false;
         }
 
-        return false;
 
         return [
             'title'    => 'Black Friday Deal',
