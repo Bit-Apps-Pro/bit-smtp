@@ -45,6 +45,6 @@
     "vite.config.ts",
     "vite.config.wp.ts"
   ],
-  "exclude": ["/node_modules/**/*"],
+  "exclude": ["/node_modules/**/*", "/frontend/language/pot-to-php.js"],
   "types": ["cypress", "node", "@4tw/cypress-drag-drop", "vite/client"]
 }

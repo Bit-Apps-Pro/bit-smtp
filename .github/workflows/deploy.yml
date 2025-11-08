@@ -74,9 +74,7 @@ jobs:
       - name: Build
         id: build-plugin
         run: |
-          pnpm build
-          pnpm i18n:parse-js
-          pnpm i18n:php
+          pnpm production
           bash .github/copy-assets
 
           if [ -d "${{ github.workspace }}/build/${{ env.PLUGIN_SLUG }}" ]; then
