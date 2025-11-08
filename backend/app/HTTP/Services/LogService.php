@@ -79,7 +79,7 @@ class LogService
         }
 
         $log->subject      = Arr::get($details, 'subject', '');
-        $log->to_addr      = Arr::get($details, 'to', '');
+        $log->to_addr      = Arr::get($details, 'to', '[]');
 
         unset($details['subject'], $details['to'], $details['from'], $details['phpmailer_exception_code']);
         $log->details    = $details;

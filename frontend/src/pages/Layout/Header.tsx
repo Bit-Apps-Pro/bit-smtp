@@ -30,17 +30,7 @@ export default function Header() {
     { label: __('Logs'), path: '/logs' },
     { label: __('Others'), path: '/others' }
   ]
-  console.log(
-    'Path---->Selected',
-    navItems.find(item => {
-      console.log(
-        `item ${item.path}`,
-        `path: ${location.pathname}`,
-        `idx: ${location.pathname.includes(item.path)}`
-      )
-      return item.path === '/' ? item.path === location.pathname : location.pathname.includes(item.path)
-    })
-  )
+
   const handleConfetti = () => {
     confetti({
       particleCount: 100,

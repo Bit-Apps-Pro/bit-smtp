@@ -1,4 +1,6 @@
+import notify from '@components/Toaster/Toaster'
 import config from '@config/config'
+import { __ } from './i18nwrap'
 
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-undef */
@@ -73,8 +75,46 @@ export default async function request<T>({
       try {
         return JSON.parse(res)
       } catch (error) {
-        const parsedRes = res.match(/{"code":(?:[^{}]*)*}/)
-        return parsedRes ? JSON.parse(parsedRes[0]) : { code: 'ERROR', data: res }
+        const parsedRes = extractJSON(res)
+        const parsedData = (
+          parsedRes === ''
+            ? { code: 'ERROR', message: __('Failed to parsed response'), data: res }
+            : parsedRes
+        ) as Response<unknown>
+
+        if (parsedData.code === 'ERROR') {
+          notify.error(parsedData.message as string)
+        }
+
+        return parsedData
       }
     })) as Response<T>
+}
+
+function extractJSON(str: string) {
+  if (typeof str !== 'string') return null
+
+  let braceCount = 0
+  let start = -1
+
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === '{') {
+      if (braceCount === 0) {
+        start = i
+      }
+      braceCount += 1
+    } else if (str[i] === '}') {
+      braceCount -= 1
+      if (braceCount === 0 && start !== -1) {
+        const jsonStr = str.substring(start, i + 1)
+        try {
+          return JSON.parse(jsonStr)
+        } catch (e) {
+          return ''
+        }
+      }
+    }
+  }
+
+  return null
 }
