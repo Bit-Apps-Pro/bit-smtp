@@ -2,7 +2,7 @@
 Contributors: bitpressadmin, akaioum
 Tags: smtp, wp mail smtp, gmail smtp, sendgrid smtp, phpmailer
 Requires at least: 5.0
-Tested up to: 6.7.1
+Tested up to: 6.8.3
 Requires PHP: 7.4
 Stable tag: 1.2
 License: GPLv2 or later
@@ -228,6 +228,7 @@ Wp-Telemetry DOES NOT IMMEDIATELY start gathering data; rather, it will gather b
 * Feat: Resend email
 * Feat: Delete email record
 * Feat: Resend multiple emails
+* Tested to latest wordpress(6.8.3) version
 
 = 1.1.8 (31 Jan, 2025) =
 * Bit Flows promotional banner added 
