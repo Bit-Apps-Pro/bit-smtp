@@ -105,7 +105,6 @@ export default defineConfig(({ mode }) => {
             'react-vendor': ['react', 'react-dom'],
             '@emotion/react': ['@emotion/react'],
             '@tanstack/react-query': ['@tanstack/react-query'],
-            '@tanstack/react-query-devtools': ['@tanstack/react-query-devtools'],
             'react-router-dom': ['react-router-dom'],
             antd: ['antd']
           },
