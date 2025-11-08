@@ -1,5 +1,5 @@
 /* stylelint-disable color-function-notation */
-.bitSocialMenu .btn {
+.bitSmtpAd .btn {
   position: relative;
 
   --active: 0.15;
@@ -9,7 +9,7 @@
     0 -0.05em 0 0 hsl(30deg calc(var(--active) * 97%) calc(var(--active) * 60%)) inset !important;
 }
 
-.bitSocialMenu button {
+.bitSmtpAd button {
   color: black;
   font-weight: bold;
   animation: scaleUpDown 1s ease-in-out infinite;

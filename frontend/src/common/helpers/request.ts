@@ -11,8 +11,14 @@ interface OptionsType {
   body?: string | FormData
   signal?: AbortSignal
 }
+
 interface QueryParam {
   [key: string]: string | number
+}
+
+interface DefaultResponse {
+  created_at: string
+  updated_at: string
 }
 
 interface RequestOptionsType {
@@ -23,11 +29,13 @@ interface RequestOptionsType {
   signal?: AbortSignal
 }
 
-export interface DefaultResponse<T> {
+export type ApiResponseType = Record<string, string | number>
+
+export interface Response<T> {
   status: 'success' | 'error'
-  data: T
-  message: string
+  data: T extends DefaultResponse ? T : T & DefaultResponse
   code: 'SUCCESS' | 'ERROR'
+  message: string | undefined
 }
 
 export default async function request<T>({
@@ -36,11 +44,9 @@ export default async function request<T>({
   queryParam,
   method = 'POST',
   signal
-}: RequestOptionsType): Promise<DefaultResponse<T>> {
-  const { AJAX_URL, NONCE, ROUTE_PREFIX } = config
-  const uri = new URL(AJAX_URL)
-  uri.searchParams.append('action', `${ROUTE_PREFIX}${action}`)
-  uri.searchParams.append('_ajax_nonce', NONCE)
+}: RequestOptionsType): Promise<Response<T>> {
+  const { API_URL, NONCE } = config
+  const uri = new URL(`${API_URL}/${action}`, `${window.location.protocol}//${window.location.host}`)
 
   // append query params in url
   if (queryParam !== null) {
@@ -53,13 +59,22 @@ export default async function request<T>({
 
   const options: OptionsType = {
     method,
-    headers: {}
+    headers: { 'x-wp-nonce': NONCE }
   }
-
-  options.signal = signal
 
   if (method.toLowerCase() === 'post') {
     options.body = data instanceof FormData ? data : JSON.stringify(data)
   }
-  return (await fetch(uri, options).then((res: Response) => res.json())) as DefaultResponse<T>
+
+  options.signal = signal
+  return (await fetch(uri, options)
+    .then(res => res.text())
+    .then(res => {
+      try {
+        return JSON.parse(res)
+      } catch (error) {
+        const parsedRes = res.match(/{"code":(?:[^{}]*)*}/)
+        return parsedRes ? JSON.parse(parsedRes[0]) : { code: 'ERROR', data: res }
+      }
+    })) as Response<T>
 }

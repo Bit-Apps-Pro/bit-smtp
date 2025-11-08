@@ -39,7 +39,7 @@ export const useSmtpConfig = () =>
     staleTime: -Infinity,
     queryFn: async () => {
       const response = await request<{ mailConfig: SmtpConfig }>({
-        action: 'get_mail_config',
+        action: 'mail/config/get',
         method: 'GET'
       })
 
@@ -58,9 +58,9 @@ export const useUpdateSmtpConfig = () =>
         data.append(key, value ?? '')
       })
 
-      const response = await request({ action: 'save_mail_config', data })
+      const response = await request<Record<string, string[]>>({ action: 'mail/config/save', data })
       if (response?.status === 'error') {
-        const errors = response?.data as Record<string, string[]>
+        const errors = response?.data
         Object.values(errors).forEach(rules => {
           rules.forEach(rule => message.error(rule))
         })

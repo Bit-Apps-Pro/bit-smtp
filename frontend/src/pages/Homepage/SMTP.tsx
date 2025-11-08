@@ -13,7 +13,7 @@ export default function SMTP() {
 
   // Check telemetry popup state
   useEffect(() => {
-    request({ action: 'telemetry_popup_disable_check', method: 'GET' })
+    request({ action: 'telemetry/popup-status', method: 'GET' })
       .then(res => {
         setIsTelemetryModalOpen(!res.data)
       })

@@ -75,18 +75,6 @@ class SMTPController
         }
     }
 
-    public function newProductNavBtnVisibleCheck()
-    {
-        $data = Config::getOption('new_product_nav_btn_hide');
-
-        return (bool) ($data);
-    }
-
-    public function newProductNavBtnHide()
-    {
-        Config::updateOption('new_product_nav_btn_hide', true);
-    }
-
     public function resend(Request $request)
     {
         if (!Capabilities::check('manage_options')) {

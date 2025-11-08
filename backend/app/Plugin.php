@@ -155,7 +155,13 @@ final class Plugin
             return;
         }
 
-        if (version_compare(Config::getOption('db_version'), Config::DB_VERSION, '<')) {
+        if (version_compare(Config::getOption('version'), '1.2', '<')) {
+            Config::deleteOption('global_post_content');
+            Config::deleteOption('new_product_nav_btn_hide');
+        }
+
+        if (version_compare(Config::getOption('version'), Config::VERSION, '<')) {
+            // here we checked version. updated version number updates to option through this migration
             try {
                 MigrationHelper::migrate(InstallerProvider::migration());
             } catch (Exception $e) {

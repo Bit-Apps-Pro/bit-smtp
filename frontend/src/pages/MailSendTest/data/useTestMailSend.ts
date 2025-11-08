@@ -10,7 +10,7 @@ export default function useTestMailSend() {
       Object.keys(values).forEach(key => {
         data.append(key, values[key])
       })
-      return request<Array<string>>({ action: 'send_test_mail', data })
+      return request<Array<string>>({ action: 'mail/send-test', data })
     },
     {
       onError: () => {

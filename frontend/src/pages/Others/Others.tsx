@@ -30,8 +30,8 @@ export default function Others() {
                       src={plugin.logo}
                       alt={`${plugin.title} logo`}
                       style={{
-                        maxWidth: '100%',
-                        maxHeight: '100%',
+                        width: 80,
+                        height: 80,
                         objectFit: 'contain'
                       }}
                     />

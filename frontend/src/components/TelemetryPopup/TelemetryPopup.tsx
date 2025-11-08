@@ -18,13 +18,13 @@ function TelemetryPopup({ isTelemetryModalOpen, setIsTelemetryModalOpen }: Telem
   const [isDataNoticeShow, setIsDataNoticeShow] = useState(false)
 
   const handleTelemetryAccess = () => {
-    request({ action: 'telemetry_permission_handle', data: { isChecked: true } })
+    request({ action: 'telemetry/handle-permission', data: { isChecked: true } })
     setIsTelemetryModalOpen(false)
   }
 
   const handleTelemetryModalSkip = () => {
     setIsTelemetryModalOpen(false)
-    request({ action: 'telemetry_permission_handle', data: { isChecked: false } })
+    request({ action: 'telemetry/handle-permission', data: { isChecked: false } })
   }
 
   const steps = [

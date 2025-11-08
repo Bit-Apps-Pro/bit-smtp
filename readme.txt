@@ -212,6 +212,12 @@ Bit SMTP uses [wp-telemetry](https://packagist.org/packages/bitapps/wp-telemetry
 
 Wp-Telemetry DOES NOT IMMEDIATELY start gathering data; rather, it will gather basic telemetry data when a user allows it. We collect the data to ensure a great user experience for all our users.
 
+== Screenshots ==
+1. SMTP Configuration
+2. Send test mail to validate SMTP Configuration
+3. Mail sent logs
+4. Log detail of a sent mail
+5. Preview of email log
 
 == Changelog ==
 

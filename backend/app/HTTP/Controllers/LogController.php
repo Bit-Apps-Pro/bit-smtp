@@ -69,7 +69,7 @@ final class LogController
 
     public function toggle(Request $request)
     {
-        $enabled = isset($request->enabled) ? (bool) $request->enabled : (bool) ($request->state ?? false);
+        $enabled = isset($request->enabled) ? (bool) $request->enabled : false;
         $status  = $this->logger->setEnabled($enabled);
         if ($status) {
             return Response::success(['enabled' => $enabled])->message(__('Logging updated', 'bit-smtp'));

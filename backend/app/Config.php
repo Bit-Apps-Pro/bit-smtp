@@ -5,6 +5,7 @@
 namespace BitApps\SMTP;
 
 use BitApps\SMTP\Views\Layout;
+use DateTimeImmutable;
 
 if (!\defined('ABSPATH')) {
     exit;
@@ -23,7 +24,7 @@ class Config
 
     public const VERSION = '1.2';
 
-    public const DB_VERSION = '1.0';
+    public const DB_VERSION = '1.1';
 
     public const REQUIRED_PHP_VERSION = '7.4';
 
@@ -68,7 +69,7 @@ class Config
 
             case 'API_URL':
 
-                return rest_url('/' . self::SLUG . '/v' . self::API_VERSION . '/');
+                return rest_url('/' . self::SLUG . '/v' . self::API_VERSION);
 
             case 'ROOT_URI':
                 return set_url_scheme(plugins_url('', self::get('MAIN_FILE')), parse_url(home_url())['scheme']);
@@ -156,6 +157,18 @@ class Config
         return update_option(self::withPrefix($option), $value, !\is_null($autoload) ? 'yes' : null);
     }
 
+    /**
+     * Delete option from option table.
+     *
+     * @param string $option Option name
+     *
+     * @return bool
+     */
+    public static function deleteOption($option)
+    {
+        return delete_option(self::withPrefix($option));
+    }
+
     public static function isDev()
     {
         return is_readable(Config::get('BASEDIR') . '/port');
@@ -166,6 +179,27 @@ class Config
         $port   = file_get_contents(Config::get('BASEDIR') . '/port');
 
         return self::isDev() ? 'http://localhost:' . $port : Config::get('ASSET_URI');
+    }
+
+    public static function adButton()
+    {
+        $hideAT  = new DateTimeImmutable('2026-01-05');
+        $current = new DateTimeImmutable();
+
+        $diff = date_diff($current, $hideAT);
+
+        if ($diff->invert) {
+            return false;
+        }
+
+        return false;
+
+        return [
+            'title'    => 'Black Friday Deal',
+            'url'      => 'https://bitapps.pro',
+            'campaign' => 'Black Friday',
+            'alt'      => 'Black Friday Deal Banner'
+        ];
     }
 
     /**

@@ -25,6 +25,7 @@ export default function AppRoutes() {
             <Route path="/logs" element={<Logs />} />
             <Route path="/logs/:id" element={<LogDetails />} />
             <Route path="/others" element={<Others />} />
+            <Route path="*" element={<SMTP />} />
           </Route>
         </Routes>
       </StyleProvider>

@@ -1,22 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { MoonOutlined, SunOutlined } from '@ant-design/icons'
 import { __ } from '@common/helpers/i18nwrap'
-import request from '@common/helpers/request'
+import config from '@config/config'
 import { useTheme } from '@config/themes/theme.provider'
 import LogoIcon from '@icons/LogoIcon'
 import LogoText from '@icons/LogoText'
-import exclusiveEarlyBirdOffer from '@resource/img/exclusiveEarlyBirdOffer.png'
+import adBanner from '@resource/img/adBanner.png'
 import { Layout as AntLayout, Button, Flex, Menu, Modal, Space, Typography, theme } from 'antd'
 import confetti from 'canvas-confetti'
 import cls from './Layout.module.css'
 
 export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [hideNewProductBtn, setHideNewProductBtn] = useState(true)
   const { isDark, toggleTheme } = useTheme()
   const location = useLocation()
+
+  const { AD_BUTTON }: { AD_BUTTON: { title: string; campaign: string; alt?: string; url: string } } =
+    config
   const { Text } = Typography
 
   const { useToken } = theme
@@ -28,15 +30,17 @@ export default function Header() {
     { label: __('Logs'), path: '/logs' },
     { label: __('Others'), path: '/others' }
   ]
-
-  useEffect(() => {
-    request({ action: 'new_product_nav_btn_visible_check', method: 'GET' }).then((res: any) => {
-      if (!res.data) {
-        setHideNewProductBtn(false)
-      }
+  console.log(
+    'Path---->Selected',
+    navItems.find(item => {
+      console.log(
+        `item ${item.path}`,
+        `path: ${location.pathname}`,
+        `idx: ${location.pathname.includes(item.path)}`
+      )
+      return item.path === '/' ? item.path === location.pathname : location.pathname.includes(item.path)
     })
-  }, [])
-
+  )
   const handleConfetti = () => {
     confetti({
       particleCount: 100,
@@ -51,11 +55,6 @@ export default function Header() {
   }
   const handleOk = () => setIsModalOpen(false)
   const handleCancel = () => setIsModalOpen(false)
-  const handleNewProductNavBtn = () => {
-    request({ action: 'hide_new_product_nav_btn' })
-    setHideNewProductBtn(true)
-    setIsModalOpen(false)
-  }
 
   return (
     <>
@@ -71,7 +70,13 @@ export default function Header() {
             <Menu
               mode="horizontal"
               disabledOverflow
-              selectedKeys={[navItems.find(item => item.path === location.pathname)?.path || '/']}
+              selectedKeys={[
+                navItems.find(item =>
+                  item.path === '/'
+                    ? item.path === location.pathname
+                    : location.pathname.includes(item.path)
+                )?.path || '/'
+              ]}
               items={navItems.map(item => ({
                 key: item.path,
                 label: (
@@ -101,9 +106,9 @@ export default function Header() {
           </Space>
         </Flex>
       </AntLayout.Header>
-      {!hideNewProductBtn && (
+      {AD_BUTTON && AD_BUTTON.title && (
         <div
-          className={cls.bitSocialMenu}
+          className={cls.bitSmtpAd}
           style={{
             position: 'fixed',
             top: 35,
@@ -113,7 +118,7 @@ export default function Header() {
           }}
         >
           <button type="button" onClick={showModal} className={cls.btn}>
-            New Product Launch
+            {AD_BUTTON.title}
             <span className={cls.star} />
             <span className={cls.star} />
             <span className={cls.star} />
@@ -127,20 +132,15 @@ export default function Header() {
         onCancel={handleCancel}
         footer={null}
         centered
-        width={400}
+        width="40vw"
       >
         <a
-          href="https://bit-flows.com/?utm_source=bit-smtp&utm_medium=inside-plugin&utm_campaign=bit_flows_early_bird"
+          href={`${AD_BUTTON.url}/?utm_source=bit-smtp&utm_medium=inside-plugin&utm_campaign=${AD_BUTTON.campaign}`}
           target="_blank"
           rel="noreferrer"
         >
-          <img src={exclusiveEarlyBirdOffer} alt="Bit Social Release Promotional Banner" width="100%" />
+          <img src={adBanner} alt={AD_BUTTON.alt || AD_BUTTON.title} width="100%" />
         </a>
-        <div style={{ textAlign: 'center', marginTop: 16 }}>
-          <Button type="text" onClick={handleNewProductNavBtn} style={{ color: '#888' }}>
-            Don&apos;t show it again
-          </Button>
-        </div>
       </Modal>
     </>
   )

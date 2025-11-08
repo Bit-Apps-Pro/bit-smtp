@@ -162,7 +162,7 @@ HTML;
         $frontendVars = apply_filters(
             Config::withPrefix('localized_script'),
             [
-                'nonce'       => wp_create_nonce(Config::withPrefix('nonce')),
+                'nonce'       => wp_create_nonce('wp_rest'),
                 'rootURL'     => Config::get('ROOT_URI'),
                 'assetsURL'   => Config::get('ASSET_URI'),
                 'baseURL'     => Config::get('ADMIN_URL') . 'admin.php?page=' . Config::SLUG . '#',
@@ -173,6 +173,7 @@ HTML;
                 'dateFormat'  => Config::getOption('date_format', true),
                 'timeFormat'  => Config::getOption('time_format', true),
                 'timeZone'    => DateTimeHelper::wp_timezone_string(),
+                'adButton'    => Config::adButton(),
 
             ]
         );
