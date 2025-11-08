@@ -24,7 +24,6 @@ export default function EmailDetailsTab({ log, isLoading }: EmailDetailsTabProps
       <Text>{localSentAt}</Text>
       <br />
       <Text strong>From: </Text>
-      <Text>{log.from_addr}</Text>
       <br />
       <Text strong>To: </Text>
       <Text>{Array.isArray(log?.to_addr) && log.to_addr.length ? log.to_addr.toString() : ''}</Text>

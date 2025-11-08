@@ -1,29 +1,31 @@
-=== SMTP - 100% Free & Open Source SMTP plugin for WordPress - Bit SMTP   ===
+=== Bit SMTP - Easy WP SMTP Solution with Email Logs   ===
 Contributors: bitpressadmin, akaioum
-Tags: smtp, wp mail smtp, gmail smtp, sendgrid smtp, phpmailer
+Tags: email logs, smtp, email, gmail smtp, wp mail smtp
 Requires at least: 5.0
-Tested up to: 6.8.3
+Tested up to: 6.7.1
 Requires PHP: 7.4
 Stable tag: 1.2
 License: GPLv2 or later
 
 == Description ==
 
-## SMTP Plugin for WordPress for Reliable and Secure Email Delivery Complete Free SMTP Solution
+## SMTP Plugin for WordPress for Reliable and Secure Email Delivery | Complete Free SMTP Solution with Detailed Email Logs
 
 **Easily fix WordPress email delivery issues. Connect with Gmail SMTP, SendGrid, Amazon SES, Outlook, Mailgun, and more SMTP services to keep your site communication dependable and secure.**
 
-**Is your WordPress not sending emails, or are they going to spam?**
+## Is your WordPress not sending emails, or are they going to spam?
 
 Solve your email delivery problems with Bit SMTP. The perfect WP Mail SMTP plugin. SMTP helps you send WordPress emails safely and reliably.
 
 When you use Bit SMTP, your emails get delivered perfectly because they are sent from an authenticated source. Many WordPress sites have problems with email. The standard PHP mail function is often blocked or filtered as spam. Bit SMTP solves this issue. It lets you connect your WordPress site to any real **SMTP server.**
 
+## Easily track and manage all your WordPress email logs with Bit SMTP.
+
 Bit SMTP is a **free plugin.** All of the features are completely free. So you don’t need to spend on SMTP configuration
 
 Let’s explore the main reasons to use Bit SMTP and how you can set it up easily.
 
-## Easily Setup Mail SMTP in Minutes
+== Easily Setup Mail SMTP in Minutes ==
 
 Using an SMTP server authenticates your website's emails, proving they are from a trusted source. This tells the recipient’s mail system that your email is genuine. It is like presenting your ID before entering a secure building.
 
@@ -33,6 +35,7 @@ Getting started with Bit SMTP is simple:
 2. **Get your SMTP details:** Your provider gives you the host, port, and encryption info.  
 3. **Add these details in Bit SMTP:** Go to your WordPress dashboard. Add your SMTP details.  
 4. **Send a test email:** Make sure emails go out. Now, every message uses a secure SMTP connection.
+5. **Enable email logs:** You will see detailed email logs from the Bit SMTP dashboard.
 
 Your provider handles delivery, ensuring your WordPress emails arrive securely every time.
 
@@ -40,11 +43,13 @@ Your provider handles delivery, ensuring your WordPress emails arrive securely e
 
 [Bit SMTP](https://bitapps.pro/bit-smtp/) gives you all the tools you need to send emails from WordPress safely and reliably.
 
-* **Connect to Any SMTP Server:** Easily integrate with top SMTP Mail services like Gmail, Outlook, Amazon SES, SendGrid, Mailgun, and more.  
-* **Secure Mail Delivery:** Send emails with SSL/TLS encryption for secure transmission.  
-* **Customizable Reply-To:** Set a custom Reply-To address for managing responses.  
-* **Quick Setup:** Get started with simple setup steps and configure your emails within minutes.  
-* **Free and Fully Functional:** All features are completely free. No premium plan required
+- **Connect to Any SMTP Server:** Easily integrate with top SMTP Mail services like Gmail, Outlook, Amazon SES, SendGrid, Mailgun, and more.  
+- **Secure Mail Delivery:** Send emails with SSL/TLS encryption for secure transmission.  
+- **Customizable Reply-To:** Set a custom Reply-To address for managing responses.  
+- **Quick Setup:** Get started with simple setup steps and configure your emails within minutes.  
+- **Free and Fully Functional:** All features are completely free. No premium plan required
+- **Details Email Logs:** You can view detailed logs of every email sent through your SMTP in the Bit SMTP dashboard. Set how long to keep the logs with a date range. You can also search logs by email address.
+- **Dark Mode Interface:** Bit SMTP comes with a clean dark mode that’s easy on the eyes and makes your dashboard look great.
 
 ## Simple Setup for SMTP Configuration in WordPress
 
@@ -185,13 +190,16 @@ And all other plugins that rely on WordPress's wp_mail to send emails
 
 ## Strong Security for Your WordPress Emails
 
-Bit SMTP follows best security practices. Many providers like Gmail SMTP, SendGrid, or Mailgun use their official APIs. You can connect using a secure API key, not by typing your main login into WordPress. This keeps your data safe and higher level of security.
+Bit SMTP follows best security practices. Many providers, like **Gmail SMTP**, **SendGrid**, or **Mailgun**, provide secure SMTP configuration credentials. You can connect using the SMTP credentials, not by typing your main login into WordPress. This keeps your data safe and ensures a higher level of security.
 
 ## **Reliable WordPress Mail SMTP for Every User**
 
 Don’t let emails go missing or end up in spam. Bit SMTP, the leading WP Mail SMTP plugin, gives you full control over your WordPress email delivery. You can use Gmail SMTP or connect to any mail service you trust. 
 
-Make sure all your emails get to the right place, every time. Install Bit SMTP now and enjoy reliable, secure email delivery from your WordPress site. Say goodbye to missed emails and spam issues
+Make sure all your emails get to the right place, every time. Install Bit SMTP now and enjoy reliable, secure email delivery from your WordPress site. Say goodbye to missed emails and spam issues!
+
+## Track and Monitor WordPress Email Logs
+With Bit SMTP’s built-in email logs system, you can easily track every email you send. View delivery details and monitor performance right from your WordPress dashboard. This gives you complete transparency and control over your WordPress site's email activity.
 
 ### **Explore Our Other Products :**
 
@@ -228,7 +236,6 @@ Wp-Telemetry DOES NOT IMMEDIATELY start gathering data; rather, it will gather b
 * Feat: Resend email
 * Feat: Delete email record
 * Feat: Resend multiple emails
-* Tested to latest wordpress(6.8.3) version
 
 = 1.1.8 (31 Jan, 2025) =
 * Bit Flows promotional banner added 

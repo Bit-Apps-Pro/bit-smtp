@@ -18,11 +18,7 @@ class LogService
     public function __construct()
     {
         if (\defined('DOING_CRON') && DOING_CRON) {
-            $currentTime  = time();
-            $logDeletedAt = Config::getOption('log_deleted_at', ($currentTime - (DAY_IN_SECONDS * 30)));
-            if ((abs($logDeletedAt - $currentTime) / DAY_IN_SECONDS) > 30) {
-                $this->deleteOlder();
-            }
+            $this->maybeDeleteOlder();
         }
     }
 
@@ -84,7 +80,6 @@ class LogService
 
         $log->subject      = Arr::get($details, 'subject', '');
         $log->to_addr      = Arr::get($details, 'to', '');
-        $log->from_addr    = Arr::get($details, 'from', '');
 
         unset($details['subject'], $details['to'], $details['from'], $details['phpmailer_exception_code']);
         $log->details    = $details;
@@ -109,7 +104,6 @@ class LogService
         // Don't need to update these fields again....
             $log->subject     = Arr::get($details, 'subject', '');
             $log->to_addr    = Arr::get($details, 'to', '');
-            $log->from_addr    = Arr::get($details, 'from', '');
 
             unset($details['subject'], $details['to'], $details['from'], $details['phpmailer_exception_code']);
             $log->details    = $details;
@@ -122,6 +116,15 @@ class LogService
         Log::where('id', $ids)->delete();
 
         return Connection::prop('last_error') ? false : true;
+    }
+
+    public function maybeDeleteOlder()
+    {
+        $currentTime  = time();
+        $logDeletedAt = Config::getOption('log_deleted_at', ($currentTime - (DAY_IN_SECONDS * 30)));
+        if ((abs($logDeletedAt - $currentTime) / DAY_IN_SECONDS) > 30) {
+            $this->deleteOlder();
+        }
     }
 
     public function deleteOlder()
@@ -161,7 +164,7 @@ class LogService
      */
     public function isEnabled()
     {
-        return (bool) Config::getOption('logging_enabled', false);
+        return (bool) Config::getOption('logging_enabled', true);
     }
 
     /**
@@ -189,6 +192,12 @@ class LogService
             return false;
         }
 
+        /**
+         * This is fallback to delete older log. as we only invoke deleteOlder in cron,
+         * site may not have working cron.
+         */
+        $this->maybeDeleteOlder();
+
         $records = [];
         foreach ($logs as $log) {
             if (!isset($log['status']) || !isset($log['data'])) {
@@ -209,7 +218,6 @@ class LogService
 
             $record['subject']   = Arr::get($details, 'subject', '');
             $record['to_addr']   = wp_json_encode(Arr::get($details, 'to', []));
-            $record['from_addr'] = Arr::get($details, 'from', '');
 
             unset(
                 $details['subject'],

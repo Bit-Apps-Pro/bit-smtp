@@ -30,7 +30,6 @@ const columns: TableColumnsType<LogType> = [
   },
   { title: __('Subject'), dataIndex: 'subject', key: 'subject' },
   { title: __('To'), dataIndex: 'to_addr', key: 'to_addr' },
-  { title: __('From'), dataIndex: 'from_addr', key: 'from_addr' },
   { title: __('Retry'), dataIndex: 'retry_count', key: 'retry_count' },
   { title: __('Sent At'), dataIndex: 'created_at', key: 'created_at' }
 ]

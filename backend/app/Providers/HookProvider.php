@@ -19,6 +19,7 @@ class HookProvider
         $this->loadAppHooks();
         Hooks::addAction('rest_api_init', [$this, 'loadApi']);
         Hooks::addFilter(Config::VAR_PREFIX . 'telemetry_additional_data', [new TelemetryPopupController(), 'filterTrackingData']);
+        Hooks::addFilter(Config::withPrefix('deactivate_reasons'), [$this, 'deactivateReasons']);
     }
 
     /**
@@ -35,6 +36,15 @@ class HookProvider
             include $this->_pluginBackend . 'hooks' . DIRECTORY_SEPARATOR . 'api.php';
             $router->register();
         }
+    }
+
+    public function deactivateReasons($reasons)
+    {
+        if (isset($reasons[Config::withPrefix('pro')])) {
+            unset($reasons[Config::withPrefix('pro')]);
+        }
+
+        return $reasons;
     }
 
     /**

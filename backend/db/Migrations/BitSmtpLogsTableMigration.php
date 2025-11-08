@@ -21,7 +21,6 @@ final class BitSmtpLogsTableMigration extends Migration
                 $table->tinyint('status');
                 $table->longtext('subject');
                 $table->varchar('to_addr', 320);
-                $table->varchar('from_addr', 320)->nullable();
                 $table->longtext('details')->nullable();
                 $table->text('debug_info')->nullable();
                 $table->tinyint('retry_count')->defaultValue(0);

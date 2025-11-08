@@ -151,7 +151,7 @@ export default function SMTP() {
             >
               <Switch checkedChildren="Yes" unCheckedChildren="No" defaultChecked={values?.smtp_auth} />
             </Form.Item>
-
+            {/* 
             <Form.Item
               name="smtp_debug"
               label={__('SMTP Debug')}
@@ -159,7 +159,7 @@ export default function SMTP() {
               style={{ flex: 1, marginBottom: 0 }}
             >
               <Switch checkedChildren="Yes" unCheckedChildren="No" defaultChecked={values?.smtp_debug} />
-            </Form.Item>
+            </Form.Item> */}
           </Space>
 
           <Form.Item

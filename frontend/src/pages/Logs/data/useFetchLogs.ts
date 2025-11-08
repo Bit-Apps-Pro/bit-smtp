@@ -17,7 +17,6 @@ export type LogType = {
   status: string
   subject: number
   to_addr: Array<string>
-  from_addr: string
   details: LogDetail
   debug_info: Array<string>
   retry_count: number

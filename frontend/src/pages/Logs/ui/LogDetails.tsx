@@ -77,9 +77,20 @@ export default function LogDetails() {
       }
       extra={
         <Space>
-          <Button icon={<DownloadOutlined />} onClick={handleExport} />
-          <Button icon={<SendOutlined />} onClick={handleResend} loading={isResending} />
-          <Button danger icon={<DeleteOutlined />} onClick={handleDelete} loading={isLogDeleting} />
+          <Button icon={<DownloadOutlined />} onClick={handleExport} title={__('Download')} />
+          <Button
+            icon={<SendOutlined />}
+            onClick={handleResend}
+            loading={isResending}
+            title={__('Resend')}
+          />
+          <Button
+            danger
+            icon={<DeleteOutlined />}
+            onClick={handleDelete}
+            loading={isLogDeleting}
+            title={__('Delete')}
+          />
         </Space>
       }
     >

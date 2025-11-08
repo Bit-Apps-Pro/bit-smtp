@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: BIT SMTP
+ * Plugin Name: Bit SMTP
  * Plugin URI:  https://www.bitapps.pro/bit-smtp
  * Description: Send email via SMTP using BIT SMTP plugin by Bit Apps
  * Version:     1.2

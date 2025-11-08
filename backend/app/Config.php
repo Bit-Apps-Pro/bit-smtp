@@ -210,7 +210,7 @@ class Config
     {
         return [
             'Home' => [
-                'title' => __('Home', 'bit-smtp'),
+                'title' => __('Settings', 'bit-smtp'),
                 'url'   => self::get('ADMIN_URL') . 'admin.php?page=' . self::SLUG,
             ]
         ];
