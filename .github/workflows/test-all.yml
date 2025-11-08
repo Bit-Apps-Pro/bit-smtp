@@ -1,0 +1,73 @@
+name: Run Lefthook on Push
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'feature/*'
+      - 'fix/*'
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup PHP
+        id: setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.x'
+          tools: composer:v2, wp-cli
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "dir=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache/restore@v4
+        name: Restore package cache
+        id: restore-package-cache
+        with:
+          path: |
+            ${{ steps.pnpm-cache.outputs.dir }}
+            ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-cached-test-package-${{ hashFiles('**/pnpm-lock.yaml', '**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cached-test-package-
+
+      - name: Install dependencies
+        run: |
+          composer install --prefer-dist --no-progress
+          pnpm install
+
+      - uses: actions/cache/save@v4
+        name: Save package cache
+        if: always() && steps.restore-package-cache.outputs.cache-hit != 'true'
+        with:
+          key: ${{ steps.restore-package-cache.outputs.cache-primary-key }}
+          path: |
+            ${{ steps.pnpm-cache.outputs.dir }}
+            ${{ steps.composer-cache.outputs.dir }}
+
+      - name: Run Lefthook
+        run: pnpm lefthook run github-actions

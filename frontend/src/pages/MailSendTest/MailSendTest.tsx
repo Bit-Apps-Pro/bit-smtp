@@ -1,122 +1,79 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
+import { __ } from '@common/helpers/i18nwrap'
+import DebugOutput from '@components/DebugOutput/DebugOutput'
+import { Button, Card, Form, Input } from 'antd'
+import useTestMailSend from './data/useTestMailSend'
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useId, useState } from 'react'
-import toast from 'react-hot-toast'
-import request from '@common/helpers/request'
-import AntBtn from '@components/Button/Button'
-import Toaster from '@components/Toaster/Toaster'
-import { Input } from 'antd'
-import TextArea from 'antd/es/input/TextArea'
-import cls from './MailSendTest.module.css'
+const { TextArea } = Input
 
 export default function MailSendTest() {
-  interface Values {
-    [key: string]: any
-    to: string
-    subject: string
-    message: string
-  }
+  const [form] = Form.useForm()
+  const { mutate: sendTestMail, isPending, data: { data: debugInfo } = {} } = useTestMailSend()
 
-  const [isLoading, setIsLoading] = useState(false)
-  const [values, setValues] = useState<Values>({
-    to: '',
-    subject: '',
-    message: ''
-  })
-
-  const id = useId()
-  const handleChange = (e: any) => {
-    const { name, value } = e.target
-    const tmpValues = { ...values }
-    tmpValues[name] = value
-    setValues(tmpValues)
-  }
-
-  const handleSubmit = (e: any) => {
-    setIsLoading(true)
-    e.preventDefault()
-    const data = new FormData()
-    // eslint-disable-next-line no-restricted-syntax, guard-for-in
-    for (const key in values) {
-      data.append(key, values[key])
-    }
-
-    request('send_test_mail', data)
-      .then(res => {
-        setIsLoading(false)
-        if (res?.status !== 'error') {
-          toast.success(res.data as string)
-        } else {
-          Object.entries(res.data as Array<string>).forEach((item: any) => {
-            item[1].forEach((rule: string) => {
-              toast.error(rule)
-            })
-          })
+  const onFinish = (values: Record<string, string>) => {
+    sendTestMail(values, {
+      onSuccess: res => {
+        if (res.code === 'SUCCESS') {
+          form.resetFields()
         }
-      })
-      .catch(() => {
-        toast.error('Mail send testing failed')
-      })
+      }
+    })
   }
 
   return (
-    <div className={cls.mailTest}>
-      <h2>Test Your Mail:</h2>
-      <form className={cls.form} onSubmit={handleSubmit}>
-        <div className={cls.inputSection}>
-          <label htmlFor={id} className={cls.label}>
-            To:
-          </label>
-          <div className={cls.inputField}>
-            <Input
-              type="email"
-              name="to"
-              placeholder="Enter Email Address"
-              onChange={handleChange}
-              id={id}
-              required
-            />
-          </div>
-        </div>
-        <div className={cls.inputSection}>
-          <label htmlFor={id} className={cls.label}>
-            Subject:
-          </label>
-          <div className={cls.inputField}>
-            <Input
-              name="subject"
-              placeholder="From Subject Here"
-              onChange={handleChange}
-              id={id}
-              required
-            />
-          </div>
-        </div>
-        <div className={cls.inputSection}>
-          <label htmlFor={id} className={cls.label}>
-            Message:
-          </label>
-          <div className={cls.inputField}>
-            <TextArea
-              name="message"
-              onChange={handleChange}
-              placeholder="Write your message"
-              maxLength={50}
-              required
-              style={{
-                height: 150,
-                resize: 'none'
-              }}
-            />
-          </div>
-        </div>
+    <Card
+      title={__('Test Your Mail')}
+      style={{ margin: '20px' }}
+      extra={
+        <Button type="primary" onClick={() => form.submit()} loading={isPending}>
+          {__('Send Test Email')}
+        </Button>
+      }
+    >
+      <Form form={form} onFinish={onFinish} layout="vertical">
+        <Form.Item
+          name="to"
+          label={__('To')}
+          rules={[
+            { required: true, message: 'Please enter recipient email' },
+            { type: 'email', message: 'Please enter a valid email' },
+            {
+              pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              message: 'Please enter a valid email address'
+            },
+            {
+              max: 254,
+              message: 'Email address is too long'
+            }
+          ]}
+        >
+          <Input placeholder="Enter Email Address" type="email" />
+        </Form.Item>
 
-        <AntBtn type="submit" isLoading={isLoading} className={cls.btn}>
-          Send Test
-        </AntBtn>
-        <Toaster />
-      </form>
-    </div>
+        <Form.Item
+          name="subject"
+          label={__('Subject')}
+          rules={[{ required: true, message: 'Please enter email subject' }]}
+        >
+          <Input placeholder="Email Subject" />
+        </Form.Item>
+
+        <Form.Item
+          name="message"
+          label={__('Message')}
+          rules={[{ required: true, message: 'Please enter email message' }]}
+        >
+          <TextArea
+            placeholder="Write your message"
+            style={{
+              resize: 'both',
+              minHeight: '100px',
+              minWidth: '100%',
+              maxWidth: '100%'
+            }}
+          />
+        </Form.Item>
+      </Form>
+      {debugInfo?.length ? <DebugOutput log={debugInfo} /> : ''}
+    </Card>
   )
 }

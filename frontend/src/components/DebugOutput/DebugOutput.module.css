@@ -1,0 +1,45 @@
+.terminal {
+  background: #0b0f14;
+  color: #d6deeb;
+  border-radius: 6px;
+  padding: 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  border: 1px solid rgba(255 255 255, 3%);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.title {
+  font-weight: 600;
+  color: #9fb0ff;
+}
+
+.content {
+  max-height: 280px;
+  overflow: auto;
+  padding: 8px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 2%), rgba(255, 255, 255, 1%));
+  border-radius: 4px;
+}
+
+.pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.line {
+  padding: 2px 0;
+}
+
+.empty {
+  opacity: 0.6;
+  font-style: italic;
+}

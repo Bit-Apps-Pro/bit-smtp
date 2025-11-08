@@ -76,10 +76,11 @@ class InstallerProvider
     {
         $migrations = [
             'BitSmtpPluginOptions',
+            'BitSmtpLogsTableMigration',
         ];
 
         return [
-            'path' => Config::get('BASEDIR')
+            'path' => Config::get('BACKEND_PATH')
                 . DIRECTORY_SEPARATOR
                 . 'db'
                 . DIRECTORY_SEPARATOR
@@ -93,10 +94,11 @@ class InstallerProvider
     {
         $migrations = [
             'BitSmtpPluginOptions',
+            'BitSmtpLogsTableMigration',
         ];
 
         return [
-            'path' => Config::get('BASEDIR')
+            'path' => Config::get('BACKEND_PATH')
                 . DIRECTORY_SEPARATOR
                 . 'db'
                 . DIRECTORY_SEPARATOR

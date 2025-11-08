@@ -18,13 +18,13 @@ function TelemetryPopup({ isTelemetryModalOpen, setIsTelemetryModalOpen }: Telem
   const [isDataNoticeShow, setIsDataNoticeShow] = useState(false)
 
   const handleTelemetryAccess = () => {
-    request('telemetry_permission_handle', { isChecked: true })
+    request({ action: 'telemetry/handle-permission', data: { isChecked: true } })
     setIsTelemetryModalOpen(false)
   }
 
   const handleTelemetryModalSkip = () => {
     setIsTelemetryModalOpen(false)
-    request('telemetry_permission_handle', { isChecked: false })
+    request({ action: 'telemetry/handle-permission', data: { isChecked: false } })
   }
 
   const steps = [
@@ -32,7 +32,7 @@ function TelemetryPopup({ isTelemetryModalOpen, setIsTelemetryModalOpen }: Telem
       title: '',
       content: (
         <>
-          <span className={cls.improvementsTitle}>New Improvements</span>
+          <span className={cls.improvementsTitle}>New Features</span>
           <div className={cls.improvements}>
             <ul>
               {changeLogs.improvements.map(item => (
@@ -92,9 +92,7 @@ function TelemetryPopup({ isTelemetryModalOpen, setIsTelemetryModalOpen }: Telem
   return (
     <AntModal
       title={
-        <div style={{ textAlign: 'center', fontSize: '20px', marginBottom: '20px' }}>
-          Bit SMTP 2024 Updates
-        </div>
+        <div style={{ textAlign: 'center', fontSize: '20px', marginBottom: '20px' }}>Changelog</div>
       }
       open={isTelemetryModalOpen}
       closable={false}

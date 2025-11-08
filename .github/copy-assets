@@ -1,0 +1,19 @@
+#!/usr/bin/env /usr/bin/bash
+
+PLUGIN_DIR="$PWD"
+
+
+rm -rf "$PLUGIN_DIR/build";
+mkdir -p "$PLUGIN_DIR/build/bit-smtp";
+BUILD_DIR="$PLUGIN_DIR/build/bit-smtp";
+
+cd "$PLUGIN_DIR"
+
+cp -r "$PLUGIN_DIR/bit_smtp.php"  "$BUILD_DIR/bit_smtp.php"
+
+cp -r "$PLUGIN_DIR/assets"  "$BUILD_DIR/assets"
+cp -r "$PLUGIN_DIR/vendor"  "$BUILD_DIR/vendor"
+cp -r "$PLUGIN_DIR/backend"  "$BUILD_DIR/backend"
+cp -r "$PLUGIN_DIR/languages"  "$BUILD_DIR/languages"
+cp -r "$PLUGIN_DIR/readme.txt"  "$BUILD_DIR/readme.txt"
+cp -r "$PLUGIN_DIR/composer.json"  "$BUILD_DIR/composer.json"

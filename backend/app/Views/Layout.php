@@ -58,7 +58,7 @@ class Layout
      */
     public function head($currentScreen)
     {
-        if (strpos($currentScreen, Config::SLUG) === false) {
+        if (strpos($currentScreen, Config::SLUG) === false || wp_script_is(Config::SLUG . '-MODULE-index')) {
             return;
         }
 
@@ -71,29 +71,24 @@ class Layout
         wp_enqueue_style('font', self::FONT_URL, [], $version);
 
         if (Config::isDev()) {
-            wp_enqueue_script($slug . '-vite-client-helper-MODULE', Config::DEV_URL . '/config/devHotModule.js', [], null);
-            wp_enqueue_script($slug . '-vite-client-MODULE', Config::DEV_URL . '/@vite/client', [], null);
-            wp_enqueue_script($slug . '-index-MODULE', Config::DEV_URL . '/main.tsx', [], null);
+            wp_enqueue_script($slug . '-MODULE-vite-client-helper', Config::devUrl() . '/config/devHotModule.js', [], null);
+            wp_enqueue_script($slug . '-MODULE-index', Config::devUrl() . '/main.tsx', [], null);
         } else {
-            wp_enqueue_script($slug . '-index-MODULE', Config::get('ASSET_URI') . '/main-.js', [], $version);
-            wp_enqueue_style($slug . '-styles', Config::get('ASSET_URI') . '/main-.css', null, $version, 'screen');
+            wp_enqueue_script($slug . '-MODULE-index', Config::get('ASSET_URI') . '/main.' . Config::VERSION . '.js', [], $version);
+            wp_enqueue_style($slug . '-styles', Config::get('ASSET_URI') . '/main.' . Config::VERSION . '.css', null, $version, 'screen');
         }
 
-        wp_localize_script(Config::SLUG . '-index-MODULE', Config::VAR_PREFIX, self::createConfigVariable());
+        wp_localize_script(Config::SLUG . '-MODULE-index', Config::VAR_PREFIX, self::createConfigVariable());
     }
 
     public function body()
     {
-        $assetURI = Config::get('ASSET_URI');
-        // phpcs:disable Generic.PHP.ForbiddenFunctions.Found
-
         echo <<<HTML
 <noscript>You need to enable JavaScript to run this app.</noscript>
 <div id="bit-apps-root">
   <div
     style="display: flex;flex-direction: column;justify-content: center;
     align-items: center;height: 90vh;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-    <!-- <img alt="app-logo" class="bit-logo" width="70" src="{$assetURI}/img/logo.svg"> -->
     <h1>Welcome to Bit SMTP.</h1>
     <p></p>
   </div>
@@ -155,7 +150,7 @@ HTML;
     public function scriptTagFilter($html, $handle, $href)
     {
         $newTag = $html;
-        if (str_contains($handle, 'MODULE')) {
+        if (strpos($handle, Config::SLUG . '-MODULE') !== false) {
             $newTag = preg_replace('/<script /', '<script type="module" ', $newTag);
         }
 
@@ -167,7 +162,7 @@ HTML;
         $frontendVars = apply_filters(
             Config::withPrefix('localized_script'),
             [
-                'nonce'       => wp_create_nonce(Config::withPrefix('nonce')),
+                'nonce'       => wp_create_nonce('wp_rest'),
                 'rootURL'     => Config::get('ROOT_URI'),
                 'assetsURL'   => Config::get('ASSET_URI'),
                 'baseURL'     => Config::get('ADMIN_URL') . 'admin.php?page=' . Config::SLUG . '#',
@@ -178,6 +173,7 @@ HTML;
                 'dateFormat'  => Config::getOption('date_format', true),
                 'timeFormat'  => Config::getOption('time_format', true),
                 'timeZone'    => DateTimeHelper::wp_timezone_string(),
+                'adButton'    => Config::adButton(),
 
             ]
         );

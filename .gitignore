@@ -1,8 +1,8 @@
 vendor/
 assets/
 languages/
-node_modules
-dist
+node_modules/
+dist/
 frontend/yarn-error.log
 frontend/coverage/*
 frontend/src/coverage/*
@@ -17,3 +17,5 @@ eslint-cache/
 locale.pot
 .vscode/settings.json
 package-lock.json
+port
+build/

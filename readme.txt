@@ -1,245 +1,241 @@
-=== SMTP - 100% Free & Open Source SMTP plugin for WordPress - Bit SMTP   ===
-Contributors: bitpressadmin
-Tags: smtp, wp mail smtp, gmail smtp, sendgrid smtp, phpmailer
+=== Bit SMTP - Easy WP SMTP Solution with Email Logs   ===
+Contributors: bitpressadmin, akaioum
+Tags: email logs, smtp, email, gmail smtp, wp mail smtp
 Requires at least: 5.0
 Tested up to: 6.7.1
 Requires PHP: 7.4
-Stable tag: 1.1.9
+Stable tag: 1.2
 License: GPLv2 or later
-
-Enable SMTP plugin to authenticate mail service of your site by configuring SMTP server of your desired mail service.
-
-Connect any SMTP like MailGun SMTP, Google SMTP, Hotmail,Yahoo,AWS SES,ZOHO Mail,Sendgrid,Sendinblue,Outlook.
-
 
 == Description ==
 
-<strong>Easiest SMTP Plugin for WordPress. It's FREE and easy to setup.</strong>
+## SMTP Plugin for WordPress for Reliable and Secure Email Delivery | Complete Free SMTP Solution with Detailed Email Logs
 
-A lot of site owners face the spam mail problem for using the WordPress default PHP mail function(). When it comes to mail service there may be some restrictions: sometimes emails are not delivered, sites cross the limit of outgoing mail.
+**Easily fix WordPress email delivery issues. Connect with Gmail SMTP, SendGrid, Amazon SES, Outlook, Mailgun, and more SMTP services to keep your site communication dependable and secure.**
 
-Bit SMTP plugin allows you to authenticate the mail service of your site by configuring the SMTP server of your desired mail service. SMTP is a protocol that helps your WordPress site to make its email deliverability more easygoing & reliable. By enabling this feature you can send mail from your site to your recipients via your preferred mail server.
+## Is your WordPress not sending emails, or are they going to spam?
 
-### How does SMTP work:
-At first, you have to open an account on your desired hosting provider (e.g: MailGun, Gmail, Yahoo, Hotmail, Zoho mail). By opening an account you are authenticating your WordPress site. They will provide you with the necessary credentials (e.g.: Encryption type, SMTP port ). You have to put this information when configuring SMTP on your site. Once your site is authenticated you can send mail through your preferred SMTP server. All the email validation work will be done on your specified SMTP server.
+Solve your email delivery problems with Bit SMTP. The perfect WP Mail SMTP plugin. SMTP helps you send WordPress emails safely and reliably.
 
-To access all the mail services you need professional mail addresses. The mail services you can use through this plug-in:
+When you use Bit SMTP, your emails get delivered perfectly because they are sent from an authenticated source. Many WordPress sites have problems with email. The standard PHP mail function is often blocked or filtered as spam. Bit SMTP solves this issue. It lets you connect your WordPress site to any real **SMTP server.**
 
-1. MailGun SMTP [5,000 free email /per month for 3 months]
-2. Gmail SMTP [10000 free email/per month]
-3. Hotmail
-4. Yahoo
-5. AWS SES
-6. ZOHO Mail
-7. Sendgrid
-8. Sendinblue
-9. Outlook
+## Easily track and manage all your WordPress email logs with Bit SMTP.
 
-  
-= Mail Gun SMTP: =
-Mailgun SMTP is a popular service provider for sending large quantities of emails, and they offer a monthly allowance of 10,000 free emails for new users.
+Bit SMTP is a **free plugin.** All of the features are completely free. So you don’t need to spend on SMTP configuration
 
-SMTP Host : smtp.mailgun.org
-Type of Encryption :TLS
-SMTP Port: 587
+Let’s explore the main reasons to use Bit SMTP and how you can set it up easily.
 
-= Gmail SMTP: =
-Bloggers and small business owners frequently prefer not to utilize third-party SMTP services. However, they have the option to utilize their Gmail or G Suite accounts for SMTP emails.
+== Easily Setup Mail SMTP in Minutes ==
 
-SMTP Host: smtp.gmail.com
-Type of Encryption: TLS
-SMTP Port: 587
+Using an SMTP server authenticates your website's emails, proving they are from a trusted source. This tells the recipient’s mail system that your email is genuine. It is like presenting your ID before entering a secure building.
 
-= Hotmail SMTP: =
+Getting started with Bit SMTP is simple:
 
-SMTP Host: smtp.live.com
-Type of Encryption: TLS
-SMTP Port: 587
+1. **Sign up with an email provider:** Choose Gmail, Mailgun, Yahoo, Zoho Mail, or your favorite.  
+2. **Get your SMTP details:** Your provider gives you the host, port, and encryption info.  
+3. **Add these details in Bit SMTP:** Go to your WordPress dashboard. Add your SMTP details.  
+4. **Send a test email:** Make sure emails go out. Now, every message uses a secure SMTP connection.
+5. **Enable email logs:** You will see detailed email logs from the Bit SMTP dashboard.
 
-= Yahoo: =
+Your provider handles delivery, ensuring your WordPress emails arrive securely every time.
 
-SMTP Host: smtp.mail.yahoo.com
-Type of Encryption: SSL
-SMTP Port: 465
+## ⚡Key Features of Bit SMTP ⚡
 
-= Zoho Mail SMTP: =
+[Bit SMTP](https://bitapps.pro/bit-smtp/) gives you all the tools you need to send emails from WordPress safely and reliably.
 
-Experience the convenience of sending emails securely using your personal or business Zoho Mail account, while ensuring the utmost protection for your login credentials. Stay safe and confident with Zoho Mail's reliable email delivery.
+- **Connect to Any SMTP Server:** Easily integrate with top SMTP Mail services like Gmail, Outlook, Amazon SES, SendGrid, Mailgun, and more.  
+- **Secure Mail Delivery:** Send emails with SSL/TLS encryption for secure transmission.  
+- **Customizable Reply-To:** Set a custom Reply-To address for managing responses.  
+- **Quick Setup:** Get started with simple setup steps and configure your emails within minutes.  
+- **Free and Fully Functional:** All features are completely free. No premium plan required
+- **Details Email Logs:** You can view detailed logs of every email sent through your SMTP in the Bit SMTP dashboard. Set how long to keep the logs with a date range. You can also search logs by email address.
+- **Dark Mode Interface:** Bit SMTP comes with a clean dark mode that’s easy on the eyes and makes your dashboard look great.
 
-SMTP Host: smtp.zoho.com
-Type of Encryption: TSL
-SMTP Port: 587
+## Simple Setup for SMTP Configuration in WordPress
 
-= Amazon SES SMTP: =
-Amazon SES is an ideal mailer for advanced users seeking to leverage the power of Amazon Web Services (AWS) SES to send high volumes of emails.
-It caters to technical users and offers a robust platform for efficient email delivery.
-With Amazon SES, users can maximize the benefits of AWS SES service and effectively handle large email volumes.
+Get Bit SMTP running in minutes. Just go to **Bit SMTP ▸ Mail Configuration** in your WordPress dashboard.
 
-SMTP Host:http://email-smtp.us-west-2.amazonaws.com/
-Type of Encryption: TLS
-SMTP Port: 587
+What to enter:
 
-= Sendgrid SMTP: =
-With SendGrid's free SMTP plan, you can send up to 100 emails per day. Easily integrate SendGrid SMTP with your WordPress site for reliable email delivery.
+* **Enable Mail:** Select yes  
+* **From Email Address:** Set the sender’s email  
+* **From Name:** Name to show as sender  
+* **Reply-To Email Address:** Add if you want replies somewhere specific  
+* **SMTP Host:** The mail server, such as smtp.gmail.com for Gmail SMTP  
+* **Type of Encryption:** SSL or TLS, as recommended  
+* **SMTP Port:** Use the right port number (usually 465 or 587)  
+* **SMTP Authentication:** Yes, and then fill in your username and password  
+* **Username and Password:** Use details from your email provider
 
-host: smtp.sendgrid.net  
-port: 587  
-encrypted: TLS
- 
-= Sendinblue SMTP: =
-Unlock the benefits of Sendinblue, a highly recommended transactional email service utilized by over 80,000 growing companies worldwide. With a daily email volume of over 30 million, their dedicated experts continuously enhance the reliability and speed of their SMTP infrastructure. Enjoy the advantage of 300 free emails per day provided by Sendinblue to empower your communication needs.
+Once you save, Bit SMTP handles the rest. Now, WordPress Mail SMTP is in action, and your emails are safer.
 
-host: smtp-relay.sendinblue.com  
-port: 587  
-encrypted: TLS
+## Supported Email Services and SMTP Providers
 
-= outlook SMTP: =
-Supercharge your email deliverability with our Microsoft 365 / Outlook mailer integration. Seamlessly send emails from WordPress using your current Outlook.com or Microsoft 365 account, maximizing convenience and efficiency. Elevate your business communication by harnessing the power of our integrated solution.
+Bit SMTP is designed to work with almost all popular SMTP providers. You can connect your site to these SMTP mail services. Most of the SMTP providers offer free plans. This flexibility allows you to choose the best option for your needs and budget.
 
-host: smtp-mail.outlook.com  
-Type of Encryption: TLS  
-port: 587
+Here is a list of popular providers and their SMTP settings:
 
-###   ⭐Features
+#### **Mailgun SMTP**
 
-1.  Send email using an SMTP server
-    
-2.  You can use Gmail, Yahoo, Hot mail's, Mail gun, Amazon SES , Sendgrid, Sendinblue, Outlook &  Zoho Mail SMTP servers if you have an account with them
-    
-3.  Securely deliver emails to your recipients.
-    
-4.  Ability to specify a Reply-to email address
-    
-5.  Email Log (Coming soon)
+Get 100 free emails per day.
 
-6.  Email Control (Coming soon)
+* **Host:** smtp.mailgun.org  
+* **Encryption:** TLS  
+* **Port:** 587
 
-  
-Once you have installed the plugin, Click the BIT SMTP menu
-The general section consists of the following options:
+#### **Gmail SMTP**
 
-* **Enable SMTP:** Yes/No if option Yes plugin is enabled or option No plugin is disabled (This option should always be checked “Yes”).
+Easy for bloggers and small businesses. Use a Gmail or Google Workspace account for WordPress emails.
 
-* **From Email Address:** The email address that will be used to send emails to your recipients.
+* **Host:** smtp.gmail.com  
+* **Encryption:** TLS  
+* **Port:** 587
 
-* **From Name:** The name your recipients will see as part of the “from” or “sender” value when they receive your message.
+#### **Hotmail SMTP**
 
-* **Reply-To Email Address:** The email address that will be used to Reply-to email address to your recipients.
+Works for Hotmail or Outlook.com accounts. Use Microsoft’s server for your mail.
 
-* **SMTP Host:** Your outgoing mail server (example: smtp.gmail.com).
+* **Host:** smtp.live.com  
+* **Encryption:** TLS  
+* **Port:** 587
 
-* **Type of Encryption:** SSL/TLS.
+#### **Yahoo SMTP**
 
-* **SMTP Port:** The port that will be used to relay outbound mail to your mail server (example: 587).
+Set up outgoing mail from your Yahoo account.
 
-* **SMTP Authentication:** No/Yes (This option should always be checked “Yes”).
+* **Host:** smtp.mail.yahoo.com  
+* **Encryption:** SSL  
+* **Port:** 465
 
-* **Username:** The username that you use to login to your mail server.
+#### **Zoho Mail SMTP**
 
-* **Password:** The password that you use to login to your mail server.
+Reliable for secure email delivery.
 
-After configuring the SMTP server you are ready for Email testing.
+* **Host:** smtp.zoho.com  
+* **Encryption:** TLS  
+* **Port:** 587
 
-###  📨 Bit SMTP Testing 
+#### **Amazon SES SMTP**
 
-This testing option will help you to verify that actually, your website can relay outgoing mail to the referred recipients. SMTP testing option consists of :
+Best choice for sending large numbers of emails.
 
-* **To Field:** Type the email address to whom you want to send the mail.
+* **Host:** email-smtp.us-west-2.amazonaws.com  
+* **Encryption:** TLS  
+* **Port:** 587
 
-* **Subject Field:** Include the subject of your message.
+#### **SendGrid SMTP**
 
-* **Message Field:**  Write your desired message to this text field.
+Get 100 free emails a day. SendGrid is well-known for great deliverability.
 
-📹 For Video Tutorial
+* **Host:** smtp.sendgrid.net  
+* **Encryption:** TLS  
+* **Port:** 587
+
+#### **Brevo (Sendinblue) SMTP**
+
+Send up to 300 free emails each day with Brevo.
+
+* **Host:** smtp-relay.sendinblue.com  
+* **Encryption:** TLS  
+* **Port:** 587
+
+#### **Outlook SMTP**
+
+Send business emails with Microsoft 365 or Outlook.com accounts.
+
+* **Host:** smtp-mail.outlook.com  
+* **Encryption:** TLS  
+* **Port:** 587
+
+## Test Your SMTP Connection
+
+Bit SMTP includes a tool for this:
+
+1. Visit **Bit SMTP ▸ Testing** in your site dashboard.  
+2. Add the recipient’s address, your subject, and a brief message.  
+3. Click "Send Test".
+
+If you receive the email, you’re setup is correct. To make things even easier, check out our video tutorial:
 
 https://youtu.be/1dnw6v2E2y8
 
+## Compatible with All the Top Form Plugins
 
-### Bit SMTP COMPATIBLE WITH ALL POPULAR FORM BUILDER:
+If you use forms, you want to make sure notifications are delivered every time. Bit SMTP works with all leading form plugins on WordPress.
 
-[**Bit Form:**](https://wordpress.org/plugins/bit-form/)
-[**Gravity Form**](https://www.gravityforms.com/)
-[**Contact Form 7**](https://wordpress.org/plugins/contact-form-7/)
-[**WPForms Pro**](https://wpforms.com/)
-[**Ninja Forms-Contact Form**](https://wordpress.org/plugins/ninja-forms/)
-[**Forminator Forms**](https://wordpress.org/plugins/forminator/)
-[**Fluent Forms**](https://wordpress.org/plugins/fluentform/)
-[**Formidable Forms**](https://wordpress.org/plugins/formidable/)
-[**Everest Forms**](https://wordpress.org/plugins/everest-forms/)
-[**WS Forms**](https://wordpress.org/plugins/ws-form/)
-[**Happy Forms - Contact Form**](https://wordpress.org/plugins/happyforms/)
-[**weForms - Contact Form**](https://wordpress.org/plugins/weforms/)
-[**Kali Forms**](https://wordpress.org/plugins/kali-forms/)
-[**WPForm Lite**](https://wordpress.org/plugins/wpforms-lite/)
-[**PlanSo Forms**](https://www.planso.net/planso-form-builder/)
-[**Form Maker by 10Web**](https://wordpress.org/plugins/form-maker/)
-[**Elementor Form**](https://elementor.com/)
-[**FormCraft**](https://wordpress.org/plugins/formcraft-form-builder/)
-[**Quform WordPress Form Builder**](https://www.quform.com/)
-[**Caldera Contact Forms**](https://calderaforms.com/)
+Supported plugins include:
 
-### SECURITY:
+* [**Bit Form**](https://wordpress.org/plugins/bit-form/)  
+* **Gravity Form**  
+* **Contact Form 7**  
+* **WPForms Pro**  
+* **Ninja Forms**  
+* **Forminator Forms**  
+* **Fluent Forms**  
+* **Formidable Forms**  
+* **Everest Forms**  
+* **WS Forms**  
+* **Happy Forms**  
+* **weForms**  
+* **Kali Forms**  
+* **WPForm Lite**  
+* **PlanSo Forms**  
+* **Form Maker by 10Web**  
+* **Elementor Form**  
+* **FormCraft**  
+* **Quform WordPress Form Builder**  
+* **Caldera Contact Forms**
 
-The Bit SMTP team places a high priority on security. Not only does the plugin adhere to all security best practices, but we offer various options to ensure the safety and protection of your website.
+And all other plugins that rely on WordPress's wp_mail to send emails
 
-For recommended direct SMTP mailers integrations like SMTP.com, Brevo (formerly Sendinblue), Mailgun, SendGrid, Postmark, and SparkPost, we utilize official provider APIs. This means that you never have to input your username or password in the plugin settings, and these credentials are not stored in the database. Instead, we use tokens or API keys, which provide a much higher level of security.
+## Strong Security for Your WordPress Emails
 
+Bit SMTP follows best security practices. Many providers, like **Gmail SMTP**, **SendGrid**, or **Mailgun**, provide secure SMTP configuration credentials. You can connect using the SMTP credentials, not by typing your main login into WordPress. This keeps your data safe and ensures a higher level of security.
 
-🎉 Overview of other products we are offering :
+## **Reliable WordPress Mail SMTP for Every User**
 
-[**Bit Form:**](https://wordpress.org/plugins/bit-form/) One of our best selling product. Bit Form is an amazing drag-and-drop form builder that allows you to create custom forms to interact with your visitors. It gives you the freedom to create any form you want, with no coding required.
+Don’t let emails go missing or end up in spam. Bit SMTP, the leading WP Mail SMTP plugin, gives you full control over your WordPress email delivery. You can use Gmail SMTP or connect to any mail service you trust. 
 
-[**Bit Integrations:**](https://wordpress.org/plugins/bit-integrations/) Automate 200+ platforms and Contact form 7, Elementor Form, WooCommerce, Google Sheet, WPForms, Forminator, BuddyBoss, LearnDash, Hubspot, Mail poet, MailChimp, Webhook, ACF, Zapier, Fluent, Forms, CRM, LMS, Membership & many more.
+Make sure all your emails get to the right place, every time. Install Bit SMTP now and enjoy reliable, secure email delivery from your WordPress site. Say goodbye to missed emails and spam issues!
 
-[**Bit Assist:**](https://wordpress.org/plugins/bit-assist/) Connect your all support assistant with a single button. Floating Chat Widget, Contact Chat Icons, Telegram Chat, Line Messenger, WeChat, WhatsApp, Email, SMS, Call Button & more.
+## Track and Monitor WordPress Email Logs
+With Bit SMTP’s built-in email logs system, you can easily track every email you send. View delivery details and monitor performance right from your WordPress dashboard. This gives you complete transparency and control over your WordPress site's email activity.
 
-[**Bit File Manager:**](https://wordpress.org/plugins/file-manager/) Best File manager and Code editor plugin for WordPress. You can edit, upload, delete, copy, move, rename, archive and extract files with the file manager plugin. You don’t need to worry about FTP anymore. It is really simple and easy to use.
+### **Explore Our Other Products :**
 
+* [**Bit Form**](https://bit-form.com/): A powerful WordPress form builder that lets you create **multi-step and conversational forms** with a **smart drag-and-drop builder**. Connect your forms with 50+ apps through **built-in integrations** to automate workflows. Build, customize, and convert with the lightning-fast form solution  
+* [**Bit Integrations**](https://bit-integrations.com/): A no-code WordPress automation plugin that lets you connect **300+ apps and services** to automate your workflows in minutes. With its **3 easy automation methods**, you can automate tasks, sync data, and maximize productivity. It connects your forms, CRMs, LMS, and eCommerce tools all inside WordPress.  
+* [**Bit Assist**](https://bitassist.co/): Connect all your customer support channels with a single button. Integrate Floating Chat Widget, WhatsApp, Email, SMS, Telegram, Messenger, and more with Bit Assist.  
+* [**Bit Social**](https://bit-social.com/): A social media automation tool that lets you **auto-post, schedule, and share instantly** across **12+ platforms** like Facebook, Instagram, LinkedIn, X, Pinterest, and more with a smart calendar view.  
+* [**Bit Flows**](https://bit-flows.com/): Bit Flows is a powerful automation tool with multi-step, unlimited workflows and advanced tools, including Router, Repeater, Iterator, and JSON Parser. With built-in AI integrations, it’s a more powerful and easier alternative to n8n.  
+* [**Bit File Manager**:](https://bitapps.pro/bit-smtp/) Bit File Manager is a WordPress plugin for easy file management. Upload, organize, and control from your WordPress dashboard.
 
-[**Bit Social**](https://wordpress.org/plugins/bit-social/) Bit Social is a versatile WordPress plugin enabling effortless post creation, scheduling, and sharing across multiple social platforms, enhancing your social media management with simplicity and efficiency.
+Join our [**Bit Apps Community**](https://www.facebook.com/groups/bitapps) for the latest plugin and exclusive features updates
 
-[**Bit Flows**](https://bit-flows.com/) – Advanced workflow automation alternative to Zapier in WordPress.
+You can find the full source code on [GitHub,](https://github.com/Bit-Apps-Pro/bit-smtp) and we welcome any contributions to help improve this amazing plugin
 
-[**ToWP:**](https://towp.io//) ToWP is a powerful platform that lets you create temporary WordPress sites in less than 10 seconds using just your email! No passwords, no login URLs to remember — just a smooth experience.It is a completely free platform.
+#### **Telemetry Data**
 
-[**Webhook.is:**](https://webhook.is/) Test your incoming webhook response & send outgoing webhook request for free.
+Bit SMTP uses [wp-telemetry](https://packagist.org/packages/bitapps/wp-telemetry) to collect some telemetry data upon the user’s confirmation. This helps us to troubleshoot problems faster & make product improvements.
 
-🔔 For more updates about our products we cordially request you to join our [**Fb Community**](https://www.facebook.com/groups/bitcommunityusers).
+Wp-Telemetry DOES NOT IMMEDIATELY start gathering data; rather, it will gather basic telemetry data when a user allows it. We collect the data to ensure a great user experience for all our users.
 
-You can access the full source code on GitHub, and your contributions to enhancing this awesome Plugin are more than welcome.
-[**View on GitHub**](https://github.com/Bit-Apps-Pro/bit-smtp)
-
-## FAQ
-
-= 1. Is it possible to utilize this plugin to send emails via SMTP from my WordPress site? =
-Yes, you can use this plugin to send emails via SMTP from your WordPress site. You can use Gmail, Yahoo, Hot mail's, Mail Gun, Amazon SES, Sendgrid, Sendinblue, Outlook &  Zoho Mail SMTP servers if you have an account with them.
-
-= 2. Is it possible to integrate the Amazon SES API with Bit SMTP? =
-Yes, you can integrate the Amazon SES API with Bit SMTP.
-
-= 3. Is it possible to send WordPress emails using SendGrid? =
-Yes, possible to send WordPress emails using SendGrid.
-
-= 4. Is it possible to send WordPress emails using Sendinblue? =
-Yes, possible to send WordPress emails using Sendinblue.
-
-= 5. Is it possible to send WordPress emails using Outlook? =
-Yes, possible to send WordPress emails using Outlook.
-
-= 6. Is it possible to send WordPress emails using Zoho Mail? =
-Yes, possible to send WordPress emails using Zoho Mail.
-
-= 7. Is it possible to send WordPress emails using Mailgun? =
-Yes, possible to send WordPress emails using Mailgun.
-
-= 9. Is it possible to send WordPress emails using Yahoo? =
-Yes, possible to send WordPress emails using Yahoo.
-
-= 10. Is it possible to send WordPress emails using Hotmail? =
-Yes, possible to send WordPress emails using Hotmail.
-
+== Screenshots ==
+1. SMTP Configuration
+2. Send test mail to validate SMTP Configuration
+3. Mail sent logs
+4. Log detail of a sent mail
+5. Preview of email log
 
 == Changelog ==
+
+= 1.2 (08 Nov, 2025) =
+* Feat: Redesigned interface
+* Feat: Email activity history
+* Feat: View sent emails
+* Feat: Resend email
+* Feat: Delete email record
+* Feat: Resend multiple emails
 
 = 1.1.8 (31 Jan, 2025) =
 * Bit Flows promotional banner added 

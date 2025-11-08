@@ -1,20 +1,10 @@
-import { Toaster as Toast } from 'react-hot-toast'
+import { notification } from 'antd'
 
-export default function Toaster() {
-  return (
-    <Toast
-      position="bottom-right"
-      gutter={8}
-      toastOptions={{
-        duration: 3000,
-        style: {
-          background: '#363636',
-          color: '#fff'
-        },
-        success: {
-          duration: 3000
-        }
-      }}
-    />
-  )
+const notify = {
+  success: (message: string, description?: string) => notification.success({ message, description }),
+  error: (message: string, description?: string) => notification.error({ message, description }),
+  info: (message: string, description?: string) => notification.info({ message, description }),
+  warning: (message: string, description?: string) => notification.warning({ message, description })
 }
+
+export default notify

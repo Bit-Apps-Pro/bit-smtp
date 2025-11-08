@@ -8,6 +8,7 @@ namespace BitApps\SMTP;
  * @since 1.0.0-alpha
  */
 
+use BitApps\SMTP\Deps\BitApps\WPDatabase\Connection as DB;
 use BitApps\SMTP\Deps\BitApps\WPKit\Hooks\Hooks;
 use BitApps\SMTP\Deps\BitApps\WPKit\Http\RequestType;
 use BitApps\SMTP\Deps\BitApps\WPKit\Migration\MigrationHelper;
@@ -15,9 +16,13 @@ use BitApps\SMTP\Deps\BitApps\WPKit\Utils\Capabilities;
 use BitApps\SMTP\Deps\BitApps\WPTelemetry\Telemetry\Telemetry;
 use BitApps\SMTP\Deps\BitApps\WPTelemetry\Telemetry\TelemetryConfig;
 use BitApps\SMTP\HTTP\Middleware\NonceCheckerMiddleware;
+use BitApps\SMTP\HTTP\Services\LogService;
+use BitApps\SMTP\HTTP\Services\MailConfigService;
 use BitApps\SMTP\Providers\HookProvider;
 use BitApps\SMTP\Providers\InstallerProvider;
+use BitApps\SMTP\Providers\SmtpProvider;
 use BitApps\SMTP\Views\Layout;
+use Exception;
 
 final class Plugin
 {
@@ -31,6 +36,8 @@ final class Plugin
     private static $_instance;
 
     private $_registeredMiddleware = [];
+
+    private array $_container = [];
 
     /**
      * Initialize the Plugin with hooks.
@@ -93,6 +100,36 @@ final class Plugin
         }
 
         new HookProvider();
+
+        $this->_container['smtpProvider'] = new SmtpProvider();
+    }
+
+    /**
+     * Get Mail Config Provider instance.
+     *
+     * @return SmtpProvider
+     */
+    public function smtpProvider()
+    {
+        return $this->_container['smtpProvider'];
+    }
+
+    public function logger(): LogService
+    {
+        if (!isset($this->_container['logService'])) {
+            $this->_container['logService'] = new LogService();
+        }
+
+        return $this->_container['logService'];
+    }
+
+    public function mailConfigService(): MailConfigService
+    {
+        if (!isset($this->_container['mailConfigService'])) {
+            $this->_container['mailConfigService'] = new MailConfigService();
+        }
+
+        return $this->_container['mailConfigService'];
     }
 
     /**
@@ -118,8 +155,18 @@ final class Plugin
             return;
         }
 
-        if (version_compare(Config::getOption('db_version'), Config::DB_VERSION, '<')) {
-            MigrationHelper::migrate(InstallerProvider::migration());
+        if (version_compare(Config::getOption('version'), '1.2', '<')) {
+            Config::deleteOption('global_post_content');
+            Config::deleteOption('new_product_nav_btn_hide');
+        }
+
+        if (version_compare(Config::getOption('version'), Config::VERSION, '<')) {
+            // here we checked version. updated version number updates to option through this migration
+            try {
+                MigrationHelper::migrate(InstallerProvider::migration());
+            } catch (Exception $e) {
+                error_log('BIT SMTP Migration Error: ' . $e->getMessage());
+            }
         }
     }
 
@@ -149,6 +196,8 @@ final class Plugin
         }
 
         static::$_instance = new static();
+
+        DB::setPluginPrefix(Config::VAR_PREFIX);
 
         return true;
     }

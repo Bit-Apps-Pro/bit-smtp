@@ -1,4 +1,12 @@
 /* stylelint-disable comment-whitespace-inside */
+.ant-notification,
+.ant-notification-wrapper,
+.ant-message,
+.ant-message-notice,
+.ant-message-notice-content {
+  z-index: 999999 !important;
+}
+
 ::-webkit-datetime-edit {
   line-height: 1;
 }
@@ -18,21 +26,9 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  color: var(--accent-color);
 }
 
-/* // a {
-//   transition: none !important;
-// }
-
-// a:active,
-// a:hover {
-//   color: #005ca7;
-//   box-shadow: none;
-// } */
-
 #bit-apps-root {
-  /* background: #242424; */
   direction: ltr !important;
   font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
@@ -46,13 +42,14 @@ body {
   min-height: auto;
 }
 
-.link {
+#bit-apps-root .link {
   text-decoration: none;
   cursor: pointer;
 }
 
-a:focus {
+#bit-apps-root .link:focus {
   outline: none;
+  box-shadow: none;
 }
 
 svg {
@@ -60,30 +57,9 @@ svg {
   display: inline-block;
 }
 
-/*
-//scroll bar style start
-// ::-webkit-scrollbar {
-//   width: 10px;
-//   height: 10px;
-// }
-
-// ::-webkit-scrollbar-track {
-//   background: transparent;
-// }
-
-// ::-webkit-scrollbar-track:hover {
-//   background: #f1f1f1;
-//   border-radius: 10px;
-// }
-
-// ::-webkit-scrollbar-thumb {
-//   background: #dcdcdc;
-//   border-radius: 10px;
-// }
-
-// ::-webkit-scrollbar-thumb:hover {
-//   background: var(--dark);
-// } */
+a:focus {
+  outline: none;
+}
 
 /* skelaton loader */
 .loader {
@@ -112,65 +88,6 @@ svg {
   100% {
     stroke-dashoffset: -150px;
   }
-}
-
-/* .tippy-box {
-  background-color: var(--accent-color) !important;
-}
-[color-scheme="dark"] .tippy-box {
-  background-color: var(--bg-80) !important;
-  color: var(--txt-1) !important;
-} */
-
-/* stylelint-disable-next-line selector-class-pattern */
-.tippy-content {
-  padding: 4px 5px !important;
-}
-
-/* .dropDownTippy {
-  background-color: var(--bg) !important;
-  border: 1px solid var(--bg-10) !important;
-} */
-
-/* [color-scheme="dark"] .tippy {
-  background-color: var(--bg-80);
-  color: var(--txt-1) !important;
-} */
-
-/*--Ant-Layout--*/
-.ant-layout {
-  background: #f5f5f5 !important;
-}
-
-.ant-upload-drag {
-  width: 30% !important;
-}
-
-.ant-upload-list-text {
-  width: 30% !important;
-}
-
-/*--Ant-Layout--*/
-
-/*--Ant-Table--*/
-.ant-table {
-  margin-top: 10px !important;
-}
-
-.ant-table-title {
-  font-weight: 700;
-  font-size: 20px;
-}
-
-.ant-table-tbody > tr > td {
-  height: 70px;
-}
-
-/*--Ant-Table--*/
-
-.ant-card-body {
-  display: flex !important;
-  padding: 20px !important;
 }
 
 textarea {

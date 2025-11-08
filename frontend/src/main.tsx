@@ -5,6 +5,7 @@ import '@resource/styles/global.css'
 import '@resource/styles/utilities.sass'
 import '@resource/styles/variables.css'
 import '@resource/styles/wp-css-reset.css'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import 'antd/dist/reset.css'
 import { enableMapSet } from 'immer'
 import AppRoutes from './AppRoutes'
@@ -15,14 +16,19 @@ enableMapSet()
 // if (config.IS_DEV) window.appState = {}
 
 const elm = document.getElementById('bit-apps-root')
+
+const queryClient = new QueryClient()
+
 if (elm) {
   const root = createRoot(elm)
 
   root.render(
     <StrictMode>
-      <HashRouter>
-        <AppRoutes />
-      </HashRouter>
+      <QueryClientProvider client={queryClient}>
+        <HashRouter>
+          <AppRoutes />
+        </HashRouter>
+      </QueryClientProvider>
     </StrictMode>
   )
 }
