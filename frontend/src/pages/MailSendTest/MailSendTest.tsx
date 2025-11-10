@@ -1,5 +1,6 @@
 import { __ } from '@common/helpers/i18nwrap'
 import DebugOutput from '@components/DebugOutput/DebugOutput'
+import config from '@config/config'
 import { Button, Card, Form, Input } from 'antd'
 import useTestMailSend from './data/useTestMailSend'
 
@@ -22,14 +23,22 @@ export default function MailSendTest() {
   return (
     <Card
       title={__('Test Your Mail')}
-      style={{ margin: '20px' }}
+      style={{ margin: '20px', width: 'max-content', alignSelf: 'center' }}
       extra={
         <Button type="primary" onClick={() => form.submit()} loading={isPending}>
           {__('Send Test Email')}
         </Button>
       }
     >
-      <Form form={form} onFinish={onFinish} layout="vertical">
+      <Form
+        form={form}
+        onFinish={onFinish}
+        layout="vertical"
+        initialValues={{
+          to: config.SEND_TO,
+          subject: config.SUBJECT
+        }}
+      >
         <Form.Item
           name="to"
           label={__('To')}
@@ -60,7 +69,7 @@ export default function MailSendTest() {
         <Form.Item
           name="message"
           label={__('Message')}
-          rules={[{ required: true, message: 'Please enter email message' }]}
+          rules={[{ message: 'Please enter email message' }]}
         >
           <TextArea
             placeholder="Write your message"

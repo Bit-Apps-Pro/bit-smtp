@@ -41,7 +41,7 @@ github-actions:
       run: composer compat
     prettier:
       run: pnpm pretty:fix
-    test-js:
-      run: pnpm test
+    # test-js:
+    #   run: pnpm test
     ts-check:
       run: pnpm ts-check

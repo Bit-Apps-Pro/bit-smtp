@@ -66,8 +66,8 @@ class Layout
         $slug    = Config::SLUG;
 
         // loading google fonts
-        wp_enqueue_style('googleapis-PRECONNECT', 'https://fonts.googleapis.com');
-        wp_enqueue_style('gstatic-PRECONNECT-CROSSORIGIN', 'https://fonts.gstatic.com');
+        wp_enqueue_style($slug . 'PRECONNECT', 'https://fonts.googleapis.com');
+        wp_enqueue_style($slug . 'CROSSORIGIN', 'https://fonts.gstatic.com');
         wp_enqueue_style('font', self::FONT_URL, [], $version);
 
         if (Config::isDev()) {
@@ -83,17 +83,15 @@ class Layout
 
     public function body()
     {
-        echo <<<HTML
-<noscript>You need to enable JavaScript to run this app.</noscript>
-<div id="bit-apps-root">
-  <div
-    style="display: flex;flex-direction: column;justify-content: center;
-    align-items: center;height: 90vh;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-    <h1>Welcome to Bit SMTP.</h1>
-    <p></p>
-  </div>
-</div>
-HTML;
+        echo '<noscript>You need to enable JavaScript to run this app.</noscript>
+            <div id="bit-apps-root">
+              <div
+                style="display: flex;flex-direction: column;justify-content: center;
+                align-items: center;height: 90vh;">
+                <h1>Welcome to Bit SMTP.</h1>
+                <p></p>
+              </div>
+            </div>';
     }
 
     public function RemoveAdminNotices()
@@ -119,20 +117,12 @@ HTML;
     public function linkTagFilter($html, $handle, $href)
     {
         $newTag = $html;
-        if (str_contains($handle, 'PRECONNECT')) {
+        if (str_contains($handle, Config::SLUG . 'PRECONNECT')) {
             $newTag = preg_replace('/rel=("|\')stylesheet("|\')/', 'rel="preconnect"', $newTag);
         }
 
-        if (str_contains($handle, 'PRELOAD')) {
-            $newTag = preg_replace('/rel=("|\')stylesheet("|\')/', 'rel="preload"', $newTag);
-        }
-
-        if (str_contains($handle, 'CROSSORIGIN')) {
+        if (str_contains($handle, Config::SLUG . 'CROSSORIGIN')) {
             $newTag = preg_replace('/<link /', '<link crossorigin ', $newTag);
-        }
-
-        if (str_contains($handle, 'SCRIPT')) {
-            $newTag = preg_replace('/<link /', '<link as="script" ', $newTag);
         }
 
         return $newTag;
@@ -174,7 +164,7 @@ HTML;
                 'timeFormat'  => Config::getOption('time_format', true),
                 'timeZone'    => DateTimeHelper::wp_timezone_string(),
                 'adButton'    => Config::adButton(),
-
+                'sendTo'      => wp_get_current_user()->user_email
             ]
         );
         if (get_locale() !== 'en_US' && file_exists(Config::get('BASEDIR') . '/languages/generatedString.php')) {

@@ -8,7 +8,9 @@ export default function useTestMailSend() {
     async (values: Record<string, string>) => {
       const data = new FormData()
       Object.keys(values).forEach(key => {
-        data.append(key, values[key])
+        if (values[key]) {
+          data.append(key, values[key])
+        }
       })
       return request<Array<string>>({ action: 'mail/send-test', data })
     },

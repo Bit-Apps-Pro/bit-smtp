@@ -2,9 +2,9 @@
 Contributors: bitpressadmin, akaioum
 Tags: email logs, smtp, email, gmail smtp, wp mail smtp
 Requires at least: 5.0
-Tested up to: 6.7.1
+Tested up to: 6.8.3
 Requires PHP: 7.4
-Stable tag: 1.2
+Stable tag: 1.2.1
 License: GPLv2 or later
 
 == Description ==
@@ -228,6 +228,10 @@ Wp-Telemetry DOES NOT IMMEDIATELY start gathering data; rather, it will gather b
 5. Preview of email log
 
 == Changelog ==
+
+= 1.2.1 (10 Nov, 2025) =
+* chore: updated tested wordpress version
+* chore: ui updated
 
 = 1.2 (08 Nov, 2025) =
 * Feat: Redesigned interface

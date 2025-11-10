@@ -10,7 +10,9 @@ const config = {
   ROOT_URL: serverVariables.rootURL || 'http://wordpress.test',
   NONCE: serverVariables.nonce || '',
   ROUTE_PREFIX: serverVariables.routePrefix || 'bit_smtp_',
-  AD_BUTTON: serverVariables.adButton
+  AD_BUTTON: serverVariables.adButton,
+  SEND_TO: serverVariables.sendTo || '',
+  SUBJECT: 'This is a test email sent via Bit SMTP plugin'
 }
 
 export default config

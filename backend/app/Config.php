@@ -22,7 +22,7 @@ class Config
 
     public const VAR_PREFIX = 'bit_smtp_';
 
-    public const VERSION = '1.2';
+    public const VERSION = '1.2.1';
 
     public const DB_VERSION = '1.1';
 
@@ -183,7 +183,7 @@ class Config
 
     public static function adButton()
     {
-        $hideAT  = new DateTimeImmutable('2026-01-05');
+        $hideAT  = new DateTimeImmutable('2025-01-05');
         $current = new DateTimeImmutable();
 
         $diff = date_diff($current, $hideAT);

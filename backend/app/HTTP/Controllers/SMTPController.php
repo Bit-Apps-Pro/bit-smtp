@@ -11,6 +11,7 @@ use BitApps\SMTP\Deps\BitApps\WPKit\Utils\Capabilities;
 use BitApps\SMTP\HTTP\Requests\MailConfigStoreRequest;
 use BitApps\SMTP\HTTP\Requests\MailTestRequest;
 use BitApps\SMTP\Plugin;
+use BitApps\SMTP\Views\EmailTemplate;
 use Exception;
 
 class SMTPController
@@ -53,7 +54,20 @@ class SMTPController
             $smtpProvider = Plugin::instance()->smtpProvider();
             $smtpProvider->setDebug(true);
             Hooks::addFilter('wp_mail_content_type', [$this, 'setContentType']);
-            wp_mail($queryParams['to'], $queryParams['subject'], $queryParams['message']);
+
+            $message = $queryParams['message'];
+            if (empty(trim($message))) {
+                $emailData = [
+                    'title'     => $queryParams['subject'],
+                    'message'   => 'This is a test email sent via Bit SMTP plugin to verify your email configuration.',
+                    'site_name' => get_bloginfo('name'),
+                    'site_url'  => home_url()
+                ];
+
+                $message = EmailTemplate::getTemplate($emailData);
+            }
+
+            wp_mail($queryParams['to'], $queryParams['subject'], $message);
             remove_filter('wp_mail_content_type', [$this, 'setContentType']);
             if ($smtpProvider->isFailed() === false) {
                 $previousData = Config::getOption('test_mail_form_submitted');

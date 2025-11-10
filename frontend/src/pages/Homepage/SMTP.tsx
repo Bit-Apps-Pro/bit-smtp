@@ -55,7 +55,7 @@ export default function SMTP() {
       title={__('SMTP Configuration')}
       style={{
         margin: '20px',
-        position: 'relative'
+        alignSelf: 'center'
       }}
       styles={{
         header: {
@@ -81,77 +81,82 @@ export default function SMTP() {
           defaultChecked={status}
         />
       </Form.Item>
-      <Form
-        form={form}
-        initialValues={values}
-        onFinish={onFinish}
-        layout="vertical"
-        disabled={!status || isLoading || updateConfig.isPending}
-      >
-        <Space direction="vertical" size="middle" style={{ padding: '15px', width: 'fit-content' }}>
-          <Space size="middle" style={{ width: '100%' }}>
-            <Form.Item
-              name="from_email_address"
-              rules={[{ required: status, type: 'email' }]}
-              label={__('From Email Address')}
-              style={{ flex: 1, marginBottom: 0 }}
-            >
-              <Input placeholder="From Email Address" />
-            </Form.Item>
+      <Space style={{ width: 'max-content', alignSelf: 'center' }}>
+        <Form
+          form={form}
+          initialValues={values}
+          onFinish={onFinish}
+          layout="vertical"
+          disabled={!status || isLoading || updateConfig.isPending}
+        >
+          <Space direction="vertical" size="middle" style={{ padding: '15px', width: 'fit-content' }}>
+            <Space size="middle" style={{ width: '100%' }}>
+              <Form.Item
+                name="from_email_address"
+                rules={[{ required: status, type: 'email' }]}
+                label={__('From Email Address')}
+                style={{ flex: 1, marginBottom: 0 }}
+              >
+                <Input placeholder="From Email Address" />
+              </Form.Item>
+
+              <Form.Item
+                name="from_name"
+                rules={[{ required: status }]}
+                label={__('From Name')}
+                style={{ flex: 1, marginBottom: 0 }}
+              >
+                <Input placeholder="From Name" />
+              </Form.Item>
+            </Space>
 
             <Form.Item
-              name="from_name"
-              rules={[{ required: status }]}
-              label={__('From Name')}
-              style={{ flex: 1, marginBottom: 0 }}
+              name="re_email_address"
+              rules={[{ type: 'email' }]}
+              label={__('Reply-To Email Address')}
             >
-              <Input placeholder="From Name" />
-            </Form.Item>
-          </Space>
-
-          <Form.Item
-            name="re_email_address"
-            rules={[{ type: 'email' }]}
-            label={__('Reply-To Email Address')}
-          >
-            <Input placeholder="Reply-To Email Address" />
-          </Form.Item>
-
-          <Space size="middle" style={{ width: '100%' }}>
-            <Form.Item
-              name="smtp_host"
-              rules={[{ required: status }]}
-              label={__('SMTP Host')}
-              style={{ flex: 2, marginBottom: 0 }}
-            >
-              <Input placeholder="SMTP Host" />
+              <Input placeholder="Reply-To Email Address" />
             </Form.Item>
 
-            <Form.Item name="port" label={__('SMTP Port')} style={{ flex: 1, marginBottom: 0 }}>
-              <AutoComplete options={[{ value: 25 }, { value: 465 }, { value: 587 }]}>
-                <Input placeholder="Port" type="number" />
-              </AutoComplete>
-            </Form.Item>
-          </Space>
+            <Space size="middle" style={{ width: '100%' }}>
+              <Form.Item
+                name="smtp_host"
+                rules={[{ required: status }]}
+                label={__('SMTP Host')}
+                style={{ flex: 2, marginBottom: 0 }}
+              >
+                <Input placeholder="SMTP Host" />
+              </Form.Item>
 
-          <Space size="middle" style={{ width: '100%', display: 'flex' }}>
-            <Form.Item name="encryption" label={__('Encryption')} style={{ flex: 1, marginBottom: 0 }}>
-              <Radio.Group>
-                <Radio.Button value="tls">TLS</Radio.Button>
-                <Radio.Button value="ssl">SSL</Radio.Button>
-                <Radio.Button value="none">None</Radio.Button>
-              </Radio.Group>
-            </Form.Item>
+              <Form.Item name="port" label={__('SMTP Port')} style={{ flex: 1, marginBottom: 0 }}>
+                <AutoComplete options={[{ value: 25 }, { value: 465 }, { value: 587 }]}>
+                  <Input placeholder="Port" type="number" />
+                </AutoComplete>
+              </Form.Item>
+            </Space>
 
-            <Form.Item
-              name="smtp_auth"
-              label={__('SMTP Authentication')}
-              valuePropName="checked"
-              style={{ flex: 1, marginBottom: 0 }}
-            >
-              <Switch checkedChildren="Yes" unCheckedChildren="No" defaultChecked={values?.smtp_auth} />
-            </Form.Item>
-            {/* 
+            <Space size="middle" style={{ width: '100%', display: 'flex' }}>
+              <Form.Item name="encryption" label={__('Encryption')} style={{ flex: 1, marginBottom: 0 }}>
+                <Radio.Group>
+                  <Radio.Button value="tls">TLS</Radio.Button>
+                  <Radio.Button value="ssl">SSL</Radio.Button>
+                  <Radio.Button value="none">None</Radio.Button>
+                </Radio.Group>
+              </Form.Item>
+
+              <Form.Item
+                name="smtp_auth"
+                label={__('SMTP Authentication')}
+                valuePropName="checked"
+                style={{ flex: 1, marginBottom: 0 }}
+              >
+                <Switch
+                  checkedChildren="Yes"
+                  unCheckedChildren="No"
+                  defaultChecked={values?.smtp_auth}
+                />
+              </Form.Item>
+              {/* 
             <Form.Item
               name="smtp_debug"
               label={__('SMTP Debug')}
@@ -160,38 +165,38 @@ export default function SMTP() {
             >
               <Switch checkedChildren="Yes" unCheckedChildren="No" defaultChecked={values?.smtp_debug} />
             </Form.Item> */}
+            </Space>
+
+            <Form.Item
+              name="smtp_user_name"
+              rules={[
+                {
+                  required: status && smtpAuth,
+                  message: 'Username is required when authentication is enabled'
+                }
+              ]}
+              label={__('SMTP Username')}
+              hidden={!smtpAuth}
+            >
+              <Input placeholder="SMTP Username" />
+            </Form.Item>
+
+            <Form.Item
+              name="smtp_password"
+              rules={[
+                {
+                  required: status && smtpAuth,
+                  message: 'Password is required when authentication is enabled'
+                }
+              ]}
+              label={__('SMTP Password')}
+              hidden={!smtpAuth}
+            >
+              <Input.Password placeholder="SMTP Password" />
+            </Form.Item>
           </Space>
-
-          <Form.Item
-            name="smtp_user_name"
-            rules={[
-              {
-                required: status && smtpAuth,
-                message: 'Username is required when authentication is enabled'
-              }
-            ]}
-            label={__('SMTP Username')}
-            hidden={!smtpAuth}
-          >
-            <Input placeholder="SMTP Username" />
-          </Form.Item>
-
-          <Form.Item
-            name="smtp_password"
-            rules={[
-              {
-                required: status && smtpAuth,
-                message: 'Password is required when authentication is enabled'
-              }
-            ]}
-            label={__('SMTP Password')}
-            hidden={!smtpAuth}
-          >
-            <Input.Password placeholder="SMTP Password" />
-          </Form.Item>
-        </Space>
-      </Form>
-
+        </Form>
+      </Space>
       {isTelemetryModalOpen ? (
         <TelemetryPopup
           isTelemetryModalOpen={isTelemetryModalOpen}

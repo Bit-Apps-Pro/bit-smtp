@@ -51,12 +51,17 @@ export default function Header() {
       <AntLayout.Header
         style={{ height: 'min-content', backgroundColor: antConfig.token.colorBgContainer }}
       >
-        <Flex align="middle" justify="space-between" wrap style={{ width: '100%' }}>
+        <Flex
+          align="center"
+          justify="space-between"
+          wrap
+          style={{ width: '100%', borderBottom: `${antConfig.token.colorBorder} 0.5px solid` }}
+        >
+          <Flex align="center">
+            <LogoIcon size={44} />
+            <LogoText h={44} w={120} />
+          </Flex>
           <Space align="center" size="large">
-            <Space align="center" size="middle" style={{ paddingLeft: 10, paddingTop: 10 }}>
-              <LogoIcon size={44} />
-              <LogoText h={44} w={120} />
-            </Space>
             <Menu
               mode="horizontal"
               disabledOverflow
