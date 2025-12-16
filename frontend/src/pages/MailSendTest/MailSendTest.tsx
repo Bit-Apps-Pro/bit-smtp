@@ -1,13 +1,16 @@
+import { useState } from 'react'
+import { DownOutlined, UpOutlined } from '@ant-design/icons'
 import { __ } from '@common/helpers/i18nwrap'
 import DebugOutput from '@components/DebugOutput/DebugOutput'
 import config from '@config/config'
-import { Button, Card, Form, Input } from 'antd'
+import { Button, Card, Form, Input, Space } from 'antd'
 import useTestMailSend from './data/useTestMailSend'
 
 const { TextArea } = Input
 
 export default function MailSendTest() {
   const [form] = Form.useForm()
+  const [isMessageExpanded, setIsMessageExpanded] = useState(false)
   const { mutate: sendTestMail, isPending, data: { data: debugInfo } = {} } = useTestMailSend()
 
   const onFinish = (values: Record<string, string>) => {
@@ -23,7 +26,7 @@ export default function MailSendTest() {
   return (
     <Card
       title={__('Test Your Mail')}
-      style={{ margin: '20px', width: 'max-content', alignSelf: 'center' }}
+      style={{ margin: '20px', width: 'max-content', minWidth: '500px', alignSelf: 'center' }}
       extra={
         <Button type="primary" onClick={() => form.submit()} loading={isPending}>
           {__('Send Test Email')}
@@ -66,21 +69,34 @@ export default function MailSendTest() {
           <Input placeholder="Email Subject" />
         </Form.Item>
 
-        <Form.Item
-          name="message"
-          label={__('Message')}
-          rules={[{ message: 'Please enter email message' }]}
-        >
-          <TextArea
-            placeholder="Write your message"
-            style={{
-              resize: 'both',
-              minHeight: '100px',
-              minWidth: '100%',
-              maxWidth: '100%'
-            }}
-          />
-        </Form.Item>
+        <Space direction="vertical" style={{ width: '100%' }}>
+          <Button
+            type="link"
+            onClick={() => setIsMessageExpanded(!isMessageExpanded)}
+            icon={isMessageExpanded ? <UpOutlined /> : <DownOutlined />}
+            style={{ padding: 0, height: 'auto', textAlign: 'left' }}
+          >
+            {isMessageExpanded ? __('Hide Message') : __('Add Message')}
+          </Button>
+
+          {isMessageExpanded && (
+            <Form.Item
+              name="message"
+              label={__('Message')}
+              rules={[{ message: 'Please enter email message' }]}
+            >
+              <TextArea
+                placeholder="Write your message"
+                style={{
+                  resize: 'both',
+                  minHeight: '100px',
+                  minWidth: '100%',
+                  maxWidth: '100%'
+                }}
+              />
+            </Form.Item>
+          )}
+        </Space>
       </Form>
       {debugInfo?.length ? <DebugOutput log={debugInfo} /> : ''}
     </Card>

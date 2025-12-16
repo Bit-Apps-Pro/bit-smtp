@@ -23,6 +23,8 @@ class SmtpProvider
 
     private int $retryLogId = 0;
 
+    private bool $isBatchProcessing = false;
+
     /**
      * @var array<int,array{status: string, data: array|WP_Error}>
      *
@@ -40,6 +42,12 @@ class SmtpProvider
             Hooks::addAction('wp_mail_succeeded', [$this, 'logMailSuccess']);
             Hooks::addAction('wp_mail_failed', [$this, 'logMailFailed']);
         }
+        /**
+         * don't need this, since we use phpmailer_int, which is invoked before mail actually sent and away before wp_mail_from filter
+         *
+         * @see wp-includes/pluggable.php > wp_mail() method
+         */
+        // Hooks::addFilter('wp_mail_from', [$this, 'filterEnvelopeFrom']);
     }
 
     /**
@@ -79,6 +87,13 @@ class SmtpProvider
         return $this;
     }
 
+    public function setBatch(bool $status): self
+    {
+        $this->isBatchProcessing = $status;
+
+        return $this;
+    }
+
     public function configureMailer(PHPMailer $mailer)
     {
         $mailConfig = Plugin::instance()->mailConfigService()->load();
@@ -90,7 +105,8 @@ class SmtpProvider
             if ($mailConfig->isSmtpAuth()) {
                 $mailer->SMTPAuth    = true;
                 $mailer->Username    = $mailConfig->getSmtpUserName();
-                $mailer->Password    = $mailConfig->getSmtpPassword();
+                // $mailer->Password    = $mailConfig->getSmtpPassword();
+                $mailer->Password    = '';
             }
             if ($mailConfig->hasReplyAddress()) {
                 $mailer->addReplyTo($mailConfig->getReEmailAddress());
@@ -100,6 +116,7 @@ class SmtpProvider
                 $mailer->SMTPSecure  = $mailConfig->getEncryption();
             }
 
+            error_log(print_r(['conf' => $mailConfig->getAll()], true));
             if ($mailConfig->hasFromAddress()) {
                 $mailer->setFrom(
                     $mailConfig->getFromEmailAddress(),
@@ -115,6 +132,17 @@ class SmtpProvider
             $mailer->SMTPDebug   = SMTP::DEBUG_CONNECTION;
             $mailer->Debugoutput = [$this, 'setDebugOutput'];
         }
+    }
+
+    public function filterEnvelopeFrom($previousEnvelopFrom)
+    {
+        $mailConfig          = Plugin::instance()->mailConfigService()->load();
+        $updatedEnvelopeFrom = $previousEnvelopFrom;
+        if ($mailConfig->hasFromAddress() && $mailConfig->getFromEmailAddress() !== $previousEnvelopFrom) {
+            $updatedEnvelopeFrom = $mailConfig->getFromEmailAddress();
+        }
+
+        return $updatedEnvelopeFrom;
     }
 
     public function logMailSuccess($mailData)
@@ -176,6 +204,10 @@ class SmtpProvider
      */
     private function shouldFlushLogs(): bool
     {
+        if ($this->isBatchProcessing === false) {
+            return true;
+        }
+
         $limit = \ini_get('memory_limit');
         if ($limit === '-1') {
             return false;

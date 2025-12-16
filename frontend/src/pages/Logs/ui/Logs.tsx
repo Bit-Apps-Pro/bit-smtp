@@ -130,7 +130,7 @@ export default function Logs() {
   return (
     <Flex gap="middle" vertical>
       <Flex align="center" gap="middle" justify="space-between" style={{ paddingInline: 10 }}>
-        <Flex gap="middle" align="center">
+        <Flex gap="middle" align="center" style={{ padding: 10 }}>
           <Button type="primary" onClick={handleDelete} disabled={!hasSelected} loading={isLogDeleting}>
             Delete
           </Button>

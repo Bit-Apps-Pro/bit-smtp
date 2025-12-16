@@ -55,8 +55,7 @@ class SMTPController
             $smtpProvider->setDebug(true);
             Hooks::addFilter('wp_mail_content_type', [$this, 'setContentType']);
 
-            $message = $queryParams['message'];
-            if (empty(trim($message))) {
+            if (!isset($queryParams['message']) || empty(trim($queryParams['message']))) {
                 $emailData = [
                     'title'     => $queryParams['subject'],
                     'message'   => 'This is a test email sent via Bit SMTP plugin to verify your email configuration.',
@@ -65,6 +64,8 @@ class SMTPController
                 ];
 
                 $message = EmailTemplate::getTemplate($emailData);
+            } else {
+                $message = $queryParams['message'];
             }
 
             wp_mail($queryParams['to'], $queryParams['subject'], $message);
