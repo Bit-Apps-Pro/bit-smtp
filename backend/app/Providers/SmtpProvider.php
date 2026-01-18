@@ -122,6 +122,7 @@ class SmtpProvider
                     $mailConfig->getFromEmailAddress(),
                     $mailConfig->getFromName()
                 );
+                $mailer->Sender = $mailConfig->getFromEmailAddress();
             }
         }
 

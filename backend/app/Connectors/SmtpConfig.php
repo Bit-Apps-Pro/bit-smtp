@@ -225,6 +225,16 @@ class SmtpConfig
         return $this;
     }
 
+    public function getViewOnlyCOnfig(): array
+    {
+        $config = $this->getAll();
+        if (isset($config['smtp_password'])) {
+            $config['smtp_password'] = '********';
+        }
+
+        return $config;
+    }
+
     /**
      * Helper to convert various representations to boolean
      *

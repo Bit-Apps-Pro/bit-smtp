@@ -55,4 +55,20 @@ class MailConfigService
     {
         return (bool) Config::updateOption('options', $this->config->getAll());
     }
+
+    public function getProviders(): array
+    {
+        // TODO: implement different providers
+        $providers            = [];
+        $providers['default'] = $this->config;
+
+        return $providers;
+    }
+
+    public function getViewOnlyConfig(string $provider = 'default'): array
+    {
+        $provider = $this->getProviders()[$provider] ?? $this->getProviders()['default'];
+
+        return $this->config->getViewOnlyConfig();
+    }
 }

@@ -8,6 +8,7 @@ $finder = PhpCsFixer\Finder::create()
 $config = new PhpCsFixer\Config();
 
 return $config
+    ->setUnsupportedPhpVersionAllowed(true)
     ->setRiskyAllowed(true)
     ->setIndent(str_pad('', 4))
     ->setRules([
