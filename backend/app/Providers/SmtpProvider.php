@@ -105,8 +105,7 @@ class SmtpProvider
             if ($mailConfig->isSmtpAuth()) {
                 $mailer->SMTPAuth    = true;
                 $mailer->Username    = $mailConfig->getSmtpUserName();
-                // $mailer->Password    = $mailConfig->getSmtpPassword();
-                $mailer->Password    = '';
+                $mailer->Password    = $mailConfig->getSmtpPassword();
             }
             if ($mailConfig->hasReplyAddress()) {
                 $mailer->addReplyTo($mailConfig->getReEmailAddress());
@@ -116,7 +115,6 @@ class SmtpProvider
                 $mailer->SMTPSecure  = $mailConfig->getEncryption();
             }
 
-            error_log(print_r(['conf' => $mailConfig->getAll()], true));
             if ($mailConfig->hasFromAddress()) {
                 $mailer->setFrom(
                     $mailConfig->getFromEmailAddress(),
