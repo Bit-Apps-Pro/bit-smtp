@@ -22,7 +22,7 @@ class Config
 
     public const VAR_PREFIX = 'bit_smtp_';
 
-    public const VERSION = '1.2.1';
+    public const VERSION = '1.2.2';
 
     public const DB_VERSION = '1.1';
 

@@ -2,9 +2,9 @@
 Contributors: bitpressadmin, akaioum
 Tags: email logs, smtp, email, gmail smtp, wp mail smtp
 Requires at least: 5.0
-Tested up to: 6.8.3
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 
 == Description ==
@@ -229,8 +229,13 @@ Wp-Telemetry DOES NOT IMMEDIATELY start gathering data; rather, it will gather b
 
 == Changelog ==
 
+= 1.2.2 (04 Jan, 2026) =
+* fix: mail sending is not working some hosting provider due to sender is not set
+* chore: ui updated
+* chore: tested with latest wordpress version
+
 = 1.2.1 (10 Nov, 2025) =
-* chore: updated tested wordpress version
+* chore: tested with latest wordpress version
 * chore: ui updated
 
 = 1.2 (08 Nov, 2025) =
