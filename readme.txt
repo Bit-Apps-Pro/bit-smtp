@@ -4,7 +4,7 @@ Tags: email logs, smtp, email, gmail smtp, wp mail smtp
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv2 or later
 
 == Description ==
@@ -228,6 +228,11 @@ Wp-Telemetry DOES NOT IMMEDIATELY start gathering data; rather, it will gather b
 5. Preview of email log
 
 == Changelog ==
+
+= 1.2.3 (20 Feb, 2026) =
+* fix: broken access control 
+* chore: ui updated
+* chore: tested with latest wordpress version
 
 = 1.2.2 (04 Jan, 2026) =
 * fix: mail sending is not working some hosting provider due to sender is not set

@@ -1,6 +1,6 @@
 {
-  "name": "bit-apps",
-  "version": "1.0.0",
+  "name": "bit-smtp",
+  "version": "1.2.3",
   "license": "ISC",
   "author": "bit-apps",
   "scripts": {
