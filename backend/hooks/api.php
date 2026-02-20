@@ -1,13 +1,13 @@
 <?php
 
+if (!\defined('ABSPATH')) {
+    exit;
+}
+
 use BitApps\SMTP\Deps\BitApps\WPKit\Http\Router\Route;
 use BitApps\SMTP\HTTP\Controllers\LogController;
 use BitApps\SMTP\HTTP\Controllers\SMTPController;
 use BitApps\SMTP\HTTP\Controllers\TelemetryPopupController;
-
-if (!\defined('ABSPATH')) {
-    exit;
-}
 
 Route::group(function () {
     Route::post('mail/config/save', [SMTPController::class, 'saveMailConfig']);

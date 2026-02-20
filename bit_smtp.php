@@ -1,5 +1,8 @@
 <?php
 
+if (! \defined('ABSPATH')) {
+    exit;
+}
 /**
  * Plugin Name: Bit SMTP
  * Plugin URI:  https://www.bitapps.pro/bit-smtp

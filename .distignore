@@ -28,6 +28,6 @@ tsconfig.json
 tsconfig.node.json
 vite.config.mts
 
-/.git
 /.github
 /.wordpress-org
+AGENTS.md
