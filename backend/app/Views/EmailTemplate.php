@@ -249,7 +249,7 @@ class EmailTemplate
                                 <tr>
                                     <td class="content-cell" align="center">
                                         <p class="sub align-center">
-                                            &copy; ' . date('Y') . ' Bit SMTP Plugin. All rights reserved.
+                                            &copy; ' . gmdate('Y') . ' Bit SMTP Plugin. All rights reserved.
                                         </p>
                                         <p class="sub align-center">
                                             This is an automated email sent from your WordPress site using the Bit SMTP plugin.
@@ -302,7 +302,7 @@ Best regards,
 Bit Apps Team
 
 ----------------------------------------
-© " . date('Y') . ' Bit SMTP Plugin. All rights reserved.
+© " . gmdate('Y') . ' Bit SMTP Plugin. All rights reserved.
 This is an automated email sent from your WordPress site using the Bit SMTP plugin.
 ';
     }

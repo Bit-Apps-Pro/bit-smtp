@@ -165,6 +165,7 @@ final class Plugin
             try {
                 MigrationHelper::migrate(InstallerProvider::migration());
             } catch (Exception $e) {
+                //phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log -- we want to log this error
                 error_log('BIT SMTP Migration Error: ' . $e->getMessage());
             }
         }
